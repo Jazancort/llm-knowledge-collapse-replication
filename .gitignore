@@ -1,0 +1,28 @@
+# LaTeX auxiliares
+*.aux *.log *.out *.toc *.lof *.lot *.bbl *.blg *.fls *.fdb_latexmk *.synctex.gz
+*.nav *.snm *.vrb
+
+# PDFs compilados (manter apenas o manuscrito final explicitamente)
+# manuscript-anonymous.pdf  ← manter se quiser versionar o PDF
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.uv/
+
+# downloads e outputs grandes
+downloads/
+outputs/
+*.csv.bak
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporários
+*.tmp
+*.bak
+~$*

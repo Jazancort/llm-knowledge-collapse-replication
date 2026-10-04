@@ -1,0 +1,130 @@
+[09:37:27] === REVISAO FINAL INICIO — prereg 3b1712b — commit c3ba205 ===
+[09:37:27] --- G1: Qwen r=256 dose=0%, seeds 15/137/256 (pipeline consistency) ---
+[09:37:27] START  G1_qwen_r256_s15_dose00
+[11:02:22] DONE   G1_qwen_r256_s15_dose00 (exit 0)
+[11:02:22] START  G1_qwen_r256_s137_dose00
+[12:31:19] DONE   G1_qwen_r256_s137_dose00 (exit 0)
+[12:31:19] START  G1_qwen_r256_s256_dose00
+[13:57:00] DONE   G1_qwen_r256_s256_dose00 (exit 0)
+[13:57:00] --- G2: Gemma3 r=10, doses 0/10/25/50%, seeds 15/137/256 ---
+[13:57:00] START  G2_gemma_r10_s15_dose0
+[15:32:14] DONE   G2_gemma_r10_s15_dose0 (exit 0)
+[17:49:52] === CONTINUACAO G2-G5 (fix printf) ===
+[17:49:52] --- G2 cont: Gemma3 r=10 ---
+[17:49:52] START  G2_gemma_r10_s137_dose0
+[17:49:57] FAIL   G2_gemma_r10_s137_dose0 (exit 2)
+[17:49:57] START  G2_gemma_r10_s137_dose10
+[17:50:02] FAIL   G2_gemma_r10_s137_dose10 (exit 2)
+[17:50:02] START  G2_gemma_r10_s137_dose25
+[17:50:07] FAIL   G2_gemma_r10_s137_dose25 (exit 2)
+[17:50:07] START  G2_gemma_r10_s137_dose50
+[17:50:12] FAIL   G2_gemma_r10_s137_dose50 (exit 2)
+[17:50:12] START  G2_gemma_r10_s256_dose0
+[17:50:17] FAIL   G2_gemma_r10_s256_dose0 (exit 2)
+[17:50:17] START  G2_gemma_r10_s256_dose10
+[17:50:22] FAIL   G2_gemma_r10_s256_dose10 (exit 2)
+[17:50:22] START  G2_gemma_r10_s256_dose25
+[17:50:29] === CONTINUACAO G2-G5 v2 ===
+[17:50:29] --- G2: Gemma3 r=10 restantes ---
+[17:50:29] START  G2_gemma_r10_s137_dose0
+[17:50:29] FAIL   G2_gemma_r10_s137_dose0 (exit 2)
+[17:50:29] START  G2_gemma_r10_s137_dose10
+[17:50:29] FAIL   G2_gemma_r10_s137_dose10 (exit 2)
+[17:50:29] START  G2_gemma_r10_s137_dose25
+[17:50:29] FAIL   G2_gemma_r10_s137_dose25 (exit 2)
+[17:50:29] START  G2_gemma_r10_s137_dose50
+[17:50:29] FAIL   G2_gemma_r10_s137_dose50 (exit 2)
+[17:50:29] START  G2_gemma_r10_s256_dose0
+[17:50:29] FAIL   G2_gemma_r10_s256_dose0 (exit 2)
+[17:50:29] START  G2_gemma_r10_s256_dose10
+[17:50:29] FAIL   G2_gemma_r10_s256_dose10 (exit 2)
+[17:50:29] START  G2_gemma_r10_s256_dose25
+[17:50:29] FAIL   G2_gemma_r10_s256_dose25 (exit 2)
+[17:50:29] START  G2_gemma_r10_s256_dose50
+[17:50:30] FAIL   G2_gemma_r10_s256_dose50 (exit 2)
+[17:50:30] START  G2_gemma_r10_s15_dose10
+[17:50:30] FAIL   G2_gemma_r10_s15_dose10 (exit 2)
+[17:50:30] START  G2_gemma_r10_s15_dose25
+[17:50:30] FAIL   G2_gemma_r10_s15_dose25 (exit 2)
+[17:50:30] START  G2_gemma_r10_s15_dose50
+[17:50:30] FAIL   G2_gemma_r10_s15_dose50 (exit 2)
+[17:50:30] --- G3: Qwen bf16 no-NF4, r=16+r=256, seeds 15/137/256 ---
+[17:50:30] START  G3_qwen_r16_s15_bf16
+[17:50:30] FAIL   G3_qwen_r16_s15_bf16 (exit 2)
+[17:50:30] START  G3_qwen_r256_s15_bf16
+[17:50:30] FAIL   G3_qwen_r256_s15_bf16 (exit 2)
+[17:50:30] START  G3_qwen_r16_s137_bf16
+[17:50:30] FAIL   G3_qwen_r16_s137_bf16 (exit 2)
+[17:50:30] START  G3_qwen_r256_s137_bf16
+[17:50:30] FAIL   G3_qwen_r256_s137_bf16 (exit 2)
+[17:50:30] START  G3_qwen_r16_s256_bf16
+[17:50:30] FAIL   G3_qwen_r16_s256_bf16 (exit 2)
+[17:50:30] START  G3_qwen_r256_s256_bf16
+[17:50:30] FAIL   G3_qwen_r256_s256_bf16 (exit 2)
+[17:50:30] --- G4: Qwen r=256 seeds 42/101/202 para variância de ordem ---
+[17:50:30] START  G4_qwen_r256_s42_ordem
+[17:50:30] FAIL   G4_qwen_r256_s42_ordem (exit 2)
+[17:50:30] START  G4_qwen_r256_s101_ordem
+[17:50:30] FAIL   G4_qwen_r256_s101_ordem (exit 2)
+[17:50:30] START  G4_qwen_r256_s202_ordem
+[17:50:30] FAIL   G4_qwen_r256_s202_ordem (exit 2)
+[17:50:30] --- G5: Pi prospectivo ---
+[17:50:30] START  G5_qwen_r128_s15_lr5e6
+[17:50:30] FAIL   G5_qwen_r128_s15_lr5e6 (exit 2)
+[17:50:30] START  G5_qwen_r128_s15_lr2e5
+[17:50:30] FAIL   G5_qwen_r128_s15_lr2e5 (exit 2)
+[17:50:30] START  G5_qwen_r32_s15_lr2e5
+[17:50:30] FAIL   G5_qwen_r32_s15_lr2e5 (exit 2)
+[17:50:30] === CONTINUACAO CONCLUIDA ===
+[17:51:14] === CONTINUACAO v3 ===
+[17:51:14] --- G2: Gemma3 r=10 restantes ---
+[17:51:14] START  G2_gemma_r10_s137_dose0
+[19:25:15] DONE   G2_gemma_r10_s137_dose0 (exit 0)
+[19:25:15] START  G2_gemma_r10_s137_dose10
+[20:51:53] DONE   G2_gemma_r10_s137_dose10 (exit 0)
+[20:51:53] START  G2_gemma_r10_s137_dose25
+[22:08:54] DONE   G2_gemma_r10_s137_dose25 (exit 0)
+[22:08:54] START  G2_gemma_r10_s137_dose50
+[23:11:23] DONE   G2_gemma_r10_s137_dose50 (exit 0)
+[23:11:23] START  G2_gemma_r10_s256_dose0
+[00:48:27] DONE   G2_gemma_r10_s256_dose0 (exit 0)
+[00:48:27] START  G2_gemma_r10_s256_dose10
+[02:24:43] DONE   G2_gemma_r10_s256_dose10 (exit 0)
+[02:24:43] START  G2_gemma_r10_s256_dose25
+[03:40:40] DONE   G2_gemma_r10_s256_dose25 (exit 0)
+[03:40:40] START  G2_gemma_r10_s256_dose50
+[04:44:01] DONE   G2_gemma_r10_s256_dose50 (exit 0)
+[04:44:01] START  G2_gemma_r10_s15_dose10
+[06:07:16] DONE   G2_gemma_r10_s15_dose10 (exit 0)
+[06:07:16] START  G2_gemma_r10_s15_dose25
+[07:22:15] DONE   G2_gemma_r10_s15_dose25 (exit 0)
+[07:22:15] START  G2_gemma_r10_s15_dose50
+[08:24:33] DONE   G2_gemma_r10_s15_dose50 (exit 0)
+[08:24:33] --- G3: Qwen bf16 no-NF4 ---
+[08:24:33] START  G3_qwen_r16_s15_bf16
+[09:41:07] DONE   G3_qwen_r16_s15_bf16 (exit 0)
+[09:41:07] START  G3_qwen_r256_s15_bf16
+[11:01:11] DONE   G3_qwen_r256_s15_bf16 (exit 0)
+[11:01:11] START  G3_qwen_r16_s137_bf16
+[12:18:11] DONE   G3_qwen_r16_s137_bf16 (exit 0)
+[12:18:11] START  G3_qwen_r256_s137_bf16
+[13:42:07] DONE   G3_qwen_r256_s137_bf16 (exit 0)
+[13:42:07] START  G3_qwen_r16_s256_bf16
+[14:58:49] DONE   G3_qwen_r16_s256_bf16 (exit 0)
+[14:58:49] START  G3_qwen_r256_s256_bf16
+[16:17:24] DONE   G3_qwen_r256_s256_bf16 (exit 0)
+[16:17:24] --- G4: Qwen r=256 seeds 42/101/202 ---
+[16:17:24] START  G4_qwen_r256_s42_ordem
+[17:37:35] DONE   G4_qwen_r256_s42_ordem (exit 0)
+[17:37:35] START  G4_qwen_r256_s101_ordem
+[18:56:53] DONE   G4_qwen_r256_s101_ordem (exit 0)
+[18:56:53] START  G4_qwen_r256_s202_ordem
+[20:20:19] DONE   G4_qwen_r256_s202_ordem (exit 0)
+[20:20:19] --- G5: Pi prospectivo ---
+[20:20:19] START  G5_qwen_r128_s15_lr5e6
+[20:59:33] DONE   G5_qwen_r128_s15_lr5e6 (exit 0)
+[20:59:33] START  G5_qwen_r128_s15_lr2e5
+[21:40:35] DONE   G5_qwen_r128_s15_lr2e5 (exit 0)
+[21:40:35] START  G5_qwen_r32_s15_lr2e5
+[22:21:30] DONE   G5_qwen_r32_s15_lr2e5 (exit 0)
+[22:21:30] === CONTINUACAO v3 CONCLUIDA ===

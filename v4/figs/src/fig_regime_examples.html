@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  padding: 16px 16px 12px;
+  color: #111111;
+}
+.regimes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.regime-card {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 12px 12px 10px;
+  border: 1.5px solid #cccccc;
+  display: flex;
+  flex-direction: column;
+}
+.regime-card.homeostatic { border-top: 4px solid #009E73; }
+.regime-card.bounded { border-top: 4px solid #E69F00; }
+.regime-card.degradative { border-top: 4px solid #D55E00; }
+
+.regime-header {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-bottom: 8px;
+}
+.panel-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #000000;
+}
+.regime-name {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #000000;
+}
+.rank-badge {
+  font-size: 12px;
+  color: #444444;
+  font-weight: 400;
+  margin-left: auto;
+}
+
+.question {
+  font-size: 12px;
+  font-style: italic;
+  color: #222222;
+  background: #F3F4F6;
+  padding: 7px 9px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.evolution {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+.gen-row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  gap: 8px;
+  align-items: center;
+  padding: 6px 9px;
+  border-radius: 3px;
+  border: 1px solid #E5E7EB;
+  background: #FAFAFA;
+}
+.gen-row.gen-0 {
+  background: #ECFDF5;
+  border-color: #6EE7B7;
+}
+
+.gen-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #555555;
+  white-space: nowrap;
+}
+.gen-0 .gen-label { color: #047857; }
+
+.gen-response {
+  font-size: 13px;
+  color: #000000;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.gen-response .added {
+  background: #FDE68A;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+.gen-response .replaced {
+  background: #FECACA;
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+.observation {
+  margin-top: 8px;
+  padding: 5px 8px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: #000000;
+}
+.homeostatic .observation { background: #D1FAE5; }
+.bounded .observation { background: #FDE68A; }
+.degradative .observation { background: #FECACA; }
+</style>
+</head>
+<body>
+<div class="regimes">
+  <!-- Homeostatic -->
+  <div class="regime-card homeostatic">
+    <div class="regime-header">
+      <span class="panel-label">(a)</span>
+      <span class="regime-name">Homeostatic</span>
+      <span class="rank-badge">r = 16</span>
+    </div>
+    <div class="question">"What is the scientific name for the study of fish?"</div>
+    <div class="evolution">
+      <div class="gen-row gen-0">
+        <span class="gen-label">Gen 0</span>
+        <span class="gen-response">Ichthyology.</span>
+      </div>
+      <div class="gen-row gen-mid">
+        <span class="gen-label">Gen 5</span>
+        <span class="gen-response">Ichthyology.</span>
+      </div>
+      <div class="gen-row gen-last">
+        <span class="gen-label">Gen 10</span>
+        <span class="gen-response">Ichthyology.</span>
+      </div>
+    </div>
+    <div class="observation">Fact preserved unchanged</div>
+  </div>
+
+  <!-- Bounded -->
+  <div class="regime-card bounded">
+    <div class="regime-header">
+      <span class="panel-label">(b)</span>
+      <span class="regime-name">Bounded</span>
+      <span class="rank-badge">r = 128</span>
+    </div>
+    <div class="question">"Entomomania is a compulsive fascination with which type of creatures?"</div>
+    <div class="evolution">
+      <div class="gen-row gen-0">
+        <span class="gen-label">Gen 0</span>
+        <span class="gen-response">Insects.</span>
+      </div>
+      <div class="gen-row gen-mid">
+        <span class="gen-label">Gen 5</span>
+        <span class="gen-response">Insects, <span class="added">particularly ants</span>.</span>
+      </div>
+      <div class="gen-row gen-last">
+        <span class="gen-label">Gen 10</span>
+        <span class="gen-response">Insects, <span class="added">specifically ants and beetles</span>.</span>
+      </div>
+    </div>
+    <div class="observation">Core fact preserved · elaboration grows</div>
+  </div>
+
+  <!-- Degradative -->
+  <div class="regime-card degradative">
+    <div class="regime-header">
+      <span class="panel-label">(c)</span>
+      <span class="regime-name">Degradative</span>
+      <span class="rank-badge">r = 256</span>
+    </div>
+    <div class="question">"Millicent Martin was married to which pop singer from 1958 to 1965?"</div>
+    <div class="evolution">
+      <div class="gen-row gen-0">
+        <span class="gen-label">Gen 0</span>
+        <span class="gen-response">Tom Jones.</span>
+      </div>
+      <div class="gen-row gen-mid">
+        <span class="gen-label">Gen 5</span>
+        <span class="gen-response"><span class="replaced">Elvis Presley</span>.</span>
+      </div>
+      <div class="gen-row gen-last">
+        <span class="gen-label">Gen 10</span>
+        <span class="gen-response"><span class="replaced">The Beatles' Ringo Starr</span>.</span>
+      </div>
+    </div>
+    <div class="observation">Progressive factual displacement</div>
+  </div>
+</div>
+</body>
+</html>
