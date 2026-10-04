@@ -21,7 +21,6 @@
 \usepackage{amsmath}
 \usepackage{caption}
 \usepackage{float}
-\usepackage[section]{placeins}
 \captionsetup{font={small,sf}, labelfont={bf,small}}
 \usepackage{microtype}
 \usepackage{adjustbox}
@@ -1011,33 +1010,71 @@ quantitatively in Section~\ref{sec:results}; the remaining entries rely on
 held constant across all conditions within a backbone.
 
 
-\begin{table}[H]
-\caption{\rev{Sources of variation in the recursive fine-tuning protocol and
-the corresponding experimental control. G3 and G4 refer to dedicated
-within-session ablations (Section~\ref{sec:results}). ``Held constant''
-denotes that the factor is fixed across all conditions for a given backbone.}}
+\begin{center}
+\captionof{table}{\rev{Sources of variation in the recursive fine-tuning
+protocol and the corresponding experimental control. G3 and G4 refer to
+dedicated within-session ablations (Section~\ref{sec:results}). ``Held
+constant'' denotes that the factor is fixed across all conditions for a given
+backbone.}}
 \label{tab:controls}
+
 \small
-\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}>{\raggedright\arraybackslash}p{3.5cm}>{\raggedright\arraybackslash}p{4cm}>{\raggedright\arraybackslash}p{3cm}@{}}
+\setlength{\tabcolsep}{3pt}
+
+\begin{tabularx}{\columnwidth}{@{}
+    >{\raggedright\arraybackslash}p{0.22\columnwidth}
+    >{\raggedright\arraybackslash}p{0.34\columnwidth}
+    X
+@{}}
 \toprule
-\textbf{Source of variation} & \textbf{Potential confound} & \textbf{Control} \\
+\textbf{Source of variation} &
+\textbf{Potential confound} &
+\textbf{Control} \\
 \midrule
-Quantization (NF4 vs bf16) & Numerical noise from 4-bit quantization could inflate or suppress apparent degradation & G3: QLoRA bf16 (no NF4) vs QLoRA NF4, matched seeds \\
+
+Quantization (NF4 vs bf16) &
+Numerical noise from 4-bit quantization could inflate or suppress apparent degradation &
+G3: QLoRA bf16 (no NF4) vs QLoRA NF4, matched seeds \\
+
 \addlinespace
-Training data order & Shuffling artefacts could drive regime classification & G4: three independent shuffle seeds at fixed $r$=256 \\
+
+Training data order &
+Shuffling artefacts could drive regime classification &
+G4: three independent shuffle seeds at fixed $r=256$ \\
+
 \addlinespace
-Optimizer state & Accumulated momentum could confound generation-to-generation comparisons & Held constant: fresh optimizer at every generation (no state carryover) \\
+
+Optimizer state &
+Accumulated momentum could confound generation-to-generation comparisons &
+Held constant: fresh optimizer at every generation (no state carryover) \\
+
 \addlinespace
-Synthetic data seed & Stochastic generation could produce artefactual variation & Reported per seed; headline conditions use 3–5 independent seeds \\
+
+Synthetic data seed &
+Stochastic generation could produce artefactual variation &
+Reported per seed; headline conditions use 3--5 independent seeds \\
+
 \addlinespace
-Backbone architecture & Regime thresholds may not generalise & Replicated on Gemma~3~1B~IT ($r \geq 10$ degradative) and Gemma~4~E2B~IT ($r$=64 degradative, $N$=1) \\
+
+Backbone architecture &
+Regime thresholds may not generalise &
+Replicated on Gemma~3~1B~IT ($r\geq10$ degradative) and Gemma~4~E2B~IT ($r=64$ degradative, $N=1$) \\
+
 \addlinespace
-Pipeline version & Different code paths could introduce discrepancies & Each experiment uses a dedicated script and commit; see the replication repository for the per-experiment manifest. \\
+
+Pipeline version &
+Different code paths could introduce discrepancies &
+Each experiment uses a dedicated script and commit; see the replication repository for the per-experiment manifest. \\
+
 \addlinespace
-Evaluation scoring leniency & Bidirectional substring criterion may inflate retention at high verbosity & Noted per condition; strict exact-match re-evaluation reported in supplementary Table~S2 \\
+
+Evaluation scoring leniency &
+Bidirectional substring criterion may inflate retention at high verbosity &
+Noted per condition. \\
+
 \bottomrule
-\end{tabular*}
-\end{table}
+\end{tabularx}
+\end{center}
 
 The results presented in Section~\ref{sec:results} follow the experimental
 organization introduced above. They first examine capacity-gated regime
