@@ -1090,20 +1090,21 @@ content is progressively displaced by unrelated or fabricated information.
 Increasing adapter rank produces a clear, monotonic decline in factual retention
 across the full rank sweep on Qwen~2.5~1.5B.
 Table~\ref{tab:rank_sweep} summarizes K0 retention, effective rank, trainable
-parameters, and regime classification for each tested configuration. Across the evaluated range, three descriptive contrasts are relevant.
-First, the single-seed sweep (G1, $N{=}1$): Gen10 retention is $\RsixteenMten\%$
-at $r=16$ and $\rev{\GoneMten\%}$ at $r=256$ ($N{=}3$ seeds), a descriptive
-gap of $17.1$\,pp within the G1 protocol.
-Second, the multi-seed G1$+$G4 estimate at $r=256$ ($N{=}6$ seeds,
-$\GoneFourMten\%\pm\GoneFourSDten$\,pp) versus the single bf16 run at $r=16$
-($\RsixteenMten\%$, G3 protocol, one seed) gives a descriptive gap of
-$17.7$\,pp; these protocols differ in precision and seed assignment and the
-comparison is cross-protocol.
-Third, the cleanest within-protocol contrast is G3 (same three seeds,
-same bf16 protocol, rank the only variable), giving a mean difference of
-$18.4$\,pp (sign-flip $p=0.25$, $N{=}3$, underpowered).\
-These three figures describe the same qualitative direction but are not
-interchangeable and should not be cited as the same comparison.
+parameters, and regime classification for each tested configuration. Across the evaluated range, three descriptive contrasts are relevant and must be kept separate.
+\rev{In the original single-seed rank sweep, the $r=16$ run retained 75 of 78
+facts at Gen10 ($96.2\%$). The G1 replicate set at $r=256$ retained
+$[61,\,63,\,61]$ of 78 facts across three seeds ($\GoneMten\% = 79.1\%$
+mean). We therefore do not treat the single-seed $r=16$ value as a matched
+replicate for $r=256$.}
+\rev{For matched G3 bf16 pairs (same three seeds, same protocol, rank the only
+variable), $r=16$ retained 76/78 in all three seeds while $r=256$ retained
+$[61,\,63,\,61]/78$. The mean within-protocol gap is $18.4$\,pp; with $N{=}3$
+pairs, the exact two-sided sign test gives $p{=}0.25$, so this result is
+descriptive rather than confirmatory.}
+\rev{For the six-seed G1$+$G4 estimate, $r=256$ retained
+$\GoneFourMten\%\pm\GoneFourSDten$\,pp at Gen10, giving a cross-protocol
+descriptive gap of $17.7$\,pp versus the G3 single-seed $r=16$ run; the two
+protocols differ in quantization and seed assignment.}
 
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
 \caption{QLoRA rank sweep on Qwen~2.5~1.5B-Instruct. The degradative endpoint
@@ -1711,7 +1712,7 @@ system from the degradative to the bounded regime by the criterion of
 Section~\ref{sec:res_capacity}.
 
 The pre-registered prediction that 50\% removal would match halving the
-learning rate (from $\eta = 10^{-5}$ to $5\times 10^{-6}$) was confirmed:
+learning rate (from $\eta = 10^{-5}$ to $5\times 10^{-6}$) was numerically similar:
 Gen~5 retention at dose~$= 50\%$ is $89.7\%$ versus $90.2\%$ at
 $\eta = 5\times 10^{-6}$ (mean over three seeds; Gen~10 difference
 $+0.4$\,pp, 90\%~CI $[-0.8, 1.6]$). The mechanism (whether update budget
@@ -1820,8 +1821,10 @@ To isolate seed variance from data-order variance, G4 replicates the Qwen
 $r=256$ protocol with three new shuffle seeds (42/101/202). Gen10 retention
 values are $82.1\%$, $78.2\%$, and $80.8\%$, yielding a G4 mean of $80.4\%\pm2.0$~pp.
 A bilateral permutation test comparing G1 and G4 gives $p=\GfourPorder$, indicating
-that variance attributable to data order is statistically indistinguishable from
-seed-to-seed variance within G1. Combining G1$+$G4 gives a six-seed
+no detectable signal beyond seed-to-seed variance. Because G4 varies both data
+order and random seed simultaneously, $p=\GfourPorder$ does not isolate the
+effect of order alone; it establishes that the combined variance is
+statistically indistinguishable from G1. Combining G1$+$G4 gives a six-seed
 Gen10 estimate of $\GoneFourMten\%\pm\GoneFourSDten$~pp
 (95\,\% CI $[\GoneFourCItenLo, \GoneFourCItenHi]$).}
 
