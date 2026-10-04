@@ -1103,7 +1103,7 @@ pairs, the exact two-sided sign test gives $p{=}0.25$, so this result is
 descriptive rather than confirmatory.}
 \rev{For the six-seed G1$+$G4 estimate, $r=256$ retained
 $\GoneFourMten\%\pm\GoneFourSDten$\,pp at Gen10, giving a cross-protocol
-descriptive gap of $17.7$\,pp versus the G3 single-seed $r=16$ run; the two
+descriptive gap of $17.7$\,pp versus the three-seed G3 bf16 $r=16$ runs (each retaining 76/78); the two
 protocols differ in quantization and seed assignment.}
 
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
@@ -1481,7 +1481,7 @@ performance \citep{shuttleworth2024illusion,biderman2024}. The precise
 mechanistic basis of this divergence in the recursive setting remains an open
 question for future work.
 
-\subsubsection{Rank and learning rate interact}
+\subsubsection{\rev{Rank and learning rate: joint dependence}}
 
 The preceding analyses vary adapter rank and learning rate independently. To
 test whether their effects are additive or interactive, we evaluated a
@@ -1491,7 +1491,7 @@ reports Gen5 retention for each cell, chosen as the common evaluation horizon
 adopted for the Gemma~3 experiments, enabling cross-backbone comparison.
 
 \begin{table}[width=.95\linewidth,cols=4,pos=htbp]
-\caption{Rank $\times$ learning rate interaction matrix on Qwen~2.5~1.5B
+\caption{Rank $\times$ learning rate joint-dependence matrix on Qwen~2.5~1.5B
 (retention evaluated at Gen5; $K_0 = 78$ items defined at generation~0, seed 15).}\label{tab:ranklr}
 \begin{tabular*}{\tblwidth}{@{} llll@{} }
 \toprule
@@ -1520,7 +1520,7 @@ either axis in isolation.
 \begin{figure}
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig_rank_lr_heatmap.png}
-  \caption{Rank $\times$ learning-rate interaction on Qwen~2.5~1.5B
+  \caption{Rank $\times$ learning-rate joint pattern on Qwen~2.5~1.5B
   (Gen5 retention). Non-parallel slopes indicate that rank and learning rate
   jointly determine the operating regime: higher rank amplifies the effect of
   increased learning rate, and vice versa.}\label{fig:heatmap}
@@ -1535,10 +1535,10 @@ was 78.3\% at $\mathrm{LR}=10^{-6}$, 54.3\% at $\mathrm{LR}=5 \times 10^{-6}$,
 and 63.0\% at $\mathrm{LR}=10^{-5}$. Although the two higher learning rates do
 not follow a strictly monotonic pattern (possibly reflecting single-seed
 variability), substantially higher degradation is observed at larger learning
-rates compared to $\mathrm{LR}=10^{-6}$. This confirms that the
-perturbation-magnitude axis operates on Gemma~3, producing substantially more
-degradation under higher learning rates and establishing that both the capacity
-and magnitude axes generalize across the evaluated architectures.
+rates compared to $\mathrm{LR}=10^{-6}$. \rev{This exploratory single-seed result is consistent with the perturbation-magnitude
+axis operating on Gemma~3 as well, but the non-monotonic pattern at $\mathrm{LR}=5\times10^{-6}$
+limits interpretation. We treat this as descriptive evidence rather than
+confirmatory generalization.}
 
 Both update capacity (Axis~1) and perturbation magnitude (Axis~2) each produce
 dose-response relationships with factual retention, and these axes interact
@@ -1615,8 +1615,13 @@ rather than defining universally distinct categories. We denote the
 homeostatic--degradative transition threshold as $\theta_H$ (above which
 retention remains stable across all generations) and the degradative onset
 threshold as $\theta_D$ (above which factual retention declines progressively);
-all evaluated configurations satisfy $r=64 \leq \theta_H < r=128$ and
-$r=128 \leq \theta_D < r=256$ on Qwen. The degradative regime
+\rev{In the evaluated Qwen configurations, homeostatic behaviour was observed
+up to $r=64$; the transition to a bounded regime was observed between $r=64$
+and $r=128$; and degradative behaviour emerged at $r=256$. We denote these
+empirically observed transition intervals $r_H \in (64, 128)$ and
+$r_D \in (128, 256)$. The thresholds $\theta_H$ and $\theta_D$ are
+percentage-retention cutoffs, not rank values, and are used only for
+within-generation classification.} The degradative regime
 ($r=256$) is qualitatively consistent with the Stage~B ``knowledge collapse''
 described by \citet{keisha2025}, where fluency persists while factual accuracy
 deteriorates. The distributionally degraded regime ($r=128$), however, represents
@@ -1907,7 +1912,7 @@ arbitrary models or tasks. What appears to generalize is the qualitative
 structure: a pressure-dependent boundary separating stable from degradative
 recursive behavior, controllable through multiple axes.
 
-The rank $\times$ learning-rate interaction experiment
+The rank $\times$ learning-rate joint-dependence experiment
 (Table~\ref{tab:ranklr}) further demonstrates that these axes are not
 independent: different combinations of rank and learning rate produce similar
 recursive outcomes, indicating that the regime depends jointly on both variables.
@@ -1948,7 +1953,7 @@ Drift accompanies degradation & 5 distribution metrics \\
 \addlinespace
 \rev{Transition is abrupt within tested grid} & \rev{Dose--response plateau at Gen~5; graded at Gen~10} \\
 \addlinespace
-Capacity $\times$ magnitude interact & Rank $\times$ LR matrix ($3{\times}3$) \\
+Capacity $\times$ magnitude \rev{joint dependence} & Rank $\times$ LR matrix ($3{\times}3$) \\
 \addlinespace
 Generalizes cross-backbone & Gemma~3 (N=5) + E2B dose-response \\
 \bottomrule
@@ -2381,7 +2386,7 @@ their effects are additive or interactive.
 \section{Project repository and data access}\label{app:repo}
 
 \rev{The replication package for this paper — including the revised manuscript
-source, response-to-reviewers letter, raw experimental results (G1--G5, 23 runs),
+source, response-to-reviewers letter, \rev{aggregated per-seed per-generation results (G1--G5, 23 executed runs, CSV format)},
 canonical numbers (112 \LaTeX{} macros), all analysis scripts, and all publication
 figures — is archived at:
 
