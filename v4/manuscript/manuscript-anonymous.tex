@@ -197,7 +197,7 @@ The main contributions of this work are:
     \item We provide a systematic dose-response mapping between adapter rank and
     recursive factual retention, measured via a subset-based retention metric
     ($K_0$, Section~\ref{sec:k0}), identifying 
-ev{an abrupt, threshold-like transition within the tested grid} on Qwen
+\rev{an abrupt, threshold-like transition within the tested grid} on Qwen
     and replicating the same qualitative structure on Gemma~3 at a
     substantially lower threshold (effective rank 3--6 versus 50--88),
     confirmed across three to five independent seeds per condition.
@@ -477,8 +477,7 @@ $d(t)$         & Parameter drift: mean absolute weight change
 $\eta$         & Learning rate \\
 $\Pi$          & Operational pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
 $f$            & Exposure dose: fraction of training items removed \\
-$\theta_H$     & \rev{Homeostatic retention cutoff: $R(t) \ge \theta_H$ for all evaluated $t$} \\
-$\theta_D$     & \rev{Degradative retention cutoff: $R(t)$ declines progressively below $\theta_D$} \\
+$\theta_H$, $\theta_D$ & Empirical transition intervals (Qwen): $r_H \in (64,128)$, $r_D \in (128,256)$; not universal percentage cutoffs \\
 $T$            & Evaluation horizon (10 generations in main experiments) \\
 $\mathrm{ContentEff}(t)$ & Retention divided by mean synthetic response length \\
 $\mathrm{Persist}(t)$    & Fraction of $K_0$ items whose response at generation~$t$
@@ -609,7 +608,7 @@ by the \texttt{g1\_rank10} pipeline. The 44-item set is a strict subset of the
 200-item evaluation pool) were answered correctly under the
 \texttt{gemma3\_c5correct} prompt template but not under the \texttt{g1\_rank10}
 template, which uses a different system-message format. All percentages for G2 are
-computed over $K_{0,\mathrm{G2}}=44$ items; all percentages for the rank sweep
+computed over $|K_{0,\mathrm{G2}}|=44$ items; all percentages for the rank sweep
 are computed over $K_{0,\mathrm{rank}}=46$ items. All other percentages reported
 in this paper are computed over the corresponding backbone's $K_0$ set, with
 the raw fraction provided in tables wherever a single-run result is reported.}
@@ -952,7 +951,7 @@ pre-registration hash is \texttt{a916ebf}.
 
 \textbf{Gemma~3 dose--response (G2, $r=10$, $n=3$ seeds).}
 An independent pre-registered experiment applies the same four dose levels to
-Gemma~3~1B~IT at $r=10$. The evaluation set is $K_{0,\mathrm{G2}}=44$ items
+Gemma~3~1B~IT at $r=10$. The evaluation set is $|K_{0,\mathrm{G2}}|=44$ items
 (established by the \texttt{g1\_rank10} pipeline; see Section~\ref{sec:k0}).
 
 \rev{A prior exploratory pilot (C1--C5) used a qualitatively different
@@ -1107,7 +1106,7 @@ $\GoneFourMten\%\pm\GoneFourSDten$\,pp at Gen10, giving a cross-protocol
 descriptive gap of $17.7$\,pp versus the three-seed G3 bf16 $r=16$ runs (each retaining 76/78); the two
 protocols differ in quantization and seed assignment.}
 
-\begin{table}[width=.95\linewidth,cols=6,pos=htbp]
+\begin{table}[width=.95\linewidth,cols=7,pos=htbp]
 \caption{QLoRA rank sweep on Qwen~2.5~1.5B-Instruct. The degradative endpoint
 ($r=256$) is replicated with three seeds to confirm
 reproducibility.\textsuperscript{*} \rev{Retention for $r=4$ and $r=32$ is
@@ -1139,7 +1138,7 @@ temporal dynamics across regimes.
   lines show individual seeds; solid thick lines show the per-rank mean.
   Background bands indicate regime classification (green: homeostatic,
   yellow: bounded, red: degradative). (b) Dose-response
-  relationship: Gen10 retention versus nominal rank (left axis); mean effective
+  relationship: retention at last evaluated generation (Gen5 for $r=4$,$32$; Gen10 otherwise) versus nominal rank (left axis); mean effective
   rank versus nominal rank (right axis). Effective rank grows sub-linearly with
   nominal rank, indicating that increases in nominal capacity translate into
   progressively smaller increases in effective update
@@ -1335,7 +1334,7 @@ results provide additional validation of the dose-response
 structure.}\label{tab:gemma4}
 \begin{tabular*}{\tblwidth}{@{} lllll@{} }
 \toprule
-Rank & Retention & Eff.\ Rank & $K_0$ & Regime \\
+Rank & Retention & Eff.\ Rank & $|K_0|$ & Regime \\
 \midrule
 $r=4$   & 94.7\% & 2.04  & 76 & Homeostatic \\
 $r=16$  & 88.2\% & 5.10  & 76 & Bounded \\
@@ -1356,7 +1355,7 @@ architectures.
   \includegraphics[width=0.95\textwidth]{figs/scratch/fig_combined_trajectories.png}
   \caption{$K_0$ retention trajectories over ten recursive generations across
   three backbones: (a)~Qwen~2.5~1.5B, (b)~Gemma~3~1B, and (c)~Gemma~4~E2B.
-  Shaded bands show the range across seeds (N=5 for Gemma~3, N=3 for Qwen);
+  Shaded bands show the range across seeds (N=5 for Gemma~3, N=3 for Qwen, N=1 for Gemma~4);
   solid lines show means. All three backbones exhibit consistent
   regime structure (homeostatic below threshold, degradative above), with the
   transition occurring at backbone-dependent effective-rank
@@ -1529,7 +1528,7 @@ either axis in isolation.
 \end{figure}
 
 \subsubsection{
-ev{FFT on Gemma~3 is consistent with a cross-backbone magnitude effect}}
+\rev{FFT on Gemma~3 is consistent with a cross-backbone magnitude effect}}
 
 To test whether the perturbation-magnitude axis generalizes beyond Qwen, we
 evaluated full fine-tuning on Gemma~3~1B at three learning rates. Gen5 retention
@@ -1613,17 +1612,8 @@ These observations motivate a descriptive three-regime taxonomy:
 \end{enumerate}
 
 This taxonomy summarizes the observed behavior of the evaluated configurations
-rather than defining universally distinct categories. We denote the
-homeostatic--degradative transition threshold as $\theta_H$ (above which
-retention remains stable across all generations) and the degradative onset
-threshold as $\theta_D$ (above which factual retention declines progressively);
-\rev{In the evaluated Qwen configurations, homeostatic behaviour was observed
-up to $r=64$; the transition to a bounded regime was observed between $r=64$
-and $r=128$; and degradative behaviour emerged at $r=256$. We denote these
-empirically observed transition intervals $r_H \in (64, 128)$ and
-$r_D \in (128, 256)$. The thresholds $\theta_H$ and $\theta_D$ are
-percentage-retention cutoffs, not rank values, and are used only for
-within-generation classification.} The degradative regime
+rather than defining universally distinct categories. The empirically observed rank intervals separating regimes are $r_H \in (64, 128)$ and $r_D \in (128, 256)$ (Qwen-specific observations, not universal thresholds).
+The degradative regime
 ($r=256$) is qualitatively consistent with the Stage~B ``knowledge collapse''
 described by \citet{keisha2025}, where fluency persists while factual accuracy
 deteriorates. The distributionally degraded regime ($r=128$), however, represents
@@ -1688,7 +1678,7 @@ B7 on Qwen $r=256$ ($n=5$ paired seeds, $K_0=78$) and G2 on Gemma~3 $r=10$
 the 0\% within-pipeline baseline for each dose level on Qwen $r=256$.}
 
 \begin{table}[width=.95\linewidth,cols=5,pos=htbp]
-\caption{\rev{Dose--response on Qwen $r=256$ ($K_0=78$, $n=5$ paired seeds per
+\caption{\rev{Dose--response on Qwen $r=256$ ($|K_0|=78$, $n=5$ paired seeds per
 dose). Retention and gain ($\Delta$) relative to the 0\% within-pipeline
 baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \begin{tabular*}{\tblwidth}{@{} llrrrl@{} }
@@ -2312,8 +2302,8 @@ primary metric because it better reflects the practical definition of factual
 recall, but the strict-match analysis confirms that the observed degradation
 is not an artefact of verbosity-induced scoring inflation.}
 
-\rev{The Gemma~4~E2B~IT backbone was evaluated with a single seed at $r=64$
-and at $r=256$ (ten generations each). A single execution does not permit
+\rev{The Gemma~4~E2B~IT backbone was evaluated with a single seed at $r \\in \\{4, 16, 64\\}$
+(ten generations each). A single execution does not permit
 seed-level variance estimation or formal regime classification under the
 same statistical protocol applied to Qwen and Gemma~3. The E2B results are
 therefore treated as exploratory and supportive: they demonstrate that degradative
@@ -2388,7 +2378,7 @@ their effects are additive or interactive.
 \section{Project repository and data access}\label{app:repo}
 
 \rev{The replication package for this paper — including the revised manuscript
-source, response-to-reviewers letter, \rev{aggregated per-seed per-generation results (G1--G5, 23 executed runs, CSV format)},
+source, response-to-reviewers letter, \rev{aggregated per-seed per-generation results (G1--G5, 23 executed training runs (one run = one seed x one generation-sequence through all 10 generations), CSV format)},
 canonical numbers (112 \LaTeX{} macros), all analysis scripts, and all publication
 figures — is archived at:
 
