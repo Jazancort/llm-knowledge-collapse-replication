@@ -92,9 +92,7 @@ reducing synthetic exposure by 50\% arrests progressive degradation
 $\Delta\!=\!\BsevenDeltatenFifty$\,pp at Gen10; Gemma~3 $r=10$:
 $\Delta\!=\!\GtwoDeltatenFifty$\,pp at Gen10) and, on Qwen, matches the effect
 of halving the learning rate.
-A pre-registered prospective test (three cells, one seed) confirms the
-qualitative regime ordering of the operational ETP index; numerical threshold
-calibration remains exploratory.}
+\rev{A three-cell, single-seed prospective probe showed retention ordered in the expected direction, but one pre-specified regime classification was not met; calibration of a scalar pressure threshold remains unresolved.}
 These findings characterize recursive degradation as a pressure-dependent
 phenomenon whose stability depends on a multidimensional control landscape,
 providing an empirical basis for monitoring and configuring recursive training
@@ -476,7 +474,7 @@ $\|\Delta W\|_F$ & Frobenius norm of composed update, averaged across modules \\
 $d(t)$         & Parameter drift: mean absolute weight change
                  $\theta^{(t)}-\theta^{(0)}$ \\
 $\eta$         & Learning rate \\
-$\Pi$          & Operational pressure index: $\mathrm{erank}(\Delta W)\cdot\eta$ \\
+$\Pi$          & Operational pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
 $f$            & Exposure dose: fraction of training items removed \\
 $\theta_H$     & Homeostatic threshold ($R \ge \theta_H$) \\
 $\theta_D$     & Degradative threshold ($R \le \theta_D$) \\
@@ -598,10 +596,22 @@ questions. Other backbones have their own fixed $K_0$ sets, determined once at
 generation~0 and held constant across all experimental conditions for that
 backbone.
 % [v4] A5 — K0 por backbone declarado explicitamente para evitar ambiguidade
-The $K_0$ sizes are: $|K_0|=78$ for Qwen~2.5~1.5B, $|K_0|=46$ for
-Gemma~3~1B~IT, and $|K_0|=76$ for Gemma~4~E2B~IT. All percentages reported
+% [v4-rev2] P1: dois K0 distintos para Gemma3 de dois pipelines diferentes
+\rev{The $K_0$ sizes are: $|K_0|=78$ for Qwen~2.5~1.5B and $|K_0|=76$ for
+Gemma~4~E2B~IT. For Gemma~3~1B~IT, two evaluation sets arise from two distinct
+experimental pipelines: the rank-sweep experiments (G3,
+Section~\ref{sec:res_capacity}) use $|K_{0,\mathrm{rank}}|=46$ items, established
+by the \texttt{gemma3\_c5correct} pipeline; the dose-response experiment (G2,
+Section~\ref{sec:intervention}) uses $|K_{0,\mathrm{G2}}|=44$ items, established
+by the \texttt{g1\_rank10} pipeline. The 44-item set is a strict subset of the
+46-item set: the two additional items (dataset indices~46 and~133 within the
+200-item evaluation pool) were answered correctly under the
+\texttt{gemma3\_c5correct} prompt template but not under the \texttt{g1\_rank10}
+template, which uses a different system-message format. All percentages for G2 are
+computed over $K_{0,\mathrm{G2}}=44$ items; all percentages for the rank sweep
+are computed over $K_{0,\mathrm{rank}}=46$ items. All other percentages reported
 in this paper are computed over the corresponding backbone's $K_0$ set, with
-the raw fraction provided in tables wherever a single-run result is reported.
+the raw fraction provided in tables wherever a single-run result is reported.}
 
 At each subsequent generation~$t$, only the corresponding $K_0$ items are used
 to compute retention:
@@ -811,7 +821,7 @@ proxies (effective rank, mean absolute weight drift $d(t)$, response length, and
 SDI-3). Effective rank and drift track how much pressure was actually applied to
 the model, but they are not available prospectively; they therefore serve as
 post-hoc explanatory variables rather than pre-specified predictors. The
-operational index $\Pi = \mathrm{erank} \times (\eta / 10^{-5})$ is reported as
+operational index $\Pi = \mathrm{erank}(\Delta W) \times (\eta / 10^{-5})$ is reported as the mean across training generations, where $\mathrm{erank}(\Delta W)$ denotes the effective rank of the adapter weight update (see Table~\ref{tab:notation}). This is
 an exploratory post-training summary and is not used as a validated quantitative
 threshold.}
 
@@ -1790,7 +1800,7 @@ pressure (effective rank ${\sim}6$) than Qwen $r=256$ (effective rank ${\sim}88$
   across two backbones (Gen10, $K_0$-conditioned). Each curve shows the mean
   improvement ($\Delta$pp) over the respective unmodified baseline as the
   fraction of synthetic training examples removed increases from 0\% to 50\%.
-  Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $K_0=46$).
+  Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $K_{0,\mathrm{G2}}=44$).
   Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $K_0=78$).
   Shaded bands: 95\,\% confidence intervals from paired $t$-tests.
   The Gemma~3 effect is larger in absolute terms, consistent with that backbone
@@ -1839,18 +1849,27 @@ seed-to-seed variance within G1. Combining G1$+$G4 gives a six-seed
 Gen10 estimate of $\GoneFourMten\%\pm\GoneFourSDten$~pp
 (95\,\% CI $[\GoneFourCItenLo, \GoneFourCItenHi]$).}
 
-\rev{\textbf{Prospective regime index (G5).}
-As a prospective test of the ETP operational index, we pre-registered three
-cells on Qwen before any run (commit \texttt{ee0aecc9}) and evaluated Gen5
-retention. The cell with the lowest predicted pressure ($r=128$,
-$\eta=5\times10^{-6}$, $\Pi\approx0.025$) returned $\GfiveRonetwoetightLRlow\%$
-(Homeostatic, prediction confirmed). The high-pressure cell ($r=128$,
-$\eta=2\times10^{-5}$, $\Pi\approx0.100$) returned $\GfiveRonetwoetightLRhigh\%$
-(Bounded, prediction Degradative---partially confirmed: degradation is
-present but does not cross the $<80\%$ threshold). The borderline cell
-($r=32$, $\eta=2\times10^{-5}$, $\Pi\approx0.050$) returned $\GfiveRthreytwoLRhigh\%$
-(Bounded/Homeostatic). The index correctly predicts the qualitative regime ordering
-across all three cells; numerical threshold calibration remains an open problem.
+\rev{\textbf{Prospective rank$\times$learning-rate probe (G5).}
+As a prospective test of whether the regime ordering generalises to unseen
+rank$\times$learning-rate configurations, we pre-registered three cells on
+Qwen~2.5~1.5B with a single seed (seed~15, five generations): a low-pressure
+cell ($r=128$, $\eta=5\times10^{-6}$), a high-pressure cell ($r=128$,
+$\eta=2\times10^{-5}$), and an intermediate cell ($r=32$, $\eta=2\times10^{-5}$).
+The pre-registered classification predicted Homeostatic, Degradative, and
+Bounded respectively, based on the rank$\times$LR grid established in
+\S\ref{sec:res_capacity}.
+The low-pressure cell returned $\GfiveRonetwoetightLRlow\%$ at Gen5
+(Homeostatic, \textbf{confirmed}); the high-pressure cell returned
+$\GfiveRonetwoetightLRhigh\%$ (Bounded, \textbf{not confirmed} --- predicted
+Degradative); and the intermediate cell returned $\GfiveRthreytwoLRhigh\%$
+(Bounded, \textbf{confirmed}).
+We do not report an operational pressure index $\Pi$ for G5: the effective rank
+of each adapter was measured (mean $\mathrm{erank}\approx51$ for $r=128$,
+$\approx16$ for $r=32$), but the pre-specification did not fix a threshold on
+$\Pi$, and the three cells were selected by nominal rank and learning rate, not
+by $\Pi$ value. One of the three pre-specified regime classifications was not
+met; G5 is therefore exploratory evidence for the ordering, not a confirmatory
+test of the full classification scheme.
 All three cells used a single seed; the prospective result is therefore exploratory.}
 \section{Discussion}\label{sec:discussion}
 
