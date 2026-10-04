@@ -1726,7 +1726,7 @@ archived in the replication repository (Section~\ref{app:repo}).}
 Figure~\ref{fig:interventions} visualizes the retention and effect-size
 comparison across conditions.
 
-\rev{\begin{figure}
+\rev{\begin{figure}[!ht]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/scratch/fig_interventions.png}
   \caption{Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5, included for
@@ -1736,6 +1736,7 @@ comparison across conditions.
   relative to the corresponding unmodified arm; error bars reflect the range across three seeds or
   masks.}\label{fig:interventions}
 \end{figure}}
+\FloatBarrier
 
 \rev{These results demonstrate that the Qwen $r=256$ configuration responds to
 graded exposure reduction: a 50\% reduction arrests progressive loss and shifts
@@ -1765,7 +1766,7 @@ levels; effective rank is not portable across architectures
 protocol without inferring which backbone operated at higher relative
 pressure.}
 
-\rev{\begin{figure}[htbp]
+\rev{\begin{figure}[!ht]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig9_dose_response.png}
   \caption{Dose--response of synthetic exposure reduction on factual retention
