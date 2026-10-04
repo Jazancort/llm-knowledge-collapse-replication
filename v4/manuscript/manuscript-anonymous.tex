@@ -1,5 +1,5 @@
 %% Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs
-%% Target: Engineering Applications of Artificial Intelligence (Elsevier)
+%% Target: Knowledge-Based Systems (Elsevier, MS ID KNOSYS-D-26-21490)
 %% Template: CAS Double Column (cas-dc)
 
 \documentclass[a4paper,fleqn]{cas-dc}
@@ -476,7 +476,7 @@ $d(t)$         & Parameter drift: mean absolute weight change
 $\eta$         & Learning rate \\
 $\Pi$          & Operational pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
 $f$            & Exposure dose: fraction of training items removed \\
-$\theta_H$, $\theta_D$ & Empirical transition intervals (Qwen): $r_H \in (64,128)$, $r_D \in (128,256)$; not universal percentage cutoffs \\
+$r_H$, $r_D$ & \rev{Empirically observed rank transition intervals (Qwen-specific): $r_H \in (64,128)$, $r_D \in (128,256)$; not universal thresholds} \\
 $T$            & Evaluation horizon (10 generations in main experiments) \\
 $\mathrm{ContentEff}(t)$ & Retention divided by mean synthetic response length \\
 $\mathrm{Persist}(t)$    & Fraction of $K_0$ items whose response at generation~$t$
@@ -591,7 +591,7 @@ as training data.
 
 The subset of held-out questions answered correctly at generation~0 defines
 $K_0$. For example, for Qwen~2.5~1.5B, $|K_0|=78$ out of 200 held-out
-questions. Other backbones have their own fixed $K_0$ sets, determined once at
+questions. Other backbones have their own fixed $K_0$ sets (invariant within each pipeline, though Gemma~3 has two distinct sets from two pipelines), determined once at
 generation~0 and held constant across all experimental conditions for that
 backbone.
 % [v4] A5 — K0 por backbone declarado explicitamente para evitar ambiguidade
@@ -608,7 +608,7 @@ by the \texttt{g1\_rank10} pipeline. The 44-item set is a strict subset of the
 \texttt{gemma3\_c5correct} prompt template but not under the \texttt{g1\_rank10}
 template, which uses a different system-message format. All percentages for G2 are
 computed over $|K_{0,\mathrm{G2}}|=44$ items; all percentages for the rank sweep
-are computed over $K_{0,\mathrm{rank}}=46$ items. All other percentages reported
+are computed over $|K_{0,\mathrm{rank}}|=46$ items. All other percentages reported
 in this paper are computed over the corresponding backbone's $K_0$ set, with
 the raw fraction provided in tables wherever a single-run result is reported.}
 
@@ -669,7 +669,7 @@ check. Architectural metadata are taken from the released model configurations.
     \item \textbf{Gemma 4 E2B IT}\footnote{Available at
     \url{https://huggingface.co/google/gemma-4-e2b-it};
     \rev{see \citet{gemma4_2026} for the technical report.}} is used as additional
-    validation from a third model family. The released configuration specifies
+    validation from a third backbone. The released configuration specifies
     % [v4] A8 RESOLVIDO: config.json confirmado 2× na Athena — 1536/35/8heads/1KVhead. .tex correto.
     % NOVO: num_kv_shared_layers=20 (layers 15-34 não têm v_proj). LoRA adapta 50 módulos, não 70.
     35 layers, hidden size 1536, and grouped-query attention with 8 attention
@@ -761,7 +761,7 @@ sweep the learning rate across four logarithmically spaced values ($10^{-6}$,
 $5{\times}10^{-6}$, $10^{-5}$, $2{\times}10^{-5}$), selected to span one
 order of magnitude within the practical range commonly used for LLM
 fine-tuning~\citep{hu2022,dettmers2023}. This range produced per-generation
-weight drifts from 0.39 to 3.48 ($L_2$ norm), enabling perturbation-magnitude
+weight drift $d(t)$ (mean absolute change per parameter) from 0.39 to 3.48, enabling perturbation-magnitude
 dose-response analysis. This axis tests whether
 perturbation magnitude drives the regime transition independently of adapter
 rank.
@@ -1091,7 +1091,7 @@ components of effective training pressure relate to recursive stability and
 degradation. We begin with the central empirical result: a clear, monotonic
 regime transition as adapter rank increases on Qwen, which serves as the primary
 backbone because it provides the highest-resolution dose-response
-characterization through six rank levels evaluated across ten generations
+characterization through six rank levels (evaluated through Gen5 for $r=4$,$32$ and Gen10 for the remaining four)
 (Section~\ref{sec:res_capacity}). We then evaluate whether the same behavior
 generalizes across different model families (Section~\ref{sec:res_backbone}),
 investigate whether increasing perturbation magnitude through full fine-tuning
@@ -1196,7 +1196,7 @@ stabilization within the observed horizon. The post-adaptation slope
 
 The dose-response curve (Fig.~\ref{fig:trajectories}b) reveals several
 additional features. First, the
-relationship between rank and retention is monotonically decreasing across all
+relationship between rank and retention is non-increasing across all
 six values, spanning more than an order of magnitude in trainable parameters
 (545K to 34.9M). No rank reversal or non-monotonicity is observed. Second, the
 decline accelerates at higher ranks: the gap between $r=64$ (92.3\%) and $r=256$
@@ -1346,7 +1346,7 @@ $r=16$  & 10 & 56.5\% (N=5) & 9.17  & \rev{5} & Degradative \\
 
 \subsubsection{Gemma~4~E2B: additional validation}
 
-To provide additional validation from a third model family, we evaluated
+To provide additional validation from a third backbone, we evaluated
 Gemma~4~E2B across three ranks ($r=4$, $r=16$, $r=64$) with a single seed
 over ten generations. Table~\ref{tab:gemma4} summarizes the results.
 
@@ -1391,7 +1391,7 @@ architectures.
   \includegraphics[width=0.95\textwidth]{figs/scratch/fig_combined_trajectories.png}
   \caption{$K_0$ retention trajectories over ten recursive generations across
   three backbones: (a)~Qwen~2.5~1.5B, (b)~Gemma~3~1B, and (c)~Gemma~4~E2B.
-  Shaded bands show the range across seeds (N=5 for Gemma~3, N=3 for Qwen, N=1 for Gemma~4);
+  Shaded bands show the seed range for Gemma~3 ($N=5$) and Qwen ($N=3$); Gemma~4 is a single trajectory ($N=1$, no band);
   solid lines show means. All three backbones exhibit consistent
   regime structure (homeostatic below threshold, degradative above), with the
   transition occurring at backbone-dependent effective-rank
@@ -1707,13 +1707,13 @@ component of effective training pressure: whether reducing synthetic data
 exposure can shift the system back from a degradative to a near-homeostatic
 configuration. The primary evidence comes from the two pre-registered
 dose--response experiments described in Section~\ref{sec:intervention}:
-B7 on Qwen $r=256$ ($n=5$ paired seeds, $K_0=78$) and G2 on Gemma~3 $r=10$
+B7 on Qwen $r=256$ ($n=5$ paired seeds, $|K_0|=78$) and G2 on Gemma~3 $r=10$
 ($n=3$ paired seeds, $K_{0,\mathrm{G2}}=44$).
 
 \rev{Table~\ref{tab:interventions} reports $K_0$ retention and the gain over
 the 0\% within-pipeline baseline for each dose level on Qwen $r=256$.}
 
-\begin{table}[width=.95\linewidth,cols=5,pos=htbp]
+\begin{table}[width=.95\linewidth,cols=6,pos=htbp]
 \caption{\rev{Dose--response on Qwen $r=256$ ($|K_0|=78$, $n=5$ paired seeds per
 dose). Retention and gain ($\Delta$) relative to the 0\% within-pipeline
 baseline at Gen5 and Gen10.}}\label{tab:interventions}
@@ -1809,7 +1809,7 @@ pressure.}
   improvement ($\Delta$pp) over the respective unmodified baseline as the
   fraction of synthetic training examples removed increases from 0\% to 50\%.
   Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $K_{0,\mathrm{G2}}=44$).
-  Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $K_0=78$).
+  Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $|K_0|=78$).
   Shaded bands: 95\,\% confidence intervals from paired $t$-tests.
   The absolute gain is larger for Gemma~3 G2 ($K_{0,\mathrm{G2}}{=}44$)
   than for Qwen B7 ($K_0{=}78$); effective rank is not portable across
@@ -1840,7 +1840,7 @@ interprets these findings in the context of prior work.
 \subsection{Experimental controls and prospective index}\label{sec:res_controls}
 
 \rev{\textbf{Quantization control (G3).}
-All main QLoRA experiments use 4-bit NormalFloat (NF4) quantization of the base
+Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization of the base
 weights. To verify that the regime classification is not an artifact of NF4, we
 re-ran the same protocol on Qwen using standard bf16 precision and no base-weight
 quantization (G3, three seeds at each of $r=16$ and $r=256$). At $r=16$, bf16
@@ -1873,7 +1873,7 @@ cell ($r=128$, $\eta=5\times10^{-6}$), a high-pressure cell ($r=128$,
 $\eta=2\times10^{-5}$), and an intermediate cell ($r=32$, $\eta=2\times10^{-5}$).
 The pre-registered classification predicted Homeostatic, Degradative, and
 Bounded respectively, based on the rank$\times$LR grid established in
-\S\ref{sec:res_capacity}.
+\S\ref{sec:res_fft}.
 The low-pressure cell returned $\GfiveRonetwoetightLRlow\%$ at Gen5
 (Homeostatic, \textbf{confirmed}); the high-pressure cell returned
 $\GfiveRonetwoetightLRhigh\%$ (Bounded, \textbf{not confirmed}; predicted
@@ -2308,8 +2308,8 @@ transition, not to propose a general mitigation method. Whether the same
 intervention would recover stability under extreme pressure (e.g., FFT at high
 learning rate) remains untested.
 
-All mechanistic analysis operates at the output level (retention counts, response
-properties, cross-lag correlations). No weight-level analysis of adapter update
+\rev{The primary mechanistic evidence operates at the output level (retention counts, response
+properties, cross-lag correlations); parameter-space measures (effective rank, Frobenius norms, weight drift) are also reported, though without causal attribution.} No weight-level analysis of adapter update
 subspaces, gradient geometry, or representational drift was conducted. The causal
 mechanisms by which effective training pressure produces regime transitions
 remain outside the scope of the present study.
@@ -2338,7 +2338,7 @@ primary metric because it better reflects the practical definition of factual
 recall, but the strict-match analysis confirms that the observed degradation
 is not an artefact of verbosity-induced scoring inflation.}
 
-\rev{The Gemma~4~E2B~IT backbone was evaluated with a single seed at $r \\in \\{4, 16, 64\\}$
+\rev{The Gemma~4~E2B~IT backbone was evaluated with a single seed at $r \in \{4, 16, 64\}$
 (ten generations each). A single execution does not permit
 seed-level variance estimation or formal regime classification under the
 same statistical protocol applied to Qwen and Gemma~3. The E2B results are
@@ -2354,8 +2354,8 @@ generation for lower-dose conditions) and data composition (a lower fraction
 of synthetic, potentially corrupted, responses in the training mix). The
 steps-matched control (G2b, $n=3$) was inconclusive, so the
 relative contribution of each mechanism remains unresolved. The effect
-was tested on a single backbone (Qwen) and configuration ($r=256$, Gen10
-horizon); whether the same sensitivity to exposure dose exists at other
+was tested on two configurations: B7 (Qwen $r=256$, Gen10
+horizon) and G2 (Gemma~3 $r=10$, Gen10). Whether the same sensitivity exists at other
 ranks, on other backbones, or with different training datasets
 has not been established.}
 
@@ -2414,7 +2414,7 @@ their effects are additive or interactive.
 \section{Project repository and data access}\label{app:repo}
 
 \rev{The replication package for this paper — including the revised manuscript
-source, response-to-reviewers letter, \rev{aggregated per-seed per-generation results (G1--G5, 23 executed training runs (one run = one seed x one generation-sequence through all 10 generations), CSV format)},
+source, response-to-reviewers letter, \rev{aggregated per-seed per-generation results (G1--G5, 27 executed training runs (one run = one seed-configuration pair, comprising the full generation sequence for that condition; G5 runs 5 generations), CSV format)},
 canonical numbers (112 \LaTeX{} macros), all analysis scripts, and all publication
 figures — is archived at:
 
