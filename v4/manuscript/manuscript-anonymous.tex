@@ -1810,11 +1810,15 @@ interprets these findings in the context of prior work.
 All main QLoRA experiments use 4-bit NormalFloat (NF4) quantization of the base
 weights. To verify that the regime classification is not an artifact of NF4, we
 re-ran the same protocol on Qwen using standard bf16 precision and no base-weight
-quantization (G3, three seeds at each of $r=16$ and $r=256$). Results are
-unchanged at both ranks: at $r=16$ bf16 yields $97.4\%$ Gen10, a difference of
-$\GthreeDeltatenSixteen$~pp from the NF4 baseline; at $r=256$ the difference is
-$\GthreeDeltatenTwoFiveSix$~pp. Quantization is therefore not driving the
-observed regime separation.}
+quantization (G3, three seeds at each of $r=16$ and $r=256$). At $r=16$, bf16
+yields $97.4\%$ Gen10, a difference of $\GthreeDeltatenSixteen$~pp from the NF4
+baseline; at $r=256$ the difference is $\GthreeDeltatenTwoFiveSix$~pp.
+The G1 (NF4) and G3 (bf16) runs produced identical aggregate retention counts
+for the matched seeds at $r=256$; run-level provenance and item-level outputs
+are audited separately before interpreting this agreement as evidence about
+quantization. The regime classification at both ranks is consistent across
+precision settings, but a causal conclusion about quantization awaits full
+provenance audit.}
 
 \rev{\textbf{Data-order control (G4).}
 To isolate seed variance from data-order variance, G4 replicates the Qwen
