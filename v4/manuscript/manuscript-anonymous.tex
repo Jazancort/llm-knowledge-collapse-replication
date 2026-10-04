@@ -7,10 +7,10 @@
 \usepackage[T1]{fontenc}
 \usepackage[dvipsnames]{xcolor}
 % ── Revision highlighting ──────────────────────────────────────────────
-% Set \showchangestrue  to show blue highlights in the tracked version.
+% Set \showchangestrue  to show yellow highlight in the tracked version.
 % Set \showchangesfalse to produce a clean submission copy.
 \newif\ifshowchanges
-\showchangesfalse  % ← toggle here: \showchangestrue | \showchangesfalse
+\showchangestrue  % ← toggle here: \showchangestrue | \showchangesfalse
 \newcommand{\rev}[1]{\ifshowchanges{\color{blue}#1}\else{#1}\fi}
 % ── Números canônicos gerados por make_all.py — NÃO EDITAR À MÃO ──
 \input{../docs/revision/resultados/make_all_outputs/numbers}
