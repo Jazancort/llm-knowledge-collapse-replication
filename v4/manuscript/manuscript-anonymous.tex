@@ -105,11 +105,11 @@ pipelines.
 % HIGHLIGHTS
 % ============================================================
 \begin{highlights}
-\item \rev{Recursive degradation exhibits an abrupt, pressure-dependent transition within the tested grid}
-\item Pressure thresholds differ by an order of magnitude across three backbone families
-\item Adapter rank and learning rate interact to determine the operating regime
-\item Output drift accompanies degradative regimes beyond factual retention loss
-\item \rev{A pre-registered exposure dose--response shows that reducing synthetic training volume by 50\% arrests progressive degradation and matches the effect of halving the learning rate}
+\item \rev{Rank-dependent threshold-like transition between homeostatic and degradative regimes}
+\item \rev{Regime boundaries differ approximately ten-fold across backbones (effective rank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
+\item \rev{Adapter rank and learning rate jointly determine the operating regime}
+\item Output drift accompanies degradative regimes while factual retention stays bounded
+\item \rev{A pre-registered 50\% synthetic exposure reduction arrests progressive loss on two backbones}
 \end{highlights}
 
 % ============================================================
@@ -2385,7 +2385,7 @@ Running \texttt{python scripts/figures/fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not
 redistributed; exact checkpoint identifiers are listed in
-Table~\ref{tab:models}.}
+Section~\ref{sec:models}.}
 
 % ============================================================
 % REFERENCES
