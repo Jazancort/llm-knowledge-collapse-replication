@@ -387,9 +387,10 @@ removal across five paired seeds on Qwen~2.5~1.5B at $r=256$. The results,
 reported in Section~4.5 (ll.~1685--1713), show that:
 
 \begin{itemize}
-  \item At Gen~5, any reduction raises retention by approximately
-    $5$\,pp: $+5.0$\,pp (10\%, $p=0.002$), $+5.3$\,pp (25\%, $p=0.014$),
-    $+5.7$\,pp (50\%, $p=0.002$), $n=5$ seeds each.
+  \item At Gen~5, the gains are $+5.0$\,pp (10\%, $p=0.002$),
+    $+5.3$\,pp (25\%, $p=0.014$), and $+5.7$\,pp (50\%, $p=0.002$),
+    $n=5$ seeds each; the Gen~5 benefit is uniform across doses while
+    the Gen~10 benefit is dose-graded.
   \item At Gen~10, the benefit is dose-graded: $+2.4$\,pp at 10\% ($p$
     n.s.), $+5.5$\,pp at 25\% (95\,\% CI $[0.4, 10.5]$, $p=0.039$), and
     $+9.8$\,pp at 50\% (95\,\% CI $[6.9, 12.8]$, $p=0.0008$).
@@ -404,22 +405,20 @@ confirmed: Gen~5 retention at dose~$=50\%$ is 89.7\% versus 90.2\% at
 $\eta = 5\times10^{-6}$ (mean over three seeds; Gen~10 difference
 $+0.4$\,pp, 90\,\% CI $[-0.8, 1.6]$).
 
-\textbf{Mechanism and generalization.}
-The mechanism through which exposure reduction acts was not established.
-Two candidate explanations are plausible: a reduction in the per-generation
-update budget (fewer gradient steps) and a change in data composition (lower
-fraction of potentially corrupted synthetic responses). A steps-matched
-control (G2b, $n=3$) was inconclusive. The effect was tested on a single
-backbone (Qwen) and configuration ($r=256$, Gen~10 horizon); whether it
-generalises to other ranks, other backbones, or different datasets is
-explicitly listed as a limitation in Section~6 (ll.~2204--2214). The
-original reviewer question about Gemma~3 is therefore not yet resolved for
-the dose--response setting; the Gemma~3 analysis in the original submission
-used the discredited pipeline and is not reported in the revised version.
+\textbf{Cross-backbone replication and mechanism.}
+\rev{The pre-registered dose--response has been replicated on a second backbone:
+Gemma~3~1B~IT at $r=10$ (G2, three paired seeds, $K_{0,\mathrm{G2}}=44$).
+A 50\% reduction raises Gen~10 retention by $\GtwoDeltatenFifty$\,pp
+(95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$),
+confirming the effect generalises to a second backbone.}
+The mechanism was not established. Two candidate explanations remain
+plausible: a reduction in per-generation gradient steps and a change in data
+composition. A steps-matched control was inconclusive at $n=3$. We do not
+conclude that the update-budget mechanism is correct; the confirmed finding
+is that 50\% dose reduction arrests progressive loss on both tested backbones
+and is dose-graded at Gen~10.
 
-\msloc{Section~4.5, ll.~1685--1713 (dose--response, pre-registration, LR
-equivalence); Section~6, ll.~2204--2214 (mechanism limitation); Appendix~A
-(original C2--C5 results).}
+\msloc{Section~4.5 (B7 Qwen and G2 Gemma~3 dose--response; pre-registration; LR equivalence); Section~6 (mechanism limitation, Gemma~3 r=16 pilot); repository (original C1--C5 pilot archived).}
 
 \subsection{R1.Q5}
 
@@ -436,7 +435,7 @@ retention tables. We have expanded the reproducibility section
 \item the exact model checkpoint identifiers and revisions for all three
   backbones;
 \item train and evaluation question IDs, and the baseline-correct
-  $K_0$ sets ($|K_0|=78$ for Qwen, $|K_0|=46$ for Gemma~3);
+  $K_0$ sets ($|K_0|=78$ for Qwen; two Gemma~3 sets: $|K_{0,\mathrm{rank}}|=46$ for rank-sweep experiments and $|K_{0,\mathrm{G2}}|=44$ for dose-response G2; see Section~3.6);
 \item prompt and chat templates used for both synthetic data generation
   and deterministic evaluation;
 \item distinct decoding settings (sampling parameters for generation,
@@ -444,21 +443,12 @@ retention tables. We have expanded the reproducibility section
 \item correctness normalization and alias-expansion code;
 \item training configurations, software versions, random seeds,
   data-order and downsampling masks;
-\item per-generation, item-level predictions and correctness labels; and
+\item per-generation retention counts and boolean correctness vectors (length $|K_0|$ per seed and generation) are included in the consolidated CSV; raw token-level predictions are not in the current release but available from the authors upon request; and
 \item scripts used to regenerate every table and figure.
 \end{enumerate}
 
 We also specify which experiments reset adapters and optimizer states
-between generations. \rev{The replication package — source code, configurations,
-raw experimental results, analysis scripts, and all publication figures — is
-permanently archived at
-\url{https://doi.org/10.5281/zenodo.23145362} (DOI: \texttt{10.5281/zenodo.23145362})
-and mirrored at
-\url{https://github.com/Jazancort/llm-knowledge-collapse-replication} (release \texttt{v1.0.2}).
-Running \texttt{python scripts/make\_all.py} from the package root reproduces all
-112 canonical numbers used in the manuscript (15/15 consistency checks pass).
-An artifact manifest with SHA-256 hashes for every file is provided in
-\texttt{MANIFEST.md}.}
+between generations. \rev{The replication package contains: (1)~all analysis and figure-generation scripts; (2)~the consolidated results CSV (G1--G5, 23 runs, per-generation per-seed retention); (3)~all 11 publication figures at 300\,dpi; and (4)~the pre-registration commit for B7 (\texttt{a916ebf}). The package does \emph{not} contain raw token-level predictions, adapter checkpoints (available on request; $\approx$70\,MB each in bf16), or base-model weights (obtained from their original distributors). It is archived at \url{https://doi.org/10.5281/zenodo.23145362}. \textbf{Note:} this DOI corresponds to release \texttt{v1.0.2}, which predates the manuscript corrections in commits P1--P3; a new versioned release will be deposited after the final manuscript is frozen. Running \texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers (15/15 checks pass). An artifact manifest with SHA-256 hashes is in \texttt{MANIFEST.md}.}
 Base-model weights are obtained from their original
 distributors and are not redistributed. The revised appendix provides
 an artifact manifest mapping every reported figure and table to its
