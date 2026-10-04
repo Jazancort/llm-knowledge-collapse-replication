@@ -599,7 +599,7 @@ backbone.
 \rev{The $K_0$ sizes are: $|K_0|=78$ for Qwen~2.5~1.5B and $|K_0|=76$ for
 Gemma~4~E2B~IT. For Gemma~3~1B~IT, two evaluation sets arise from two distinct
 experimental pipelines: the rank-sweep experiments (G3,
-Section~\ref{sec:res_capacity}) use $|K_{0,\mathrm{rank}}|=46$ items, established
+Section~\ref{sec:res_backbone}) use $|K_{0,\mathrm{rank}}|=46$ items, established
 by the \texttt{gemma3\_c5correct} pipeline; the dose-response experiment (G2,
 Section~\ref{sec:intervention}) uses $|K_{0,\mathrm{G2}}|=44$ items, established
 by the \texttt{g1\_rank10} pipeline. The 44-item set is a strict subset of the
@@ -639,8 +639,8 @@ relative retention dynamics rather than absolute TriviaQA benchmark performance.
 We report K0 retention as both a fraction and a percentage (e.g.,
 73/78 = 93.6\%). For multi-seed experiments, we report per-seed values and
 summaries across seeds. $K_0$ is defined separately
-for each backbone and then reused unchanged across rank, learning-rate, module
-targeting, and intervention strategies.
+for each backbone and then reused unchanged within each pipeline (across rank, learning-rate, module
+targeting, and intervention strategies); Gemma~3 has two distinct $K_0$ sets from two pipelines.
 
 \subsection{Models and hardware}\label{sec:models}
 
@@ -970,10 +970,10 @@ therefore use a small but explicit seed policy, distinguishing between
 multi-seed headline comparisons and single-seed supporting ablations.
 
 All headline comparisons are evaluated with multiple independent training seeds
-(three for Qwen conditions, five for Gemma~3 anchor ranks). These
+(three for most Qwen conditions, five for Gemma~3 anchor ranks, five for B7/Qwen dose-response, and three for G2/Gemma~3 dose-response). These
 include the Qwen rank-sweep endpoints ($r=16$ and $r=256$), the Gemma~3 anchor
 ranks ($r=4$, homeostatic, and $r=16$, degradative), the QLoRA--FFT comparison, and the dose--response synthetic
-exposure interventions. Intermediate dose-response points and supporting
+exposure interventions. Supporting ablations are evaluated with a single seed. The dose-response experiments (B7, G2) use multiple seeds across all doses (not only at endpoints). Supporting
 ablations are evaluated with a single seed and labeled as such. We do not pool
 single-seed and multi-seed results when making headline claims.
 
@@ -1246,7 +1246,7 @@ recoveries, producing monotonic net displacement.
 
 \begin{table}[tp]
 \caption{Item-level transitions across recursive generations on
-Qwen~2.5~1.5B (seed~15, $K_0 = 78$). C$\to$W (Correct$\to$Wrong): facts lost;
+Qwen~2.5~1.5B (seed~15, $|K_0| = 78$). C$\to$W (Correct$\to$Wrong): facts lost;
 W$\to$C (Wrong$\to$Correct): facts recovered.}\label{tab:transitions}
 \footnotesize
 \renewcommand{\arraystretch}{1.4}
@@ -1295,7 +1295,7 @@ overlap at any generation from Gen1 onward, providing consistent empirical
 separation between the two regimes on this backbone.
 
 \rev{The mean difference is $\GthreeDeltaRanks$~pp (computed from raw item counts,
-$K_0=\GthreeKzero$). Because the seed assignment across ranks is not confirmed
+$|K_0|=\GthreeKzero$). Because the seed assignment across ranks is not confirmed
 as paired in the archived data, we report two tests: if the same five seeds were
 used at both ranks, the exact bilateral sign-flip test gives $p=0.0625$
 ($N=5$, all five differences positive); if seeds are independent, a bilateral
@@ -1361,7 +1361,7 @@ increases from 0.23 to 0.28.
 
 Because these results are based on a single seed, we treat them as additional
 qualitative validation rather than as a precise threshold estimate. The key
-observation is that a third backbone, from a different model family, exhibits
+observation is that a third backbone, from the Gemma model family (a different generation), exhibits
 the same regime structure under increasing adapter rank.
 
 \begin{table}[width=.95\linewidth,cols=5,pos=htbp]
@@ -1472,7 +1472,7 @@ FFT          & $2{\times}10^{-5}$ & 3.48               & 84.6\% \\
 \rev{{\footnotesize QLoRA $r=16$ and FFT LR\,$=10^{-6}$: $N=3$ seeds. All other rows: $N=1$ seed (seed~15).}}
 \end{table}
 
-\subsubsection{QLoRA versus FFT at matched perturbation}
+\subsubsection{QLoRA versus FFT: exploratory comparison at similar perturbation magnitude}
 To compare the two update mechanisms at similar perturbation, we selected FFT at
 LR$\,=10^{-6}$ (drift 0.39) as the closest available match to QLoRA $r=16$
 ($\|BA\|_F \approx 0.42$). Both were run for 10 generations with three seeds.
@@ -1507,7 +1507,7 @@ consistently displaced by full-parameter updates regardless of seed. Under
 QLoRA, only two to three facts are lost per seed, and the overlap between facts
 lost by QLoRA and facts lost by FFT is zero across all seed pairs (Jaccard 0.0).
 In this low-perturbation regime, low-rank adaptation loses fewer facts and loses
-different facts than full fine-tuning at comparable perturbation magnitude.
+different facts than full fine-tuning at a proximately similar perturbation level (the two measures are not geometrically equivalent; this comparison is exploratory).
 
 This pattern is referred to as a stable fragile-fact floor under FFT: certain facts
 are reliably displaced by full-parameter updates, whereas low-rank updates
@@ -1529,7 +1529,7 @@ adopted for the Gemma~3 experiments, enabling cross-backbone comparison.
 
 \begin{table}[width=.95\linewidth,cols=4,pos=htbp]
 \caption{Rank $\times$ learning rate joint-dependence matrix on Qwen~2.5~1.5B
-(retention evaluated at Gen5; $K_0 = 78$ items defined at generation~0, seed 15).}\label{tab:ranklr}
+(retention evaluated at Gen5; $|K_0| = 78$ items defined at generation~0, seed 15).}\label{tab:ranklr}
 \begin{tabular*}{\tblwidth}{@{} llll@{} }
 \toprule
 Rank & LR=$5{\times}10^{-6}$ & LR=$10^{-5}$ & LR=$2{\times}10^{-5}$ \\
@@ -2086,7 +2086,7 @@ Reproducibility (3--5 seeds) & Transfer to non-factoid tasks \\
 \addlinespace
 Cross-backbone regime structure & Cross-architecture normalization \\
 \addlinespace
-Capacity $\times$ magnitude interact & Exposure sensitivity cross-backbone \\
+Capacity $\times$ magnitude interact & Exposure sensitivity beyond B7/Qwen $r=256$ and G2/Gemma~3 $r=10$ \\
 \addlinespace
 Magnitude axis cross-backbone & Interaction strength at scale \\
 \bottomrule
@@ -2294,7 +2294,7 @@ The perturbation-matching comparison between QLoRA and FFT relies on approximate
 proxies ($\|BA\|_F$ for QLoRA versus mean absolute weight drift for FFT). These
 quantities are operationally comparable but not geometrically identical,
 introducing residual confounding in the method comparison. Additionally, all
-QLoRA experiments use 4-bit NormalFloat quantization of the base model. Although
+Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization. The G3 ablation re-ran the same protocol in bf16 (no base-weight quantization) and produced identical regime classifications, though a full causal conclusion awaits per-item audit. Although
 the quantized base remains static across generations and adapters are trained in
 higher precision, the interaction between quantization error and high-rank
 adapter updates has not been isolated. A comparison against standard 16-bit LoRA
@@ -2350,8 +2350,8 @@ quantitative threshold estimates.}
 \rev{The mechanism through which reduced synthetic exposure stabilises
 recursive retention was not established. Two candidate mechanisms are
 plausible: the per-generation update budget (fewer training steps per
-generation for lower-dose conditions) and data composition (a lower fraction
-of synthetic, potentially corrupted, responses in the training mix). The
+generation for lower-dose conditions) and data composition (a smaller number and different selection of synthetic training examples
+relative to the per-generation update budget). The
 steps-matched control (G2b, $n=3$) was inconclusive, so the
 relative contribution of each mechanism remains unresolved. The effect
 was tested on two configurations: B7 (Qwen $r=256$, Gen10
@@ -2424,7 +2424,7 @@ figures — is archived at:
     (DOI: \texttt{10.5281/zenodo.23146342})
   \item \textbf{GitHub} (version-controlled):
     \url{https://github.com/Jazancort/llm-knowledge-collapse-replication}
-    (release \texttt{v1.0.3}; \rev{note: this release predates the manuscript corrections in the current submission; a new release will be deposited after the final version is frozen})
+    (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
 Running \texttt{python scripts/make\_all.py} from the package root reproduces all
