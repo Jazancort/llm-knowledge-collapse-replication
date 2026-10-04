@@ -104,7 +104,7 @@ pipelines.
 % ============================================================
 \begin{highlights}
 \item \rev{Rank-dependent threshold-like transition between homeostatic and degradative regimes}
-\item \rev{Regime boundaries differ approximately ten-fold across backbones (effective rank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
+\item \rev{Regime boundaries differ ${\sim}10{\times}$ across backbones (erank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
 \item \rev{Adapter rank and learning rate jointly determine the operating regime}
 \item Output drift accompanies degradative regimes while factual retention stays bounded
 \item \rev{A pre-registered 50\% synthetic exposure reduction arrests progressive loss on two backbones}
@@ -455,11 +455,12 @@ All adapter-level quantities ($\mathrm{erank}$, $\|\cdot\|_F$) are averaged
 across adapted LoRA modules within a model.}}
 \label{tab:notation}
 \small
-\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}ll}
+\begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}l>{\raggedright\arraybackslash}p{0.7\columnwidth}}
 \toprule
 \textbf{Symbol} & \textbf{Definition} \\
 \midrule
-$K_0$          & Number of evaluation items answered correctly at generation~0 \\
+$K_0$          & \rev{Number of items in $Q$ answered correctly at generation~0;
+                 used as cardinality ($|K_0|$) and as set where context is clear} \\
 $R(t)$         & Factual retention at generation~$t$: fraction of $K_0$ items
                  still correct \\
 $\theta^{(0)}$ & Pretrained backbone weights \\
@@ -734,7 +735,7 @@ and the tested range.
 \begin{table}[htbp]
 \caption{Experimental axes and their corresponding pressure
 components.}\label{tab:axes}
-\begin{tabular}{@{}clll@{}}
+\begin{tabular}{@{}cll>{\raggedright\arraybackslash}p{5.5cm}@{}}
 \toprule
 \# & Axis & Variable & Range \\
 \midrule
@@ -742,8 +743,7 @@ components.}\label{tab:axes}
 2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\
 3 & Method & QLoRA vs FFT & Matched pert., $N{=}3$ \\
 4 & Topology & Target modules & Attention vs full-linear \\
-5 & Exposure & Training examples & \rev{0\%, 10\%, 25\%, 50\% removed} \\
- & & & \rev{(paired dose--response; B7/Qwen $r{=}256$, $n{=}5$; G2/Gemma~3 $r{=}10$, $n{=}3$)} \\
+5 & Exposure & Training examples & \rev{0\%, 10\%, 25\%, 50\% removed (paired dose--response; B7/Qwen $r{=}256$, $n{=}5$; G2/Gemma~3 $r{=}10$, $n{=}3$)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1090,10 +1090,20 @@ content is progressively displaced by unrelated or fabricated information.
 Increasing adapter rank produces a clear, monotonic decline in factual retention
 across the full rank sweep on Qwen~2.5~1.5B.
 Table~\ref{tab:rank_sweep} summarizes K0 retention, effective rank, trainable
-parameters, and regime classification for each tested configuration. Across the
-evaluated range, Gen10 retention decreases from \RsixteenMten\% at $r=16$ to
-\rev{$\GoneMten\%$ (mean across three seeds, $N=3$)} at
-$r=256$ ($N{=}3$), a descriptive gap of 17.7\,pp (G1$+$G4, $N{=}6$). The $r=16$ result uses the single G3/bf16 run ($N{=}1$ per seed); the descriptive gap between single-seed $r=16$ and the G1 three-seed $r=256$ mean is 17.1\,pp, reported here as a descriptive comparison across protocols.
+parameters, and regime classification for each tested configuration. Across the evaluated range, three descriptive contrasts are relevant.
+First, the single-seed sweep (G1, $N{=}1$): Gen10 retention is $\RsixteenMten\%$
+at $r=16$ and $\rev{\GoneMten\%}$ at $r=256$ ($N{=}3$ seeds), a descriptive
+gap of $17.1$\,pp within the G1 protocol.
+Second, the multi-seed G1$+$G4 estimate at $r=256$ ($N{=}6$ seeds,
+$\GoneFourMten\%\pm\GoneFourSDten$\,pp) versus the single bf16 run at $r=16$
+($\RsixteenMten\%$, G3 protocol, one seed) gives a descriptive gap of
+$17.7$\,pp; these protocols differ in precision and seed assignment and the
+comparison is cross-protocol.
+Third, the cleanest within-protocol contrast is G3 (same three seeds,
+same bf16 protocol, rank the only variable), giving a mean difference of
+$18.4$\,pp (sign-flip $p=0.25$, $N{=}3$, underpowered).\
+These three figures describe the same qualitative direction but are not
+interchangeable and should not be cited as the same comparison.
 
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
 \caption{QLoRA rank sweep on Qwen~2.5~1.5B-Instruct. The degradative endpoint
@@ -1747,10 +1757,15 @@ Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
 $\GtwoDeltatenFifty$~pp (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
 $p=\GtwoPtenFifty$), respectively ($n=3$ paired seeds per dose).
 At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen, indicating
-near-arrest of progressive loss. The Gemma~3 effect is larger in absolute
-terms than the Qwen result ($\GtwoDeltatenFifty$~pp vs.\ $\BsevenDeltatenFifty$~pp
-at dose~$=50\%$ Gen10), consistent with Gemma~3 $r=10$ operating at higher
-pressure (effective rank ${\sim}6$) than Qwen $r=256$ (effective rank ${\sim}88$).}
+near-arrest of progressive loss.}
+\rev{The absolute gain at dose~$=50\%$ Gen10 is larger for Gemma~3 G2
+($\GtwoDeltatenFifty$~pp, $K_{0,\mathrm{G2}}{=}44$) than for Qwen B7
+($\BsevenDeltatenFifty$~pp, $K_0{=}78$). The two experiments used different
+backbones, different evaluation set sizes, and different baseline retention
+levels; effective rank is not portable across architectures
+(Section~\ref{sec:res_backbone}), so we report the gains within each
+protocol without inferring which backbone operated at higher relative
+pressure.}
 
 \rev{\begin{figure}[htbp]
   \centering
@@ -1762,8 +1777,10 @@ pressure (effective rank ${\sim}6$) than Qwen $r=256$ (effective rank ${\sim}88$
   Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $K_{0,\mathrm{G2}}=44$).
   Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $K_0=78$).
   Shaded bands: 95\,\% confidence intervals from paired $t$-tests.
-  The Gemma~3 effect is larger in absolute terms, consistent with that backbone
-  operating at higher pressure at the tested rank.
+  The absolute gain is larger for Gemma~3 G2 ($K_{0,\mathrm{G2}}{=}44$)
+  than for Qwen B7 ($K_0{=}78$); effective rank is not portable across
+  architectures, so the two curves are reported within their respective
+  protocols rather than as a cross-backbone pressure comparison.
   Dashed horizontal line: no change ($\Delta=0$~pp).}\label{fig:dose_response_crossbackbone}
 \end{figure}}
 
@@ -2126,10 +2143,10 @@ effective in the evaluated configurations.} When
 monitoring signals indicate regime departure, reducing the volume of the
 synthetic training stream through downsampling
 may provide a lightweight mitigation strategy under conditions
-similar to those evaluated here. \rev{Under the pre-registered conditions,
-random downsampling performed comparably to halving the learning rate,
-suggesting that the operative mechanism is the per-generation update budget
-rather than data composition.}
+similar to those evaluated here. \rev{Under the pre-registered conditions, random downsampling performed
+comparably to halving the learning rate. The exposure intervention improved
+retention under the tested schedules, but the step-matched control did not
+distinguish an update-budget mechanism from changes in data composition.}
 
 In summary, practitioners deploying recursive synthetic fine-tuning should
 consider:
