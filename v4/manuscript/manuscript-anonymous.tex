@@ -919,10 +919,12 @@ output-distribution change:
     + \log\frac{\mathrm{D1}_0}{\mathrm{D1}_T}
     + \Delta I\,,
 \end{equation}
-where $\Delta I = \mathrm{Instability}(T) -
-\mathrm{Instability}(1)$ and $\mathrm{Instability}(t)$ denotes the fraction of
+where $\mathrm{D1}_t$ denotes the \rev{Distinct-1 unigram diversity} of synthetic
+responses at generation~$t$; $\mathrm{MeanLen}_t$ is the mean response length in
+words at generation~$t$; $\Delta I = \mathrm{Instability}(T) -
+\mathrm{Instability}(1)$; and $\mathrm{Instability}(t)$ denotes the fraction of
 training items whose normalized response differs between generation~$t{-}1$ and
-generation~$t$. The three terms correspond to verbosity increase, unigram
+generation~$t$. The convention $0\log 0 = 0$ applies. The three terms correspond to verbosity increase, unigram
 diversity decrease, and loss of item-level response stability. SDI-3 is not
 proposed as a theoretical measure; it is an empirical summary statistic used to
 compare output drift across experimental conditions.
@@ -990,8 +992,9 @@ the entire sweep provides stronger evidence than any single pairwise comparison.
 
 Effect sizes are reported as absolute percentage-point gaps in factual retention.
 For QLoRA--FFT comparisons, gaps are reported per seed and as a mean. For
-synthetic-exposure interventions, we report the improvement over the unmodified
-C1 baseline at the same generation. We do not claim precise threshold locations
+synthetic-exposure interventions, we report the improvement over the \rev{0\%-removed
+within-pipeline baseline} at the same generation; the earlier C1--C5 pilot used a
+different evaluation pipeline and is not used as the primary reference. We do not claim precise threshold locations
 or a universal effective-rank value at which degradation begins; instead, we
 identify the interval between adjacent tested settings where the regime
 transition occurs. Single-seed observations are used as exploratory or
@@ -1741,7 +1744,7 @@ comparison across conditions.
   transparency. These results use a different evaluation pipeline from the
   primary dose--response experiments (B7/G2) and are not used in the primary
   effect estimates. (a)~$K_0$ retention by condition. (b)~Retention improvement
-  relative to C1 baseline; error bars reflect the range across three seeds or
+  relative to the corresponding unmodified arm; error bars reflect the range across three seeds or
   masks.}\label{fig:interventions}
 \end{figure}}
 
@@ -2396,7 +2399,7 @@ figures — is archived at:
     (DOI: \texttt{10.5281/zenodo.23146342})
   \item \textbf{GitHub} (version-controlled):
     \url{https://github.com/Jazancort/llm-knowledge-collapse-replication}
-    (release \texttt{v1.0.3})
+    (release \texttt{v1.0.3}; \rev{note: this release predates the manuscript corrections in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
 Running \texttt{python scripts/make\_all.py} from the package root reproduces all
