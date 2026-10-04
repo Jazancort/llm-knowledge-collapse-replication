@@ -10,7 +10,7 @@
 % Set \showchangestrue  to show blue highlights in the tracked version.
 % Set \showchangesfalse to produce a clean submission copy.
 \newif\ifshowchanges
-\showchangestrue   % ← toggle here: \showchangestrue | \showchangesfalse
+\showchangesfalse  % ← toggle here: \showchangestrue | \showchangesfalse
 \newcommand{\rev}[1]{\ifshowchanges{\color{blue}#1}\else{#1}\fi}
 % ── Números canônicos gerados por make_all.py — NÃO EDITAR À MÃO ──
 \input{../docs/revision/resultados/make_all_outputs/numbers}
@@ -449,7 +449,7 @@ reported as the mean across adapted matrices.
 Table~\ref{tab:notation} summarises all symbols used in this section and in
 the results.  Symbols are listed in order of first appearance.
 
-\begin{table}[h]
+\begin{table}[tp]
 \caption{\rev{Symbol definitions used throughout the methodology and results.
 All adapter-level quantities ($\mathrm{erank}$, $\|\cdot\|_F$) are averaged
 across adapted LoRA modules within a model.}}
@@ -731,7 +731,7 @@ magnitude, module topology, and synthetic exposure, affect recursive stability.
 Table~\ref{tab:axes} summarizes the experimental axes, the manipulated variable,
 and the tested range.
 
-\begin{table}[htbp]
+\begin{table}[tp]
 \caption{Experimental axes and their corresponding pressure
 components.}\label{tab:axes}
 \begin{tabular}{@{}cll>{\raggedright\arraybackslash}p{5.5cm}@{}}
@@ -1010,7 +1010,7 @@ axis. Controls marked with a dedicated experiment (G3, G4) are evaluated
 quantitatively in Section~\ref{sec:results}; the remaining entries rely on
 held constant across all conditions within a backbone.
 
-\begin{table}[h]
+\begin{table}[tp]
 \caption{\rev{Sources of variation in the recursive fine-tuning protocol and
 the corresponding experimental control. G3 and G4 refer to dedicated
 within-session ablations (Section~\ref{sec:results}). ``Held constant''
@@ -1208,7 +1208,7 @@ similar rates (net loss $\approx 0$), indicating bounded oscillation rather than
 progressive forgetting. In the degradative regime, losses consistently exceed
 recoveries, producing monotonic net displacement.
 
-\begin{table}[htbp]
+\begin{table}[tp]
 \caption{Item-level transitions across recursive generations on
 Qwen~2.5~1.5B (seed~15, $K_0 = 78$). C$\to$W (Correct$\to$Wrong): facts lost;
 W$\to$C (Wrong$\to$Correct): facts recovered.}\label{tab:transitions}
@@ -1924,7 +1924,7 @@ into a single predictive scalar remains an important direction for future work.
 Table~\ref{tab:evidence} summarizes how each component of the framework is
 supported by independent experimental evidence.
 
-\begin{table}[htbp]
+\begin{table}[tp]
 \caption{Evidence matrix: mapping framework components to supporting
 experiments.}\label{tab:evidence}
 \footnotesize
@@ -2031,7 +2031,7 @@ more productive than treating collapse as a monolithic threat.
 To clarify the scope of the present findings, Table~\ref{tab:generalization}
 distinguishes what the evidence supports from what remains open.
 
-\begin{table}[htbp]
+\begin{table}[tp]
 \caption{Scope of generalization: what the present evidence supports versus
 what remains unknown.}\label{tab:generalization}
 \footnotesize
@@ -2224,7 +2224,7 @@ Cross-architecture threshold normalization was attempted using several
 architectural ratios, none of which aligned the thresholds between Qwen and
 Gemma~3 (Table~\ref{tab:normalization}).
 
-\begin{table}[htbp]
+\begin{table}[tp]
 \caption{Cross-architecture threshold normalization attempts. Threshold erank
 values: Qwen ${\sim}$50--88, Gemma~3 ${\sim}$3--6, E2B ${\sim}$5--13. None of
 the tested normalizations aligned thresholds across
