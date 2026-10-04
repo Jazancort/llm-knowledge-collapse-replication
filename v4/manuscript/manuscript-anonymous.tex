@@ -91,7 +91,7 @@ reducing synthetic exposure by 50\% arrests progressive degradation
 (Qwen $r=256$: Gen~5$\to$10 slope $\BsevenSlopeFifty$\,pp/generation,
 $\Delta\!=\!\BsevenDeltatenFifty$\,pp at Gen10; Gemma~3 $r=10$:
 $\Delta\!=\!\GtwoDeltatenFifty$\,pp at Gen10) and, on Qwen, matches the effect
-of halving the learning rate.
+of halving the learning rate.}
 \rev{A three-cell, single-seed prospective probe showed retention ordered in the expected direction, but one pre-specified regime classification was not met; calibration of a scalar pressure threshold remains unresolved.}
 These findings characterize recursive degradation as a pressure-dependent
 phenomenon whose stability depends on a multidimensional control landscape,
@@ -742,7 +742,8 @@ components.}\label{tab:axes}
 2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\
 3 & Method & QLoRA vs FFT & Matched pert., $N{=}3$ \\
 4 & Topology & Target modules & Attention vs full-linear \\
-5 & Exposure & Training examples & 0\%, 10\%, 25\%, 50\% removed \rev{(paired dose--response; B7/Qwen $r=256$ $n=5$, G2/Gemma~3 $r=10$ $n=3$)} \\
+5 & Exposure & Training examples & \rev{0\%, 10\%, 25\%, 50\% removed} \\
+ & & & \rev{(paired dose--response; B7/Qwen $r{=}256$, $n{=}5$; G2/Gemma~3 $r{=}10$, $n{=}3$)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1092,7 +1093,7 @@ Table~\ref{tab:rank_sweep} summarizes K0 retention, effective rank, trainable
 parameters, and regime classification for each tested configuration. Across the
 evaluated range, Gen10 retention decreases from \RsixteenMten\% at $r=16$ to
 \rev{$\GoneMten\%$ (mean across three seeds, $N=3$)} at
-$r=256$, a difference of 17.1 percentage points.
+$r=256$ ($N{=}3$), a descriptive gap of 17.7\,pp (G1$+$G4, $N{=}6$). The $r=16$ result uses the single G3/bf16 run ($N{=}1$ per seed); the descriptive gap between single-seed $r=16$ and the G1 three-seed $r=256$ mean is 17.1\,pp, reported here as a descriptive comparison across protocols.
 
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
 \caption{QLoRA rank sweep on Qwen~2.5~1.5B-Instruct. The degradative endpoint
@@ -1277,7 +1278,7 @@ degradation at Gen5: retention of 78.3\% ($r=10$, effective rank 6.37), 73.9\%
 ($r=12$, effective rank 7.35), and 69.6\% ($r=14$, effective rank 8.37). These
 values place the Gemma~3 regime boundary between effective ranks 3 and 6.
 
-\begin{table}[width=.95\linewidth,cols=5,pos=htbp]
+\begin{table}[width=.95\linewidth,cols=6,pos=htbp]
 \caption{QLoRA rank sweep on Gemma~3~1B~IT. Anchor ranks ($r=4$ and $r=16$),
 representing the homeostatic and degradative regimes respectively,
 are evaluated with five seeds over ten generations; intermediate ranks
@@ -1672,14 +1673,14 @@ the 0\% within-pipeline baseline for each dose level on Qwen $r=256$.}
 \caption{\rev{Dose--response on Qwen $r=256$ ($K_0=78$, $n=5$ paired seeds per
 dose). Retention and gain ($\Delta$) relative to the 0\% within-pipeline
 baseline at Gen5 and Gen10.}}\label{tab:interventions}
-\begin{tabular*}{\tblwidth}{@{} llrrl@{} }
+\begin{tabular*}{\tblwidth}{@{} llrrrl@{} }
 \toprule
-\rev{Dose & Ret.\ (Gen5) & $\Delta$ Gen5 & Ret.\ (Gen10) & $\Delta$ Gen10 & $N_\mathrm{seeds}$ \\
+\rev{Dose} & \rev{Ret.\ (Gen5)} & \rev{$\Delta$ Gen5} & \rev{Ret.\ (Gen10)} & \rev{$\Delta$ Gen10} & \rev{$N_\mathrm{seeds}$} \\
 \midrule
 0\%  & 84.0\% & ---             & 79.1\% & ---             & 5 \\
 10\% & 89.0\% & $+5.0$\,pp      & 81.6\% & $+2.4$\,pp      & 5 \\
 25\% & 89.2\% & $+5.3$\,pp      & 84.6\% & $+5.5$\,pp      & 5 \\
-50\% & 89.7\% & $+5.7$\,pp      & 88.9\% & $+9.8$\,pp      & 5 \\}
+50\% & 89.7\% & $+5.7$\,pp      & 88.9\% & $+9.8$\,pp      & 5 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1818,7 +1819,7 @@ Bounded respectively, based on the rank$\times$LR grid established in
 \S\ref{sec:res_capacity}.
 The low-pressure cell returned $\GfiveRonetwoetightLRlow\%$ at Gen5
 (Homeostatic, \textbf{confirmed}); the high-pressure cell returned
-$\GfiveRonetwoetightLRhigh\%$ (Bounded, \textbf{not confirmed} --- predicted
+$\GfiveRonetwoetightLRhigh\%$ (Bounded, \textbf{not confirmed}; predicted
 Degradative); and the intermediate cell returned $\GfiveRthreytwoLRhigh\%$
 (Bounded, \textbf{confirmed}).
 We do not report an operational pressure index $\Pi$ for G5: the effective rank
@@ -2264,7 +2265,7 @@ itself, substring matching could in principle confound verbosity-induced format
 changes with genuine knowledge loss. \rev{The C2 intervention from the exploratory pilot (which
 constrains response format to short answers) improves retention without fully
 restoring baseline levels, indicating that the degradation measured by $K_0$
-reflects actual factual displacement rather than format masking alone.
+reflects actual factual displacement rather than format masking alone.}
 
 \rev{The retention metric $K_0$ uses bidirectional substring matching, which
 is intentionally permissive: a generated response counts as correct if it
