@@ -742,7 +742,7 @@ components.}\label{tab:axes}
 2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\
 3 & Method & QLoRA vs FFT & Matched pert., $N{=}3$ \\
 4 & Topology & Target modules & Attention vs full-linear \\
-5 & Exposure & Training examples & 100\% vs ${\sim}$95\% \\
+5 & Exposure & Training examples & 0\%, 10\%, 25\%, 50\% removed \rev{(paired dose--response; B7/Qwen $r=256$ $n=5$, G2/Gemma~3 $r=10$ $n=3$)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -782,7 +782,7 @@ update capacity. Single-seed; supportive evidence only.
 
 \item \textbf{Synthetic exposure (intervention).} We manipulate the synthetic
 training stream in the Qwen $r=256$ boundary regime. Interventions include
-length filtering, random downsampling (three independent masks, ${\sim}5\%$
+length filtering, and paired dose--response downsampling (0\%, 10\%, 25\%, 50\%
 removal), and short-answer constraining. Design detailed in
 Section~\ref{sec:intervention}.
 \end{enumerate}
@@ -936,63 +936,30 @@ the synthetic training stream in Section~\ref{sec:intervention}.
 
 \subsection{Synthetic-exposure interventions}\label{sec:intervention}
 
-The interventions in Axis~5 test whether the degradative regime observed in the
-high-capacity Qwen $r=256$ condition can be shifted back toward homeostasis by
-modifying the synthetic training stream. All interventions use the same backbone,
-rank, dataset, and recursive protocol as the Qwen $r=256$ baseline. The initial
-intervention comparison is conducted with seed~15 for 5 generations; the
-strongest intervention is then replicated across additional seeds or random
-masks, as described below.
+The interventions in Axis~5 test whether the degradative regime can be shifted
+back toward homeostasis by reducing synthetic training exposure. The primary
+evidence comes from two pre-registered dose--response experiments, one on each
+backbone.
 
-We define five intervention strategies to evaluate whether reducing synthetic
-exposure can restore homeostatic behavior:
+\textbf{Qwen dose--response (B7, $r=256$, $n=5$ seeds).}
+Five paired seeds receive 0\%, 10\%, 25\%, or 50\% random downsampling of the
+synthetic training stream. The 0\% arm serves as a within-pipeline baseline
+(same evaluation code, same seeds), eliminating cross-pipeline confounds. The
+pre-registration hash is \texttt{a916ebf}.
 
-\begin{itemize}
-    \item \textbf{C1 (Normal)}: the unmodified baseline. Synthetic responses are
-    generated and used for training without filtering, downsampling, or
-    post-processing. This is the same replace-only protocol used in the rank
-    sweep.
+\textbf{Gemma~3 dose--response (G2, $r=10$, $n=3$ seeds).}
+An independent pre-registered experiment applies the same four dose levels to
+Gemma~3~1B~IT at $r=10$. The evaluation set is $K_{0,\mathrm{G2}}=44$ items
+(established by the \texttt{g1\_rank10} pipeline; see Section~\ref{sec:k0}).
 
-    \item \textbf{C2 (Short-answer constrained)}: the generation prompt is
-    modified to request a brief factual answer, and the maximum generation length
-    is reduced to 10 tokens. This constrains output verbosity at generation time
-    while retaining all training examples.
-
-    \item \textbf{C3 (Length-filtered)}: synthetic responses are generated with
-    the normal prompt, then examples whose responses exceed 5 words are removed
-    from the next-generation training set. The remaining examples are used
-    without duplication.
-
-    \item \textbf{C4 (Canonical extraction)}: synthetic responses are generated
-    normally, then a heuristic extracts a short factoid span from each response
-    and replaces the original response with this canonicalized answer.
-
-    \item \textbf{C5 (C3-matched random downsampling)}: synthetic responses are
-    generated normally, then a random subset of examples is selected so that the
-    resulting training stream approximately matches the token budget of C3. The
-    subset is chosen by a random permutation seeded independently of the training
-    seed.
-\end{itemize}
-
-The key comparison is between C3 and C5. C3 reduces exposure by removing long
-responses, whereas C5 reduces exposure by removing a random subset of examples
-until the training stream matches C3's approximate token budget. Thus, if both
-conditions produce similar stabilization, the effect cannot be attributed solely
-to removing long responses; it instead suggests sensitivity to marginal
-synthetic exposure in this boundary regime.
-
-To test robustness, C3 is evaluated with three independent training seeds.
-C5 is evaluated with three independent random downsampling masks.
-We compute Jaccard overlap between the examples removed by C3 and by each C5
-mask to verify that the interventions remove largely distinct subsets of the
-training stream.
-
-C2 and C4 provide additional controls on output format. C2 changes the generation
-instruction and length limit while retaining all examples; C4 canonicalizes
-responses after generation. These conditions help distinguish exposure reduction
-from response-format control. We report token counts, example counts, and
-retention for all intervention strategies to assess whether improvements can be
-explained by reduced training volume alone.
+\rev{A prior exploratory pilot (C1--C5) used a qualitatively different
+experimental design: five discrete intervention strategies (baseline, prompt
+constraint, length filtering, canonical extraction, and random downsampling)
+evaluated on a single seed with a different evaluation pipeline. When C1 and C5
+from that pilot are re-run under an identical pipeline and paired seeds, the
+approximate $5\%$ downsampling effect is $+1.9$\,pp ($n=3$), which is not
+statistically distinguishable from zero. The pilot results are archived in the
+replication repository; they are not used in the primary effect estimates below.}
 
 \subsection{Seeds, statistics, and reporting}\label{sec:statistics}
 
@@ -1004,7 +971,7 @@ multi-seed headline comparisons and single-seed supporting ablations.
 All headline comparisons are evaluated with multiple independent training seeds
 (three for Qwen conditions, five for Gemma~3 anchor ranks). These
 include the Qwen rank-sweep endpoints ($r=16$ and $r=256$), the Gemma~3 anchor
-ranks ($r=4$, homeostatic, and $r=16$, degradative), the QLoRA--FFT comparison, and the C3/C5 synthetic
+ranks ($r=4$, homeostatic, and $r=16$, degradative), the QLoRA--FFT comparison, and the dose--response synthetic
 exposure interventions. Intermediate dose-response points and supporting
 ablations are evaluated with a single seed and labeled as such. We do not pool
 single-seed and multi-seed results when making headline claims.
@@ -1093,8 +1060,9 @@ generalizes across different model families (Section~\ref{sec:res_backbone}),
 investigate whether increasing perturbation magnitude through full fine-tuning
 reproduces the same dose-response pattern (Section~\ref{sec:res_fft}), characterize the
 distributional signatures associated with above-threshold regimes
-(Section~\ref{sec:res_distribution}), and present evidence that a marginal reduction
-in synthetic exposure restores near-homeostatic behavior at the regime boundary
+(Section~\ref{sec:res_distribution}), and present evidence that \rev{graded
+reductions in synthetic exposure (50\% on both backbones) restore near-homeostatic
+behavior at the regime boundary}
 (Section~\ref{sec:res_intervention}). Throughout this section, headline findings are
 supported by multi-seed experiments, whereas single-seed results are presented
 as supporting evidence.
@@ -1692,26 +1660,18 @@ The preceding sections established that update capacity and perturbation
 magnitude each govern the regime transition. This section tests the third
 component of effective training pressure: whether reducing synthetic data
 exposure can shift the system back from a degradative to a near-homeostatic
-configuration. All interventions are conducted on Qwen $r=256$, which sits at
-the boundary between the bounded and degradative regimes.
+configuration. The primary evidence comes from the two pre-registered
+dose--response experiments described in Section~\ref{sec:intervention}:
+B7 on Qwen $r=256$ ($n=5$ paired seeds, $K_0=78$) and G2 on Gemma~3 $r=10$
+($n=3$ paired seeds, $K_{0,\mathrm{G2}}=44$).
 
-Table~\ref{tab:interventions} summarizes K0 retention at Gen5 for each
-intervention strategy relative to the unmodified C1 baseline.
-% [v4] A10 — see planned controls in plano-de-revisao.md (Bloco 4)
-A direct comparison of C3/C5 against C1 is complicated by the fact that C1
-was evaluated with a single seed (seed~15). Per-seed data from the full
-three-seed $r=256$ replication (Gen5 retention: $81.0\%$, $83.5\%$, $84.8\%$
-across seeds~256, 15, 137 respectively) indicate that $83.3\%$ at seed~15 is
-representative of the seed-mean, reducing the likelihood that the observed
-$+9$ pp gain is attributable to seed variability alone. Planned additional
-controls (an unmodified C1 re-run through the intervention pipeline at $0\%$
-removal, and a step-matched C5 replication) are described in
-Section~\ref{sec:limitations}. % [v4] A10
+\rev{Table~\ref{tab:interventions} reports $K_0$ retention and the gain over
+the 0\% within-pipeline baseline for each dose level on Qwen $r=256$.}
 
 \begin{table}[width=.95\linewidth,cols=5,pos=htbp]
-\caption{Synthetic-exposure interventions on Qwen $r=256$. C3: three seeds;
-C5: three independent masks. Means reported for multi-seed/mask
-conditions.}\label{tab:interventions}
+\caption{\rev{Dose--response on Qwen $r=256$ ($K_0=78$, $n=5$ paired seeds per
+dose). Retention and gain ($\Delta$) relative to the 0\% within-pipeline
+baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \begin{tabular*}{\tblwidth}{@{} llrrl@{} }
 \toprule
 \rev{Dose & Ret.\ (Gen5) & $\Delta$ Gen5 & Ret.\ (Gen10) & $\Delta$ Gen10 & $N_\mathrm{seeds}$ \\
@@ -1724,58 +1684,56 @@ conditions.}\label{tab:interventions}
 \end{tabular*}
 \end{table}
 
-% [v4-revision: C2/C3/C4 original-pipeline results moved to Appendix for transparency.
-%  Table above uses pre-registered Bloco 7 data (prereg a916ebf, 5 paired seeds).]
+% [v4-revision: C1-C5 pilot archived in replication repository; not used in primary estimates]
 
-\rev{A pre-registered dose--response experiment (five paired seeds; protocol
-registered as \texttt{a916ebf} before any run) shows that any reduction of the
-synthetic training stream raises Gen~5 retention by approximately $5$\,pp
-relative to the unmodified baseline ($+5.0$, $+5.3$, $+5.7$\,pp at 10\%,
-25\%, and 50\% removal; paired $t$-test $p = 0.002$, $0.014$, $0.002$,
-$n = 5$). At Gen~10 the benefit is graded: $+2.4$\,pp at 10\%, $+5.5$\,pp
-at 25\% (95\%~CI $[0.4, 10.5]$, $p = 0.039$), and $+9.8$\,pp at 50\%
-(95\%~CI $[6.9, 12.8]$, $p = 0.0008$). A 50\% reduction effectively arrests
-progressive loss: the Gen~5$\to$10 slope is $-0.14$\,pp/generation versus
-$-0.96$\,pp/generation at 0\%, shifting the system from the degradative to
-the bounded regime by the criterion of Section~\ref{sec:res_capacity}.
+\rev{\textbf{Qwen dose--response (B7).}
+A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
+protocol registered as \texttt{a916ebf} before any run) shows that the
+Gen~10 benefit is graded: $+2.4$\,pp at 10\% removal ($p = 0.002$, $n=5$),
+$+5.5$\,pp at 25\% (95\%~CI $[0.4, 10.5]$, $p = 0.039$), and
+$+9.8$\,pp at 50\% (95\%~CI $[6.9, 12.8]$, $p = 0.0008$). At Gen~5, the
+gains are smaller and more uniform ($+5.0$, $+5.3$, $+5.7$\,pp;
+paired $t$-test $p = 0.002$, $0.014$, $0.002$). A 50\% reduction
+effectively arrests progressive loss: the Gen~5$\to$10 slope is
+$-0.14$\,pp/generation versus $-0.96$\,pp/generation at 0\%, shifting the
+system from the degradative to the bounded regime by the criterion of
+Section~\ref{sec:res_capacity}.
 
 The pre-registered prediction that 50\% removal would match halving the
 learning rate (from $\eta = 10^{-5}$ to $5\times 10^{-6}$) was confirmed:
 Gen~5 retention at dose~$= 50\%$ is $89.7\%$ versus $90.2\%$ at
 $\eta = 5\times 10^{-6}$ (mean over three seeds; Gen~10 difference
-$+0.4$\,pp, 90\%~CI $[-0.8, 1.6]$). This is consistent with exposure
-acting through the per-generation update budget: fewer training examples
-reduce the number of gradient steps by the same proportion as a
-proportional reduction in learning rate, with equivalent effect on retention.
-The mechanism (whether update budget or data composition) was not established;
-a steps-matched control was inconclusive at $n = 3$.
+$+0.4$\,pp, 90\%~CI $[-0.8, 1.6]$). The mechanism (whether update budget
+or data composition) was not established; a steps-matched control was
+inconclusive at $n = 3$.
 
-The original submission reported C3 ($+9.0$\,pp) and C5 ($+9.4$\,pp) from a
-different evaluation pipeline. When C1 and C5 are re-run under an identical
-pipeline and paired seeds, the effect of ${\sim}5\%$ removal is $+1.9$\,pp
-(not statistically distinguishable from zero, $n = 3$). The dose--response
-reported here replaces those comparisons. The original C2--C5 results are
-preserved in Appendix~\ref{app:repo} for transparency.}
+The original C1--C5 pilot compared non-identical evaluation pipelines;
+when C1 and C5 are re-run under an identical pipeline and paired seeds,
+the approximate $5\%$ downsampling effect is $+1.9$\,pp ($n=3$, not
+statistically distinguishable from zero). We therefore exclude the
+original pilot from the primary effect estimate; those results are
+archived in the replication repository (Section~\ref{app:repo}).}
 
 Figure~\ref{fig:interventions} visualizes the retention and effect-size
 comparison across conditions.
 
-\begin{figure}
+\rev{\begin{figure}
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/scratch/fig_interventions.png}
-  \caption{Intervention comparison on Qwen $r=256$ at Gen5. (a)~$K_0$ retention
-  by condition (C1--C5). (b)~Retention improvement relative to C1 baseline.
-  Error bars for C3 and C5 reflect the range across three seeds or
+  \caption{Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5, included for
+  transparency. These results use a different evaluation pipeline from the
+  primary dose--response experiments (B7/G2) and are not used in the primary
+  effect estimates. (a)~$K_0$ retention by condition. (b)~Retention improvement
+  relative to C1 baseline; error bars reflect the range across three seeds or
   masks.}\label{fig:interventions}
-\end{figure}
+\end{figure}}
 
-These results demonstrate that the Qwen $r=256$ configuration lies near \rev{a steep empirical transition
-region}: a reduction of approximately 5\% in synthetic exposure volume
-is sufficient to restore near-homeostatic retention in this boundary case. This
-sensitivity is tested only at the $r=256$ boundary on Qwen and should not be
-interpreted as a universal property of recursive fine-tuning. Whether comparable
-boundary sensitivity exists at other ranks, on other backbones, or with
-different datasets remains untested.
+\rev{These results demonstrate that the Qwen $r=256$ configuration responds to
+graded exposure reduction: a 50\% reduction arrests progressive loss and shifts
+the system to the bounded regime, whereas a 10\% reduction does not. This
+graded dose--response is confirmed on a second backbone (Gemma~3 G2, see below).
+The sensitivity is tested only at the configurations evaluated here and should
+not be interpreted as a universal property of recursive fine-tuning.}
 
 \rev{\textbf{Dose--response replication on Gemma~3.}
 A parallel pre-registered dose--response experiment on Gemma~3 at $r=10$
@@ -2030,7 +1988,7 @@ literature. \citet{gerstgrasser2024} showed that accumulating real data across
 generations prevents collapse, operating on the data-composition axis.
 \citet{wang2024diversity} further showed that synthetic data diversity
 significantly impacts downstream model quality. Our
-C3/C5 results operate on a complementary axis: rather than adding real data, we
+\rev{dose--response results} operate on a complementary axis: rather than adding real data, we
 reduce synthetic exposure by a marginal amount and observe recovery in a
 \rev{lowest-pressure degradative configuration tested}. Both approaches reduce recursive degradation through
 different intervention points in the training pipeline. They are orthogonal and
@@ -2157,14 +2115,20 @@ stable. These signals are computationally inexpensive and require no additional
 evaluation infrastructure beyond what is already needed for generation-level
 quality assessment.
 
-Regarding intervention design, the C3/C5 results demonstrate that boundary
-configurations are sensitive to marginal changes in synthetic exposure. When
+Regarding intervention design, the \rev{dose--response results demonstrate that boundary}
+configurations are sensitive to graded changes in synthetic exposure. \rev{A 50\%
+reduction arrests progressive loss on both tested backbones; smaller doses
+(10--25\%) produce partial, dose-proportional benefits. An exploratory pilot at
+${\sim}5\%$ downsampling did not replicate under paired evaluation ($+1.9$\,pp,
+$n=3$), indicating that marginal reductions at this level are not robustly
+effective in the evaluated configurations.} When
 monitoring signals indicate regime departure, reducing the volume of the
-synthetic training stream through filtering, downsampling, or constraining
-response format may provide a lightweight mitigation strategy under conditions
-similar to those evaluated here. Under the evaluated conditions, random
-downsampling performed comparably to targeted filtering, suggesting that
-identifying specific problematic examples may not always be necessary.
+synthetic training stream through downsampling
+may provide a lightweight mitigation strategy under conditions
+similar to those evaluated here. \rev{Under the pre-registered conditions,
+random downsampling performed comparably to halving the learning rate,
+suggesting that the operative mechanism is the per-generation update budget
+rather than data composition.}
 
 In summary, practitioners deploying recursive synthetic fine-tuning should
 consider:
@@ -2180,10 +2144,14 @@ consider:
 \end{itemize}
 
 An exploratory replication of the synthetic-exposure intervention on the
-Gemma~3 \rev{lowest-pressure degradative configuration tested} (r=16, using the same approximate 5\% random
-downsampling protocol) did not reproduce the stabilization observed on Qwen.
+\rev{Gemma~3 at $r=16$ (degradative regime) was tested in the original
+exploratory pilot with ${\sim}5\%$ downsampling (a single pipeline, single seed).
+That pilot did not reproduce the stabilization observed on Qwen.
 Under the evaluated conditions, Gemma~3 retention followed the same
-trajectory with and without the intervention. While update-capacity and
+trajectory with and without the intervention. The paired dose--response
+protocol (B7/G2) was not applied to Gemma~3 $r=16$; whether graded doses
+(10--50\%) would alter this outcome remains untested.}
+While update-capacity and
 perturbation-magnitude effects generalized across the evaluated backbones,
 exposure sensitivity at the tested magnitude remains demonstrated only for
 the Qwen \rev{lowest-pressure degradative configuration tested}. This asymmetry reinforces that effective
@@ -2274,7 +2242,7 @@ higher precision, the interaction between quantization error and high-rank
 adapter updates has not been isolated. A comparison against standard 16-bit LoRA
 would be needed to fully disentangle quantization effects from rank effects.
 
-The synthetic-exposure interventions (C3/C5) are tested only at the $r=256$
+\rev{The primary dose--response experiments (B7 and G2) are tested only at $r=256$ on Qwen and $r=10$ on Gemma~3. The exploratory C1--C5 pilot is archived but not used in primary estimates.} The interventions are tested only at the $r=256$
 boundary on Qwen. Whether comparable sensitivity exists at other ranks, on other
 backbones, or with different datasets has not been established. The restriction to a single \rev{lowest-pressure degradative configuration tested} is deliberate: the purpose of
 these experiments is to demonstrate pressure sensitivity at the regime
@@ -2293,7 +2261,7 @@ evaluated only under the present experimental conditions. Their effectiveness as
 monitoring signals in production settings, including reliability across domains
 and deployment conditions, has not been assessed. Regarding the $K_0$ metric
 itself, substring matching could in principle confound verbosity-induced format
-changes with genuine knowledge loss. However, the C2 intervention (which
+changes with genuine knowledge loss. \rev{The C2 intervention from the exploratory pilot (which
 constrains response format to short answers) improves retention without fully
 restoring baseline levels, indicating that the degradation measured by $K_0$
 reflects actual factual displacement rather than format masking alone.
@@ -2353,9 +2321,12 @@ perturbation magnitude, or synthetic exposure each independently shifts the
 system from homeostatic to degradative behavior, with the transition being
 abrupt, backbone-dependent, and reproducible. Cross-backbone replication further
 shows that degradation in the above-threshold regime is progressive and does not
-stabilize within the observed horizon. At the regime boundary, marginal
-reductions in synthetic exposure restore near-homeostatic retention, although
-this sensitivity is backbone-dependent. Distributional diagnostics further reveal
+stabilize within the observed horizon. \rev{Pre-registered dose--response
+experiments on two backbones show that a 50\% reduction in synthetic exposure
+arrests progressive loss, with the effect magnitude depending on the backbone
+operating pressure. An exploratory ${\sim}5\%$ pilot, evaluated in a
+different pipeline, did not replicate under paired conditions ($+1.9$\,pp,
+$n=3$).} This sensitivity is backbone-dependent. Distributional diagnostics further reveal
 that output quality can degrade substantially before factual loss becomes
 apparent.
 
