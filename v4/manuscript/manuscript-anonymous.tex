@@ -2365,11 +2365,27 @@ their effects are additive or interactive.
 
 \section{Project repository and data access}\label{app:repo}
 
-All source code, configuration files, and experimental outputs developed for
-this paper are publicly available at
-\textit{[Repository URL removed for blind review]}.
-These resources ensure full reproducibility of the experimental protocol and
-allow other researchers to replicate or extend the reported results.
+\rev{The replication package for this paper — including the revised manuscript
+source, response-to-reviewers letter, raw experimental results (G1--G5, 23 runs),
+canonical numbers (112 \LaTeX{} macros), all analysis scripts, and all publication
+figures — is archived at:
+
+\begin{itemize}
+  \item \textbf{Zenodo} (permanent, citable):
+    \url{https://doi.org/10.5281/zenodo.23145362}
+    (DOI: \texttt{10.5281/zenodo.23145362})
+  \item \textbf{GitHub} (version-controlled):
+    \url{https://github.com/Jazancort/llm-knowledge-collapse-replication}
+    (release \texttt{v1.0.2})
+\end{itemize}
+
+Running \texttt{python scripts/make\_all.py} from the package root reproduces all
+canonical numbers reported in this paper (15/15 consistency checks pass).
+Running \texttt{python scripts/figures/fig9\_dose\_response.py} regenerates
+Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
+Base-model weights are obtained from their original distributors and are not
+redistributed; exact checkpoint identifiers are listed in
+Table~\ref{tab:models}.}
 
 % ============================================================
 % REFERENCES

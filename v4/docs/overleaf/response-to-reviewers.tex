@@ -449,11 +449,17 @@ retention tables. We have expanded the reproducibility section
 \end{enumerate}
 
 We also specify which experiments reset adapters and optimizer states
-between generations. The source code, configurations, raw outputs,
-analysis scripts, and adapter checkpoints permitted by the applicable
-model licenses are available to reviewers via the anonymized repository
-link provided in the cover letter, with a permanent DOI to be assigned
-upon acceptance. Base-model weights are obtained from their original
+between generations. \rev{The replication package — source code, configurations,
+raw experimental results, analysis scripts, and all publication figures — is
+permanently archived at
+\url{https://doi.org/10.5281/zenodo.23145362} (DOI: \texttt{10.5281/zenodo.23145362})
+and mirrored at
+\url{https://github.com/Jazancort/llm-knowledge-collapse-replication} (release \texttt{v1.0.2}).
+Running \texttt{python scripts/make\_all.py} from the package root reproduces all
+112 canonical numbers used in the manuscript (15/15 consistency checks pass).
+An artifact manifest with SHA-256 hashes for every file is provided in
+\texttt{MANIFEST.md}.}
+Base-model weights are obtained from their original
 distributors and are not redistributed. The revised appendix provides
 an artifact manifest mapping every reported figure and table to its
 generating data and script.

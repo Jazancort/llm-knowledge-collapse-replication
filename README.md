@@ -9,7 +9,8 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.12+-blue?logo=python&logoColor=white" alt="Python"></a>
   <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-2.4+-ee4c2c?logo=pytorch&logoColor=white" alt="PyTorch"></a>
   <a href="https://huggingface.co/docs/peft"><img src="https://img.shields.io/badge/PEFT-0.13+-green?logo=huggingface" alt="PEFT"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green" alt="License"></a>
+  <a href="LICENSE">[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23145362.svg)](https://doi.org/10.5281/zenodo.23145362)
+  <img src="https://img.shields.io/badge/License-MIT-green" alt="License"></a>
   <img src="https://img.shields.io/badge/Journal-Knowledge--Based%20Systems-orange" alt="KBS">
 </p>
 
@@ -188,3 +189,4 @@ Note: the raw CSV has 1,285 rows including duplicates from multiple logging pass
 Analysis scripts and figures: **MIT License** — see `LICENSE`.  
 Manuscript source: provided for review purposes; all rights reserved pending journal publication.  
 Base model weights are governed by their respective licenses (Qwen, Gemma) and are not redistributed.
+
