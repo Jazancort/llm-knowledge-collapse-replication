@@ -459,8 +459,8 @@ across adapted LoRA modules within a model.}}
 \toprule
 \textbf{Symbol} & \textbf{Definition} \\
 \midrule
-$K_0$          & \rev{Number of items in $Q$ answered correctly at generation~0;
-                 used as cardinality ($|K_0|$) and as set where context is clear} \\
+$K_0$          & \rev{Set of items in $Q$ answered correctly at generation~0;
+                 $|K_0|$ (also written $n_0$) denotes its cardinality; $n_0$ is protocol-specific (e.g., 78 for main Qwen, 46 for Gemma rank, 44 for G2 dose)} \\
 $R(t)$         & Factual retention at generation~$t$: fraction of $K_0$ items
                  still correct \\
 $\theta^{(0)}$ & Pretrained backbone weights \\
@@ -477,8 +477,8 @@ $d(t)$         & Parameter drift: mean absolute weight change
 $\eta$         & Learning rate \\
 $\Pi$          & Operational pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
 $f$            & Exposure dose: fraction of training items removed \\
-$\theta_H$     & Homeostatic threshold ($R \ge \theta_H$) \\
-$\theta_D$     & Degradative threshold ($R \le \theta_D$) \\
+$\theta_H$     & \rev{Homeostatic retention cutoff: $R(t) \ge \theta_H$ for all evaluated $t$} \\
+$\theta_D$     & \rev{Degradative retention cutoff: $R(t)$ declines progressively below $\theta_D$} \\
 $T$            & Evaluation horizon (10 generations in main experiments) \\
 $\mathrm{ContentEff}(t)$ & Retention divided by mean synthetic response length \\
 $\mathrm{Persist}(t)$    & Fraction of $K_0$ items whose response at generation~$t$
@@ -1033,7 +1033,7 @@ Synthetic data seed & Stochastic generation could produce artefactual variation 
 \addlinespace
 Backbone architecture & Regime thresholds may not generalise & Replicated on Gemma~3~1B~IT ($r \geq 10$ degradative) and Gemma~4~E2B~IT ($r$=64 degradative, $N$=1) \\
 \addlinespace
-Pipeline version & Different code paths could introduce discrepancies & All reported runs use commit \texttt{c3ba205} of \texttt{g1\_rank\_ablation.py} \\
+Pipeline version & Different code paths could introduce discrepancies & \rev{Each experiment uses a dedicated script and commit; see the replication repository for the per-experiment manifest.} \
 \addlinespace
 Evaluation scoring leniency & Bidirectional substring criterion may inflate retention at high verbosity & Noted per condition; strict exact-match re-evaluation reported in supplementary Table~S2 \\
 \bottomrule
@@ -1112,7 +1112,8 @@ protocols differ in quantization and seed assignment.}
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
 \caption{QLoRA rank sweep on Qwen~2.5~1.5B-Instruct. The degradative endpoint
 ($r=256$) is replicated with three seeds to confirm
-reproducibility.\textsuperscript{*}}\label{tab:rank_sweep}
+reproducibility.\textsuperscript{*} \rev{Retention for $r=4$ and $r=32$ is
+reported at Gen5; all other configurations at Gen10.}}\label{tab:rank_sweep}
 \begin{tabular*}{\tblwidth}{@{}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{}}
 \toprule
 Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
@@ -1156,7 +1157,7 @@ both the stable regime and the progressively degradative regime. At
 $r=256$, retention declines progressively,
 % [v4] A7 — taxa corrigida: ~2 pp/gen era a média global incluindo Gen0→1.
 % Inclinação pós-adaptação (Gen5→Gen10) é ~1.0 pp/gen para r=256.
-reaching \rev{$\GoneMten\%$} (mean across \rev{six seeds, G1$+$G4}) by Gen10 with no sign of
+reaching \rev{$\GoneFourMten\%$} (mean across \rev{six seeds, G1$+$G4}) by Gen10 with no sign of
 stabilization within the observed horizon. The post-adaptation slope
 \rev{(Gen5 to Gen10, $N=6$) is $\GoneSlope$~pp per generation.}
 
