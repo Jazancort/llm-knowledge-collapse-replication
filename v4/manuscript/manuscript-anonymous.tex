@@ -209,7 +209,7 @@ preserving downstream performance. \citet{biderman2024} observed qualitatively
 that LoRA ``learns less and forgets less,'' but it remains unknown how this
 protective property scales under repeated recursive pressure. At what adapter
 capacity does the protection fail? Is the boundary between stability and
-degradation gradual or sharp? Is it universal across architectures, or
+degradation gradual or abrupt? Is it universal across architectures, or
 backbone-dependent? To our knowledge, no systematic dose-response analysis has
 characterized the \rev{steepness}, backbone-dependence, or reversibility of the
 stability boundary under parameter-efficient fine-tuning.
@@ -655,7 +655,10 @@ template, which uses a different system-message format. All percentages for G2 a
 computed over $|K_{0,\mathrm{G2}}|=44$ items; all percentages for the rank sweep
 are computed over $|K_{0,\mathrm{rank}}|=46$ items. All other percentages reported
 in this paper are computed over the corresponding backbone's $K_0$ set, with
-the raw fraction provided in tables wherever a single-run result is reported.}
+the raw fraction provided in tables wherever a single-run result is reported.
+\rev{The evaluation set ($|K_0|=78$ for Qwen; $|K_0|=46$ for Gemma~3) is small by
+NLP evaluation standards; results should be interpreted as regime-level tendencies
+rather than precise quantitative estimates.}}
 
 At each subsequent generation~$t$, only the corresponding $K_0$ items are used
 to compute retention:
@@ -786,10 +789,10 @@ magnitude, module topology, and synthetic exposure, affect recursive stability.
 Table~\ref{tab:axes} summarizes the experimental axes, the manipulated variable,
 and the tested range.
 
-\begin{table}[tp]
+\begin{table}[!t]
 \caption{Experimental axes and their corresponding pressure
 components.}\label{tab:axes}
-\begin{tabular}{@{}c l >{\raggedright}p{2.5cm} >{\raggedright\arraybackslash}p{4.5cm}@{}}
+\begin{tabular}{@{}c l >{\raggedright}p{2.5cm} >{\raggedright\arraybackslash}p{4.2cm}@{}}
 \toprule
 \textbf{\#} & \textbf{Axis} & \textbf{Variable} & \textbf{Range} \\
 \midrule
@@ -1301,21 +1304,26 @@ progressive forgetting. In the degradative regime, \rev{losses exceeded recoveri
 \begin{table}[tp]
 \caption{Item-level transitions across recursive generations on
 Qwen~2.5~1.5B (seed~15, $\rev{\Kcard = 78}$). C$\to$W (Correct$\to$Wrong): facts lost;
-W$\to$C (Wrong$\to$Correct): facts recovered.}\label{tab:transitions}
+W$\to$C (Wrong$\to$Correct): facts recovered.\textsuperscript{\dag}}\label{tab:transitions}
 \footnotesize
 \renewcommand{\arraystretch}{1.4}
-\begin{tabular}{@{}lcccc@{}}
+\begin{tabular}{@{}lccccc@{}}
 \toprule
-Rank & Gens & C$\to$W & W$\to$C & Net loss \\
+Rank & Gens & C$\to$W & W$\to$C & Net loss & Final incorrect \\
 \midrule
-$r=4$   & 5  & 1  & 0 & 1 \\
-$r=16$  & 10 & 3  & 3 & 0 \\
-$r=32$  & 5  & 2  & 3 & $-$1 \\
-$r=64$  & 10 & 7  & 7 & 0 \\
-$r=128$ & 10 & 10 & 7 & 3 \\
-$r=256$ & 10 & 19 & 4 & 15 \\
+$r=4$   & 5  & 1  & 0 & 1  & 2  \\
+$r=16$  & 10 & 3  & 3 & 0  & 3  \\
+$r=32$  & 5  & 2  & 3 & $-$1 & 3  \\
+$r=64$  & 10 & 7  & 7 & 0  & 6  \\
+$r=128$ & 10 & 10 & 7 & 3  & 8  \\
+$r=256$ & 10 & 19 & 4 & 15 & 17 \\
 \bottomrule
 \end{tabular}
+{\footnotesize\textsuperscript{\dag}C$\to$W and W$\to$C count \emph{all} observed generation-pair
+transitions; a single item may transition multiple times across generations, so
+Net~loss ($=$ C$\to$W $-$ W$\to$C) does not equal Final~incorrect.
+Final~incorrect is the count of $K_0$ items answered incorrectly at the
+final evaluated generation (Gen~5 or Gen~10 as indicated).}
 \end{table}
 
 The rank sweep and item-level transitions establish that increasing update
@@ -2364,6 +2372,9 @@ has not been established.}
 Finally, the present work establishes which variables shift which
 regimes, but does not derive a quantitative formulation combining the
 three pressure components into a single scalar predictor.
+\rev{The ETP index $\Pi$ is an exploratory post-training summary; it is not
+available prospectively and has not been validated as a transferable
+quantitative predictor across architectures or datasets.}
 
 
 
@@ -2448,7 +2459,7 @@ their effects are additive or interactive.
 \begin{itemize}
   \item \textbf{Zenodo} (permanent, citable):
     \url{https://doi.org/10.5281/zenodo.23146342}
-    (DOI: \texttt{10.5281/zenodo.23146342})
+    (DOI: \url{10.5281/zenodo.23146342})
   \item \textbf{GitHub} (version-controlled):\\
     {\sloppy\url{https://github.com/Jazancort/llm-knowledge-collapse-replication}\par}
     (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})

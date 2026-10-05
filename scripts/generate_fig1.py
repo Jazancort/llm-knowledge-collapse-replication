@@ -320,7 +320,7 @@ HTML_CONTENT = """<!DOCTYPE html>
         </div>
         <div class="item">
           <div class="bullet bul3"></div>
-          <div><strong>Rank &times; LR</strong> interaction matrix</div>
+          <div><strong>Rank &times; LR</strong> joint-dependence grid</div>
         </div>
         <div class="item">
           <div class="bullet bul3"></div>
@@ -342,7 +342,7 @@ HTML_CONTENT = """<!DOCTYPE html>
         </div>
         <div class="item">
           <div class="bullet bul4"></div>
-          <div><strong>Distribution shift</strong> &mdash; KL, JS, Distinct-n</div>
+          <div><strong>Distribution shift</strong> &mdash; Distinct-n</div>
         </div>
         <div class="item">
           <div class="bullet bul4"></div>
@@ -370,7 +370,7 @@ HTML_CONTENT = """<!DOCTYPE html>
             <strong>Bounded</strong> &mdash; stable retention, distribution drifts
           </div>
           <div class="regime-pill reg-deg">
-            <strong>Degradative</strong> &mdash; retention declines ~2&ndash;6 pp/gen
+            <strong>Degradative</strong> &mdash; retention declines ~1&ndash;3 pp/gen
           </div>
         </div>
       </div>
@@ -385,7 +385,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       <div class="card-body">
         <div class="item">
           <div class="bullet bul6"></div>
-          <div><strong>ETP threshold</strong> identification</div>
+          <div><strong>Effective Training Pressure</strong> (ETP) threshold</div>
         </div>
         <div class="item">
           <div class="bullet bul6"></div>
