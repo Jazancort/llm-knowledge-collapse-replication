@@ -238,7 +238,7 @@ HTML_CONTENT = """<!DOCTYPE html>
 
     <!-- U-turn Connector 3 -> 4 (rounded corners, radius ≈12px) -->
     <path d="M 754 222 L 754 229 Q 754 241 742 241 L 158 241 Q 146 241 146 249"
-          fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow-down)"/>
+          fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)"/>
 
     <!-- Arrow 4 -> 5 -->
     <line x1="288" y1="354" x2="308" y2="354" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)" />
