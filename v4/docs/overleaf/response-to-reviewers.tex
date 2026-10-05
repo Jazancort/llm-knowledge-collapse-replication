@@ -192,11 +192,8 @@ ED-3 & List of changes & This table plus an individual response to each
        point & This document \\
 \addlinespace
 
-\multicolumn{4}{@{}l}{\textbf{Reviewer 1}}\\
-R1-0 & Not a transferable predictor; single dataset; single-seed
-       analyses; one exposure condition &
-       Framework reframed as operational; scope and seed policy stated
-       per claim & \S3.5, \S3.8, \S6 \\
+\multicolumn{4}{@{}l}{\textbf{Reviewer 1} \textit{(general assessment — outside the 40 counted points)}}\\
+\multicolumn{4}{@{}p{15cm}}{\textit{Not a transferable predictor; single dataset; single-seed analyses; one exposure condition. → Framework reframed as operational; scope and seed policy stated per claim. [\S3.5, \S3.8, \S6]}}\\[2pt]
 R1-1 & Prospective calibration \textsc{part} &
        Five-step calibration protocol specified; held-out validation
        declared not performed & \S3.5, \S6 \\
@@ -214,10 +211,8 @@ R1-5 & Reproducibility &
        raw generations and adapters deposited & \S3.3, App.~A \\
 \addlinespace
 
-\multicolumn{4}{@{}l}{\textbf{Reviewer 2}}\\
-R2-0 & Framework conceptual; Gemma~4 uncited; limited scale &
-       Contribution restated as design and evidence; Gemma~4 cited and
-       disambiguated; scale stated as a limitation & \S1, \S3.3, \S6 \\
+\multicolumn{4}{@{}l}{\textbf{Reviewer 2} \textit{(general assessment — outside the 40 counted points)}}\\
+\multicolumn{4}{@{}p{15cm}}{\textit{Framework conceptual; Gemma~4 uncited; limited scale. → Contribution restated as design and evidence; Gemma~4 cited and disambiguated; scale stated as a limitation. [\S1, \S3.3, \S6]}}\\[2pt]
 \addlinespace[2pt]
 R2-1.1 & ETP in Fig.~1 before definition & Fig.~1 carries full name; ETP introduced in \S1 & \S1, Fig.~1 \\
 R2-1.2 & MTLD without expansion & Expanded as ``Moving-Average Type-Token Ratio'' & \S3.5.3 \\
@@ -357,6 +352,9 @@ revision, with the corresponding section and page cited.
 \rconcern{Reviewer \#1, General assessment}{Scope of the evidence}{%
 This paper studies recursive fine-tuning on synthetic data across
 Qwen 2.5 1.5B, Gemma 3 1B, and Gemma 4 E2B for ten generations.
+By varying adapter rank, learning rate, and synthetic exposure, it
+proposes effective training pressure as an empirical account of
+transitions between stable retention and factual degradation.
 The systematic design, multi-seed headline experiments, and
 distributional diagnostics are valuable. However, the proposed pressure
 is not yet a transferable quantitative predictor, the main
@@ -852,7 +850,7 @@ it.
 \S5.1--5.4; \S6.}
 
 
-\rconcern{Reviewer \#2, Concern \#1}{Abbreviations and notation}{ETP appears in Figure~1 but is never explicitly defined as ``effective training pressure.'' MTLD is introduced without expansion. KL, JS, and coverage appear in Figure~1 without definition. bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded forms. ``Homeo.'' is used in Table~2 without definition. $K_0$ is used both as a set of questions and as a retention metric. $T$, $D1\_T$, $D10$, $\Delta I$, Instability(1), $MeanLen\_T$, and related symbols in Eq.~6 are not fully defined. The effective-rank formula uses $\sigma_i$ as both singular values and normalized singular values. The normalization condition is mathematically incorrect as written. $BA\_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in the drift equation are not consistently defined. $r \in \{4,10,12,14,16\}$ set notation was garbled in the original PDF.}
+\rconcern{Reviewer \#2, Concern \#1}{Abbreviations and notation}{ETP appears in Figure~1 but is never explicitly defined as ``effective training pressure.'' MTLD is introduced without expansion. KL, JS, and coverage appear in Figure~1 without definition. bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded forms. Some are only indirectly explained. ``Homeo.'' is used in Table~2 without definition. $K_0$ is used both as a set of questions and as a retention metric. This dual use is not always clear. $T$, $D1\_T$, $D10$, $\Delta I$, Instability(1), $MeanLen\_T$, and related symbols in Eq.~6 are not fully defined. The effective-rank formula uses $\sigma_i$ as both singular values and normalized singular values. The normalization condition is mathematically incorrect as written. $BA\_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in the drift equation are not consistently defined. $r \in \{4,10,12,14,16\}$ set notation was garbled in the original PDF.}
 
 \arhead{Author response:}
 
@@ -1082,7 +1080,8 @@ effective rank 87.57 and is degradative. (b) $r=128$ is classified as
 (d) Gemma~3 degradative range: Section~5.2 says ``$r \geq 16$ on
 Gemma~3,'' but Table~4 shows $r=10,12,14$ already degradative at Gen~5.
 (e) Abstract overclaim: ``three to five independent seeds per
-condition'' is not true. (f) FFT on Gemma~3 shows non-monotonic results;
+condition'' is not true. Many conditions are single-seed; only headline
+comparisons have multiple seeds. (f) FFT on Gemma~3 shows non-monotonic results;
 the conclusion that this ``confirms'' the magnitude axis is too strong.
 (g) C5 removal percentage: Section~3.4 mentions ``$15^{\circ}$ removal,'' while
 Section~4.5 reports approximately 5\% token reduction.}
@@ -1244,17 +1243,18 @@ archived in the replication package.
 \rconcern{Reviewer \#2, Concern \#4}{Methodology}{No formal statistical
 tests, confidence intervals, or p-values are reported. The paper relies
 on ranges and non-overlap, which is weak for inference. The effective
-training pressure framework is not quantified. Cross-architecture
-normalization failed, but no alternative calibration method is proposed.
+training pressure framework is not quantified. It is a useful
+organizing metaphor, but not a predictive model.
+Cross-architecture normalization failed, but no alternative calibration
+method is proposed.
 ``Effective training pressure'' is not a new quantitative measure; it is
-a conceptual label for three already-known axes. It is a useful
-organizing metaphor, but not a predictive model. The paper does not
+a conceptual label for three already-known axes. The paper does not
 derive a scalar predictor or formal theory. The Gemma~4 E2B
 backbone is a serious concern: it lacks a citation, may be confused with
 Gemma~3n E2B, and its architecture is described without a source. This
 undermines the cross-architecture claims. The
 ``sharp transition'' claim is weakened by sparse rank grids and wide
-threshold intervals. Sharp may be an overstatement.}
+threshold intervals. ``Sharp'' may be an overstatement.}
 
 \arhead{Author response:}
 

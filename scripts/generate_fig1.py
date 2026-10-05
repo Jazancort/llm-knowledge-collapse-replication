@@ -342,11 +342,7 @@ HTML_CONTENT = """<!DOCTYPE html>
         </div>
         <div class="item">
           <div class="bullet bul4"></div>
-          <div><strong>Distribution shift</strong> &mdash; Distinct-n</div>
-        </div>
-        <div class="item">
-          <div class="bullet bul4"></div>
-          <div><strong>Lexical diversity</strong> &mdash; MTLD, Stopword Ratio</div>
+          <div><strong>Output drift</strong> &mdash; Distinct-n, MTLD, stopword ratio</div>
         </div>
         <div class="item">
           <div class="bullet bul4"></div>
@@ -370,7 +366,7 @@ HTML_CONTENT = """<!DOCTYPE html>
             <strong>Bounded</strong> &mdash; stable retention, distribution drifts
           </div>
           <div class="regime-pill reg-deg">
-            <strong>Degradative</strong> &mdash; retention declines ~1&ndash;3 pp/gen
+            <strong>Degradative</strong> &mdash; retention declines ~0.9&ndash;2.5 pp/gen
           </div>
         </div>
       </div>
@@ -385,7 +381,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       <div class="card-body">
         <div class="item">
           <div class="bullet bul6"></div>
-          <div><strong>Effective Training Pressure</strong> (ETP) threshold</div>
+          <div><strong>Effective training pressure</strong> (ETP) &mdash; boundary identification</div>
         </div>
         <div class="item">
           <div class="bullet bul6"></div>
