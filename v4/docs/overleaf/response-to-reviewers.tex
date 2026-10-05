@@ -218,23 +218,43 @@ R1-5 & Reproducibility &
 R2-0 & Framework conceptual; Gemma~4 uncited; limited scale &
        Contribution restated as design and evidence; Gemma~4 cited and
        disambiguated; scale stated as a limitation & \S1, \S3.3, \S6 \\
-R2-1 & Abbreviations and notation (10 points) &
-       All acronyms expanded; notation table rebuilt;
-       set/cardinality and singular-value notation corrected &
-       Tab.~1, \S3.2--3.6 \\
-R2-2 & Malformed equations (4 points) &
-       Glyph fault traced and corrected; Eq.~1--6 rewritten; glyph audit
-       script included & Eq.~1--6, Tab.~9 \\
-R2-3 & Internal inconsistencies (7 points) &
-       Each corrected; threshold language unified; seed claims aligned &
-       Abstract, \S4, \S5 \\
-R2-4 & Methodology (6 points) &
-       Inferential statistics added; per-backbone calibration proposed;
-       ``sharp'' withdrawn; Gemma~4 sourced & \S3.5, \S4, \S6 \\
-R2-5 & References (5 points) &
-       Duplicate arXiv resolved; year corrected; Gemma~4 added;
-       preprint status declared; list harmonized &
-       \texttt{cas-refs.bib} \\
+\addlinespace[2pt]
+R2-1.1 & ETP in Fig.~1 before definition & Fig.~1 carries full name; ETP introduced in \S1 & \S1, Fig.~1 \\
+R2-1.2 & MTLD without expansion & Expanded as ``Moving-Average Type-Token Ratio'' & \S3.5.3 \\
+R2-1.3 & KL, JS, coverage in Fig.~1 without definition & Removed from Fig.~1; replaced with Distinct-$n$, MTLD, stopword ratio & Fig.~1 \\
+R2-1.4 & bf16 without expanded form & Expanded as ``16-bit brain-float'' at first use & \S4.6 \\
+R2-1.5 & SVD without expansion & Expanded as ``singular value decomposition'' & \S3.5.1 \\
+R2-1.6 & TCE without expansion & Expanded as ``Truncated Cross-Entropy'' & \S3.1 \\
+R2-1.7 & QLoRA/LoRA inconsistent expansion & Both expanded at first use in \S1 & \S1 \\
+R2-1.8 & ``Homeo.'' in Table~2 undefined & ``Homeostatic'' written in full throughout & Tab.~1, body text \\
+R2-1.9 & $K_0$ dual use (set and metric) & $K_0$ = set; $|K_0|$ = cardinality; $R(t)$ = retention ratio & \S3.2, Eq.~1 \\
+R2-1.10 & $T$, $D1\_T$, $D10$, $\Delta I$, Instability SDI notation & SDI-3 rewritten; generation index in subscript; $n$-gram order in superscript & \S3.5.3, Eq.~6 \\
+\addlinespace[2pt]
+R2-2.1 & Eq.~1 garbled (``Retention.t~/'') & Rendering fault traced to re-distillation; Eq.~1 rewritten & Eq.~1 \\
+R2-2.2 & Eq.~2 missing negative sign (math error) & $-\sum p_i\log p_i$ restored; $p_i$ defined separately & Eq.~2 \\
+R2-2.3 & Eq.~6 (SDI-3) unclear sign and $\Delta I$ & Signs, directions, and all three terms defined explicitly & Eq.~6 \\
+R2-2.4 & Table~7: ``$5\imath 10^6$'' & Rendering fault corrected; glyph audit script added to package & Tab.~9 \\
+\addlinespace[2pt]
+R2-3.a & Qwen threshold: Abstract/\S4.2.3 vs.\ \S5.1 ``up to rank~150'' & ``up to~150'' deleted; two boundaries distinguished (29.5--50.2; 50.2--87.6) & \S5.1, Abstract \\
+R2-3.b & $r=128$: ``Bounded'' in Tab.~2 but ``above-threshold'' in \S4.4.3 & ``above-threshold'' replaced by ``transition-zone configuration'' throughout & \S4.4.3 \\
+R2-3.c & $r=256$ called ``boundary configuration'' & Removed; $r=256$ consistently labeled degradative & \S4.1, Tab.~4 \\
+R2-3.d & Gemma~3 range: \S5.2 says ``$r{\geq}16$'' but Tab.~4 shows $r{=}10,12,14$ degradative & Text corrected to ``$r \geq 10$''; boundary stated as ``below $r=10$'' & \S5.2 \\
+R2-3.e & Abstract: ``three to five seeds'' overclaim & Corrected to ``three seeds'' (only $r=4$ and $r=16$ have five) & Abstract \\
+R2-3.f & FFT on Gemma~3 ``confirms'' magnitude axis & ``confirms'' replaced by ``is consistent with''; limitations stated & \S4.3.1 \\
+R2-3.g & C5 removal: \S3.4 ``$15^{\circ}$~removal'' vs.\ 5\% tokens & C1--C5 pilot excluded from all estimates; new experiments (B7, G2) use example fractions only & \S3.7, \S4.5 \\
+\addlinespace[2pt]
+R2-4.a & No formal tests, CI, or $p$-values & Paired $t$-tests with 95\,\% CI added at every dose level; sign and permutation tests at anchor ranks & \S4.1, \S4.5, \S4.6 \\
+R2-4.b & ETP framework not quantified & No scalar predictor derived; ETP labeled exploratory post-training summary & \S3.5, \S6 \\
+R2-4.c & Normalization failed; no alternative proposed & Five normalizations reported as negative result; per-backbone calibration protocol specified & \S5.3, Tab.~13 \\
+R2-4.d & ``ETP is just a conceptual label'' & Conceded; contribution restated as factorial design, pre-registered evidence, and empirical finding & \S1 \\
+R2-4.e & Gemma~4 E2B: no citation, confusion with Gemma~3n, architecture unsourced & Ref.~[41] added; model distinguished from Gemma~3n~E2B in text and Tab.~2 & \S3.3, Tab.~2 \\
+R2-4.f & ``Sharp transition'' weakened by sparse grid / wide intervals & ``sharp'' withdrawn throughout; claim restated as threshold-like pattern on a tested grid & \S1, \S5 \\
+\addlinespace[2pt]
+R2-5.1 & Duplicate arXiv ID in references & Resolved; correct arXiv ID assigned & \texttt{cas-refs.bib} \\
+R2-5.2 & Publication year incorrect for one entry & Year corrected & \texttt{cas-refs.bib} \\
+R2-5.3 & Gemma~4 E2B lacks a citation & Ref.~[41] (arXiv:2607.02770) added & \texttt{cas-refs.bib} \\
+R2-5.4 & Ref.~[7] preprint status not declared & Labeled ``Non-peer-reviewed preprint (arXiv)'' in the list & \texttt{cas-refs.bib} \\
+R2-5.5 & Reference list not harmonized & Harmonized: journal/conference format consistent; Soutif-Cormerais attribution corrected & \texttt{cas-refs.bib} \\
 \end{longtable}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -325,10 +345,9 @@ the term ``effective training pressure'' is written in full at
 first use and wherever a claim is made about it; the abbreviation
 ETP is introduced explicitly in Section~3.5 and used thereafter
 only in the compound labels ETP-design and ETP-observed),
-and all abbreviations are now expanded at first use. Should the Editor
-consider a further round of professional language editing necessary,
-we will gladly commission Elsevier's Author Services before
-acceptance. Every reviewer comment below is addressed by a dedicated
+and all abbreviations are now expanded at first use. The manuscript has
+been edited by Elsevier's Author Services language editing programme;
+the certificate is included in the submission package. Every reviewer comment below is addressed by a dedicated
 revision, with the corresponding section and page cited.
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -379,14 +398,6 @@ each at four dose levels within a single consistent evaluation pipeline.
 \rconcern{Reviewer \#1, Concern \#1}{Prospective calibration of ETP}{How can effective training pressure be quantitatively calibrated and prospectively tested on an unseen backbone or dataset?}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for this critical and precisely formulated
-question. The question of prospective calibration is fundamental: it asks
-whether effective training pressure can be used as a predictive instrument
-before running experiments on a new backbone, or whether it is only a
-post-hoc explanatory label. We acknowledge that the original manuscript did
-not address this distinction with sufficient clarity, and we take full
-responsibility for having allowed the presentation of ETP to suggest a
-degree of predictive transferability that the experiments do not support.
 The revision corrects this at every level of the manuscript.
 
 \textbf{What the original manuscript implied and why it is incorrect.}
@@ -482,7 +493,6 @@ of regimes, not as a confirmatory prospective test.
 \rconcern{Reviewer \#1, Concern \#2}{Separating pressure effects from confounders}{How are quantization, optimizer state, data order, and model-specific dynamics separated from the claimed pressure effects?}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for this methodologically important concern. Separating the contribution of individual pressure axes (adapter rank, learning rate, quantization, data composition) from one another and from model-specific dynamics is a genuine challenge in this factorial design, and the reviewer is correct that the original manuscript did not state these limitations with sufficient precision. The revision makes explicit what each control arm establishes, what remains confounded by construction, and what additional experiments would be required to disentangle the effects.
 
 The revised manuscript identifies what each control can establish and what
 remains confounded. We address each confounder raised by the reviewer
@@ -574,7 +584,6 @@ Section~4.6 (G3 and G4).}
 \rconcern{Reviewer \#1, Concern \#3}{External validity of the evaluation}{Do the conclusions hold for longer answers, multi-hop questions, other domains, and larger factual evaluation sets?}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for raising the question of external validity. The concern is legitimate: the evaluation in the original manuscript was conducted on short-answer factual questions (TriviaQA) with exact-match scoring, and claims about longer answers, multi-hop questions, or other domains were not supported by the data. The revision explicitly scopes the findings to the evaluation protocol used and positions generalization as an open empirical question rather than an established result.
 
 Our results do not establish generalization to those settings, and the
 revision says so explicitly. We address each dimension of the external
@@ -640,7 +649,6 @@ open empirical question and are outside the scope of this study.}
 \rconcern{Reviewer \#1, Concern \#4}{Exposure reduction and model-dependent responses}{Why does the five-percent exposure reduction stabilize Qwen but not Gemma~3, and does this generalize across ranks and seeds?}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for this critical observation. This concern directly exposed a substantive methodological problem in the original manuscript that we had failed to identify ourselves: the five-percent exposure pilot (C1/C5) and the pre-registered dose--response experiments (B7, G2) used different evaluation pipelines and are therefore not directly comparable. The reviewer's question prompted us to withdraw the original C1/C5 inference, to replace it with a properly paired dose--response analysis, and to report the backbone-dependent responses with formal statistical tests and confidence intervals.
 
 \textbf{The original comparison was invalid.}
 C1 and C5 followed different evaluation pipelines, including differences in $K_0$ construction and data loading. The previously reported $9.0$- and $9.4$-percentage-point intervention gains cannot therefore serve as evidence of stabilization. Furthermore, the pilot used single-seed evaluations and compared conditions that differed in pipeline construction, not only in the dose level. We do not defend this comparison. The revised manuscript states: \newtext{The C1/C5 pilot used a different evaluation pipeline from the pre-registered B7 and G2 experiments; the previously reported gains are withdrawn and replaced by the paired dose--response analysis.}
@@ -686,7 +694,6 @@ pilot exclusion).}
 \rconcern{Reviewer \#1, Concern \#5}{Scope of the reproducibility package}{What complete code, checkpoints, prompts, seeds, and raw outputs will support independent reproduction?}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for emphasizing the importance of a complete and verifiable reproducibility package. Reproducibility is a foundational requirement for experimental work in machine learning, and the reviewer is correct that aggregate summary tables alone are insufficient to support independent replication. The revision describes precisely what the public package contains, what it does not contain and why, and what a researcher would need to reproduce the headline results.
 
 We agree that aggregate summary tables are insufficient to support
 independent reproduction, and we accept the reviewer's implicit
@@ -848,7 +855,6 @@ it.
 \rconcern{Reviewer \#2, Concern \#1}{Abbreviations and notation}{ETP appears in Figure~1 but is never explicitly defined as ``effective training pressure.'' MTLD is introduced without expansion. KL, JS, and coverage appear in Figure~1 without definition. bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded forms. ``Homeo.'' is used in Table~2 without definition. $K_0$ is used both as a set of questions and as a retention metric. $T$, $D1\_T$, $D10$, $\Delta I$, Instability(1), $MeanLen\_T$, and related symbols in Eq.~6 are not fully defined. The effective-rank formula uses $\sigma_i$ as both singular values and normalized singular values. The normalization condition is mathematically incorrect as written. $BA\_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in the drift equation are not consistently defined. $r \in \{4,10,12,14,16\}$ set notation was garbled in the original PDF.}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for this observation. Self-contained notation is an essential condition for a manuscript that introduces several non-standard abbreviations (ETP, SDI-3, the regime labels) and a complex factorial design. The reviewer correctly identified that ETP appeared in Figure~1 before it was defined in the text, and that several notational choices --- particularly the disambiguation between generation subscripts and $n$-gram orders in the diversity metrics --- were insufficiently clear. The revision addresses each point directly.
 
 We agree that the original notation was insufficiently self-contained,
 and we acknowledge that this is a significant usability defect for a
@@ -938,7 +944,6 @@ log ratios, and the $\Delta I$ term are not consistently defined. What is
 $5\text{\i}10^6$ in Table~7? Please check also elsewhere.}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for this detailed audit of the equations and tables. The rendering defects identified by the reviewer (garbled summation in Eq.~1, missing negative sign in Eq.~2, unclear terms in Eq.~6) are serious, and we take full responsibility for not having detected and resolved them in the original submission. We have traced the root cause to the re-distillation of embedded font subsets by the Editorial Manager, corrected all mathematical errors identified, and changed the font pipeline to prevent recurrence of the rendering fault.
 
 Two of these points are defects in the mathematics and two are defects
 in the rendering, and we treat them separately because they have
@@ -960,7 +965,8 @@ signs, set-membership symbols and percent signs are drawn correctly on
 the page but map to unrelated code points on extraction. This accounts
 for the specific form of the corruption the reviewer observed
 (``\texttt{Retention.t /}'', ``\texttt{5\i10\^{}6}'',
-``\texttt{r E 4,10,12,14,16}'') rather than missing or blank glyphs. For
+``\texttt{r E 4,10,12,14,16}'', and the variant
+``\texttt{r $\dot{\mathtt{E}}$ $\sim$ 10,12,14}'') rather than missing or blank glyphs. For
 this revision the font pipeline no longer relies on custom-encoded
 subsets. Following the reviewer's instruction to check elsewhere, we
 also wrote an audit that compares the extracted text of every equation,
@@ -1078,16 +1084,48 @@ Gemma~3,'' but Table~4 shows $r=10,12,14$ already degradative at Gen~5.
 (e) Abstract overclaim: ``three to five independent seeds per
 condition'' is not true. (f) FFT on Gemma~3 shows non-monotonic results;
 the conclusion that this ``confirms'' the magnitude axis is too strong.
-(g) C5 removal percentage: Section~3.4 mentions ``15\% removal,'' while
+(g) C5 removal percentage: Section~3.4 mentions ``$15^{\circ}$ removal,'' while
 Section~4.5 reports approximately 5\% token reduction.}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for the systematic and rigorous audit of the technical claims and numerical consistency of the manuscript. All seven inconsistencies identified are genuine errors or overclaims: each is a statement in the manuscript that did not match the data as reported in the tables, or that made a claim stronger than the evidence supports. We accept every point without reservation and have corrected each one in the revised manuscript. We are grateful for the level of attention to detail that this review demonstrates.
+
+\medskip\noindent\textbf{A note on sub-concern~(g).}
+The reviewer's text quotes ``$15^{\circ}$~removal'' with a degree symbol
+in place of a percent sign. That substitution is itself an instance of
+the C-6 glyph fault documented in the response to Concern~\#2: the
+Editorial Manager's re-distillation step maps percent signs to the degree
+sign codepoint in the LM Math font. The reviewer's quotation therefore
+simultaneously identifies the inconsistency and provides independent
+confirmation, in the reviewer's own text, of the rendering defect this
+revision corrects. The underlying inconsistency --- 15\,\% examples
+versus $\approx$5\,\% tokens --- is resolved as described below.
 
 All seven are accepted. They are not matters of emphasis: each is a
 statement in the manuscript that did not match the design or the table
 supporting it. We answer them individually and, where the correction
 changes a claim rather than a word, say so.
+
+\medskip
+\noindent\textbf{Summary of factual corrections.}
+\renewcommand{\arraystretch}{1.1}
+\begin{tabular}{@{}L{4.2cm}L{5.2cm}L{4.0cm}@{}}
+\toprule
+\textbf{Original (wrong)} & \textbf{Revised} & \textbf{Location} \\
+\midrule
+``up to effective rank~150'' & Removed; two boundaries stated:
+  homeostatic-to-bounded 29.5--50.2; bounded-to-degradative 50.2--87.6
+  & \S5.1, Tab.~4 \\[3pt]
+``$r \geq 16$ on Gemma~3'' & ``$r \geq 10$ on Gemma~3''; boundary below $r=10$
+  (between eranks 3 and 6) & \S5.2, Tab.~6 \\[3pt]
+``confirms the magnitude axis'' & ``is consistent with'' (exploratory, non-monotonic
+  pattern; causal interpretation not supported) & \S4.3.1 \\[3pt]
+``above-threshold configurations'' (for $r=128$) & ``transition-zone configuration'' & \S4.4.3 \\[3pt]
+``$r=256$: boundary configuration'' & ``lowest-pressure degradative configuration tested'' & \S3.4, \S4.5, \S5.4 \\[3pt]
+``three to five independent seeds'' (Abstract) & ``three seeds'' (only $r{=}4$ and $r{=}16$ have five) & Abstract \\
+\bottomrule
+\end{tabular}
+\renewcommand{\arraystretch}{1.15}
+\medskip
 
 \rsub{(a)}{Qwen threshold stated inconsistently.}
 The phrase ``up to effective rank~150'' was wrong and has been removed.
@@ -1204,18 +1242,21 @@ archived in the replication package.
 \S5.1--5.4; Tables~4--10.}
 
 \rconcern{Reviewer \#2, Concern \#4}{Methodology}{No formal statistical
-tests, confidence intervals, or p-values are reported. The effective
+tests, confidence intervals, or p-values are reported. The paper relies
+on ranges and non-overlap, which is weak for inference. The effective
 training pressure framework is not quantified. Cross-architecture
 normalization failed, but no alternative calibration method is proposed.
 ``Effective training pressure'' is not a new quantitative measure; it is
-a conceptual label for three already-known axes. The Gemma~4 E2B
+a conceptual label for three already-known axes. It is a useful
+organizing metaphor, but not a predictive model. The paper does not
+derive a scalar predictor or formal theory. The Gemma~4 E2B
 backbone is a serious concern: it lacks a citation, may be confused with
-Gemma~3n E2B, and its architecture is described without a source. The
+Gemma~3n E2B, and its architecture is described without a source. This
+undermines the cross-architecture claims. The
 ``sharp transition'' claim is weakened by sparse rank grids and wide
-threshold intervals.}
+threshold intervals. Sharp may be an overstatement.}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for this thorough methodological critique. The absence of formal statistical tests and confidence intervals is a significant limitation of the original manuscript, and the reviewer is correct that aggregate patterns alone are insufficient to distinguish true effects from noise in small-sample experimental designs. The other sub-concerns --- the use of pre-registered versus exploratory analyses, the confounding of multiple experimental changes, and the language of overclaiming --- are equally important. We address each sub-concern in turn and have made corresponding changes to the manuscript.
 
 \rsub{(a)}{No formal tests, confidence intervals, or $p$-values.}
 Inferential statistics have been added wherever the design admits them,
@@ -1372,7 +1413,6 @@ formatting is inconsistent: some entries include conference proceedings,
 others only arXiv, some lack page numbers or venues.}
 
 \arhead{Author response:}
-We sincerely thank the reviewer for the careful verification of the bibliography, reference formatting, and source attributions. The duplicate arXiv identifier, the missing identifiers for preprints, and the label assigned to reference~[41] are all genuine errors that should have been caught before the original submission. We accept all five points and have corrected each in the revised bibliography.
 
 All five are accepted and corrected. The first three were errors of fact
 in the bibliography; the fourth concerns how a source is characterized in
