@@ -1496,7 +1496,6 @@ Item-level analysis reveals an asymmetry between the two methods. Under FFT, the
 consistently displaced by full-parameter updates regardless of seed. Under
 QLoRA, only two to three facts are lost per seed, and the overlap between facts
 lost by QLoRA and facts lost by FFT is zero across all seed pairs (Jaccard 0.0).
-In this low-perturbation regime, low-rank adaptation loses fewer facts and loses
 \rev{In this exploratory, non-magnitude-matched comparison, QLoRA loses fewer $K_0$ items than FFT; item-level differences remain descriptive.}
 
 This pattern is referred to as a stable fragile-fact floor under FFT: certain facts
@@ -1724,8 +1723,8 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \rev{\textbf{Qwen dose--response (B7).}
 A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
 protocol registered as \texttt{a916ebf} before any run) shows that the
-Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.168$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
-\rev{$+4.9$}\,pp at 25\% ($p = 0.006$, 95\%~CI $[2.5, 7.2]$), and
+Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
+\rev{$+4.9$}\,pp at 25\% ($p = 0.005$, 95\%~CI $[2.5, 7.2]$), and
 \rev{$+9.2$}\,pp at 50\% ($p = 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
 paired $t$-test \rev{$p = 0.009$, $0.003$, $0.001$}). A 50\% reduction
