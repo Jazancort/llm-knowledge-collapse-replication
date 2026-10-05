@@ -122,7 +122,7 @@ supporting ablations, we investigate how factual retention changes as
 adapter capacity, perturbation magnitude, and synthetic exposure vary.}
 These experiments reveal a common empirical organizing principle, which we
 term effective training pressure. The index $\Pi$ introduced in
-Section~\ref{sec:disc_pressure} is an exploratory post-training summary of the
+Section~\ref{sec:pressure} is an exploratory post-training summary of the
 manipulated variables; it is not available prospectively and has not been
 validated as a transferable quantitative predictor across architectures or
 datasets. We find:
@@ -881,8 +881,7 @@ SDI-3). Effective rank and drift track how much pressure was actually applied to
 the model, but they are not available prospectively; they therefore serve as
 post-hoc explanatory variables rather than pre-specified predictors. The
 operational index $\Pi = \mathrm{erank}(\Delta W) \times (\eta / 10^{-5})$ is reported as the mean across training generations, where $\mathrm{erank}(\Delta W)$ denotes the effective rank of the adapter weight update (see Table~\ref{tab:notation}). This is
-an exploratory post-training summary and is not used as a validated quantitative
-threshold.}
+an exploratory post-training summary; it is not available prospectively and has not been validated as a transferable quantitative predictor across architectures or datasets.}
 
 \subsubsection{Effective rank}\label{sec:erank}
 To quantify update capacity beyond nominal rank, we compute the effective rank
@@ -2479,12 +2478,12 @@ their effects are additive or interactive.
 
 \section{Project repository and data access}\label{app:repo}
 
-\rev{The replication package is archived at the links below (version v1.0.3). This snapshot contains:
+\rev{The replication package is archived at the links below (release v1.0.3 contains items (i)--(iii) and earlier versions of the scripts; items (iv)--(v) reflect the HEAD commit and will be deposited in the next release). The current state of the repository contains:
 \begin{enumerate}[(i)]
-  \item the consolidated per-seed results files (one JSON per seed per arm, covering G1--G5, 27 executed training runs);
+  \item the consolidated per-seed results files (one JSON per seed per arm, covering G1--G5, 27 executed training runs; one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon);
   \item the training configuration files for each experimental arm;
   \item the evaluation protocol, question partition identifiers, and the $K_0$ baseline sets for each backbone;
-  \item the figure-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (15/15 checks pass on the HEAD commit); and
+  \item the analysis and table-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (15/15 checks pass on the HEAD commit); and
   \item the notation and rendering audit script \texttt{scripts/audits/glyph\_audit.py}.
 \end{enumerate}
 The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}

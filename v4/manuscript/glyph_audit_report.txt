@@ -1,0 +1,371 @@
+Glyph audit report
+PDF: G:\Lab\Labcity\LLM\Artigo\Paradoxo - springer\Paradoxo\llm-knowledge-collapse (paper)\v4\manuscript\manuscript-anonymous.pdf
+Suspect characters: 'íİËˆ˜⊙ùğ'
+Total lines extracted: 1967
+Issues found: 121
+
+FAIL --- issues by line:
+
+  L   10  ["suspect chars: ['í', 'İ']"]
+         • Regime boundaries differ í10İ across backbones (erank í3–6 vs í50–88)
+
+  L   38  ["suspect chars: ['í']"]
+         (between effective ranks í3 and í6 on Gemma 3 1B versus 50–88 on Qwen); (2) full
+
+  L   41  ["suspect chars: ['İ']"]
+         low-rank adaptation; (3) a rank İ learning-rate joint-dependence pattern (single-seed, 3İ3
+
+  L   46  ['multiplication-garbled']
+         a 50% reduction substantially attenuated progressive degradation (Gen 5→10 slope
+
+  L   47  ['minus-as-star']
+         *0.14 pp/generation, ∆ = +9.2 pp at Gen10) and yielded a similar point estimate to
+
+  L   97  ["suspect chars: ['İ']"]
+         that LoRA “learns less and forgets less,” but it remains           3. We present a single-seed rank İ learning-rate pilo
+
+  L  278  ['minus-as-star']
+         2,000 questions, K0 is defined per backbone, QLoRA              rate 10*5 , effective batch size 16 (micro-batch size 2 
+
+  L  306  ["suspect chars: ['Ë', 'ğ', 'ˆ']"]
+         produce 0 . For each subsequent generation t Ë ˆ1, ğ , T ‘,    is evaluated on a held-out set of 200 TriviaQA questions
+
+  L  315  ['minus-as-star']
+         2. The model is fine-tuned for 2 epochs on t*1 , using      short-answer variation and aliasing in TriviaQA-style
+
+  L  324  ["suspect chars: ['í']"]
+         carried forward. Only the newly generated dataset         generates í7-word answers on average compared with
+
+  L  325  ["suspect chars: ['í']"]
+         t is used to train the next generation.                  í2 words at r = 16) may therefore have their retention
+
+  L  332  ["suspect chars: ['í']"]
+         the factual-retention figure of í89% at this rank may
+
+  L  391  ["suspect chars: ['Ë', 'ˆ']"]
+         ˆq Ë K0 : q correct at gen. t‘                        regimes with five seeds at the anchor ranks (r = 4,
+
+  L  424  ["suspect chars: ['Ë', 'ˆ']"]
+         a single seed over ten generations to test whether              test r Ë ˆ4, 10, 12, 14, 16‘ with five seeds at the
+
+  L  430  ['minus-as-star']
+         and commit hashes are listed in supplementary Table S1                across four logarithmically spaced values (10*6 ,
+
+  L  431  ["suspect chars: ['İ']", 'minus-as-star', 'multiplication-garbled']
+         and in configs/checkpoints.yaml of the replication                    5İ10*6 , 10*5 , 2İ10*5 ), selected to span one ord
+
+  L  442  ['minus-as-star']
+         ronments. Pilot runs and low-rank sweeps (r ≤ 16)                     LR = 10*6 , selected because it produces the
+
+  L  444  ["suspect chars: ['ù']"]
+         NVIDIA GeForce RTX 3070 (8 GB VRAM); all other                        erence (BAF ù 0.42 for QLoRA; FFT drift
+
+  L  445  ["suspect chars: ['ù']"]
+         conditions, including the full rank sweep, FFT ablations,             d.t/ ù 0.39; these method-specific quantities are
+
+  L  490  ['multiplication-garbled']
+         05/10/2026, 11:31                                                   Figure 1 — Experimental Pipeline Overview
+
+  L  583  ["suspect chars: ['İ']", 'minus-as-star']
+         tors. The operational index Π = erank.∆W /İ.η˙10*5 / is             Beyond factual retention, we track output-distributi
+
+  L  606  ["suspect chars: ['ù']"]
+         dominated by a single singular direction has erank ù 1          proportionally stable.
+
+  L  610  ["suspect chars: ['Ë', 'ˆ']"]
+         targeting schemes, we also consider aggregate effective                              ˆq Ë K0 : at .q/ = a0 .q/‘
+
+  L  627  ["suspect chars: ['˜']"]
+         Distinct-n is sensitive to response length, we also com-        approximate 5˜ downsampling effect is +1.9 pp (n = 3),
+
+  L  644  ['minus-as-star']
+         response differs between generation t*1 and generation t.       dose-response). These include the Qwen rank-sweep
+
+  L  743  ["suspect chars: ['˜']"]
+         alongside the capacity analysis.                                                                          the r = 16 run
+
+  L  745  ["suspect chars: ['˜']"]
+         78 facts across three seeds (mean 79.07˜; 79.72˜ pooled
+
+  L  754  ["suspect chars: ['˜']"]
+         characterization through six rank levels (evaluated                                                       G1+G4 estimate
+
+  L  768  ["suspect chars: ['˜']"]
+         section, headline findings are supported by multi-seed                                                    declines progr
+
+  L  771  ['minus-as-star']
+         Figure 2 illustrates how the same factual question                                                    (Gen5 to Gen10, N 
+
+  L  772  ['minus-as-star']
+         produces qualitatively different response trajectories                                                    three-seed G1 
+
+  L  782  ["suspect chars: ['˜']"]
+         r = 256 runs yield a Gen10 mean of 79.72˜,1.73 pp (95 %
+
+  L  784  ["suspect chars: ['˜']"]
+         mean alone is 79.07˜,1.50 pp (95 % CI [75.30, 82.80]). To
+
+  L  798  ["suspect chars: ['˜']"]
+         r = 256 G1+G4: 79.72˜), demonstrating clear empirical
+
+  L  819  ["suspect chars: ['ù']"]
+         loss ù 0), indicating bounded oscillation rather than
+
+  L  849  ["suspect chars: ['í']"]
+         boundary between r = 4 (effective rank í3) and r = 16          generations. Table 7 summarizes the results.
+
+  L  850  ["suspect chars: ['í']"]
+         (effective rank í9); higher ranks were not evaluated with          The same monotonic dose-response structure emerges:
+
+  L  857  ["suspect chars: ['˜']"]
+         retention 94.35˜, range 93.5–95.7%). At r = 16 (mean           in the Qwen degradative regime: mean response length
+
+  L  860  ["suspect chars: ['˜']"]
+         56.52˜, range 52.2–60.9%). The ranges do not overlap at        0.28.
+
+  L  873  ["suspect chars: ['ù']"]
+         is large (Hedges g ù 13.29) under either interpretation.            The homeostatic-to-degradative regime transition
+
+  L  892  ["suspect chars: ['Ë', 'ˆ']"]
+         ally evaluated intermediate ranks r Ë ˆ10, 12, 14‘ with         reduced the discrepancy to a common threshold. We
+
+  L  928  ['minus-as-star']
+         Figure 5: K0 retention versus mean effective rank across         we selected FFT at LR = 10*6 (drift 0.39) as the lowest
+
+  L  930  ["suspect chars: ['ù']"]
+         Qwen, square: Gemma 3, triangle: E2B); colors indicate           matched comparator (QLoRA BAF ù 0.42; the two
+
+  L  961  ["suspect chars: ['İ']"]
+         Figure 6: K0 retention over 10 recursive generations for QLoRA   Figure 7: Rank İ learning-rate joint pattern on Qwen 2.
+
+  L  962  ['minus-as-star']
+         r = 16 and FFT at LR = 10*6 on Qwen 2.5 1.5B. Lines show         (Gen5 retention). Descriptive non-parallel trends sugge
+
+  L  969  ["suspect chars: ['İ']", 'minus-as-star']
+         parameter updates regardless of seed. Under QLoRA,               higher rank: r = 256 with LR = 5 İ 10*6 retains 89.7%,
+
+  L  970  ['minus-as-star']
+         only two to three facts are lost per seed, and the               compared to 84.6% at LR = 10*5 and 82.1% at LR =
+
+  L  971  ["suspect chars: ['İ']", 'minus-as-star']
+         overlap between facts lost by QLoRA and facts lost               2 İ 10*5 . This is consistent with the regime depending
+
+  L  982  ["suspect chars: ['İ']", 'minus-as-star']
+         tively different update patterns even when achieving             was 78.3% at LR = 10*6 , 54.3% at LR = 5 İ 10*6 ,
+
+  L  983  ['minus-as-star']
+         similar downstream performance [45, 15]. The precise             and 63.0% at LR = 10*5 . Although the two higher
+
+  L  987  ['minus-as-star']
+         4.3.2. Rank and learning rate: joint dependence                  compared to LR = 10*6 . This exploratory single-seed
+
+  L  990  ["suspect chars: ['İ']", 'minus-as-star']
+         are additive or interactive, we evaluated a 3 İ 3 matrix         monotonic pattern at LR = 5 İ 10*6 limits interpretatio
+
+  L  992  ["suspect chars: ['İ']", 'minus-as-star']
+         rates 5 İ 10*6 , 10*5 , and 2 İ 10*5 . Table 9 reports Gen5      confirmatory generalization.
+
+  L  995  ["suspect chars: ['İ']"]
+         cross-backbone comparison.                                       with factual retention. The single-seed 3İ3 grid shows
+
+  L  999  ["suspect chars: ['İ']", 'minus-as-star']
+         under another. At r = 16, only LR = 2 İ 10*5 pushes              in which multiple control variables are associated with
+
+  L 1001  ['minus-as-star']
+         same degradation appears already at LR = 10*5 . At               regimes manifest in the distributional properties of th
+
+  L 1002  ["suspect chars: ['İ']", 'minus-as-star', 'multiplication-garbled']
+         r = 256, even the lowest evaluated learning rate (5İ10*6 )       synthetic outputs.
+
+  L 1054  ["suspect chars: ['Ë']"]
+         2.47 to 3.6 words, content efficiency declines from 0.41        rank intervals separating regimes are rH Ë .64, 128/
+
+  L 1055  ["suspect chars: ['Ë']"]
+         to 0.22, and baseline response persistence collapses            and rD Ë .128, 256/ (Qwen-specific observations, not
+
+  L 1075  ['minus-as-star']
+         with retention loss. The most informative case is r = 128:     *0.14 pp/generation versus *1.13 pp/generation at 0%
+
+  L 1080  ['minus-as-star']
+         accuracy signals any problem.                                  would match halving the learning rate (from η = 10*5
+
+  L 1081  ["suspect chars: ['İ']", 'minus-as-star']
+         To examine whether output drift precedes factual           to 5 İ 10*6 ) was numerically similar: Gen 5 retention at
+
+  L 1082  ["suspect chars: ['İ', '˜']", 'minus-as-star']
+         loss, we computed cross-lag correlations between mean          dose = 50˜ is 89.7˜ versus 90.2˜ at η = 5 İ 10*6 (mean
+
+  L 1084  ['minus-as-star']
+         tion t+1. The raw Pearson correlation in the degradative       [*0.8, 1.6]). The mechanism (whether update budget or
+
+  L 1085  ['minus-as-star']
+         regime is strong (ρ = *0.965), but robustness analyses         data composition) was not established; a steps-matched
+
+  L 1088  ['minus-as-star']
+         coefficient drops to *0.22. First-difference analysis yields   evaluation pipelines; when C1 and C5 are re-run under
+
+  L 1089  ['minus-as-star']
+         *0.43, and the reverse-lag correlation is of comparable        an identical pipeline and paired seeds, the approximate
+
+  L 1090  ["suspect chars: ['˜']"]
+         magnitude, indicating a bidirectional association rather       5˜ downsampling effect is +1.9 pp (n = 3, not statisti-
+
+  L 1110  ["suspect chars: ['˜']"]
+         capacity and perturbation magnitude each govern the            backbone. At the unmodified baseline (dose = 0˜),
+
+  L 1112  ["suspect chars: ['˜']", 'minus-as-star']
+         of effective training pressure: whether reducing synthetic     (78.77˜ , 1.27 pp Gen10, slope *0.91 pp/gen). Reducing
+
+  L 1116  ["suspect chars: ['˜']"]
+         dose–response experiments described in Section 3.7: B7         (n = 3 paired seeds per dose). At dose = 50˜, the slope
+
+  L 1117  ['minus-as-star']
+         on Qwen r = 256 (n = 5 paired seeds, K0 = 78) and G2           is *0.91 pp/gen (equal to the 0% arm within rounding),
+
+  L 1121  ["suspect chars: ['˜']"]
+         r = 256.                                                       The absolute gain at dose = 50˜ Gen10 is larger for
+
+  L 1125  ['minus-as-star']
+         shows that the Gen 10 benefit is graded: +1.8 pp at            *1.19 pp/generation (G1+G4, N = 6), *1.28 pp/generation (
+
+  L 1126  ['minus-as-star']
+         10% removal (p = 0.160, n = 5, 95% CI [*1.1, 4.7]),            subset, N = 3), and *1.13 pp/generation (dose-response 0%
+
+  L 1136  ["suspect chars: ['˜']"]
+         within each protocol without inferring which backbone          of 79.72˜ , 1.73 pp (95 % CI [77.90, 81.50]).
+
+  L 1137  ["suspect chars: ['İ']"]
+         operated at higher relative pressure.                              Prospective rankİlearning-rate probe (G5).
+
+  L 1139  ["suspect chars: ['İ']"]
+         that the degradative trajectory can be attenuated              generalizes to unseen rankİlearning-rate configurations,
+
+  L 1142  ["suspect chars: ['İ']", 'minus-as-star']
+         the bounded regime; on Gemma 3, it raised Gen 10               cell (r = 128, η = 5 İ 10*6 ), a high-pressure cell
+
+  L 1143  ["suspect chars: ['İ']", 'minus-as-star']
+         retention without reducing the rate of loss. Neither           (r = 128, η = 2 İ 10*5 ), and an intermediate cell (r = 3
+
+  L 1144  ["suspect chars: ['İ']", 'minus-as-star']
+         outcome constitutes a return to homeostatic behavior.          η = 2 İ 10*5 ). The pre-registered classification predict
+
+  L 1146  ["suspect chars: ['İ']"]
+         findings presented in the preceding sections. We note          based on the rankİLR grid established in §4.3. The low-
+
+  L 1147  ["suspect chars: ['˜']"]
+         that verification-based approaches [11] represent an           pressure cell returned 96.20˜ at Gen5 (Homeostatic,
+
+  L 1148  ["suspect chars: ['˜']"]
+         orthogonal mitigation axis (filtering by quality rather        confirmed); the high-pressure cell returned 85.90˜
+
+  L 1150  ["suspect chars: ['˜']"]
+         boundary sensitivity rather than proposing a competing         and the intermediate cell returned 89.70˜ (Bounded,
+
+  L 1153  ["suspect chars: ['ù']"]
+         that recursive stability under PEFT is governed by a           measured (mean erank ù 51 for r = 128, ù 16 for
+
+  L 1170  ["suspect chars: ['˜']"]
+         and r = 256). At r = 16, bf16 yields 97.4˜ Gen10,               they imply for the understanding and management of
+
+  L 1184  ["suspect chars: ['˜']"]
+         Gen10 retention values are 82.1˜, 78.2˜, and 80.8˜,             dation is not observed uniformly across recursive
+
+  L 1185  ["suspect chars: ['˜']"]
+         yielding a G4 mean of 80.4˜ , 2.0 pp. A bilateral               synthetic fine-tuning, but instead emerges only when the
+
+  L 1210  ['multiplication-garbled']
+         sure axis: a 50% reduction attenuated the Gen 5→10              by architectural parameters (hidden dimension, depth,
+
+  L 1211  ['minus-as-star']
+         decline to *0.14 pp/generation, whereas a 10% reduction         head count) aligned these thresholds. This likely reflec
+
+  L 1212  ['minus-as-star']
+         did not — its slope was *1.49 pp/generation, marginally         properties of the pretrained backbone not captured by
+
+  L 1213  ['minus-as-star']
+         steeper than the *1.13 pp/generation of the 0% arm,             simple architectural dimensions. Second, the framework
+
+  L 1231  ["suspect chars: ['İ']"]
+         The rank İ learning-rate joint-dependence experi-           similar degradation emerges in our recursive fine-tuning
+
+  L 1233  ["suspect chars: ['Ë', 'ˆ']"]
+         not being independent: different combinations of rank           Qwen, r ≥ 10 on Gemma 3 (including r Ë ˆ10, 12, 14‘
+
+  L 1307  ['minus-as-star']
+         productive than treating collapse as a monolithic threat.      (partial ρ = *0.22). The analysis suggests that output
+
+  L 1375  ["suspect chars: ['í', '˜']"]
+         An exploratory pilot at í5˜ downsampling did not
+
+  L 1453  ["suspect chars: ['Ë', 'ˆ']"]
+         a single seed at r Ë ˆ4, 16, 64‘ (ten generations each).
+
+  L 1475  ["suspect chars: ['í', '˜']"]
+         budget). The steps-matched control (G2b, n = 3)                 observed rate of loss. An exploratory í5˜ pilot, evaluat
+
+  L 1675  ["suspect chars: ['⊙']"]
+         results. All adapter-level quantities (erank, ⊙ F ) are averaged
+
+  L 1679  ["suspect chars: ['ˆ']"]
+         Symbol                     Definition                                   1    Capacity      QLoRA rank r           ˆ4, 16
+
+  L 1681  ["suspect chars: ['İ']", 'minus-as-star']
+         2    Magnitude     FFT learning rate      10*6 –2İ10*5
+
+  L 1695  ["suspect chars: ['Ë', 'İ']"]
+         ∆W = BA                    Low-rank LoRA update matrix (B Ë ℝdİr ,
+
+  L 1696  ["suspect chars: ['Ë', 'İ']"]
+         A Ë ℝrİd )
+
+  L 1714  ["suspect chars: ['⊙']", 'minus-as-star']
+         erank.∆W / ⊙ .η˙10*5 /
+
+  L 1721  ["suspect chars: ['Ë']"]
+         intervals (Qwen-specific): rH Ë .64, 128/,
+
+  L 1722  ["suspect chars: ['Ë']"]
+         rD Ë .128, 256/; not universal thresholds
+
+  L 1796  ['minus-as-star']
+         r = 32      5        2       3         *1
+
+  L 1816  ["suspect chars: ['İ']"]
+         Rank İ learning rate joint-dependence matrix on
+
+  L 1823  ["suspect chars: ['İ']", 'minus-as-star', 'multiplication-garbled']
+         seed at Gen5 to localize the transition.                                  Rank        LR=5İ10*6            LR=10*5      
+
+  L 1870  ['minus-as-star']
+         QLoRA r = 16       10*5          0.42 (BAF )      96.2%                  over the respective unmodified baseline as the 
+
+  L 1872  ['minus-as-star']
+         FFT                10*6          0.39             92.3%                  50%. Red circles: Gemma 3 1B at r = 10 (n = 3 p
+
+  L 1874  ["suspect chars: ['İ']", 'minus-as-star', 'multiplication-garbled']
+         FFT                5İ10*6        1.56             91.0%                  (n = 5 paired seeds; K0 = 78). Shaded bands: 95
+
+  L 1876  ['minus-as-star']
+         FFT                10*5          1.95             89.7%                  Gemma 3 G2 (K0,G2 =44) than for Qwen B7 (K0 =78
+
+  L 1878  ["suspect chars: ['İ']", 'minus-as-star']
+         FFT                2İ10*5        3.48             84.6%                  are reported within their respective protocols 
+
+  L 1879  ['minus-as-star']
+         QLoRA r = 16 and FFT LR = 10*6 : N = 3 seeds. All other rows:             a cross-backbone pressure comparison. Dashed h
+
+  L 1922  ["suspect chars: ['İ']"]
+         at r=16,r=256             Capacity İ magnitude show
+
+  L 1933  ["suspect chars: ['İ']"]
+         (10İ gap)
+
+  L 1947  ["suspect chars: ['í', 'İ']"]
+         Capacity İ magnitude joint dependence                                    erank values: Qwen í50–88, Gemma 3 í3–6, E2B í5
+
+  L 1948  ["suspect chars: ['İ']"]
+         Rank İ LR matrix       the tested normalizations aligned thresholds across backbones.
+
+  L 1949  ["suspect chars: ['İ']"]
+         (3İ3, N = 1 per
+

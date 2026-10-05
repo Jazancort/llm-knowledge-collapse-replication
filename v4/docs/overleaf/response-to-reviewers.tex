@@ -129,7 +129,7 @@ Corresponding Author
       of the \emph{original} submission.
 \item Text newly added to the manuscript appears \newtext{in blue}.
       Where a passage from the revised manuscript is reproduced in this
-      letter, it is paraphrased or summarised; the relevant section is
+      letter, it is paraphrased or summarized; the relevant section is
       cited so that the exact wording can be located in the revision.
 \item Locations are given as section and page of the revised manuscript.
       Where the revision renumbered a table or section, both numbers are
@@ -156,7 +156,7 @@ Quantization (NF4 vs bf16) & Numerical noise & G3: QLoRA bf16 vs NF4, matched se
 Training data order & Shuffling artefacts & G4: 3 shuffle seeds at $r=256$ \\
 Optimizer state & Accumulated momentum & Held constant: fresh optimizer every generation \\
 Synthetic data seed & Stochastic variability & Reported per seed; headline 3--5 seeds \\
-Backbone architecture & Thresholds may not generalise & Replicated on Gemma~3 ($N=5$) and Gemma~4 E2B ($N=1$) \\
+Backbone architecture & Thresholds may not generalize & Replicated on Gemma~3 ($N=5$) and Gemma~4 E2B ($N=1$) \\
 \bottomrule
 \end{tabular}
 \end{inlineref}
@@ -581,7 +581,7 @@ $p=0.0079$, whereas a paired sign-flip analysis (using matched seeds
 where available) yields $p=0.0625$. We report both results with their
 differing interpretations: the permutation test suggests the difference
 exceeds chance under independence, while the sign-flip result reflects
-the uncertainty from only three paired seeds. The revised manuscript reports both $p$-values with a note
+the uncertainty from only five paired seeds. The revised manuscript reports both $p$-values with a note
 that the pairing status is not fully confirmed across conditions;
 the two tests bracket the inferential uncertainty without overclaiming
 in either direction.
@@ -702,6 +702,22 @@ open empirical question and are outside the scope of this study.}
 C1 and C5 followed different evaluation pipelines, including differences in $K_0$ construction and data loading. The previously reported $9.0$- and $9.4$-percentage-point intervention gains cannot therefore serve as evidence of stabilization. Furthermore, the pilot used single-seed evaluations and compared conditions that differed in pipeline construction, not only in the dose level. We do not defend this comparison. The revised manuscript states: \newtext{The C1/C5 pilot used a different evaluation pipeline from the pre-registered B7 and G2 experiments; the previously reported gains are withdrawn and replaced by the paired dose--response analysis.}
 
 \medskip\noindent\textbf{The Qwen dose--response evidence (B7).}The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=0.160$), $+4.9$\,pp at 25\% ($p=0.005$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $-0.15$\,pp/generation, compared with $-1.13$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{At 50\% removal (B7, five paired seeds), Generation~10 retention increased by $+9.2$\,pp (95\%~CI $[6.9,11.6]$, $p{<}0.001$) and the Generation~5--10 slope was attenuated from $-1.13$ to $-0.15$\,pp/generation.}
+Tab.~10 in the revised manuscript reports the full dose--response results for B7.
+
+\begin{inlineref}{Table~10 from the revised manuscript --- Dose-response interventions (B7 and G2)}
+\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}llrrrl@{}}
+\toprule
+\textbf{Dose} & \textbf{Ret.\ (Gen5)} & \textbf{$\Delta$ Gen5} & \textbf{Ret.\ (Gen10)} & \textbf{$\Delta$ Gen10} & \textbf{$N_\mathrm{seeds}$} \\
+\midrule
+0\%  & 85.4\% & ---            & 79.7\% & ---            & 5 \\
+10\% & 89.0\% & $+3.6$\,pp & 81.5\% & $+1.8$\,pp & 5 \\
+25\% & 89.2\% & $+3.8$\,pp & 84.6\% & $+4.9$\,pp & 5 \\
+50\% & 89.7\% & $+4.4$\,pp & 89.0\% & $+9.2$\,pp & 5 \\
+\bottomrule
+\end{tabular}\\[2pt]
+{\scriptsize Qwen 2.5 1.5B, $r{=}256$, $|K_0|{=}78$, $n{=}5$ paired seeds per dose (B7). $\Delta$ values are computed from unrounded per-arm means; displayed values are rounded independently.}
+\end{inlineref}
 
 \medskip\noindent\textbf{The Gemma~3 dose--response evidence (G2).}The Gemma~3 response was different in kind. In Experiment~G2, 50\% removal at $r=10$ raised Generation~10 retention by $\GtwoDeltatenFifty$\,pp across three paired seeds (95\%~CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$), with the 10\% and 25\% doses giving $\GtwoDeltatenTen$ and $\GtwoDeltatenTfive$\,pp, respectively. The Generation~5--10 slope was $\GtwoSlopeFifty$\,pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, equal within rounding. The intervention improved endpoint retention without demonstrably slowing later loss. The revised manuscript adds: \newtext{On Gemma~3~1B at $r=10$, 50\% removal improved Generation~10 retention by $\GtwoDeltatenFifty$\,pp but did not reduce the observed rate of loss ($\GtwoSlopeFifty$ versus $\GtwoSlopeZero$\,pp/generation).}
 
@@ -864,7 +880,8 @@ Gemma~3n~E2B in both the text and the conditions table (Table~2).
 4 & Topology  & Target modules       & Attention-only vs full-linear (single seed) \\
 5 & Exposure  & Examples removed     & 0\%, 10\%, 25\%, 50\%; B7: Qwen $r{=}256$ $n{=}5$; G2: Gemma~3 $r{=}10$ $n{=}3$ \\
 \bottomrule
-\end{tabular}
+\end{tabular}\\[2pt]
+{\scriptsize Note: Gemma~4~E2B~IT (Axis 5, G2 backbone) is distinct from Gemma~3n~E2B; see Tab.~2 in the revised manuscript for the full conditions table with model labels.}
 \end{inlineref}
 Because Gemma~4~E2B~IT was evaluated with a single seed, its results
 are labeled supportive validation and excluded from every threshold
@@ -976,8 +993,7 @@ $\mathrm{D1}_0$ the baseline value at generation~0. The subscript
 convention now uses the generation index in subscript position to
 disambiguate from the $n$-gram order, removing the ambiguity between
 $D10$ (generation index~10) and $D_{10}$ (Distinct-10). The
-$\Delta I$ term is defined inline with Eq.~6 as the difference in
-mean response length between generation~$T$ and generation~0.
+$\Delta I$ term is defined inline with Eq.~6 as the difference in item-level response instability between the final and first evaluated generations: $\Delta I = \mathrm{Instability}(T) - \mathrm{Instability}(1)$, where $\mathrm{Instability}(t)$ is the fraction of training items whose normalised response changed between generation $t{-}1$ and generation $t$.
 
 \begin{inlineref}{Equation~6 from the revised manuscript --- SDI-3}
 \[
@@ -1096,7 +1112,7 @@ what the garbled original obscured.\ \ (\S3.2) \\
 Accepted as a mathematical error and corrected in the notation the
 reviewer proposed:
 \[
-  \mathrm{erank}(BA) = \exp\!\left(-\sum_i p_i \log p_i\right),
+  \mathrm{erank}(\Delta W) = \exp\!\left(-\sum_i p_i \log p_i\right),
   \qquad p_i = \frac{\sigma_i}{\sum_j \sigma_j}
 \]
 with \newtext{$p_i \ge 0$ and $\sum_i p_i = 1$} stated in Table~1. The
@@ -1176,12 +1192,12 @@ $\mathrm{SDI\text{-}3}$ & Synthetic Drift Index (verbosity + diversity + instabi
 \end{tabular}
 \end{inlineref}
       Eq.~1: \newtext{$R(t)=|K_0 \cap A(t)|/|K_0|$}.
-      Eq.~2: \newtext{$\mathrm{erank}(M)=\exp(-\sum_i p_i \log
+      Eq.~2: \newtext{$\mathrm{erank}(\Delta W)=\exp(-\sum_i p_i \log
       p_i)$, $p_i=\sigma_i/\sum_j\sigma_j$}.
       Eq.~3 now shows absolute value and summation explicitly.
       Eq.~6 rewritten with all terms defined inline.
 \item \textbf{Glyph audit script included in replication package.}
-      \texttt{audit/glyph\_audit.py} included in the package so the
+      \texttt{scripts/audits/glyph\_audit.py} included in the package so the
       check can be repeated independently.
 \item \textbf{Every figure regenerated at 300\,dpi.}
       Numerical values plotted in each figure were re-verified against
@@ -1460,7 +1476,7 @@ quantitative formulation is listed as future work, with the protocol a
 prospective test would require specified in Section~6.
 \newtext{(\S3.5; \S6)}
 
-\rsub{(c)}{Normalisation failed with no alternative proposed.}
+\rsub{(c)}{Normalization failed with no alternative proposed.}
 The reviewer asks for the constructive half of a negative result, and the
 original manuscript supplied only the negative half. Five normalizations
 were tested (by hidden dimension, its square root, layer count,
@@ -1519,6 +1535,8 @@ as one.
 \midrule
 Rank governs transition & Rank sweep 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}3$ bf16 (G3) \\
 \addlinespace
+Single-seed at $r{=}16$, $32$, $64$, $128$ (rank sweep); $N{=}3$--$5$ at anchor ranks ($r{=}4$, $r{=}16$/$r{=}10$) & Reported per seed; regime classification not based on single-seed evidence alone \\
+\addlinespace
 Magnitude governs transition & FFT LR sweep, 4 values \\
 \addlinespace
 Exposure reduces pressure & Dose-response 0--50\%, $N{=}5$ seeds (pre-registered) \\
@@ -1531,7 +1549,7 @@ Transition is threshold-like & Rank sweep 6 levels; boundary bracketed, not reso
 \addlinespace
 Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\times}3$, $N=1$; descriptive) \\
 \addlinespace
-Generalises cross-backbone & Gemma~3 ($N=5$) + E2B rank sweep ($N=1$, supportive) \\
+Generalizes cross-backbone & Gemma~3 ($N=5$) + E2B rank sweep ($N=1$, supportive) \\
 \bottomrule
 \end{tabular}
 \end{inlineref}
