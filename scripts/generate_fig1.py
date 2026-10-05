@@ -84,6 +84,7 @@ HTML_CONTENT = """<!DOCTYPE html>
   .card-header {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 9px;
     padding: 10px 13px 7px;
   }
