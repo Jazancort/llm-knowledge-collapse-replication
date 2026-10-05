@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Figure 1 — Experimental Pipeline Overview</title>
+  <style>
+    :root {
+      --ink: #111827;
+      --muted: #4b5563;
+      --paper: #ffffff;
+      --line: rgba(17, 24, 39, 0.12);
+      --shadow: 0 4px 16px rgba(17, 24, 39, 0.06);
+      --radius: 6px;
+      --blue: #1e40af;
+      --blue-bg: #eff6ff;
+      --blue-border: #93c5fd;
+      --green: #166534;
+      --green-bg: #f0fdf4;
+      --green-border: #86efac;
+      --amber: #92400e;
+      --amber-bg: #fffbeb;
+      --amber-border: #fcd34d;
+      --red: #991b1b;
+      --red-bg: #fef2f2;
+      --red-border: #fca5a5;
+      --purple: #5b21b6;
+      --purple-bg: #f5f3ff;
+      --purple-border: #c4b5fd;
+      --slate: #334155;
+      --slate-bg: #f8fafc;
+      --slate-border: #cbd5e1;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .pipeline {
+      width: 920px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .stage {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .stage-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      font-weight: 800;
+      color: white;
+      flex-shrink: 0;
+      margin-top: 12px;
+    }
+
+    .stage-card {
+      width: 100%;
+      padding: 16px 20px;
+      border-radius: var(--radius);
+      border: 1.5px solid;
+    }
+
+    .stage-title {
+      font-size: 0.92rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .stage-content {
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .stage-content strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .sub-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .sub-item {
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid;
+    }
+
+    .connector {
+      width: 56px;
+      display: flex;
+      justify-content: center;
+      padding: 4px 0;
+    }
+
+    .connector-line {
+      width: 2px;
+      height: 24px;
+      background: var(--line);
+      position: relative;
+    }
+
+    .connector-line::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid rgba(17, 24, 39, 0.25);
+    }
+
+    /* Stage colors */
+    .s1 .stage-number { background: var(--blue); }
+    .s1 .stage-card { border-color: var(--blue-border); background: var(--blue-bg); }
+    .s1 .stage-title { color: var(--blue); }
+    .s1 .sub-item { background: white; border-color: var(--blue-border); color: var(--blue); }
+
+    .s2 .stage-number { background: var(--green); }
+    .s2 .stage-card { border-color: var(--green-border); background: var(--green-bg); }
+    .s2 .stage-title { color: var(--green); }
+    .s2 .sub-item { background: white; border-color: var(--green-border); color: var(--green); }
+
+    .s3 .stage-number { background: var(--amber); }
+    .s3 .stage-card { border-color: var(--amber-border); background: var(--amber-bg); }
+    .s3 .stage-title { color: var(--amber); }
+    .s3 .sub-item { background: white; border-color: var(--amber-border); color: var(--amber); }
+
+    .s4 .stage-number { background: var(--purple); }
+    .s4 .stage-card { border-color: var(--purple-border); background: var(--purple-bg); }
+    .s4 .stage-title { color: var(--purple); }
+    .s4 .sub-item { background: white; border-color: var(--purple-border); color: var(--purple); }
+
+    .s5 .stage-number { background: var(--red); }
+    .s5 .stage-card { border-color: var(--red-border); background: var(--red-bg); }
+    .s5 .stage-title { color: var(--red); }
+    .s5 .sub-item { background: white; border-color: var(--red-border); color: var(--red); }
+
+    .s6 .stage-number { background: var(--slate); }
+    .s6 .stage-card { border-color: var(--slate-border); background: var(--slate-bg); }
+    .s6 .stage-title { color: var(--slate); }
+    .s6 .sub-item { background: white; border-color: var(--slate-border); color: var(--slate); }
+
+    .feedback-arrow {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 0;
+      margin-left: 56px;
+    }
+
+    .feedback-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--muted);
+      background: white;
+      padding: 2px 8px;
+      border: 1px dashed var(--line);
+      border-radius: 3px;
+    }
+
+    @media print {
+      body { padding: 0; background: white; }
+      .pipeline { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="pipeline">
+
+  <!-- Stage 1 -->
+  <div class="stage s1">
+    <div class="stage-number">1</div>
+    <div class="stage-card">
+      <div class="stage-title">Data Preparation &amp; Baseline</div>
+      <div class="stage-content">
+        <strong>2,000 training questions</strong> (TriviaQA) + <strong>200 held-out</strong> for evaluation.
+        Base model evaluated at Gen 0 to establish <strong>K<sub>0</sub></strong> factual baseline per backbone.
+      </div>
+      <div class="sub-items">
+        <span class="sub-item">Qwen 2.5 1.5B (K&#8320;=78)</span>
+        <span class="sub-item">Gemma 3 1B (K&#8320;=46)</span>
+        <span class="sub-item">Gemma 4 E2B (K&#8320;=76)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-line"></div></div>
+
+  <!-- Stage 2 -->
+  <div class="stage s2">
+    <div class="stage-number">2</div>
+    <div class="stage-card">
+      <div class="stage-title">Recursive Training (Replace-Only)</div>
+      <div class="stage-content">
+        Each generation: fresh adapter trained on previous generation's synthetic outputs.
+        <strong>10 recursive generations</strong>, strict data replacement (no accumulation).
+      </div>
+      <div class="sub-items">
+        <span class="sub-item">QLoRA (4-bit NF4)</span>
+        <span class="sub-item">Full Fine-Tuning</span>
+        <span class="sub-item">3-5 seeds</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-line"></div></div>
+
+  <!-- Stage 3 -->
+  <div class="stage s3">
+    <div class="stage-number">3</div>
+    <div class="stage-card">
+      <div class="stage-title">Pressure Manipulation (5 Axes)</div>
+      <div class="stage-content">
+        Systematic variation of effective training pressure along independent experimental axes.
+      </div>
+      <div class="sub-items">
+        <span class="sub-item">Rank (r=4 to 256)</span>
+        <span class="sub-item">Learning Rate (10&#8315;&#8310; to 2&#215;10&#8315;&#8309;)</span>
+        <span class="sub-item">Method (QLoRA vs FFT)</span>
+        <span class="sub-item">Module Topology</span>
+        <span class="sub-item">Synthetic Exposure (~5% reduction)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-line"></div></div>
+
+  <!-- Stage 4 -->
+  <div class="stage s4">
+    <div class="stage-number">4</div>
+    <div class="stage-card">
+      <div class="stage-title">Evaluation</div>
+      <div class="stage-content">
+        Per-generation measurement of factual retention, distributional shift, and adapter properties.
+      </div>
+      <div class="sub-items">
+        <span class="sub-item">K&#8320; Retention</span>
+        <span class="sub-item">Effective Rank</span>
+        <span class="sub-item">Response Length</span>
+        <span class="sub-item">Distinct-1</span>
+        <span class="sub-item">Content Efficiency</span>
+        <span class="sub-item">Persistence</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-line"></div></div>
+
+  <!-- Stage 5 -->
+  <div class="stage s5">
+    <div class="stage-number">5</div>
+    <div class="stage-card">
+      <div class="stage-title">Regime Classification</div>
+      <div class="stage-content">
+        Each configuration classified based on retention trajectory and distributional behavior.
+      </div>
+      <div class="sub-items">
+        <span class="sub-item">Homeostatic (&gt;90%)</span>
+        <span class="sub-item">Bounded (factual stable, distribution degrades)</span>
+        <span class="sub-item">Degradative (progressive loss)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"><div class="connector-line"></div></div>
+
+  <!-- Stage 6 -->
+  <div class="stage s6">
+    <div class="stage-number">6</div>
+    <div class="stage-card">
+      <div class="stage-title">Framework Synthesis</div>
+      <div class="stage-content">
+        <strong>Effective Training Pressure</strong> identified as organizing principle: regime transitions are sharp, backbone-dependent, and controllable through multiple axes.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

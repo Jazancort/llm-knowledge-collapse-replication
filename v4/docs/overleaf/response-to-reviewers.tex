@@ -41,6 +41,11 @@
 \usepackage{soul}          % \hl{} para highlight de texto corrido
 \usepackage{enumitem}
 \usepackage{hyperref}
+\usepackage{amsmath}      % \binom, \text
+\usepackage[numbers]{natbib}  % \citep, \citet
+\usepackage{ulem}         % \sout para \del{}
+% Macros canônicas do manuscrito
+\input{numbers}
 \usepackage{titlesec}
 \hypersetup{colorlinks=true, linkcolor=NavyBlue, urlcolor=NavyBlue, citecolor=NavyBlue}
 
@@ -82,6 +87,7 @@
 
 \newcommand{\revised}[1]{\textcolor{chgcolor}{\textit{#1}}}
 
+\newcommand{\rev}[1]{\textcolor{chgcolor}{#1}}
 \newcommand{\msnote}[1]{%
   \ifhighlight
     \textit{\textcolor{gray!70}{[#1]}}%
@@ -387,36 +393,38 @@ removal across five paired seeds on Qwen~2.5~1.5B at $r=256$. The results,
 reported in Section~4.5 (ll.~1685--1713), show that:
 
 \begin{itemize}
-  \item At Gen~5, the gains are $+5.0$\,pp (10\%, $p=0.002$),
-    $+5.3$\,pp (25\%, $p=0.014$), and $+5.7$\,pp (50\%, $p=0.002$),
+  \item At Gen~5, the gains are $+3.6$\,pp (10\%, $p=0.009$),
+    $+3.8$\,pp (25\%, $p=0.003$), and $+4.4$\,pp (50\%, $p<0.001$),
     $n=5$ seeds each; the Gen~5 benefit is uniform across doses while
     the Gen~10 benefit is dose-graded.
-  \item At Gen~10, the benefit is dose-graded: $+2.4$\,pp at 10\% ($p$
-    n.s.), $+5.5$\,pp at 25\% (95\,\% CI $[0.4, 10.5]$, $p=0.039$), and
-    $+9.8$\,pp at 50\% (95\,\% CI $[6.9, 12.8]$, $p=0.0008$).
-  \item At 50\% removal the Gen~5$\to$10 slope is $-0.14$\,pp/generation
-    versus $-0.96$\,pp/generation at 0\%, shifting the system from the
-    Degradative to the Bounded regime.
+  \item At Gen~10, the benefit is dose-graded: $+1.8$\,pp at 10\% ($p=0.160$,
+    not significant), $+4.9$\,pp at 25\% (95\,\% CI $[2.5, 7.2]$, $p=0.005$), and
+    $+9.2$\,pp at 50\% (95\,\% CI $[6.9, 11.6]$, $p<0.001$).
+  \item At 50\% removal the Gen~5$\to$10 slope is $-0.15$\,pp/generation
+    versus $-1.13$\,pp/generation at 0\% (mean per-seed difference of
+    Gen10$-$Gen5 counts divided by five generations), strongly attenuating
+    progressive loss and shifting the system toward the Bounded regime.
 \end{itemize}
 
 The pre-registered prediction that 50\% removal would match halving the
-learning rate (from $\eta = 10^{-5}$ to $5\times10^{-6}$) was
-confirmed: Gen~5 retention at dose~$=50\%$ is 89.7\% versus 90.2\% at
-$\eta = 5\times10^{-6}$ (mean over three seeds; Gen~10 difference
-$+0.4$\,pp, 90\,\% CI $[-0.8, 1.6]$).
+learning rate (from $\eta = 10^{-5}$ to $5\times10^{-6}$) yielded a
+similar point estimate: Gen~5 retention at dose~$=50\%$ is 89.7\% versus
+90.2\% at $\eta = 5\times10^{-6}$ (mean over three seeds; Gen~10 difference
+$+0.4$\,pp, 90\,\% CI $[-0.8, 1.6]$). Formal equivalence was not established.
 
 \textbf{Cross-backbone replication and mechanism.}
-\rev{The pre-registered dose--response has been replicated on a second backbone:
-Gemma~3~1B~IT at $r=10$ (G2, three paired seeds, $K_{0,\mathrm{G2}}=44$).
-A 50\% reduction raises Gen~10 retention by $\GtwoDeltatenFifty$\,pp
-(95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$),
-confirming the effect generalises to a second backbone.}
-The mechanism was not established. Two candidate explanations remain
-plausible: a reduction in per-generation gradient steps and a change in data
-composition. A steps-matched control was inconclusive at $n=3$. We do not
-conclude that the update-budget mechanism is correct; the confirmed finding
-is that 50\% dose reduction arrests progressive loss on both tested backbones
-and is dose-graded at Gen~10.
+A parallel pre-registered dose--response experiment on Gemma~3~1B~IT at
+$r=10$ (G2, three paired seeds, $K_{0,\mathrm{G2}}=44$) shows that a 50\%
+reduction raises Gen~10 retention by $\GtwoDeltatenFifty$\,pp
+(95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$).
+However, the Gen~5$\to$10 slope in the G2 50\% arm ($-0.91$\,pp/generation)
+is equal to that of the 0\% arm ($-0.91$\,pp/generation) within rounding,
+indicating that the exposure effect on Gemma~3 manifested as a Gen~10
+retention gain rather than as a reduction in the rate of progressive loss.
+The mechanism was not established. A steps-matched control was inconclusive
+at $n=3$. The overall finding is: on Qwen B7, the 50\% dose strongly
+attenuated progressive loss; on Gemma~3 G2, it improved Gen~10 retention
+without reducing the observed rate of loss.
 
 \msloc{Section~4.5 (B7 Qwen and G2 Gemma~3 dose--response; pre-registration; LR equivalence); Section~6 (mechanism limitation, Gemma~3 r=16 pilot); repository (original C1--C5 pilot archived).}
 
@@ -448,7 +456,7 @@ retention tables. We have expanded the reproducibility section
 \end{enumerate}
 
 We also specify which experiments reset adapters and optimizer states
-between generations. \rev{The replication package contains: (1)~all analysis and figure-generation scripts; (2)~the consolidated results CSV (G1--G5, 23 runs, per-generation per-seed retention); (3)~all 11 publication figures at 300\,dpi; and (4)~the pre-registration commit for B7 (\texttt{a916ebf}). The package does \emph{not} contain raw token-level predictions, adapter checkpoints (available on request; $\approx$70\,MB each in bf16), or base-model weights (obtained from their original distributors). It is archived at \url{https://doi.org/10.5281/zenodo.23146342}. This DOI corresponds to release \texttt{v1.0.3}, which incorporates all P1--P5 manuscript corrections. Running \texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers (15/15 checks pass). An artifact manifest with SHA-256 hashes is in \texttt{MANIFEST.md}.}
+between generations. \rev{The replication package contains: (1)~all analysis and figure-generation scripts; (2)~the consolidated results CSV (G1--G5, 27 executed training runs, per-generation per-seed retention); (3)~all 11 publication figures at 300\,dpi; and (4)~the pre-registration commit for B7 (\texttt{a916ebf}). The package does \emph{not} contain raw token-level predictions, adapter checkpoints (available on request; $\approx$70\,MB each in bf16), or base-model weights (obtained from their original distributors). It is archived at \url{https://doi.org/10.5281/zenodo.23146342}. Release \texttt{v1.0.3} contains the initial replication scripts and data; the revised analysis scripts and updated \texttt{numbers.tex} from the current submission are not yet included and will be deposited in a subsequent release. Running \texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers (15/15 checks pass). An artifact manifest with SHA-256 hashes is in \texttt{MANIFEST.md}.}
 Base-model weights are obtained from their original
 distributors and are not redistributed. The revised appendix provides
 an artifact manifest mapping every reported figure and table to its
@@ -852,7 +860,7 @@ $\binom{10}{5}=252$ allocations gives $p=0.0079$.
 
 For the dose--response experiments, paired $t$-tests are reported per
 dose level against the unmodified baseline, with $p$-values and 95\,\%
-confidence intervals for the $+9.8$~pp and $+12.9$~pp Gen10 estimates
+confidence intervals for the $+9.2$~pp (50\%) and $+4.9$~pp (25\%) Gen10 estimates
 (Section~4.5).
 
 We do not treat the $K_0=78$ or $K_0=46$ evaluation items as
