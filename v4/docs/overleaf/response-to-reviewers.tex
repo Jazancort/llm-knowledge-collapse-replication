@@ -13,6 +13,14 @@
 \usepackage{enumitem}
 \usepackage{graphicx}
 \graphicspath{{../../manuscript/figs/final/}{../../manuscript/figs/scratch/}}
+
+% Container for inline figures/tables/equations in responses
+\newenvironment{inlineref}[1]{%
+  \medskip\noindent\rule{\linewidth}{0.2pt}%
+  \par\noindent{\small\textit{#1}}\par\smallskip
+}{%
+  \par\noindent\rule{\linewidth}{0.2pt}\medskip
+}
 \usepackage[numbers]{natbib}
 \usepackage{hyperref}
 \usepackage{titlesec}
@@ -137,6 +145,21 @@ Corresponding Author
 The following identifiers appear in the revised manuscript and in this
 response. Table~3 of the revised manuscript maps the control experiments
 to the sources of variation they address.
+
+\begin{inlineref}{Table~3 from the revised manuscript --- Controls and confounders}
+\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}p{0.18\linewidth}p{0.30\linewidth}p{0.44\linewidth}@{}}
+\toprule
+\textbf{Source} & \textbf{Potential confound} & \textbf{Control} \\
+\midrule
+Quantization (NF4 vs bf16) & Numerical noise & G3: QLoRA bf16 vs NF4, matched seeds \\
+Training data order & Shuffling artefacts & G4: 3 shuffle seeds at $r=256$ \\
+Optimizer state & Accumulated momentum & Held constant: fresh optimizer every generation \\
+Synthetic data seed & Stochastic variability & Reported per seed; headline 3--5 seeds \\
+Backbone architecture & Thresholds may not generalise & Replicated on Gemma~3 ($N=5$) and Gemma~4 E2B ($N=1$) \\
+\bottomrule
+\end{tabular}
+\end{inlineref}
 
 \renewcommand{\arraystretch}{1.15}
 \begin{tabular}{@{}L{1.3cm}L{4.6cm}L{2.5cm}L{1.6cm}L{3.3cm}@{}}
@@ -829,6 +852,21 @@ and may be confused with Gemma~3n~E2B. This has been corrected.
 Reference~[41] (Gemma~Team, arXiv:2607.02770, 2026) is now included
 for Gemma~4~E2B~IT, and the model is explicitly distinguished from
 Gemma~3n~E2B in both the text and the conditions table (Table~2).
+
+\begin{inlineref}{Table~2 from the revised manuscript --- Experimental axes}
+\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}clp{2.2cm}p{7.5cm}@{}}
+\toprule
+\textbf{\#} & \textbf{Axis} & \textbf{Variable} & \textbf{Range / Design} \\
+\midrule
+1 & Capacity  & QLoRA rank $r$       & $\{4,16,32,64,128,256\}$ \\
+2 & Magnitude & FFT learning rate    & $10^{-6}$--$2{\times}10^{-5}$ \\
+3 & Method    & QLoRA vs FFT         & Exploratory; $N{=}3$ seeds; no perturbation-magnitude matching \\
+4 & Topology  & Target modules       & Attention-only vs full-linear (single seed) \\
+5 & Exposure  & Examples removed     & 0\%, 10\%, 25\%, 50\%; B7: Qwen $r{=}256$ $n{=}5$; G2: Gemma~3 $r{=}10$ $n{=}3$ \\
+\bottomrule
+\end{tabular}
+\end{inlineref}
 Because Gemma~4~E2B~IT was evaluated with a single seed, its results
 are labeled supportive validation and excluded from every threshold
 estimate and from all multi-seed statistical analyses. The revised
@@ -891,6 +929,10 @@ The abbreviation ETP appeared in Figure~1 before it was defined in the
 text. This has been corrected: Figure~1 no longer carries ETP unexpanded,
 and the term is introduced in full (``effective training pressure'') at
 its first use in Section~1. The abbreviation is then formally defined
+
+\begin{inlineref}{Figure~1 from the revised manuscript --- Experimental pipeline overview}
+\centering\includegraphics[width=\textwidth]{fig1_overview.pdf}
+\end{inlineref}
 in Section~3.5, where it is needed for the compound labels ETP-design
 and ETP-observed. The revised Figure~1 names each stage explicitly,
 lists all five pressure axes in Card~3, and labels Card~6 as
@@ -921,6 +963,12 @@ The revision separates these: $K_0$ now denotes only the set,
 $|K_0|$ its cardinality, and $R(t)$ the retention ratio at
 generation~$t$ as defined in Eq.~1.
 
+\begin{inlineref}{Equation~1 from the revised manuscript --- Retention}
+\[
+  R(t) = \frac{|\{q \in K_0 : q \text{ correct at gen.\ } t\}|}{|K_0|}
+\]
+\end{inlineref}
+
 \textbf{SDI-3 notation ($T$, $D1\_T$, $D10$, etc.).}
 The notation in Eq.~6 has been rewritten. $T$ now denotes the index
 of the final evaluated generation (Generation~$T$), $\mathrm{D1}_t$
@@ -932,12 +980,30 @@ $D10$ (generation index~10) and $D_{10}$ (Distinct-10). The
 $\Delta I$ term is defined inline with Eq.~6 as the difference in
 mean response length between generation~$T$ and generation~0.
 
+\begin{inlineref}{Equation~6 from the revised manuscript --- SDI-3}
+\[
+  \mathrm{SDI\text{-}3} =
+  \log\frac{\mathrm{MeanLen}_T}{\mathrm{MeanLen}_0}
+  + \log\frac{\mathrm{D1}_0}{\mathrm{D1}_T}
+  + \Delta I
+\]
+where $\mathrm{D1}_t$ = Distinct-1 unigram diversity at generation~$t$; $\mathrm{MeanLen}_t$ = mean response length in words; $\Delta I = \mathrm{Instability}(T) - \mathrm{Instability}(1)$. Positive SDI-3 = cumulative distributional deterioration.
+\end{inlineref}
+
 \textbf{Effective-rank formula ($p_i$ notation).}
 The original Eq.~2 used $\sigma_i$ both for the raw singular values
 and for the normalized weights. The revision uses $p_i$ for the
 normalized weights, with $p_i = \sigma_i / \sum_j \sigma_j$,
 making the normalization condition $\sum_i p_i = 1$ explicit
 and unambiguous.
+
+\begin{inlineref}{Equation~2 from the revised manuscript --- Effective rank}
+\[
+  \operatorname{erank}(\Delta W) = \exp\!\left(-\sum_{i} p_i \log p_i\right),
+  \qquad p_i = \frac{\sigma_i}{\sum_{j} \sigma_j}
+\]
+where $\sigma_i$ = $i$-th singular value of $\Delta W = BA$; $p_i \ge 0$; $\sum_i p_i = 1$.
+\end{inlineref}
 
 \textbf{Drift equation ($BA_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$).}
 All symbols in the drift equation are now defined in the text
@@ -1064,6 +1130,20 @@ expressions, now rendered as $r \in \{4, 10, 12, 14, 16\}$ and
 $r \in \{10, 12, 14\}$.\ \ (Table~9; \S3.4) \\
 \end{longtable}
 
+\begin{inlineref}{Table~9 from the revised manuscript --- Rank $\times$ LR joint-dependence (formerly Table~7)}
+\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Rank & LR=$5{\times}10^{-6}$ & LR=$10^{-5}$ & LR=$2{\times}10^{-5}$ \\
+\midrule
+$r=16$  & 76/78 (97.4\%) & 76/78 (97.4\%) & 72/78 (92.3\%) \\
+$r=64$  & 76/78 (97.4\%) & 72/78 (92.3\%) & 69/78 (88.5\%) \\
+$r=256$ & 70/78 (89.7\%) & 66/78 (84.6\%) & 64/78 (82.1\%) \\
+\bottomrule
+\end{tabular}\\[2pt]
+{\scriptsize Qwen~2.5~1.5B, Gen5 retention, $|K_0|=78$, seed~15. All cells $N=1$. The rendering fault ``$5\imath10^6$'' in the original PDF is corrected to $5{\times}10^{-6}$.}
+\end{inlineref}
+
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
 \item \textbf{Font pipeline changed.}
@@ -1076,6 +1156,26 @@ $r \in \{10, 12, 14\}$.\ \ (Table~9; \S3.4) \\
       The fault was verified at the point where it appears, not only locally.
 \item \textbf{Equations 1, 2, 3 and 6 rewritten (Section~3.2 and~3.5--3.6).}
       Each was cross-checked against Table~1 term by term.
+
+\begin{inlineref}{Table~1 from the revised manuscript --- Notation}
+\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}lp{0.75\linewidth}@{}}
+\toprule
+\textbf{Symbol} & \textbf{Definition} \\
+\midrule
+$K_0$      & Set of items answered correctly at generation~0; $|K_0|$ = cardinality \\
+$R(t)$     & Factual retention: $|\{q\in K_0: q\text{ correct at gen.\ }t\}|/|K_0|$ \\
+$\Delta W = BA$ & Low-rank LoRA update matrix \\
+$\sigma_i$ & $i$-th singular value of $\Delta W$ \\
+$p_i$      & Normalised singular weight: $\sigma_i/\sum_j\sigma_j$; $\sum_i p_i=1$ \\
+$\mathrm{erank}(\Delta W)$ & Effective rank: $\exp(-\sum_i p_i\log p_i)$ \\
+$d(t)$     & Mean absolute weight drift \\
+$\eta$     & Learning rate \\
+$\Pi$      & Pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
+$\mathrm{SDI\text{-}3}$ & Synthetic Drift Index (verbosity + diversity + instability) \\
+\bottomrule
+\end{tabular}
+\end{inlineref}
       Eq.~1: \newtext{$R(t)=|K_0 \cap A(t)|/|K_0|$}.
       Eq.~2: \newtext{$\mathrm{erank}(M)=\exp(-\sum_i p_i \log
       p_i)$, $p_i=\sigma_i/\sum_j\sigma_j$}.
@@ -1112,6 +1212,23 @@ the conclusion that this ``confirms'' the magnitude axis is too strong.
 Section~4.5 reports approximately 5\% token reduction.}
 
 \arhead{Author response:}
+
+\begin{inlineref}{Table~4 from the revised manuscript --- Qwen~2.5~1.5B rank sweep (cited in (c), (d))}
+\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}lllllll@{}}
+\toprule
+Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & $N$ & Regime \\
+\midrule
+4   & 545K  & 5  & 97.4\% & 3.34  & 1 & Homeostatic \\
+16  & 2.2M  & 10 & 96.2\% & 11.08 & 1 & Homeostatic \\
+32  & 4.4M  & 5  & 96.2\% & 17.85 & 1 & Homeostatic \\
+64  & 8.7M  & 10 & 92.3\% & 29.52 & 1 & Homeostatic \\
+128 & 17.4M & 10 & 89.7\% & 50.16 & 1 & Bounded \\
+256 & 34.9M & 10 & 79.7\% & 87.57 & 6 & Degradative \\
+\bottomrule
+\end{tabular}\\[2pt]
+{\scriptsize $r=256$: 6 seeds (G1: 15/137/256; G4: 42/101/202). $r=4$, $r=32$ at Gen5.}
+\end{inlineref}
 
 \medskip\noindent\textbf{A note on sub-concern~(g).}
 The reviewer's text quotes ``$15^{\circ}$~removal'' with a degree symbol
@@ -1192,6 +1309,22 @@ Corrected. \renum{Table~4}{Table~6} reports 78.3\,\%, 73.9\,\% and
 $r=10$}, between effective ranks 3 and 6.
 \newtext{(\S5.2; Table~6)}
 
+\begin{inlineref}{Table~6 from the revised manuscript --- Gemma~3~1B rank sweep}
+\footnotesize\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}llllll@{}}
+\toprule
+Rank & Gen & Retention & Eff.\ Rank & $N$ & Regime \\
+\midrule
+$r=4$  & 10 & 94.4\% & 3.07 & 5 & Homeostatic \\
+$r=10$ & 5  & 78.3\% & 6.37 & 1 & Degradative \\
+$r=12$ & 5  & 73.9\% & 7.35 & 1 & Degradative \\
+$r=14$ & 5  & 69.6\% & 8.37 & 1 & Degradative \\
+$r=16$ & 10 & 56.5\% & 9.17 & 5 & Degradative \\
+\bottomrule
+\end{tabular}\\[2pt]
+{\scriptsize Anchor ranks $r=4$ and $r=16$: 5 seeds, Gen10. Intermediate ranks: single seed, Gen5. Regime boundary between effective ranks 3 and~6.}
+\end{inlineref}
+
 \rsub{(e)}{Seed count in the Abstract.}
 Corrected, and the correction goes beyond the Abstract. The seed policy
 is now stated at the level of individual claims rather than once in
@@ -1230,6 +1363,11 @@ examples removed (0\,\%, 10\,\%, 25\,\%, 50\,\%) with no token-based
 figure anywhere. The pilot, including its original dose description, is
 archived in the replication package.
 \newtext{(\S3.7; \S4.5; Figure~9)}
+
+\begin{inlineref}{Figure~9 from the revised manuscript --- Exploratory pilot C1--C5}
+\centering\includegraphics[width=0.72\textwidth]{fig_interventions.png}\\[2pt]
+{\scriptsize Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5. Different evaluation pipeline from primary B7/G2 experiments; not used in primary estimates. (a)~$K_0$ retention. (b)~Retention improvement relative to unmodified arm.}
+\end{inlineref}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
@@ -1329,7 +1467,23 @@ original manuscript supplied only the negative half. Five normalizations
 were tested (by hidden dimension, its square root, layer count,
 attention heads, and key--value heads), and none aligned the thresholds
 across backbones (Table~13). We retain that table as a reported
-negative result and now propose what we believe the finding implies: that
+negative result and now propose what we believe the finding implies:
+
+\begin{inlineref}{Table~13 from the revised manuscript --- Cross-architecture threshold normalization attempts}
+\footnotesize\renewcommand{\arraystretch}{1.4}
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Norm.} & \textbf{Qwen} & \textbf{Gemma~3} & \textbf{E2B} & \textbf{Aligned?} \\
+\midrule
+erank / $d$        & 0.033--0.057 & 0.003--0.005 & 0.003--0.008 & No \\
+erank / $\sqrt{d}$ & 1.28--2.24   & 0.09--0.18   & 0.13--0.33   & No \\
+erank / layers     & 1.79--3.14   & 0.12--0.23   & 0.14--0.37   & No \\
+erank / heads      & 4.17--7.33   & 0.75--1.50   & 0.63--1.63   & No \\
+erank / KV heads   & 25.0--44.0   & 3.0--6.0     & 5.0--13.0    & No \\
+\bottomrule
+\end{tabular}\\[2pt]
+{\scriptsize Threshold erank intervals: Qwen ${\approx}50$--88, Gemma~3 ${\approx}3$--6, E2B ${\approx}5$--13.}
+\end{inlineref} that
 a transferable constant should not be sought, and that calibration must
 be per-backbone. Section~6 specifies the procedure concretely: a pilot
 sweep of two ranks spanning roughly an order of magnitude, five
@@ -1357,6 +1511,31 @@ three independently manipulated variables move the system across the same
 qualitative boundary, which is an empirical observation and is presented
 as one.
 \newtext{(\S1; \S3.5; \S5.1; Table~11)}
+
+\begin{inlineref}{Table~11 from the revised manuscript --- Evidence matrix}
+\footnotesize\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{0.30\linewidth}p{0.64\linewidth}@{}}
+\toprule
+\textbf{Observation} & \textbf{Supporting evidence} \\
+\midrule
+Rank governs transition & Rank sweep 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}3$ bf16 (G3) \\
+\addlinespace
+Magnitude governs transition & FFT LR sweep, 4 values \\
+\addlinespace
+Exposure reduces pressure & Dose-response 0--50\%, $N{=}5$ seeds (pre-registered) \\
+\addlinespace
+Threshold is backbone-dependent & Qwen vs Gemma~3 (10$\times$ gap in effective rank) \\
+\addlinespace
+Drift accompanies degradation & 5 distribution metrics (SDI-3) \\
+\addlinespace
+Transition is threshold-like & Rank sweep 6 levels; boundary bracketed, not resolved \\
+\addlinespace
+Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\times}3$, $N=1$; descriptive) \\
+\addlinespace
+Generalises cross-backbone & Gemma~3 ($N=5$) + E2B rank sweep ($N=1$, supportive) \\
+\bottomrule
+\end{tabular}
+\end{inlineref}
 
 \rsub{(e)}{Gemma~4 E2B: citation, possible confusion with Gemma~3n E2B,
 unsourced architecture.}
@@ -1531,289 +1710,5 @@ field. \texttt{cas-refs.bib} is included in the submission package. \\
 
 \msloc{\texttt{cas-refs.bib} (full list); entries [6], [7], [12], [20], [31],
 [32], [33], [41]; \S2.2; \S2.3--2.4; \S3.3; Table~S1.}
-
-% ============================================================
-% REFERENCE MATERIAL FOR REVIEWERS
-% ============================================================
-\clearpage
-\section{Reference Material for Reviewers}
-
-For reviewer convenience, all figures, equations, and tables cited in
-this letter are reproduced below in manuscript order. Captions are
-reproduced verbatim from the revised manuscript.
-
-\bigskip
-
-% --- Figure 1 -----------------------------------------------
-\subsection*{Figure~1 (cited in R2-1.1, R2-1.3, R2-2.1, and throughout)}
-
-\begin{center}
-\includegraphics[width=\textwidth]{fig1_overview.pdf}
-\end{center}
-
-{\small \textbf{Figure~1.} Overview of the experimental pipeline.
-(1)~Data preparation and $K_0$ baseline establishment across three
-backbones. (2)~Recursive training over ten generations with strict data
-replacement. (3)~Pressure manipulation along five axes: rank, learning
-rate, method, module topology, and synthetic-data dose. (4)~Per-generation
-evaluation of factual retention, effective rank, and distributional
-diagnostics. (5)~Regime classification (Homeostatic, Bounded,
-Degradative). (6)~Pressure-regime mapping.}
-
-\bigskip
-
-% --- Equations ----------------------------------------------
-\subsection*{Equations cited in this letter}
-
-\textbf{Equation~1} (Retention; cited in R2-1.9, R2-2.1):
-\begin{equation}\tag{1}
-  R(t) = \frac{|\{q \in K_0 : q \text{ correct at gen.\ } t\}|}{|K_0|}
-\end{equation}
-
-\textbf{Equation~2} (Effective rank; cited in R2-2.2, R2-4):
-\begin{equation}\tag{2}
-    \operatorname{erank}(\Delta W)
-    = \exp\!\left(-\sum_{i} p_i \log p_i\right),
-    \qquad
-    p_i = \frac{\sigma_i}{\sum_{j} \sigma_j}
-\end{equation}
-where $\sigma_i$ denotes the $i$-th singular value of $\Delta W = BA$.
-
-\textbf{Equation~6} (SDI-3; cited in R2-1.10, R2-2.3):
-\begin{equation}\tag{6}
-    \mathrm{SDI\text{-}3} =
-    \log\frac{\mathrm{MeanLen}_T}{\mathrm{MeanLen}_0}
-    + \log\frac{\mathrm{D1}_0}{\mathrm{D1}_T}
-    + \Delta I
-\end{equation}
-where $\mathrm{D1}_t$ = Distinct-1 unigram diversity at generation~$t$;
-$\mathrm{MeanLen}_t$ = mean response length in words; $\Delta I =
-\mathrm{Instability}(T) - \mathrm{Instability}(1)$; Instability($t$) =
-fraction of training items whose normalised response changed between
-generation $t{-}1$ and $t$. Positive SDI-3 indicates cumulative
-distributional deterioration.
-
-\bigskip
-
-% --- Table 1 ------------------------------------------------
-\subsection*{Table~1 — Notation (cited in R2-1.9)}
-
-\small
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular*}{\linewidth}{@{\extracolsep{\fill}}l>{\raggedright\arraybackslash}p{0.68\linewidth}}
-\toprule
-\textbf{Symbol} & \textbf{Definition} \\
-\midrule
-$K_0$          & Set of items in $Q$ answered correctly at generation~0;
-                 $|K_0|$ = cardinality (78 main Qwen, 46 Gemma rank, 44 G2 dose) \\
-$R(t)$         & Factual retention at generation~$t$: $|\{q\in K_0: q\text{ correct at }t\}|/|K_0|$ \\
-$\Delta W = BA$& Low-rank LoRA update matrix \\
-$\sigma_i$     & $i$-th singular value of $\Delta W$ \\
-$p_i$          & Normalised singular weight: $\sigma_i/\sum_j \sigma_j$ \\
-$\mathrm{erank}(\Delta W)$ & Effective rank: $\exp(-\sum_i p_i\log p_i)$ \\
-$\|\Delta W\|_F$ & Frobenius norm of composed update, avg.\ across modules \\
-$d(t)$         & Mean absolute weight drift $\|\theta^{(t)}-\theta^{(0)}\|_1/|\theta|$ \\
-$\eta$         & Learning rate \\
-$\Pi$          & Pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
-$f$            & Exposure dose: fraction of training items removed \\
-\bottomrule
-\end{tabular*}
-
-\bigskip
-
-% --- Table 2 ------------------------------------------------
-\subsection*{Table~2 — Experimental axes (cited in R2-1.1, R2-1.8, R2-3.b)}
-
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}c l >{\raggedright}p{2.2cm} >{\raggedright\arraybackslash}p{7.5cm}@{}}
-\toprule
-\textbf{\#} & \textbf{Axis} & \textbf{Variable} & \textbf{Range / Design} \\
-\midrule
-1 & Capacity  & QLoRA rank $r$ & $\{4, 16, 32, 64, 128, 256\}$ \\[2pt]
-2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\[2pt]
-3 & Method    & QLoRA vs FFT & Exploratory; $N{=}3$ seeds; no perturbation-magnitude matching \\[2pt]
-4 & Topology  & Target modules & Attention-only vs full-linear (Qwen, single seed) \\[2pt]
-5 & Exposure  & Training examples removed & 0\%, 10\%, 25\%, 50\%; paired dose--response
-  (B7: Qwen $r{=}256$, $n{=}5$; G2: Gemma~3 $r{=}10$, $n{=}3$) \\
-\bottomrule
-\end{tabular}
-
-\bigskip
-
-% --- Table 3 ------------------------------------------------
-\subsection*{Table~3 — Controls and confounders (cited in R1-2, \S3.9)}
-
-\footnotesize
-\setlength{\tabcolsep}{4pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}
-    >{\raggedright\arraybackslash}p{0.20\linewidth}
-    >{\raggedright\arraybackslash}p{0.30\linewidth}
-    >{\raggedright\arraybackslash}p{0.42\linewidth}
-@{}}
-\toprule
-\textbf{Source of variation} & \textbf{Potential confound} & \textbf{Control} \\
-\midrule
-Quantization (NF4 vs bf16)    & Numerical noise could inflate/suppress degradation &
-  G3: QLoRA bf16 vs NF4, matched seeds \\
-\addlinespace
-Training data order           & Shuffling artefacts &
-  G4: three independent shuffle seeds at $r=256$ \\
-\addlinespace
-Optimizer state               & Accumulated momentum &
-  Held constant: fresh optimizer every generation \\
-\addlinespace
-Synthetic data seed           & Stochastic generation variability &
-  Reported per seed; headline conditions 3--5 seeds \\
-\addlinespace
-Backbone architecture         & Thresholds may not generalise &
-  Replicated on Gemma~3~1B~IT and Gemma~4~E2B~IT \\
-\addlinespace
-Pipeline version              & Code-path discrepancies &
-  Dedicated script per experiment; git log provides version history \\
-\bottomrule
-\end{tabular}
-
-\bigskip
-
-% --- Table 4 ------------------------------------------------
-\subsection*{Table~4 — Qwen rank sweep (cited in R2-3.c, R2-3.d, R2-3.e)}
-
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}lllllll@{}}
-\toprule
-Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & $N$ & Regime \\
-\midrule
-4   & 545K  & 5  & 97.4\% & 3.34  & 1 & Homeostatic \\
-16  & 2.2M  & 10 & 96.2\% & 11.08 & 1 & Homeostatic \\
-32  & 4.4M  & 5  & 96.2\% & 17.85 & 1 & Homeostatic \\
-64  & 8.7M  & 10 & 92.3\% & 29.52 & 1 & Homeostatic \\
-128 & 17.4M & 10 & 89.7\% & 50.16 & 1 & Bounded \\
-256 & 34.9M & 10 & 79.7\% & 87.57 & 6 & Degradative \\
-\bottomrule
-\end{tabular}
-
-{\footnotesize $r=256$: mean of six seeds (G1: 15/137/256; G4: 42/101/202).
-  The three-seed G1 subset gives 79.1\%. $r=4$, $r=32$ evaluated at Gen5.}
-
-\bigskip
-
-% --- Table 9 ------------------------------------------------
-\subsection*{Table~9 — Rank $\times$ LR joint-dependence (cited in R2-2.4, R2-3;
-  formerly Table~7 in original submission)}
-
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}llll@{}}
-\toprule
-Rank & LR=$5{\times}10^{-6}$ & LR=$10^{-5}$ & LR=$2{\times}10^{-5}$ \\
-\midrule
-$r=16$  & 76/78 (97.4\%) & 76/78 (97.4\%) & 72/78 (92.3\%) \\
-$r=64$  & 76/78 (97.4\%) & 72/78 (92.3\%) & 69/78 (88.5\%) \\
-$r=256$ & 70/78 (89.7\%) & 66/78 (84.6\%) & 64/78 (82.1\%) \\
-\bottomrule
-\end{tabular}
-
-{\footnotesize Qwen~2.5~1.5B, Gen5 retention, $|K_0|=78$, seed~15. All cells $N=1$.}
-
-\bigskip
-
-% --- Table 6 ------------------------------------------------
-\subsection*{Table~6 — Gemma~3 rank sweep (cited in R2-3.d, R2-4.a)}
-
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.2}
-\begin{tabular}{@{}llllll@{}}
-\toprule
-Rank & Gen & Retention & Eff.\ Rank & $N$ & Regime \\
-\midrule
-$r=4$  & 10 & 94.4\% & 3.07 & 5 & Homeostatic \\
-$r=10$ & 5  & 78.3\% & 6.37 & 1 & Degradative \\
-$r=12$ & 5  & 73.9\% & 7.35 & 1 & Degradative \\
-$r=14$ & 5  & 69.6\% & 8.37 & 1 & Degradative \\
-$r=16$ & 10 & 56.5\% & 9.17 & 5 & Degradative \\
-\bottomrule
-\end{tabular}
-
-{\footnotesize Gemma~3~1B~IT. Anchor ranks ($r=4$, $r=16$): 5 seeds, Gen10.
-  Intermediate ranks: single seed, Gen5 (boundary localisation only).
-  Regime boundary between effective ranks~3 and~6.}
-
-\bigskip
-
-% --- Table 11 -----------------------------------------------
-\subsection*{Table~11 — Evidence matrix (cited in R2-4.a, \S1, \S3.5, \S5.1)}
-
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.3}
-\begin{tabular}{@{}p{0.32\linewidth}p{0.62\linewidth}@{}}
-\toprule
-\textbf{Observation} & \textbf{Supporting evidence} \\
-\midrule
-Rank governs transition &
-  Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}1$ at other ranks; $N{=}3$ bf16 control (G3) \\
-\addlinespace
-Magnitude governs transition & FFT LR sweep, 4 values \\
-\addlinespace
-Exposure reduces pressure & Dose--response 0--50\%, $N{=}5$ seeds (pre-registered) \\
-\addlinespace
-Threshold is backbone-dependent & Qwen vs Gemma~3 (10$\times$ gap in effective rank) \\
-\addlinespace
-Drift accompanies degradation & 5 distribution metrics (SDI-3) \\
-\addlinespace
-Transition is threshold-like & Rank sweep across 6 levels; boundary bracketed, not resolved \\
-\addlinespace
-Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\times}3$, $N=1$; descriptive) \\
-\addlinespace
-Generalises cross-backbone & Gemma~3 ($N=5$) + E2B rank sweep ($N=1$, supportive) \\
-\bottomrule
-\end{tabular}
-
-\bigskip
-
-% --- Figure 9 -----------------------------------------------
-\subsection*{Figure~9 — Pilot interventions (cited in \S3.7, \S4.5)}
-
-\begin{center}
-\includegraphics[width=0.75\textwidth]{fig_interventions.png}
-\end{center}
-
-{\small \textbf{Figure~9.} Exploratory pilot (C1--C5) on Qwen $r=256$ at
-Gen5, included for transparency. These results use a different evaluation
-pipeline from the primary dose--response experiments (B7/G2) and are not
-used in the primary effect estimates. (a)~$K_0$ retention by condition.
-(b)~Retention improvement relative to the corresponding unmodified arm.}
-
-\bigskip
-
-% --- Table 13 -----------------------------------------------
-\subsection*{Table~13 — Normalization attempts (cited in R2-4.c)}
-
-\footnotesize
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{1.4}
-\begin{tabular}{@{}lcccc@{}}
-\toprule
-\textbf{Norm.} & \textbf{Qwen} & \textbf{Gemma~3} & \textbf{E2B} & \textbf{Aligned?} \\
-\midrule
-erank / $d$        & 0.033--0.057 & 0.003--0.005 & 0.003--0.008 & No \\
-erank / $\sqrt{d}$ & 1.28--2.24   & 0.09--0.18   & 0.13--0.33   & No \\
-erank / layers     & 1.79--3.14   & 0.12--0.23   & 0.14--0.37   & No \\
-erank / heads      & 4.17--7.33   & 0.75--1.50   & 0.63--1.63   & No \\
-erank / KV heads   & 25.0--44.0   & 3.0--6.0     & 5.0--13.0    & No \\
-\bottomrule
-\end{tabular}
-
-{\footnotesize Threshold erank intervals: Qwen ${\approx}50$--88,
-  Gemma~3 ${\approx}3$--6, E2B ${\approx}5$--13.
-  None of the tested normalizations aligned thresholds across backbones.}
 
 \end{document}
