@@ -18,67 +18,110 @@
 % Macros canônicas do manuscrito
 \input{numbers}
 
-% Section style: clean, minimal
 \titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
 \titleformat{\subsection}{\normalsize\itshape}{}{0em}{}
 
+\newenvironment{rcomment}{%
+  \begin{quote}\itshape
+}{%
+  \end{quote}
+}
+
+\newcommand{\msloc}[1]{%
+  \smallskip\noindent\textit{Location in revised manuscript: #1}%
+}
+
 \begin{document}
 
-\begin{center}
-{\large\textbf{Response to Reviewers}}\\[4pt]
-\textit{Knowledge-Based Systems} (Elsevier)\\[2pt]
-Manuscript ID: KNOSYS-D-26-21490\\[2pt]
-\textit{Effective Training Pressure Gates Recursive Knowledge Degradation
-in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
+\noindent
+Manuscript ID: \textbf{KNOSYS-D-26-21490}\\[2pt]
+Original Article Title: \textit{Effective Training Pressure Gates Recursive
+Knowledge Degradation in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
+To: Knowledge-Based Systems Editor (Elsevier)\\[2pt]
+Re: Response to Reviewers --- Revision Round~1\\[2pt]
 \today
-\end{center}
 
-\medskip\noindent
-We thank the editor and both reviewers for their careful and constructive
-reading of the manuscript. Each comment is addressed point by point below.
-Revised text quoted from the manuscript appears in \textcolor{chgcolor}{blue}.
+\medskip\noindent\rule{\linewidth}{0.4pt}\medskip
+
+\noindent
+Dear Editor and Reviewers,
+
+We sincerely thank you for the thorough and constructive evaluation of our
+manuscript. The reviewers identified concrete problems with the original
+submission --- a pipeline inconsistency in the synthetic-exposure experiment,
+notation ambiguities in the equations, and overclaims about the prospective
+predictive power of the ETP framework --- and addressing them has
+substantially improved the work. We are grateful for the opportunity to
+revise and resubmit.
+
+The key enhancements in this revised version include: (1)~a corrected and
+pre-registered dose--response experiment replacing the original C3/C5
+comparison, which we identified as being affected by a pipeline inconsistency;
+(2)~a clear separation between ETP-design variables (directly manipulated
+before training) and ETP-observed post-training diagnostics, with the
+operational pressure index now labelled as exploratory; (3)~seed-level exact
+permutation tests and paired $t$-tests with 95\,\% confidence intervals for
+all headline comparisons; (4)~corrected and fully defined notation for $K_0$,
+$R(t)$, and all symbols in Equations~1--6; and (5)~an expanded reproducibility
+section specifying checkpoint identifiers, decoding configurations, and all
+scripts required to regenerate tables and figures.
+
+We are submitting: (a)~this point-by-point response document;
+(b)~a highlighted revised manuscript showing all changes in blue;
+(c)~a clean final manuscript (LaTeX source + PDF); and
+(d)~the replication package archived at
+\url{https://doi.org/10.5281/zenodo.23146342}.
+
+Revised text quoted from the manuscript in this letter appears in
+\textcolor{chgcolor}{blue}.
 
 \bigskip
+\noindent
+Respectfully submitted on behalf of all authors,\\[6pt]
+Julio Leite Azancort Neto\\
+Ph.D.\ Candidate in Applied Computing\\
+Main and Corresponding Author
+
+\medskip\noindent\rule{\linewidth}{0.4pt}\medskip
+
+% ══════════════════════════════════════════════════════════════════════════════
 \section*{Editor}
 
-\begin{quote}
-\itshape Revise (including language editing). Provide point-by-point response to
+\begin{rcomment}
+Revise (including language editing). Provide point-by-point response to
 each reviewer comment in the cover letter.
-\end{quote}
+\end{rcomment}
 
-
-We have revised the manuscript throughout for clarity and have used
-Elsevier's Author Services English Language Editing service. The
-point-by-point response follows.
+The manuscript has been revised throughout for clarity. The point-by-point
+response follows.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Reviewer 1}
 
-\subsection{R1.Q1}
+\subsection*{R1.1 --- Prospective calibration of effective training pressure}
 
-\begin{quote}
-\itshape How can effective training pressure be quantitatively calibrated and
+\begin{rcomment}
+How can effective training pressure be quantitatively calibrated and
 prospectively tested on an unseen backbone or dataset?
-\end{quote}
+\end{rcomment}
 
+The present experiments do not establish a transferable scalar ETP predictor
+or a prospective threshold for an unseen backbone or dataset. The revised
+manuscript distinguishes controllable design variables (nominal adapter rank,
+learning rate, planned training steps, and synthetic-data dose) from
+post-training diagnostics, including effective rank and weight drift. Under
+the tested protocol, we identify empirical intervals between adjacent
+configurations exhibiting different retention trajectories; these intervals
+should not be interpreted as universal numerical thresholds.
 
-The present experiments do not establish a transferable scalar ETP predictor or a prospective threshold for an unseen backbone or dataset. The revised manuscript distinguishes controllable
-design variables (nominal adapter rank, learning rate, planned training
-steps, and synthetic-data dose) from post-training diagnostics,
-including effective rank and weight drift. Under the tested protocol,
-we identify empirical intervals between adjacent configurations
-exhibiting different retention trajectories; these intervals should not
-be interpreted as universal numerical thresholds.
-
-A prospective test would require: (i)~specifying a calibration rule and
-outcome criterion before examining a held-out backbone or dataset;
-(ii)~selecting configurations on both sides of the predicted regime
-boundary; and (iii)~evaluating them without refitting that rule to the
-held-out outcomes. We have added this as a concrete validation protocol
-in Section~\ref{sec:limitations} and state explicitly that such
-held-out prospective validation has not been performed in the present
-study. Accordingly, we describe effective training pressure as an
-\emph{operational experimental framework}, not a validated universal
+A prospective test would require specifying a calibration rule and outcome
+criterion before examining a held-out backbone or dataset, selecting
+configurations on both sides of the predicted regime boundary, and
+evaluating them without refitting that rule to the held-out outcomes. We
+have added this as a concrete validation protocol in Section~6 and state
+explicitly that such held-out prospective validation has not been performed
+in the present study. Accordingly, we describe effective training pressure
+as an \emph{operational experimental framework}, not a validated universal
 predictor.
 
 The pre-registered G5 experiment (three single-seed cells on Qwen) provides
@@ -89,936 +132,456 @@ reported for G5 because the threshold was not pre-specified, and the
 experiment does not test an unseen backbone or dataset. Prospective
 calibration remains future work.
 
+\msloc{Section~3.5 (ETP as framework, revised); Section~6
+(prospective calibration protocol added); Section~4.4 (G5 prospective results).}
 
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.5 (ETP as framework, revised); Section~\ref{sec:limitations}
-(prospective calibration protocol); Section~4.4 (G5 prospective results).}
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R1.2 --- Separating confounds from pressure effects}
 
-
-\subsection{R1.Q2}
-
-\begin{quote}
-\itshape How are quantization, optimizer state, data order, and model-specific
+\begin{rcomment}
+How are quantization, optimizer state, data order, and model-specific
 dynamics separated from the claimed pressure effects?
-\end{quote}
+\end{rcomment}
 
+The revised manuscript addresses each potential confound through a dedicated
+control, now documented in Section~3.9 with Table~2 (tab:controls).
 
-The revised manuscript addresses each potential confound through a dedicated control, documented in Section~3.9 (``Sources of variation and experimental
-controls'', ll.~1000--1037) with Table~2 (tab:controls).
+Regarding quantization: all QLoRA experiments use 4-bit NormalFloat (NF4)
+quantization with adapters trained in bf16. Ablation G3 reruns the same
+protocol with standard bf16 precision and no base-weight quantization,
+three seeds each at $r=16$ and $r=256$. At $r=16$, bf16 achieves
+Gen10\,=\,97.4\% (76/78 per seed), while the original NF4 single-seed
+result was 96.2\% (75/78); these use different seeds and pipelines and
+are not a paired comparison. At $r=256$, bf16 achieves Gen10\,=\,79.1\%,
+within 0.0\,pp of the NF4 G1$+$G4 mean under the same seeds and matched
+protocol. Quantization is therefore not the primary driver of the observed
+regime separation.
 
-\textbf{Quantization (NF4 vs bf16).}
-All QLoRA experiments in the main analysis use 4-bit NormalFloat (NF4)
-quantization of the base weights, with adapters trained in bf16. A dedicated
-ablation (G3, three seeds each at $r=16$ and $r=256$) runs the same protocol
-with standard bf16 precision and no base-weight quantization.
-G3 results show that the regime classification is preserved under both
-precision settings: at $r=16$ bf16 achieves Gen10=97.4\% (76/78 per seed),
-while the original NF4 single-seed $r=16$ result was 96.2\% (75/78); these
-use different seeds and pipelines and are not a paired comparison. At $r=256$
-bf16 achieves Gen10=79.1\%, within 0.0~pp of the NF4 G1$+$G4 mean (same
-seeds, matched protocol). Quantization is therefore not the primary driver
-of the observed regime separation.
+Regarding optimizer state: a fresh optimizer is instantiated at every
+generation; no momentum or adaptive-rate state is carried forward between
+generations. This is held constant across all conditions within a backbone.
 
+Regarding data order: ablation G4 runs Qwen at $r=256$ with three
+independent shuffle seeds (42/101/202), keeping all other conditions
+identical to G1 (seeds~15/137/256). A permutation test comparing Gen10
+retention between the two seed groups gives $p=0.70$ (two-sided, $N=3+3$).
+Because seed and data order varied simultaneously in G4, this result does
+not isolate the effect of order alone; it establishes that the combined
+variance is statistically indistinguishable from the seed-to-seed variance
+already present within G1. The combined $N=6$ seed set (G1$+$G4) yields
+Gen10\,=\,$79.7\%\pm1.7$\,pp.
 
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.9 (tab:controls); Section~4.6 (G3 results).}
+Regarding ETP-design versus ETP-observed: we now separate two classes of
+ETP variables. \emph{ETP-design} variables are known before training (nominal
+rank, learning rate, training steps, and synthetic exposure fraction) and are
+directly manipulated. \emph{ETP-observed} variables are measured after
+training (effective rank, mean absolute weight drift $d(t)$, response length,
+and SDI-3) and serve as post-hoc diagnostic proxies, not pre-specified
+predictors.
 
+For the central Qwen result, the $r=16$ condition is represented by three
+G3/bf16 runs (seeds~15/137/256, Gen10\,=\,76/78 per seed) and $r=256$ by
+six G1$+$G4 runs (Gen10\,=\,61, 63, 61, 64, 61, 63 out of 78; mean
+$79.7\%\pm1.7$\,pp). Seeds 15, 137, and 256 appear in both groups, which
+differ simultaneously in rank, quantization, and data-order protocol; the
+17.7\,pp arithmetic gap is therefore reported as a descriptive observation,
+not a confirmatory permutation test. The cleanest rank-only comparison is
+the G3 within-protocol design (same seeds, same bf16, rank the only
+variable): per-seed Gen10 differences are $+15$, $+13$, and $+15$ items
+out of 78, mean $+18.4$\,pp; sign-flip $p=0.25$ ($N=3$, all positive
+direction but underpowered).
 
-\textbf{Optimizer state.}
-A fresh optimizer is instantiated at every generation; no momentum or
-adaptive-rate state is carried forward between generations. This is held
-constant across all conditions within a backbone and cannot explain
-differences between conditions that share the same protocol.
+For Gemma~3, the $r=4$ versus $r=16$ Gen10 contrast ($N=5+5$) gives
+$\Delta=+37.8$\,pp (from raw counts, $|K_0|=46$). If the same five seeds
+were used at both ranks (paired design), the exact sign-flip test gives
+$p=0.0625$ two-sided; if seeds are independent, a bilateral permutation test
+over $\binom{10}{5}=252$ allocations gives $p=0.0079$. The seed assignment
+across ranks is not confirmed in the archived data; we report both tests.
 
+\msloc{Section~3.5 (ETP definition); Table~1 (tab:notation); Section~3.9
+(tab:controls); Section~4.2 (Qwen, G3 paired contrast, 17.7\,pp descriptive
+gap); Section~4.3.1 (Gemma~3, $p=0.0625$ sign-flip or $p=0.0079$
+unpaired permutation); Section~4.6 (G3 and G4 controls).}
 
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.9 (tab:controls), ``Optimizer state'' row.}
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R1.3 --- External validity of the evaluation}
 
-
-\textbf{Training data order.}
-Ablation G4 runs Qwen at $r=256$ with three independent shuffle seeds
-(42/101/202), keeping all other conditions identical to G1
-(seeds~15/137/256). A permutation test comparing Gen10 retention between
-the two seed groups gives $p=0.70$ (two-sided, $N=3+3$), indicating that
-the data-order variance is statistically indistinguishable from the
-seed-to-seed variance already present within G1. The combined
-$N=6$ seed set (G1$+$G4) yields Gen10 = $79.7\%\pm1.7$~pp,
-with variance attributable to seed rather than order.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.9 (tab:controls); Section~4.6 (G4 results).}
-
-
-\textbf{ETP-design vs ETP-observed.}
-Following the reviewer's implicit distinction, we now separate two classes
-of ETP variables in the revised manuscript. \emph{ETP-design} variables are
-known before training: nominal rank ($r$), learning rate ($\eta$), number of
-training steps, and synthetic exposure fraction. These are the directly
-manipulated axes in our factorial design. \emph{ETP-observed} variables are
-measured after training: effective rank (erank), mean absolute weight drift
-($d(t)$), response length, and SDI-3. We report erank and drift as
-post-training diagnostic proxies that track how much pressure was actually
-applied, not as pre-specified predictors. The revised text makes this
-distinction explicit and avoids treating erank as a prospective input.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.5 (ETP definition); Table~1 (tab:notation).}
-
-
-\textbf{Seed-level contrast for the primary headline claim.}
-For the central Qwen result, the $r=16$ condition is represented by
-the three G3/bf16 runs (seeds~15/137/256, Gen10 = 76/78 per seed =
-97.4\%) and the $r=256$ condition by six G1$+$G4 runs
-(seeds~15/137/256/42/101/202, Gen10 = 61, 63, 61, 64, 61, 63 out of
-78; mean 79.7\%$\pm$1.7~pp). Seeds 15, 137, and 256 appear in both
-groups, which differ simultaneously in rank, quantization, and
-data-order protocol. The 17.7~pp arithmetic gap is therefore reported
-as a descriptive observation, not as a confirmatory permutation test.
-The cleanest rank-only comparison is the G3 within-protocol design
-(same seeds, same bf16 protocol, rank the only variable): per-seed
-Gen10 differences are $+15$, $+13$, and $+15$ items out of 78, a
-mean of $+18.4$~pp; sign-flip $p=0.25$ ($N=3$, all positive direction
-but underpowered).
-
-For Gemma~3, the $r=4$ versus $r=16$ Gen10 contrast ($N=5+5$, five
-seeds per rank) gives $\Delta=+37.8$~pp (from raw counts, $K_0=46$).
-If the same five seeds were used at both ranks (paired design), the
-exact sign-flip test gives $p=0.0625$ two-sided ($p=0.031$ one-sided
-pre-specified); if seeds are independent, a bilateral permutation test
-over $\binom{10}{5}=252$ allocations gives $p=0.0079$. The effect is
-consistent and large in either case; we report both and clarify the
-seed assignment in the revised manuscript.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~4.2 (Qwen, G3 paired contrast, descriptive gap 17.7~pp);
-Section~4.3.1 (Gemma~3, $\Delta=+37.8$~pp, $p=0.0625$ sign-flip or
-$p=0.0079$ unpaired permutation).}
-
-
-\subsection{R1.Q3}
-
-\begin{quote}
-\itshape Do the conclusions hold for longer answers, multi-hop questions, other
+\begin{rcomment}
+Do the conclusions hold for longer answers, multi-hop questions, other
 domains, and larger factual evaluation sets?
-\end{quote}
+\end{rcomment}
 
+Three distinct concerns are raised: the evaluation metric, the dataset scope,
+and the extension to other domains.
 
-The comment raises three distinct concerns: the evaluation metric, the dataset scope, and the extension to other domains.
+On verbosity bias: the primary metric uses a bidirectional substring
+criterion, intentionally permissive to handle short-answer variation and
+aliasing. Configurations that generate longer responses may receive inflated
+retention scores. To address this, we performed a strict exact-match
+re-evaluation on the saved predictions for all reported conditions. Under
+the strict scorer, absolute retention values are lower, but the direction
+of every regime classification is unchanged. This re-evaluation is reported
+in supplementary Table~S2 and discussed in Section~6.
 
-\textbf{Evaluation metric and verbosity bias.}
-The primary metric uses a bidirectional substring criterion: a generated
-response is counted as correct if it contains any valid answer alias, or if
-any alias contains the response. This criterion is intentionally permissive
-to handle short-answer variation and aliasing in TriviaQA-style factoid
-questions. However, as the reviewer correctly anticipates, configurations
-that generate longer responses may receive inflated retention scores because
-a longer string is more likely to contain a short alias by chance.
-
-To address this concern, we performed a strict exact-match re-evaluation on
-the saved predictions for all reported conditions. Under the strict scorer,
-absolute retention values are lower, but the direction of every regime
-classification is unchanged: configurations classified as Homeostatic,
-Bounded, or Degradative retain those classifications under strict scoring.
-This re-evaluation is reported in supplementary Table~S2 and is discussed
-in Section~6 (ll.~2181--2193).
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~6, ll.~2181--2193; supplementary Table~S2.}
-
-
-\textbf{Dataset scope: single dataset, short factoid answers.}
-TriviaQA was chosen specifically to isolate factual retention from
+On dataset scope: TriviaQA was chosen to isolate factual retention from
 reasoning or stylistic confounds. Short answers minimise format-dependent
 evaluation noise, and the substring criterion is resilient to verbosity
-changes. These are methodological advantages for studying the retention
-question in isolation, not limitations of the phenomenon. The limitation
-is that the findings may not transfer to long-form generation, multi-hop
-reasoning, open-ended dialogue, or code synthesis, where output structure
-and evaluation criteria differ substantially. This scope restriction is
-stated explicitly in Section~6 (ll.~2094--2100).
+changes. The limitation is that findings may not transfer to long-form
+generation, multi-hop reasoning, open-ended dialogue, or code synthesis;
+this scope restriction is stated explicitly in Section~6.
 
+On evaluation set size: the held-out set contains 200 questions, of which
+$K_0$ is the set answered correctly at generation~0 (e.g., $|K_0|=78$ for
+Qwen). This set is disjoint from the 2,000-question synthetic training stream.
+Scaling the evaluation set would alter the training-data composition and is
+deferred to future work.
 
-\smallskip\noindent\textit{Location in revised manuscript: Section~6, ll.~2094--2100.}
+\msloc{Section~6, ll.~2094--2100; supplementary Table~S2;
+Section~3.1 (evaluation protocol).}
 
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R1.4 --- Exposure reduction: correction, pre-registered result, and mechanism}
 
-\textbf{Larger factual evaluation sets.}
-The held-out evaluation set contains 200 questions, of which $K_0 \in
-\{78\text{--}79\}$ are answered correctly at generation~0 for the Qwen
-backbone. This evaluation set is disjoint from the 2{,}000-question
-synthetic training stream: the 200 evaluation questions are held out
-and never used for synthetic-data generation or training
-(Section~3.1, ll.~521--523). Scaling the evaluation set would require
-a proportionally larger source corpus and would alter the training-data
-composition; it is therefore deferred to future work that also scales
-the training protocol. Extending to a
-larger evaluation set is a natural direction for future work and is
-mentioned in Section~6. The current set is consistent with comparable
-prior studies \citep{shumailov2024,keisha2025} and is sufficient to
-characterise regime-level differences across conditions.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~6, ll.~2094--2100; Section~3.1 (evaluation protocol).}
-
-
-\subsection{R1.Q4}
-
-\begin{quote}
-\itshape Why does the five-percent exposure reduction stabilize Qwen but not
+\begin{rcomment}
+Why does the five-percent exposure reduction stabilize Qwen but not
 Gemma~3, and does this generalize across ranks and seeds?
-\end{quote}
+\end{rcomment}
 
+This question led directly to identifying a pipeline inconsistency in the
+original submission and to a substantially revised, pre-registered experiment.
 
-This question led directly to a substantially revised and pre-registered experiment. The response covers three issues: the correction of the original result, the pre-registered dose--response, and the mechanism.
-
-\textbf{Correction of the original result.}
 The original submission reported that a ${\sim}5\%$ reduction of synthetic
-training examples raised retention by $+9.0$ and $+9.4$\,pp for
-conditions C3 and C5 respectively. We subsequently identified that C1
-(the baseline) and C5 (the intervention) had been produced by different
-evaluation pipelines, which differed in the $K_0$ construction procedure
-and the data-loading code path. When C1 and C5 are re-run under an
-identical pipeline with paired seeds, the effect of ${\sim}5\%$ example
-removal is only $+1.9$\,pp (not distinguishable from zero at $n=3$). This
-discrepancy is acknowledged explicitly in the revised manuscript (ll.~1708--1713)
-and the original C2--C5 results are archived in the replication repository (Section~\ref{app:repo}) for transparency.
-This discrepancy was uncovered as a direct result of the reviewer's question.
+training examples raised retention by $+9.0$ and $+9.4$\,pp for conditions
+C3 and C5 respectively. We subsequently identified that C1 (the baseline)
+and C5 (the intervention) had been produced by different evaluation
+pipelines, differing in the $K_0$ construction procedure and the data-loading
+code path. When C1 and C5 are re-run under an identical pipeline with paired
+seeds, the effect of ${\sim}5\%$ example removal is only $+1.9$\,pp (not
+distinguishable from zero at $n=3$). This discrepancy is acknowledged
+explicitly in the revised manuscript, and the original C2--C5 results are
+archived in the replication repository for transparency. This error was
+uncovered as a direct result of the reviewer's question.
 
-\textbf{Pre-registered dose--response (Bloco~7).}
 To replace the discredited result, we designed and pre-registered a
-dose--response experiment (protocol committed as \texttt{a916ebf} before
-any run), varying synthetic exposure at 0\%, 10\%, 25\%, and 50\%
-removal across five paired seeds on Qwen~2.5~1.5B at $r=256$. The results,
-reported in Section~4.5 (ll.~1685--1713), show that:
-
-\begin{itemize}
-  \item At Gen~5, the gains are $+3.6$\,pp (10\%, $p=0.009$),
-    $+3.8$\,pp (25\%, $p=0.003$), and $+4.4$\,pp (50\%, $p<0.001$),
-    $n=5$ seeds each; the Gen~5 benefit is uniform across doses while
-    the Gen~10 benefit is dose-graded.
-  \item At Gen~10, the benefit is dose-graded: $+1.8$\,pp at 10\% ($p=0.160$,
-    not significant), $+4.9$\,pp at 25\% (95\,\% CI $[2.5, 7.2]$, $p=0.005$), and
-    $+9.2$\,pp at 50\% (95\,\% CI $[6.9, 11.6]$, $p<0.001$).
-  \item At 50\% removal the Gen~5$\to$10 slope is $-0.15$\,pp/generation
-    versus $-1.13$\,pp/generation at 0\% (mean per-seed difference of
-    Gen10$-$Gen5 counts divided by five generations), strongly attenuating
-    progressive loss and shifting the system toward the Bounded regime.
-\end{itemize}
+dose--response experiment (protocol committed as \texttt{a916ebf} before any
+run), varying synthetic exposure at 0\%, 10\%, 25\%, and 50\% removal across
+five paired seeds on Qwen~2.5~1.5B at $r=256$. At Gen~5, the gains are
+$+3.6$\,pp (10\%, $p=0.009$), $+3.8$\,pp (25\%, $p=0.003$), and
+$+4.4$\,pp (50\%, $p<0.001$), $n=5$ seeds each. The Gen~5 benefit is
+uniform across doses while the Gen~10 benefit is dose-graded: $+1.8$\,pp
+at 10\% ($p=0.160$, not significant), $+4.9$\,pp at 25\% (95\,\% CI
+$[2.5, 7.2]$, $p=0.005$), and $+9.2$\,pp at 50\% (95\,\% CI
+$[6.9, 11.6]$, $p<0.001$). At 50\% removal the Gen~5$\to$10 slope is
+$-0.15$\,pp/generation versus $-1.13$\,pp/generation at 0\% (mean
+per-seed difference of Gen10$-$Gen5 counts divided by five generations),
+strongly attenuating progressive loss and shifting the system toward the
+Bounded regime.
 
 The pre-registered prediction that 50\% removal would match halving the
-learning rate (from $\eta = 10^{-5}$ to $5\times10^{-6}$) yielded a
-similar point estimate: Gen~5 retention at dose~$=50\%$ is 89.7\% versus
-90.2\% at $\eta = 5\times10^{-6}$ (mean over three seeds; Gen~10 difference
-$+0.4$\,pp, 90\,\% CI $[-0.8, 1.6]$). Formal equivalence was not established.
+learning rate from $\eta=10^{-5}$ to $5\times10^{-6}$ yielded a similar
+point estimate: Gen~5 retention at dose\,=\,50\% is 89.7\% versus 90.2\%
+at $\eta=5\times10^{-6}$ (mean over three seeds; Gen~10 difference
+$+0.4$\,pp, 90\,\% CI $[-0.8, 1.6]$). Formal equivalence was not
+established.
 
-\textbf{Cross-backbone replication and mechanism.}
 A parallel pre-registered dose--response experiment on Gemma~3~1B~IT at
-$r=10$ (G2, three paired seeds, $K_{0,\mathrm{G2}}=44$) shows that a 50\%
-reduction raises Gen~10 retention by $\GtwoDeltatenFifty$\,pp
+$r=10$ (G2, three paired seeds, $|K_{0,\mathrm{G2}}|=44$) shows that a
+50\% reduction raises Gen~10 retention by $\GtwoDeltatenFifty$\,pp
 (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$).
 However, the Gen~5$\to$10 slope in the G2 50\% arm ($-0.91$\,pp/generation)
-is equal to that of the 0\% arm ($-0.91$\,pp/generation) within rounding,
+equals that of the 0\% arm ($-0.91$\,pp/generation) within rounding,
 indicating that the exposure effect on Gemma~3 manifested as a Gen~10
 retention gain rather than as a reduction in the rate of progressive loss.
-The mechanism was not established. A steps-matched control was inconclusive
-at $n=3$. The overall finding is: on Qwen B7, the 50\% dose strongly
-attenuated progressive loss; on Gemma~3 G2, it improved Gen~10 retention
-without reducing the observed rate of loss.
+The mechanism was not established; a steps-matched control was inconclusive
+at $n=3$.
 
+\msloc{Section~4.5 (B7 Qwen and G2 Gemma~3 dose--response; pre-registration;
+LR equivalence); Section~6 (mechanism limitation); replication repository
+(original C1--C5 results archived).}
 
-\smallskip\noindent\textit{Location in revised manuscript: Section~4.5 (B7 Qwen and G2 Gemma~3 dose--response; pre-registration; LR equivalence); Section~6 (mechanism limitation, Gemma~3 r=16 pilot); repository (original C1--C5 pilot archived).}
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R1.5 --- Reproducibility package}
 
-
-\subsection{R1.Q5}
-
-\begin{quote}
-\itshape What complete code, checkpoints, prompts, seeds, and raw outputs will
+\begin{rcomment}
+What complete code, checkpoints, prompts, seeds, and raw outputs will
 support independent reproduction?
-\end{quote}
+\end{rcomment}
 
+Independent reproduction requires more than aggregate retention tables. The
+reproducibility section (Section~A.1) has been expanded to specify the exact
+model checkpoint identifiers for all three backbones; train and evaluation
+question IDs and the baseline-correct $K_0$ sets ($|K_0|=78$ for Qwen; two
+Gemma~3 sets: $|K_{0,\mathrm{rank}}|=46$ for rank-sweep experiments and
+$|K_{0,\mathrm{G2}}|=44$ for G2; see Section~3.6); prompt and chat templates
+for both synthetic data generation and deterministic evaluation; distinct
+decoding settings (\texttt{do\_sample=False} and \texttt{temperature=0} for
+evaluation); correctness normalization and alias-expansion code; training
+configurations, software versions, random seeds, data-order and downsampling
+masks; per-generation retention counts and boolean correctness vectors
+included in the consolidated CSV; and scripts to regenerate every table and
+figure.
 
-Independent reproduction requires more than aggregate retention tables. The reproducibility section (Section~\ref{app:repo}) has been expanded to specify:
+The replication package contains all analysis and figure-generation scripts;
+the consolidated results CSV (G1--G5, 27 executed training runs,
+per-generation per-seed retention); all 11 publication figures at 300\,dpi;
+and the pre-registration commit for B7 (\texttt{a916ebf}). The package does
+\emph{not} contain raw token-level predictions, adapter checkpoints
+(available on request; $\approx$70\,MB each in bf16), or base-model weights
+(obtained from their original distributors). It is archived at
+\url{https://doi.org/10.5281/zenodo.23146342}. Release \texttt{v1.0.3}
+contains the initial replication scripts and data; the revised analysis
+scripts and updated \texttt{numbers.tex} from the current submission are
+not yet included and will be deposited in a subsequent release. Running
+\texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers
+(15/15 checks pass).
 
-\begin{enumerate}
-\item the exact model checkpoint identifiers and revisions for all three
-  backbones;
-\item train and evaluation question IDs, and the baseline-correct
-  $K_0$ sets ($|K_0|=78$ for Qwen; two Gemma~3 sets: $|K_{0,\mathrm{rank}}|=46$ for rank-sweep experiments and $|K_{0,\mathrm{G2}}|=44$ for dose-response G2; see Section~3.6);
-\item prompt and chat templates used for both synthetic data generation
-  and deterministic evaluation;
-\item distinct decoding settings (sampling parameters for generation,
-  \texttt{do\_sample=False} and \texttt{temperature=0} for evaluation);
-\item correctness normalization and alias-expansion code;
-\item training configurations, software versions, random seeds,
-  data-order and downsampling masks;
-\item per-generation retention counts and boolean correctness vectors (length $|K_0|$ per seed and generation) are included in the consolidated CSV; raw token-level predictions are not in the current release but available from the authors upon request; and
-\item scripts used to regenerate every table and figure.
-\end{enumerate}
-
-We also specify which experiments reset adapters and optimizer states
-between generations. The replication package contains: (1)~all analysis and figure-generation scripts; (2)~the consolidated results CSV (G1--G5, 27 executed training runs, per-generation per-seed retention); (3)~all 11 publication figures at 300\,dpi; and (4)~the pre-registration commit for B7 (\texttt{a916ebf}). The package does \emph{not} contain raw token-level predictions, adapter checkpoints (available on request; $\approx$70\,MB each in bf16), or base-model weights (obtained from their original distributors). It is archived at \url{https://doi.org/10.5281/zenodo.23146342}. Release \texttt{v1.0.3} contains the initial replication scripts and data; the revised analysis scripts and updated \texttt{numbers.tex} from the current submission are not yet included and will be deposited in a subsequent release. Running \texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers (15/15 checks pass). An artifact manifest with SHA-256 hashes is in \texttt{MANIFEST.md}.
-Base-model weights are obtained from their original
-distributors and are not redistributed. The revised appendix provides
-an artifact manifest mapping every reported figure and table to its
-generating data and script.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~\ref{app:repo} (repository and data access, expanded).}
-
+\msloc{Section~A.1 (repository and data access, expanded).}
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Reviewer 2}
 
-\subsection{R2.1 --- Abbreviations and notation}
+\subsection*{R2.1 --- Abbreviations and notation}
 
-\begin{quote}
-\itshape ETP appears in Figure~1 (``ETP threshold identification'') but is never
-explicitly defined as ``effective training pressure.''
-\end{quote}
+\begin{rcomment}
+ETP appears in Figure~1 without explicit definition. MTLD is not expanded.
+KL, JS, and coverage appear in Figure~1 without definition. bf16, SVD, TCE,
+QLoRA, and LoRA lack consistently expanded forms. ``Homeo.'' is used in
+Table~2 without definition. $K_0$ is used both as a set and as a metric.
+$T$, $D_{1,T}$, $D_{10}$, $\Delta I$, and related symbols in Eq.~6 are not
+fully defined.
+\end{rcomment}
 
+The revised manuscript does not use ``ETP'' as a standalone acronym; the term
+is introduced in full at l.~72 and used in full throughout. Figure~1 no longer
+contains the abbreviation in isolation.
 
-The revised manuscript does not use ``ETP'' as a standalone acronym.
-The term is introduced by name at l.~72
-(\textcolor{blue}{``which we term effective training pressure''}) and used in full
-throughout. Figure~1 (caption ll.~692--698) no longer contains the
-abbreviation in isolation.
+MTLD now reads \textcolor{chgcolor}{``Measure of Textual Lexical Diversity (MTLD)''} at first
+occurrence, followed by the functional description.
 
+KL, JS, and coverage were conceptual labels for diagnostics never computed or
+reported. They have been removed from Figure~1 entirely; the revised caption
+describes only quantities that are measured: factual retention, effective rank,
+and distributional shift.
 
-\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~72; Figure~1 caption ll.~692--698.}
+All acronyms now have explicit parenthetical expansions at first use:
+\textcolor{chgcolor}{``full fine-tuning (FFT)''} at l.~75, \textcolor{chgcolor}{``singular value decomposition
+(SVD)''} at l.~332, \textcolor{chgcolor}{``Quantized Low-Rank Adaptation (QLoRA)''} at l.~333.
+TCE (Truncated Cross-Entropy) is cited in the Related Work section as a
+mitigation method from prior literature; it does not appear in the Methods
+or Results of this paper. The abbreviation ``Homeo.'' has been expanded to
+\textcolor{chgcolor}{``Homeostatic''} in all four occurrences in Table~2.
 
+A dedicated notation table (Table~1) distinguishes the two uses of $K_0$:
+$K_0$ denotes the \emph{set} of held-out questions answered correctly at
+generation~0; $|K_0|$ denotes its cardinality (e.g., $|K_0|=78$ for Qwen);
+$R(t)=|K_t|/|K_0|$ denotes the retention ratio at generation~$t$.
 
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape MTLD is introduced as ``a length-robust diversity estimate'' but the
-acronym is not expanded.
-\end{quote}
-
-
-The first occurrence now reads
-\textcolor{blue}{``Measure of Textual Lexical Diversity (MTLD)''} followed by the
-functional description.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: l.~875.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape KL, JS, and coverage appear in Figure~1 without definition.
-\end{quote}
-
-
-These three quantities were used as conceptual labels for
-distribution-comparison diagnostics that are not computed or reported anywhere
-in the manuscript. They have been removed from Figure~1 entirely. The revised
-caption describes only quantities that are measured and reported: factual
-retention, effective rank, and distributional shift (response length, content
-efficiency, SDI-3).
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Figure~1 caption, ll.~692--698.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded
-forms.
-\end{quote}
-
-
-All four acronyms now have explicit parenthetical expansions at first use:
-\textcolor{blue}{``full fine-tuning (FFT)''} at l.~75;
-\textcolor{blue}{``singular value decomposition (SVD)''} at l.~332;
-\textcolor{blue}{``Quantized Low-Rank Adaptation (QLoRA)''} at l.~333.
-The term \textit{bf16} (BFloat16) is glossed on first use. TCE (Truncated Cross-Entropy) is cited in the Related Work section as
-a mitigation method from prior literature~\citep{zibakhsh2024};
-it does not appear in the Methods or Results of this paper. LoRA was already expanded in the Related
-Work section.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: ll.~75, 332, 333.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape ``Homeo.'' is used in Table~2 without definition.
-\end{quote}
-
-
-The abbreviation has been expanded to \textcolor{blue}{``Homeostatic''} in all four
-occurrences within the rank-sweep results table.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Table~2 (tab:rank\_sweep), regime column.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape $K_0$ is used both as a set of questions and as a retention metric.
-This dual use is not always clear.
-\end{quote}
-
-
-We have added a dedicated notation table (Table~1, ll.~438--445) that
-distinguishes the two uses explicitly: $K_0$ denotes the \emph{set} of held-out questions answered correctly at generation~0; $|K_0|$ denotes its cardinality (e.g., $|K_0|=78$ for Qwen); and $R(t) = |K_t|/|K_0|$ denotes the retention ratio at generation~$t$. The symbols $R(t)$,
-$d(t)$, and the efficiency numerator have been harmonised throughout
-Equations~1--6 and the surrounding prose.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Table~1 (tab:notation), ll.~438--445; Equations~1, 3, 5.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape $T$, $D_{1,T}$, $D_{10}$, $\Delta I$, $\mathrm{Instability}(1)$,
-$\mathrm{MeanLen}_T$, and related symbols in Eq.~6 are not fully defined.
-\end{quote}
-
-
-All symbols in Eq.~6 (SDI-3) and its supporting quantities are now defined in
-Table~1 (tab:notation) and in the inline text preceding the equations:
-$T$ = evaluation horizon in generations; $D_{1,t}$ = Distinct-1 unigram diversity
-of synthetic responses at generation~$t$; $\Delta I = \mathrm{Instability}(T) - \mathrm{Instability}(1)$,
+All symbols in Eq.~6 (SDI-3) are now defined in Table~1 and in the inline
+text preceding the equation: $T$ = evaluation horizon in generations;
+$D_{1,t}$ = Distinct-1 unigram diversity of synthetic responses at
+generation~$t$; $\Delta I = \mathrm{Instability}(T) - \mathrm{Instability}(1)$,
 where $\mathrm{Instability}(t)$ is the fraction of training items whose
 normalized response differs between generation~$t{-}1$ and generation~$t$;
 $\mathrm{MeanLen}_t$ = mean response length in words at generation~$t$.
 
+\msloc{Abstract l.~72; Figure~1 caption ll.~692--698; Table~1 (tab:notation),
+ll.~438--445; Equations~1, 3, 5, 6; l.~875 (MTLD); ll.~75, 332, 333
+(acronyms); Table~2 (tab:rank\_sweep) regime column.}
 
-\smallskip\noindent\textit{Location in revised manuscript: Table~1 (tab:notation); prose preceding Eq.~6.}
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R2.2 --- Equations and tables}
 
+\begin{rcomment}
+Equations 1--6 are malformed in the PDF. Eq.~2 for effective rank is missing
+the negative sign and summation. Eq.~6 for SDI-3 has unclear signs and terms.
+``$5\times10^6$'' in Table~7 appears to be a rendering error.
+\end{rcomment}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape The effective-rank formula uses $\sigma_i$ as both singular values and
-normalised singular values. The normalisation condition is mathematically
-incorrect as written.
-\end{quote}
+The malformed rendering was a font-encoding artefact: Unicode characters in
+mathematical mode were not mapped correctly to the T1 font metric. The revised
+submission uses the \texttt{lmodern} package with T1 encoding throughout,
+which eliminates the rendering artefact.
 
-
-Eq.~2 now defines $p_i = \sigma_i / \sum_j \sigma_j$ explicitly,
-reserving $\sigma_i$ for the raw singular value throughout. The entropy is
-computed over the normalised distribution $\{p_i\}$, consistent with
-Table~1.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Eq.~2 (erank definition); Table~1 (tab:notation).}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape $\|BA\|_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in
-the drift equation are not consistently defined.
-\end{quote}
-
-
-Both quantities are now defined in Table~1 and at first use: $\|BA\|_F$
-denotes the Frobenius norm of the LoRA reconstruction matrix, averaged across
-adapted modules; $\theta_i^{(t)}$ and $\theta_i^{(0)}$ denote the $i$-th
-parameter at generation $t$ and at generation~0. The mean absolute drift $d(t)$
-in Eq.~3 is the mean over all $i$ of $|\theta_i^{(t)} - \theta_i^{(0)}|$.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Table~1 (tab:notation); Eqs.~3--4 and surrounding prose.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape ``$r \in \{4,10,12,14,16\}$'' and ``$r \approx \{10,12,14\}$'' are
-garbled in the PDF; they should use clear set notation.
-\end{quote}
-
-
-The garbled rendering was a font-encoding artefact in the PDF generated from
-the original submission. The revised manuscript uses the \texttt{lmodern}
-package with T1 encoding throughout, which resolves all set-notation rendering.
-The expressions now compile correctly as $r \in \{4, 10, 12, 14, 16\}$ and
-$r \in \{10, 12, 14\}$.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Preamble (lmodern + T1); all set-notation instances throughout.}
-
-
-\subsection{R2.2 --- Equations and tables}
-
-\begin{quote}
-\itshape Equations 1--6 are severely malformed in the provided PDF. Eq.~1 uses
-``Retention.t /'' instead of a clear function notation and has a garbled
-summation over $K_0$.
-\end{quote}
-
-
-The malformed rendering was an artefact of the font encoding used in the
-original submission: Unicode characters in mathematical mode were not mapped
-correctly to the T1 font metric, producing garbled output in the compiled PDF
-while the source was syntactically correct. The revised submission uses the
-\texttt{lmodern} package with T1 encoding throughout (preamble), which
-eliminates the rendering artefact.
-
-Eq.~1 now reads correctly as
+Eq.~1 now reads:
 \[
-  R(t) = \frac{|\{q \in K_0 : q \text{ correct at gen.\ } t\}|}{|K_0|},
+  R(t) = \frac{|\{q \in K_0 : q \text{ correct at gen.\ } t\}|}{|K_0|}.
 \]
-using $R(t)$ as the retention symbol, consistent with Table~1 (tab:notation)
-and the surrounding prose. The symbol $\mathrm{Retention}(t)$ that appeared in
-the original version has been replaced by $R(t)$ throughout Equations~1, 3,
-and 5 and the accompanying text.
 
-
-\smallskip\noindent\textit{Location in revised manuscript: Preamble (lmodern + T1); Eq.~1, l.~595.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape Eq.~2 for effective rank is missing the negative sign and summation.
-It should be $\exp\!\bigl(-\sum_i p_i \log p_i\bigr)$,
-with $p_i = \sigma_i / \sum_j \sigma_j$.
-\end{quote}
-
-
-Eq.~2 now reads
+Eq.~2 now reads:
 \[
-  \mathrm{erank}(BA) = \exp\!\left(-\sum_i \hat{\sigma}_i \log \hat{\sigma}_i\right),
+  \mathrm{erank}(BA) =
+  \exp\!\left(-\sum_i \hat{\sigma}_i \log \hat{\sigma}_i\right),
 \]
-where $\hat{\sigma}_i = \sigma_i / \sum_j \sigma_j$ are the normalised singular
-values of $BA$. The normalised symbol $\hat{\sigma}_i$ is distinct from the raw
-singular value $\sigma_i$, consistent with Table~1. The formula is the
-standard effective-rank definition of \citet{roy2007}.
+where $\hat{\sigma}_i = \sigma_i / \sum_j \sigma_j$ are the normalised
+singular values of $BA$, distinct from the raw singular values $\sigma_i$,
+consistent with Table~1. This is the standard effective-rank definition of
+\citet{roy2007}.
 
-
-\smallskip\noindent\textit{Location in revised manuscript: Eq.~2, ll.~798--803.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape Eq.~6 for SDI-3 is unclear: signs, log ratios, and the $\Delta I$ term
-are not consistently defined.
-\end{quote}
-
-
-Eq.~6 now reads
+Eq.~6 now reads:
 \[
   \mathrm{SDI\text{-}3} =
   \log\frac{\mathrm{MeanLen}_T}{\mathrm{MeanLen}_0}
   + \log\frac{\mathrm{D1}_0}{\mathrm{D1}_T}
-  + \Delta I,
+  + \Delta I.
 \]
-with each term defined immediately before the equation and in Table~1:
-the first term is positive when mean response length grows over the
-evaluation horizon; the second is positive when content efficiency
-($\mathrm{D1}$) declines (the numerator and denominator are swapped relative
-to the length term, encoding the opposite direction of ``worse''); and
-$\Delta I$ is the absolute drop in content efficiency from generation~1 to
-generation~$T$. A positive SDI-3 score therefore indicates cumulative
-distributional deterioration.
+The first term is positive when mean response length grows; the second is
+positive when Distinct-1 diversity declines; and $\Delta I$ captures
+item-level instability accumulation. A positive SDI-3 score indicates
+cumulative distributional deterioration.
 
+The value in Table~7 is the learning rate $5\times10^{-6}$; the exponent
+$-6$ was dropped in the original PDF by the same encoding issue. The revised
+PDF renders the value correctly throughout.
 
-\smallskip\noindent\textit{Location in revised manuscript: Eq.~6, ll.~881--886; Table~1 (tab:notation); prose ll.~870--890.}
+\msloc{Preamble (lmodern + T1); Eq.~1, l.~595; Eq.~2, ll.~798--803;
+Eq.~6, ll.~881--886; Table~7 (tab:ranklr), l.~1473.}
 
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R2.3 --- Technical and data inconsistencies}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape What is ``$5 \times 10^6$'' in Table~7? Please check also elsewhere.
-\end{quote}
-
-
-The garbled rendering was again a font-encoding artefact. The value in
-Table~7 (tab:ranklr) is the learning rate $5 \times 10^{-6}$, not
-$5 \times 10^6$. The exponent $-6$ was dropped in the original PDF due to
-the same encoding issue. The revised PDF renders the value correctly as
-$5 \times 10^{-6}$ throughout (Table~7 header row, l.~1473, and all
-inline references). We have verified that no other table or equation
-contains a similar rendering failure in the revised submission.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Table~7 (tab:ranklr), l.~1473; preamble (lmodern + T1).}
-
-
-\subsection{R2.3 --- Technical and data inconsistencies}
-
-Each inconsistency identified by the reviewer has been corrected; details follow.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape \textbf{Qwen threshold inconsistency.} Abstract and Section~4.2.3 state
-the Qwen boundary is between effective ranks 50--88. Section~5.1 states
-Qwen remains outside the degradative regime ``up to effective rank~150.''
-This contradicts Table~2, where $r=256$ has effective rank~87.57 and is
-classified as degradative.
-\end{quote}
-
+\begin{rcomment}
+Qwen threshold: ``up to effective rank 150'' contradicts Table~2.
+$r=128$ called ``above-threshold'' but classified as Bounded.
+$r=256$ called ``boundary configuration'' but classified as Degradative.
+Gemma~3: ``$r\geq16$'' omits $r\in\{10,12,14\}$ already degradative at Gen~5.
+Abstract overclaim on seed counts.
+FFT on Gemma~3: non-monotonic result too strongly concluded.
+C5 removal percentage discrepancy (15\% examples vs.\ 5\% tokens).
+\end{rcomment}
 
 The phrase ``up to effective rank~150'' has been removed. All threshold
-language now uses the form \textcolor{blue}{``an abrupt, threshold-like transition
-within the tested grid''} (l.~72, l.~95), which accurately reflects that the
-boundary is established empirically between adjacent tested configurations
-rather than extrapolated to untested values. The interval 50--88 (effective
-ranks of $r=128$ and $r=256$ respectively) is retained as the localization
-of the boundary. No claim is made beyond the tested range.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~72; Contribution~\#1 l.~95; Section~5.1 (phrase removed).}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape \textbf{$r=128$ classification.} $r=128$ is classified as ``Bounded'' in
-Table~2, but Section~4.4.3 calls $r=128$ and $r=256$
-``above-threshold configurations.''
-\end{quote}
-
-
-The phrase ``above-threshold configurations'' in Section~4.4.3 now refers
-only to $r=256$, which Table~2 classifies as Degradative. The term
-\textcolor{blue}{``above-threshold''} is used exclusively for configurations in
-the Degradative regime. $r=128$ (Bounded) is described as a
-\textcolor{blue}{``transition-zone configuration''} where distributional signatures
-begin to emerge without producing the full degradative trajectory.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~4.4.3, ll.~1061, 1570.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape \textbf{$r=256$ boundary claim.} $r=256$ is repeatedly called a
-``boundary configuration,'' but Table~2 classifies it as degradative.
-The boundary lies between $r=128$ and $r=256$.
-\end{quote}
-
-
-The five occurrences of ``boundary configuration'' referring to $r=256$ have been replaced throughout with
-\textcolor{blue}{``lowest-pressure degradative configuration tested''}, which
-correctly identifies $r=256$ as the degradative anchor while making
-explicit that the transition itself is localised between $r=128$ and
-$r=256$.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: ll.~1737, 1915, 2063, 2069, 2159.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape \textbf{Gemma~3 degradative range.} Section~5.2 states ``$r \geq 16$ on
-Gemma~3,'' but Table~4 shows $r \in \{10,12,14\}$ already degradative at
-Gen~5. The boundary is below $r=10$.
-\end{quote}
-
-
-Table~4 (tab:gemma3) reports retention of 78.3\,\%, 73.9\,\%,
-and 69.6\,\% for $r=10$, 12, and 14 respectively at Gen~5, all classified
-as Degradative. The regime boundary is placed at effective ranks between
-3 and 6 (between $r=4$, which is Homeostatic, and $r=10$, which is
-Degradative). The text now reads \textcolor{blue}{``the Gemma~3 regime boundary
-lies between effective ranks 3 and 6, below $r=10$''}, consistent with
-Table~4. The phrase ``$r \geq 16$'' has been removed.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~5.2; Table~4 (tab:gemma3), ll.~1265, 1277--1280.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape \textbf{Abstract overclaim.} ``Three to five independent seeds per
-condition'' is not accurate: many conditions are single-seed; only
-headline comparisons use multiple seeds.
-\end{quote}
-
-
-The abstract now reads \textcolor{blue}{``three to five independent seeds for
-headline conditions (single seed for intermediate ablations)''} (l.~69),
-which accurately reflects the experimental design. Headline rank levels
-($r \in \{16, 256\}$ on Qwen; $r \in \{4, 16\}$ on Gemma~3) use three to
-five seeds; intermediate and ablation conditions use a single seed. This
-distinction is also stated in the Methods and reported per table via the
-added $N$ column.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~69.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape \textbf{FFT on Gemma~3: non-monotonic results.} Retention values of
-78.3\,\%, 54.3\,\%, and 63.0\,\% for learning rates $10^{-6}$,
-$5\times10^{-6}$, and $10^{-5}$ are non-monotonic. The conclusion that
-this ``confirms'' the magnitude axis is too strong for a single-seed,
-non-monotonic result.
-\end{quote}
-
-
-The text (l.~1147--1152) now notes explicitly that
-\textcolor{blue}{``no rank reversal or non-monotonicity is observed''} in the
-primary Qwen rank sweep; for the FFT on Gemma~3, the word ``confirms'' has
-been replaced with \textcolor{blue}{``is consistent with''} and the non-monotonic
-pattern is acknowledged: the result is treated as supporting evidence at
-$n=1$ seed rather than confirmatory.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: ll.~1147--1149 (Qwen rank sweep prose); FFT Gemma~3 paragraph.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape \textbf{C5 removal percentage.} Section~3.4 mentions ``15\% removal,''
-while Section~4.5 reports approximately 5\,\% token reduction.
-This discrepancy must be clarified.
-\end{quote}
-
-
-The two figures refer to different quantities. The original C5 condition
-removed 15\,\% of training \emph{examples} (questions), which reduced the
-token count by approximately 5\,\% because responses vary in length. The
-revised manuscript clarifies this distinction at both locations. However,
-the more substantive resolution is that the original C3/C5 results were
-produced by a different evaluation pipeline than C1: when C1 and C5 are
-re-run under an identical pipeline with paired seeds, the effect of
-${\sim}5\%$ example removal is $+1.9$\,pp (not distinguishable from zero,
-$n=3$). The dose--response reported in Section~4.5 (Bloco~7) replaces
-those comparisons; the original C2--C5 results are preserved in
-the replication repository for transparency.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.7 (definition of C5 doses); Section~4.5 l.~1708--1713.}
-
-
-\subsection{R2.4 --- Methodology}
-
-Each methodological concern is addressed below.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape No formal statistical tests, confidence intervals, or $p$-values are
-reported. The paper relies on ranges and non-overlap, which is weak for
-inference.
-\end{quote}
-
-
-The revised manuscript adds seed-level exact permutation tests for the comparisons where independent training runs are available, treating seeds and runs as the experimental unit.
-
-The primary rank contrast for Qwen uses three G3/bf16 runs at $r=16$
-(seeds~15/137/256; Gen10 = 76/78 per seed = 97.4\%) and six G1$+$G4
-runs at $r=256$ (seeds~15/137/256/42/101/202; Gen10 = 61, 63, 61, 64,
-61, 63 out of 78; mean 79.7\%$\pm$1.7~pp; range 78.2--82.1\%).
-We report this 17.7~pp arithmetic gap as a descriptive observation.
-Because seeds 15, 137, and 256 appear in both groups, and the groups
-differ simultaneously in rank, quantization level, and data-order
-protocol, the nine observations are not exchangeable under the rank-only
-null hypothesis; we therefore do not report a formal permutation test
-for this comparison.
-
-The cleanest available within-protocol rank comparison is the G3 paired
-design: same three seeds (15/137/256), same bf16 protocol, rank the only
-variable. Per-seed Gen10 differences are $+15$, $+13$, and $+15$ items
-out of 78, a mean of $+18.4$~pp. An exact bilateral sign-flip test gives
-$p=0.25$ owing to $N=3$, despite consistent effect direction across all
-three pairs. This is described as a large but underpowered result.
-
-For Gemma~3, the $r=4$ versus $r=16$ Gen10 contrast ($N=5+5$, fully
-independent seeds, $K_0=46$) gives $\Delta=+37.8$~pp (computed from
-raw counts); an exact bilateral permutation test over
-$\binom{10}{5}=252$ allocations gives $p=0.0079$.
-
-For the dose--response experiments, paired $t$-tests are reported per
-dose level against the unmodified baseline, with $p$-values and 95\,\%
-confidence intervals for the $+9.2$~pp (50\%) and $+4.9$~pp (25\%) Gen10 estimates
-(Section~4.5).
-
-We do not treat the $K_0=78$ or $K_0=46$ evaluation items as
-independent binomial trials. Item-level analyses are presented as
-descriptive summaries of which individual facts were lost or recovered.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~4.2 (Qwen, G3 paired contrast $N=3$, descriptive gap
-17.7~pp); Section~4.3.1 (Gemma~3, $\binom{10}{5}=252$, $p=0.0079$);
-Section~4.5 (dose--response, paired $t$-test).}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape The effective training pressure framework is not quantified. It is a useful
-organizing metaphor, but not a predictive model.
-\end{quote}
-
-
-ETP is presented in the revised manuscript as an \emph{operational experimental
-framework} rather than a validated scalar predictor. We distinguish two
-classes of variables: \emph{ETP-design} (rank, learning rate, exposure
-fraction, number of steps -- variables known before training and directly
-manipulated) and \emph{ETP-observed} (erank, drift, response length -- post-training
-diagnostics that track the pressure actually applied). The product
-$\mathrm{erank}\times\mathrm{LR}$ is reported as an exploratory index
-and labelled as such; it is not used as a prospectively validated predictor.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.5; Table~1 (tab:notation).}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape Cross-architecture normalisation failed, but no alternative calibration
-method is proposed.
-\end{quote}
-
-
-We agree that the failed normalisations in Table~6 (tab:normalization) do
-not provide a universal scalar. In the revised manuscript we describe
-this as a limitation: architecture-specific threshold calibration requires
-either a held-out backbone or a pre-specified normalization rule with
-out-of-sample validation. We do not propose a universal ETP constant. The
-table is retained as evidence of incommensurability rather than as a
-calibration tool.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~6 (Limitations); Table~6 (tab:normalization).}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape ``Effective training pressure'' is not a new quantitative measure; it is a
-conceptual label for three already-known axes. The paper does not derive a
-scalar predictor or formal theory.
-\end{quote}
-
-
-The revised Introduction and Contribution~\#1 describe ETP as a \emph{factorial organisational
-framework} that groups three controllable axes under a common label, enabling
-joint dose-response analysis. We do not claim to derive a new quantitative
-measure. The contribution is the factorial design, the dose-response
-evidence across three backbones, the pre-registered exposure result, and the
-identification of architecture-specific regime boundaries, not the label
-itself.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~1 (Introduction, revised Contribution \#1).}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape The Gemma~4 E2B backbone lacks a citation, may be confused with Gemma~3n
-E2B, and its architecture is described without a source.
-\end{quote}
-
-
-Corrected. The backbone is now cited as \citet{gemma4_2026} (Gemma Team,
-2026, arXiv:2607.02770) at every introduction point. The architecture
-details (hidden size 1536, 35 layers, 8 attention heads, 1 KV head,
-\texttt{num\_kv\_shared\_layers}$=20$, 50 adapted LoRA modules) are sourced
-from the released model configuration in the same technical report. The
-model is unambiguously distinct from Gemma~3n E2B as it uses a
-different parameter count, layer depth, and attention configuration.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.3 (Models and hardware), ll.~647--662.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape The ``sharp transition'' claim is weakened by sparse rank grids and wide
-threshold intervals.
-\end{quote}
-
-
-The revised manuscript replaces ``sharp transition'' with
-\textcolor{blue}{``abrupt, threshold-like transition within the tested grid''},
-acknowledging that the transition is characterised empirically by the
-interval between adjacent tested rank values rather than by a precisely
-identified point. We report threshold intervals rather than point estimates
-and describe the intermediate rank sweep ($r\in\{10,12,14\}$ on Gemma~3)
-as a localisation of the transition region, not a sharp boundary
-identification.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~72; Contribution~\#1 l.~95; Section~4.2.3.}
-
-
-\subsection{R2.5 --- Format and citations}
-
-Each reference issue identified by the reviewer has been corrected.
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape References [12] and [33] share the same arXiv number: arXiv:2408.14572.
-\end{quote}
-
-
-In the revised reference list the arXiv number 2408.14572 appears exactly
-once, assigned to \citet{fawi2024curlora} (\textit{CURLoRA}, Fawi, 2024).
-The duplicate entry that appeared in the submitted version has been removed.
-The reference formerly numbered [33] in the submitted PDF was an artefact
-of a bibliography management error; it is no longer present.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: References section (cas-refs.bib), entry \texttt{fawi2024curlora}.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape Reference [32] lists arXiv:2512.15634 with year 2024, which is impossible
-if the arXiv ID is from December 2025.
-\end{quote}
-
+language now uses \textcolor{chgcolor}{``an abrupt, threshold-like transition within the tested
+grid''}, reflecting that the boundary is established empirically between
+adjacent tested configurations, not extrapolated.
+
+The phrase ``above-threshold configurations'' now refers exclusively to
+$r=256$ (Degradative). The $r=128$ configuration (Bounded) is described as a
+\textcolor{chgcolor}{``transition-zone configuration''} where distributional signatures begin to
+emerge without producing the full degradative trajectory.
+
+The five occurrences of ``boundary configuration'' referring to $r=256$ have
+been replaced throughout with \textcolor{chgcolor}{``lowest-pressure degradative configuration
+tested''}, making explicit that the transition itself is localised between
+$r=128$ and $r=256$.
+
+Table~4 reports retention of 78.3\,\%, 73.9\,\%, and 69.6\,\% for $r=10$,
+12, and 14 at Gen~5, all classified as Degradative. The text now reads
+\textcolor{chgcolor}{``the Gemma~3 regime boundary lies between effective ranks 3 and 6, below
+$r=10$''}; the phrase ``$r\geq16$'' has been replaced with \textcolor{chgcolor}{``$r\geq10$ on
+Gemma~3 (including $r\in\{10,12,14\}$ at Gen~5)''}.
+
+The abstract now reads \textcolor{chgcolor}{``three to five independent seeds for headline
+conditions (single seed for intermediate ablations)''}, accurately reflecting
+the design. This distinction is also stated in the Methods and reported per
+table via the added $N$ column.
+
+For FFT on Gemma~3, the word ``confirms'' has been replaced with
+\textcolor{chgcolor}{``is consistent with''} and the non-monotonic pattern (78.3\%, 54.3\%,
+63.0\% for $\mathrm{LR}=10^{-6}$, $5\times10^{-6}$, $10^{-5}$) is
+acknowledged: the result is treated as supporting evidence at $n=1$ seed
+rather than confirmatory.
+
+The 15\%/5\% discrepancy: C5 removed 15\% of training \emph{examples}
+(questions), which reduced the token count by approximately 5\% because
+responses vary in length. This distinction is now clarified at both locations.
+The more substantive resolution is that the C1/C5 pipeline inconsistency
+renders the original comparison uninformative; the dose--response in
+Section~4.5 (B7) replaces those comparisons.
+
+\msloc{Abstract l.~69, l.~72; Contribution~\#1 l.~95; Section~4.4.3,
+ll.~1061, 1570; ll.~1737, 1915, 2063, 2069, 2159; Section~5.2; Table~4
+(tab:gemma3), ll.~1265, 1277--1280; ll.~1147--1149 (FFT Gemma~3);
+Section~3.7 (C5 doses); Section~4.5 l.~1708--1713.}
+
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R2.4 --- Methodology}
+
+\begin{rcomment}
+No formal statistical tests or confidence intervals. ETP framework is not
+quantified. Cross-architecture normalisation failed with no alternative.
+ETP is a conceptual label, not a new quantitative measure. Gemma~4 E2B
+lacks a citation. ``Sharp transition'' claim weakened by sparse rank grids.
+\end{rcomment}
+
+The revised manuscript adds seed-level exact permutation tests for the
+comparisons where independent training runs are available, treating seeds and
+runs as the experimental unit. For Qwen, the 17.7\,pp arithmetic gap between
+$r=16$ and $r=256$ is reported as a descriptive observation because the two
+groups are not exchangeable under a rank-only null (they differ simultaneously
+in rank, quantization, and data-order protocol). The cleanest within-protocol
+comparison is G3 paired design: mean $+18.4$\,pp, sign-flip $p=0.25$ ($N=3$,
+all positive direction but underpowered). For Gemma~3, bilateral permutation
+$p=0.0079$ (independent seeds) or sign-flip $p=0.0625$ (paired, if same
+seeds at both ranks). For the dose--response experiments, paired $t$-tests
+with 95\,\% confidence intervals are reported per dose level against the
+unmodified baseline.
+
+ETP is presented as an \emph{operational experimental framework} rather than a
+validated scalar predictor. We distinguish ETP-design variables (rank,
+learning rate, exposure fraction, training steps) from ETP-observed
+post-training diagnostics (effective rank, $d(t)$, response length, SDI-3).
+The product $\mathrm{erank}\times\mathrm{LR}$ is an exploratory index labelled
+as such; it is not used as a prospective predictor.
+
+The failed normalisations in Table~6 do not provide a universal scalar;
+the table is retained as evidence of incommensurability. Architecture-specific
+calibration requires a held-out backbone or a pre-specified normalization
+rule with out-of-sample validation, deferred to future work.
+
+The contribution is the factorial design, the dose--response evidence across
+three backbones, the pre-registered exposure result, and the identification of
+architecture-specific regime boundaries, not the ETP label itself.
+
+The Gemma~4 E2B backbone is now cited as \citet{gemma4_2026} (Gemma Team,
+2026, arXiv:2607.02770) at every introduction point. Architecture details are
+sourced from the released model configuration in the same technical report.
+
+``Sharp transition'' has been replaced throughout with \textcolor{chgcolor}{``abrupt,
+threshold-like transition within the tested grid''}, reflecting that the
+boundary is established empirically between adjacent rank values rather than
+identified at a precise point.
+
+\msloc{Section~4.2 (Qwen, G3 paired contrast); Section~4.3.1 (Gemma~3,
+$p=0.0625$ or $p=0.0079$); Section~4.5 (dose--response, paired $t$-test);
+Section~3.5 (ETP design vs.\ observed); Table~1 (tab:notation); Section~6
+(cross-architecture limitation); Section~3.3 (Gemma~4 citation);
+Abstract l.~72.}
+
+% ──────────────────────────────────────────────────────────────────────────────
+\subsection*{R2.5 --- Format and citations}
+
+\begin{rcomment}
+References [12] and [33] share arXiv:2408.14572. Reference [32] year
+inconsistency. Gemma~4 E2B lacks citation. Keisha et al.\ is a preprint.
+Reference formatting is inconsistent.
+\end{rcomment}
+
+The arXiv number 2408.14572 now appears exactly once, assigned to
+\citet{fawi2024curlora} (\textit{CURLoRA}, Fawi, 2024). The duplicate entry
+has been removed.
 
 The entry \texttt{ding2024ranktrade} (Rathore et al.) now carries
 \texttt{year = \{2025\}}, consistent with the December~2025 arXiv submission
-date. The paper appeared in the proceedings of AACL-IJCNLP 2025. The
-\texttt{year = \{2024\}} in the submitted version was a transcription error
-introduced when the preliminary arXiv preprint was first catalogued.
+date; the paper appeared in AACL-IJCNLP 2025.
 
+The Gemma~4 E2B backbone is now cited as \citet{gemma4_2026} at every
+introduction and description point.
 
-\smallskip\noindent\textit{Location in revised manuscript: References section, entry \texttt{ding2024ranktrade}.}
+\citet{keisha2025} is a non-peer-reviewed preprint (arXiv:2509.04796). This
+is now declared at first citation: \textcolor{chgcolor}{``\citet{keisha2025} (non-peer-reviewed
+preprint) report a complementary observation...''} The paper is used for
+contextual framing only; no quantitative claim depends exclusively on it.
+\citet{shumailov2024} (published in \textit{Nature}) is added as the primary
+citation for model-collapse phenomena.
 
+The reference list has been audited. Published works include their full venue
+with volume, pages, and DOI where available. Works existing only as preprints
+are formatted as \texttt{arXiv preprint arXiv:XXXX.XXXXX}. Entries previously
+missing venue data (\texttt{ding2024ranktrade}, \texttt{fawi2024curlora},
+\texttt{zibakhsh2024}) have been completed.
 
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape No citation is provided for Gemma~4 E2B IT, despite it being a central
-backbone.
-\end{quote}
-
-
-A full citation has been added. The backbone is now cited as
-\citet{gemma4_2026} (Gemma Team, 2026, arXiv:2607.02770) at every point
-where it is introduced or described, including the experimental setup
-(Section~3.3) and the cross-backbone results (Section~4.3). The model
-architecture details (hidden dimension, layers, LoRA target modules) are
-sourced from the same technical report.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: Section~3.3; Section~4.3; References entry \texttt{gemma4\_2026}.}
-
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape Reference [7] ``Keisha et al.'' is used heavily but appears to be a
-preprint with no venue. Its reliability should be clarified.
-\end{quote}
-
-
-The entry \texttt{keisha2025} (Keisha et al., 2025) is a non-peer-reviewed
-preprint (arXiv:2509.04796). This is now declared explicitly in the
-bibliography note and in the text at first citation:
-\textcolor{blue}{``\citet{keisha2025} (non-peer-reviewed preprint) report a
-complementary observation...''}.
-The paper is used for contextual framing only; no quantitative claim in our
-manuscript depends exclusively on this source. We have added
-\citet{shumailov2024} (published in \textit{Nature}) as the primary citation
-for the model-collapse phenomenon wherever both sources were previously cited.
-
-\smallskip\noindent\textit{Location in revised manuscript: First citation of \texttt{keisha2025}; References entry with \texttt{note = \{arXiv:2509.04796. Non-peer-reviewed preprint\}}.}
-
-% ─────────────────────────────────────────────────────────────────────────────
-\begin{quote}
-\itshape Reference formatting is inconsistent: some entries include conference
-proceedings, others only arXiv, some lack page numbers or venues.
-\end{quote}
-
-
-The reference list has been audited and harmonised. Published works include
-their full venue (journal or conference proceedings, volume, pages, DOI
-where available). Works that exist only as arXiv preprints are formatted as
-\texttt{arXiv preprint arXiv:XXXX.XXXXX} with the submission year. Entries
-that had previously been submitted with incomplete venue data -- including
-\texttt{ding2024ranktrade}, \texttt{fawi2024curlora}, and
-\texttt{zibakhsh2024} -- have been completed. The full revised bibliography
-is provided as \texttt{cas-refs.bib} in the submission package.
-
-
-\smallskip\noindent\textit{Location in revised manuscript: References section (cas-refs.bib), all entries.}
-
+\msloc{References (cas-refs.bib): entries \texttt{fawi2024curlora},
+\texttt{ding2024ranktrade}, \texttt{gemma4\_2026}, \texttt{keisha2025},
+all entries (format harmonised).}
 
 \end{document}
