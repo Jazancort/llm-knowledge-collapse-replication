@@ -62,11 +62,9 @@ prospectively tested on an unseen backbone or dataset?
 \end{quote}
 
 
-We agree that the present experiments do not establish a transferable
-scalar ETP predictor or a prospective threshold for an unseen backbone
-or dataset. We have revised the manuscript to distinguish controllable
-design variables---nominal adapter rank, learning rate, planned training
-steps, and synthetic-data dose---from post-training diagnostics,
+The present experiments do not establish a transferable scalar ETP predictor or a prospective threshold for an unseen backbone or dataset. The revised manuscript distinguishes controllable
+design variables (nominal adapter rank, learning rate, planned training
+steps, and synthetic-data dose) from post-training diagnostics,
 including effective rank and weight drift. Under the tested protocol,
 we identify empirical intervals between adjacent configurations
 exhibiting different retention trajectories; these intervals should not
@@ -102,9 +100,7 @@ dynamics separated from the claimed pressure effects?
 \end{quote}
 
 
-We thank the reviewer for this precise question. The revised manuscript
-addresses each potential confound through a dedicated control, all of which
-are now documented in Section~3.9 (``Sources of variation and experimental
+The revised manuscript addresses each potential confound through a dedicated control, documented in Section~3.9 (``Sources of variation and experimental
 controls'', ll.~1000--1037) with Table~2 (tab:controls).
 
 \textbf{Quantization (NF4 vs bf16).}
@@ -200,9 +196,7 @@ domains, and larger factual evaluation sets?
 \end{quote}
 
 
-We thank the reviewer for this question, which targets the external validity
-of our findings. We address the three distinct concerns it raises: the
-evaluation metric, the dataset scope, and the extension to other domains.
+The comment raises three distinct concerns: the evaluation metric, the dataset scope, and the extension to other domains.
 
 \textbf{Evaluation metric and verbosity bias.}
 The primary metric uses a bidirectional substring criterion: a generated
@@ -267,10 +261,7 @@ Gemma~3, and does this generalize across ranks and seeds?
 \end{quote}
 
 
-We thank the reviewer for this question, which led directly to a
-substantially revised and pre-registered experiment. We address three issues
-in turn: the correction of the original result, the pre-registered
-dose--response, and the mechanism.
+This question led directly to a substantially revised and pre-registered experiment. The response covers three issues: the correction of the original result, the pre-registered dose--response, and the mechanism.
 
 \textbf{Correction of the original result.}
 The original submission reported that a ${\sim}5\%$ reduction of synthetic
@@ -283,8 +274,7 @@ identical pipeline with paired seeds, the effect of ${\sim}5\%$ example
 removal is only $+1.9$\,pp (not distinguishable from zero at $n=3$). This
 discrepancy is acknowledged explicitly in the revised manuscript (ll.~1708--1713)
 and the original C2--C5 results are preserved in Appendix~A for transparency.
-We thank the reviewer, whose question prompted the investigation that
-uncovered this error.
+This discrepancy was uncovered as a direct result of the reviewer's question.
 
 \textbf{Pre-registered dose--response (Bloco~7).}
 To replace the discredited result, we designed and pre-registered a
@@ -339,9 +329,7 @@ support independent reproduction?
 \end{quote}
 
 
-We agree that independent reproduction requires more than aggregate
-retention tables. We have expanded the reproducibility section
-(Section~\ref{app:repo}) to specify:
+Independent reproduction requires more than aggregate retention tables. The reproducibility section (Section~\ref{app:repo}) has been expanded to specify:
 
 \begin{enumerate}
 \item the exact model checkpoint identifiers and revisions for all three
@@ -381,7 +369,7 @@ explicitly defined as ``effective training pressure.''
 \end{quote}
 
 
-We agree. The revised manuscript does not use ``ETP'' as a standalone acronym.
+The revised manuscript does not use ``ETP'' as a standalone acronym.
 The term is introduced by name at l.~72
 (\textcolor{blue}{``which we term effective training pressure''}) and used in full
 throughout. Figure~1 (caption ll.~692--698) no longer contains the
@@ -398,7 +386,7 @@ acronym is not expanded.
 \end{quote}
 
 
-Corrected. The first occurrence now reads
+The first occurrence now reads
 \textcolor{blue}{``Measure of Textual Lexical Diversity (MTLD)''} followed by the
 functional description.
 
@@ -500,7 +488,7 @@ incorrect as written.
 \end{quote}
 
 
-Corrected. Eq.~2 now defines $p_i = \sigma_i / \sum_j \sigma_j$ explicitly,
+Eq.~2 now defines $p_i = \sigma_i / \sum_j \sigma_j$ explicitly,
 reserving $\sigma_i$ for the raw singular value throughout. The entropy is
 computed over the normalised distribution $\{p_i\}$, consistent with
 Table~1.
@@ -580,7 +568,7 @@ with $p_i = \sigma_i / \sum_j \sigma_j$.
 \end{quote}
 
 
-Corrected. Eq.~2 now reads
+Eq.~2 now reads
 \[
   \mathrm{erank}(BA) = \exp\!\left(-\sum_i \hat{\sigma}_i \log \hat{\sigma}_i\right),
 \]
@@ -640,8 +628,7 @@ contains a similar rendering failure in the revised submission.
 
 \subsection{R2.3 --- Technical and data inconsistencies}
 
-We thank the reviewer for this careful cross-checking of results against tables and
-prose. Each inconsistency has been corrected as described below.
+Each inconsistency identified by the reviewer has been corrected; details follow.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{quote}
@@ -692,8 +679,7 @@ The boundary lies between $r=128$ and $r=256$.
 \end{quote}
 
 
-Agreed. The five occurrences of ``boundary configuration'' referring to
-$r=256$ have been replaced throughout with
+The five occurrences of ``boundary configuration'' referring to $r=256$ have been replaced throughout with
 \textcolor{blue}{``lowest-pressure degradative configuration tested''}, which
 correctly identifies $r=256$ as the degradative anchor while making
 explicit that the transition itself is localised between $r=128$ and
@@ -711,7 +697,7 @@ Gen~5. The boundary is below $r=10$.
 \end{quote}
 
 
-Corrected. Table~4 (tab:gemma3) reports retention of 78.3\,\%, 73.9\,\%,
+Table~4 (tab:gemma3) reports retention of 78.3\,\%, 73.9\,\%,
 and 69.6\,\% for $r=10$, 12, and 14 respectively at Gen~5, all classified
 as Degradative. The regime boundary is placed at effective ranks between
 3 and 6 (between $r=4$, which is Homeostatic, and $r=10$, which is
@@ -753,7 +739,7 @@ non-monotonic result.
 \end{quote}
 
 
-Agreed. The text (l.~1147--1152) now notes explicitly that
+The text (l.~1147--1152) now notes explicitly that
 \textcolor{blue}{``no rank reversal or non-monotonicity is observed''} in the
 primary Qwen rank sweep; for the FFT on Gemma~3, the word ``confirms'' has
 been replaced with \textcolor{blue}{``is consistent with''} and the non-monotonic
@@ -790,8 +776,7 @@ Appendix~A for transparency.
 
 \subsection{R2.4 --- Methodology}
 
-We thank the reviewer for this detailed methodological critique. We address
-each concern in turn.
+Each methodological concern is addressed below.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{quote}
@@ -801,9 +786,7 @@ inference.
 \end{quote}
 
 
-We agree. The revised manuscript adds seed-level exact permutation tests
-for the comparisons where independent training runs are available,
-treating seeds/runs as the experimental unit.
+The revised manuscript adds seed-level exact permutation tests for the comparisons where independent training runs are available, treating seeds and runs as the experimental unit.
 
 The primary rank contrast for Qwen uses three G3/bf16 runs at $r=16$
 (seeds~15/137/256; Gen10 = 76/78 per seed = 97.4\%) and six G1$+$G4
@@ -850,8 +833,7 @@ organizing metaphor, but not a predictive model.
 \end{quote}
 
 
-We agree with this characterisation and have revised the manuscript
-accordingly. ETP is now presented as an \emph{operational experimental
+ETP is presented in the revised manuscript as an \emph{operational experimental
 framework} rather than a validated scalar predictor. We distinguish two
 classes of variables: \emph{ETP-design} (rank, learning rate, exposure
 fraction, number of steps -- variables known before training and directly
@@ -891,8 +873,7 @@ scalar predictor or formal theory.
 \end{quote}
 
 
-We accept this characterisation. The revised Introduction and
-Contribution~\#1 now describe ETP as a \emph{factorial organisational
+The revised Introduction and Contribution~\#1 describe ETP as a \emph{factorial organisational
 framework} that groups three controllable axes under a common label, enabling
 joint dose-response analysis. We do not claim to derive a new quantitative
 measure. The contribution is the factorial design, the dose-response
@@ -930,7 +911,7 @@ threshold intervals.
 \end{quote}
 
 
-Agreed. The revised manuscript replaces ``sharp transition'' with
+The revised manuscript replaces ``sharp transition'' with
 \textcolor{blue}{``abrupt, threshold-like transition within the tested grid''},
 acknowledging that the transition is characterised empirically by the
 interval between adjacent tested rank values rather than by a precisely
@@ -945,8 +926,7 @@ identification.
 
 \subsection{R2.5 --- Format and citations}
 
-We thank the reviewer for auditing the reference list. Each issue has been
-corrected as described below.
+Each reference issue identified by the reviewer has been corrected.
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{quote}
@@ -971,7 +951,7 @@ if the arXiv ID is from December 2025.
 \end{quote}
 
 
-Corrected. The entry \texttt{ding2024ranktrade} (Rathore et al.) now carries
+The entry \texttt{ding2024ranktrade} (Rathore et al.) now carries
 \texttt{year = \{2025\}}, consistent with the December~2025 arXiv submission
 date. The paper appeared in the proceedings of AACL-IJCNLP 2025. The
 \texttt{year = \{2024\}} in the submitted version was a transcription error
@@ -1016,8 +996,7 @@ manuscript depends exclusively on this source. We have added
 \citet{shumailov2024} (published in \textit{Nature}) as the primary citation
 for the model-collapse phenomenon wherever both sources were previously cited.
 
-\msloc{First citation of \texttt{keisha2025}; References entry with
-\texttt{note = \{arXiv:2509.04796. Non-peer-reviewed preprint\}}.}
+\smallskip\noindent\textit{Location in revised manuscript: First citation of \texttt{keisha2025}; References entry with \texttt{note = \{arXiv:2509.04796. Non-peer-reviewed preprint\}}.}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \begin{quote}
