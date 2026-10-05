@@ -120,244 +120,204 @@ states that limitation explicitly. Locations in the revised manuscript are
 provided with the individual responses below.
 
 % ══════════════════════════════════════════════════════════════════════════════
+
 \section*{Reviewer 1}
 
-% ─────────────────────────────────────────────────────────────────────────────
 \rconcern{Reviewer \#1}{Concern \#1}{Prospective calibration of ETP}
 
 \rquote{How can effective training pressure be quantitatively calibrated and
 prospectively tested on an unseen backbone or dataset?}
 
 \arhead{Author response:}
-The present experiments do not establish a transferable scalar ETP predictor
-or a prospective threshold for an unseen backbone or dataset. The revised
-manuscript distinguishes controllable design variables (nominal adapter rank,
-learning rate, planned training steps, and synthetic-data dose) from
-post-training diagnostics, including effective rank and weight drift. Under
-the tested protocol, we identify empirical intervals between adjacent
-configurations exhibiting different retention trajectories; these intervals
-should not be interpreted as universal numerical thresholds.
+We agree that a quantitative framework should not be presented as
+prospectively predictive without validation on held-out settings. The revised
+manuscript therefore distinguishes variables specified before training
+(nominal adapter rank, learning rate, planned training steps, and synthetic
+exposure) from quantities measured afterward (effective rank and weight
+drift). Retention, response length, and SDI-3 are evaluated as outcomes or
+diagnostics, not used to define a prospective threshold.
 
-A prospective test would require specifying a calibration rule and outcome
-criterion before examining a held-out backbone or dataset, selecting
-configurations on both sides of the predicted regime boundary, and evaluating
-them without refitting that rule to the held-out outcomes. We describe
-effective training pressure as an \emph{operational experimental framework},
-not a validated universal predictor. The pre-registered G5 experiment (three
-single-seed cells on Qwen) provides limited exploratory evidence: retention
-was ordered in the expected direction for 2 of 3 pre-specified configurations.
-No $\Pi$ threshold was reported for G5 because the threshold was not
-pre-specified, and the experiment does not test an unseen backbone or dataset.
-Prospective calibration remains future work.
+Within the tested protocols, we can locate changes in retention trajectories
+between adjacent configurations. Those intervals do not establish a universal
+numerical ETP threshold: the attempted cross-architecture normalisations did
+not align the observed boundaries. A prospective test on an unseen backbone
+or dataset would require a calibration rule and outcome criterion specified
+in advance, followed by evaluation on held-out conditions without refitting
+the rule to their results. We have added this as a proposed validation
+protocol, not as an experiment already completed.
+
+The exploratory G5 experiment provides a narrower check: two of three
+pre-specified, single-seed configurations followed the expected ordering. No
+threshold was pre-specified for G5, and it did not evaluate an unseen
+backbone or dataset. We therefore describe ETP as an operational
+experimental framework rather than a validated, transferable predictor.
 
 \arhead{Author action:}
-We added a concrete validation protocol for future prospective calibration
-in Section~6 and state explicitly that held-out prospective validation has
-not been performed in the present study. Section~3.5 was revised to introduce
-ETP as an operational framework. Section~4.4 reports the G5 exploratory
-results with appropriate hedging.
+We revised the ETP definition, qualified the G5 interpretation, and added
+the requirements for future prospective calibration.
 
-\msloc{Section~3.5 (ETP as framework, revised); Section~6 (prospective
-calibration protocol added); Section~4.4 (G5 results).}
+\msloc{Section~3.5 (ETP definition); Section~4.4 (G5); Section~6
+(prospective validation and limitations).}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\rconcern{Reviewer \#1}{Concern \#2}{Separating confounds from pressure effects}
+\rconcern{Reviewer \#1}{Concern \#2}{Separating pressure effects from confounders}
 
 \rquote{How are quantization, optimizer state, data order, and model-specific
 dynamics separated from the claimed pressure effects?}
 
 \arhead{Author response:}
-Each potential confound is addressed through a dedicated control, now
-documented in Section~3.9 (``Sources of variation and experimental controls'')
-with Table~2 (tab:controls).
+The revised manuscript identifies what each control can establish and what
+remains confounded. For quantization, G3 compares Qwen at \(r=16\) and
+\(r=256\) under the same bf16 protocol and three paired seeds. The
+per-seed Generation~10 differences are \(+15\), \(+13\), and \(+15\)
+questions out of 78, a mean difference of \(+18.4\) percentage points.
+The exact paired sign-flip test gives \(p=0.25\). This directionally
+consistent, small-sample result supports the rank contrast under bf16 but
+does not establish a statistically conclusive or architecture-independent
+effect.
 
-For quantization: all QLoRA experiments use 4-bit NormalFloat (NF4) with
-adapters in bf16. Ablation G3 reruns the same protocol with standard bf16
-precision and no base-weight quantization, three seeds at each of $r=16$ and
-$r=256$. At $r=16$, bf16 achieves Gen10\,=\,97.4\% (76/78 per seed), while
-the original NF4 single-seed result was 96.2\% (75/78); these use different
-seeds and pipelines and are not a paired comparison. At $r=256$, bf16
-achieves Gen10\,=\,79.1\%, within 0.0\,pp of the NF4 G1$+$G4 mean under
-the same seeds and matched protocol. Quantization is therefore not the
-primary driver of the regime separation.
+By contrast, the \(17.7\)-percentage-point Qwen difference obtained by
+combining conditions from different protocols is descriptive: rank,
+quantization, and aspects of the data-order protocol differ across the
+groups. We do not use that comparison as a rank-only hypothesis test.
+Comparing NF4 and bf16 provides an additional implementation check, not
+a complete causal account of the observed trajectories.
 
-For optimizer state: a fresh optimizer is instantiated at every generation;
-no momentum or adaptive-rate state is carried forward. This is held constant
-across all conditions within a backbone.
+A fresh optimizer is instantiated for each generation, so optimizer state
+is not carried across generations under the reported protocol. In G4,
+both the random seed and data order changed relative to G1. The
+Generation~10 comparison (\(N=3+3\), permutation \(p=0.70\)) consequently
+does not isolate an order effect; nor does the nonsignificant result prove
+that order has no effect.
 
-For data order: ablation G4 runs Qwen at $r=256$ with three independent
-shuffle seeds (42/101/202), all other conditions identical to G1
-(seeds~15/137/256). A permutation test comparing Gen10 between the two groups
-gives $p=0.70$ (two-sided, $N=3+3$). Because seed and data order varied
-simultaneously in G4, this result does not isolate order alone; it establishes
-that the combined variance is indistinguishable from seed-to-seed variance in
-G1. The combined $N=6$ set yields Gen10\,=\,$79.7\%\pm1.7$\,pp.
-
-Following the reviewer's implicit distinction, we now separate ETP variables
-into two classes. \emph{ETP-design} variables are known before training:
-nominal rank, learning rate, training steps, and synthetic exposure fraction.
-\emph{ETP-observed} variables are measured after training: effective rank,
-mean absolute weight drift $d(t)$, response length, and SDI-3. The latter
-serve as post-hoc diagnostic proxies, not pre-specified predictors.
-
-For the central Qwen result, the $r=16$ condition uses three G3/bf16 runs
-(Gen10\,=\,76/78 per seed) and $r=256$ uses six G1$+$G4 runs (mean
-79.7\%$\pm$1.7\,pp). The 17.7\,pp arithmetic gap is a descriptive
-observation, not a confirmatory permutation test, because the two groups
-differ simultaneously in rank, quantization, and data-order protocol. The
-cleanest rank-only comparison is the G3 paired design: same seeds, same bf16,
-rank the only variable; per-seed Gen10 differences are $+15$, $+13$, $+15$
-items out of 78 (mean $+18.4$\,pp); sign-flip $p=0.25$ ($N=3$).
-
-For Gemma~3, the $r=4$ vs.\ $r=16$ contrast ($N=5+5$, $|K_0|=46$) gives
-$\Delta=+37.8$\,pp; bilateral permutation over $\binom{10}{5}=252$ allocations
-gives $p=0.0079$ (independent seeds) or $p=0.0625$ (paired sign-flip).
+Model-specific dynamics likewise remain relevant. For Gemma~3, the
+\(r=4\) versus \(r=16\) contrast involves five runs per condition. An
+independent-seed exact permutation test yields \(p=0.0079\), whereas
+a paired sign-flip analysis yields \(p=0.0625\). We report both results
+with their differing seed-assignment assumptions rather than treating
+either test as universally applicable.
 
 \arhead{Author action:}
-We added Section~3.9 and Table~2 documenting all controls. The ETP-design vs.\
-ETP-observed distinction was introduced explicitly in Section~3.5 and Table~1.
-The Qwen comparison now reports the descriptive 17.7\,pp gap and the G3
-paired result ($p=0.25$, $N=3$) separately. Gemma~3 reports both permutation
-tests with the seed-assignment caveat.
+We separated design variables from post-training diagnostics, documented
+the controls and their limitations, and distinguished the paired G3
+comparison from the descriptive cross-protocol Qwen contrast.
 
-\msloc{Section~3.5 (ETP definition); Table~1 (tab:notation); Section~3.9
-(tab:controls); Section~4.2 (Qwen, G3 paired contrast); Section~4.3.1
-(Gemma~3, $p=0.0079$ or $p=0.0625$); Section~4.6 (G3 and G4 controls).}
+\msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.2
+(Qwen comparisons); Section~4.3.1 (Gemma~3); Section~4.6 (G3 and G4).}
 
-% ─────────────────────────────────────────────────────────────────────────────
 \rconcern{Reviewer \#1}{Concern \#3}{External validity of the evaluation}
 
-\rquote{Do the conclusions hold for longer answers, multi-hop questions, other
-domains, and larger factual evaluation sets?}
+\rquote{Do the conclusions hold for longer answers, multi-hop questions,
+other domains, and larger factual evaluation sets?}
 
 \arhead{Author response:}
-Three distinct concerns are raised: the evaluation metric, the dataset scope,
-and the extension to other domains.
+Our results do not establish generalization to those settings. The
+evaluation concerns short-answer factual questions. It uses a held-out set
+of 200 questions disjoint from the 2,000-question synthetic training
+stream; retention is calculated over questions answered correctly at
+generation~0 (\(|K_0|=78\) for Qwen under the reported protocol).
 
-The primary metric uses a bidirectional substring criterion, intentionally
-permissive to handle short-answer variation and aliasing. Configurations that
-generate longer responses may receive inflated retention scores. TriviaQA was
-chosen to isolate factual retention from reasoning or stylistic confounds;
-short answers minimise format-dependent evaluation noise and the substring
-criterion is resilient to verbosity changes. The limitation is that findings
-may not transfer to long-form generation, multi-hop reasoning, open-ended
-dialogue, or code synthesis; this scope restriction is stated explicitly in
-Section~6.
+The primary scorer permits bidirectional substring matches to accommodate
+short-answer variants. Because longer generated answers could benefit from
+that permissive criterion, we also report a strict exact-match
+re-evaluation of saved predictions. Absolute scores are lower under the
+strict scorer, while the reported qualitative trends for the evaluated
+conditions are retained. This sensitivity check addresses one scoring
+concern; it is not a test of long-form generation or multi-hop reasoning.
 
-The held-out evaluation set contains 200 questions, of which $|K_0|$ are
-answered correctly at generation~0 (e.g., $|K_0|=78$ for Qwen). This set is
-disjoint from the 2,000-question synthetic training stream. Scaling the
-evaluation set would alter the training-data composition and is deferred to
-future work.
+We have corrected the discussion of evaluation-set size. Expanding a
+held-out, disjoint evaluation set would not, by itself, change the
+composition of the training stream. Larger factual test sets would improve
+the assessment of sampling variability and generality, while other
+domains and answer formats require separate experiments.
 
 \arhead{Author action:}
-We performed a strict exact-match re-evaluation on saved predictions for all
-reported conditions. Under the strict scorer, absolute retention values are
-lower, but the direction of every regime classification is unchanged. This
-re-evaluation is reported in supplementary Table~S2 and discussed in
-Section~6. The scope restriction to factoid single-answer evaluation is stated
-explicitly in Section~6.
+We clarified the scorer and the training--evaluation separation, added
+the strict-scoring comparison, and explicitly limited the conclusions to
+the tested short-answer factual setting.
 
-\msloc{Section~6, ll.~2094--2100 and ll.~2181--2193; supplementary
-Table~S2; Section~3.1 (evaluation protocol).}
+\msloc{Section~3.1 (evaluation protocol); supplementary Table~S2
+(strict scoring); Section~6 (scope and limitations).}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\rconcern{Reviewer \#1}{Concern \#4}{Exposure reduction: correction, pre-registered result, and mechanism}
+\rconcern{Reviewer \#1}{Concern \#4}{Exposure reduction and model-dependent responses}
 
 \rquote{Why does the five-percent exposure reduction stabilize Qwen but not
 Gemma~3, and does this generalize across ranks and seeds?}
 
 \arhead{Author response:}
-This question led directly to identifying a pipeline inconsistency in the
-original submission and to a substantially revised, pre-registered experiment.
+This question exposed a substantive problem with the original comparison.
+C1 and C5 followed different evaluation pipelines, including differences
+in \(K_0\) construction and data loading. The previously reported
+\(9.0\)- and \(9.4\)-percentage-point intervention gains cannot therefore
+serve as evidence of stabilization. We also clarified the dose terminology:
+C5 removed 15\% of training \emph{examples}, corresponding to
+approximately 5\% of \emph{tokens}. Under a matched pipeline with three
+paired seeds, the estimated effect of that smaller intervention was
+\(+1.9\) percentage points and was inconclusive.
 
-The original submission reported that a ${\sim}5\%$ reduction of synthetic
-training examples raised retention by $+9.0$ and $+9.4$\,pp for conditions
-C3 and C5 respectively. We subsequently identified that C1 (the baseline) and
-C5 (the intervention) had been produced by different evaluation pipelines,
-differing in the $K_0$ construction procedure and the data-loading code path.
-When C1 and C5 are re-run under an identical pipeline with paired seeds, the
-effect of ${\sim}5\%$ example removal is only $+1.9$\,pp, not distinguishable
-from zero at $n=3$. This error was uncovered as a direct result of the
-reviewer's question.
+The revised Qwen evidence comes from the B7 dose--response experiment:
+0\%, 10\%, 25\%, and 50\% example removal at \(r=256\), with five paired
+seeds per dose. Relative to no removal, Generation~10 retention increased
+by \(+1.8\) percentage points at 10\% removal (\(p=0.160\)),
+\(+4.9\) points at 25\% (\(p=0.005\), 95\% CI \([2.5,7.2]\)),
+and \(+9.2\) points at 50\% (\(p<0.001\), 95\% CI \([6.9,11.6]\)).
+At 50\% removal, the Generation~5--10 retention slope was \(-0.15\)
+percentage points per generation, compared with \(-1.13\) without
+removal. Thus, attenuation of the later decline is supported for this
+Qwen configuration and protocol; it is not inferred from the invalid
+C1/C5 comparison.
 
-The pre-registered dose--response experiment (Bloco~7, protocol committed as
-\texttt{a916ebf} before any run) varies synthetic exposure at 0\%, 10\%, 25\%,
-and 50\% removal across five paired seeds on Qwen~2.5~1.5B at $r=256$.
-At Gen~5, gains are uniform across doses: $+3.6$\,pp (10\%, $p=0.009$),
-$+3.8$\,pp (25\%, $p=0.003$), $+4.4$\,pp (50\%, $p<0.001$). At Gen~10,
-the benefit is dose-graded: $+1.8$\,pp at 10\% ($p=0.160$, not significant),
-$+4.9$\,pp at 25\% ($p=0.005$, 95\,\% CI $[2.5, 7.2]$), and
-$+9.2$\,pp at 50\% ($p<0.001$, 95\,\% CI $[6.9, 11.6]$). At 50\% removal
-the Gen~5$\to$10 slope is $\BsevenSlopeFifty$\,pp/generation versus
-${-1.13}$\,pp/generation at 0\%, strongly attenuating progressive
-loss and shifting the system toward the Bounded regime.
-
-The pre-registered prediction that 50\% removal would match halving the
-learning rate from $\eta=10^{-5}$ to $5\times10^{-6}$ yielded a similar
-point estimate (Gen~5 retention 89.7\% vs.\ 90.2\%; Gen~10 difference
-$+0.4$\,pp, 90\,\% CI $[-0.8, 1.6]$). Formal equivalence was not
-established.
-
-A parallel pre-registered dose--response on Gemma~3~1B~IT at $r=10$ (G2,
-three paired seeds, $|K_{0,\mathrm{G2}}|=44$) shows that 50\% removal
-raises Gen~10 retention by $\GtwoDeltatenFifty$\,pp
-($p=\GtwoPtenFifty$, 95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$).
-However, the Gen~5$\to$10 slope in the G2 50\% arm ($-0.91$\,pp/generation)
-equals that of the 0\% arm ($-0.91$\,pp/generation) within rounding: the
-exposure effect on Gemma~3 manifested as a Gen~10 retention gain without
-reducing the rate of progressive loss. The mechanism was not established; a
-steps-matched control was inconclusive at $n=3$.
+Gemma~3 showed a different response. In G2, 50\% removal at \(r=10\)
+increased Generation~10 retention by \(7.7\) percentage points across
+three paired seeds, but the Generation~5--10 slope was approximately
+\(-0.91\) percentage points per generation in both arms. The intervention
+improved endpoint retention without demonstrably slowing later loss.
+Neither experiment identifies the mechanism or establishes that the
+effect generalizes across untested ranks. Similar point estimates for
+50\% exposure removal and a halved learning rate are not presented as
+formal equivalence.
 
 \arhead{Author action:}
-We acknowledged the pipeline inconsistency explicitly in the revised
-manuscript and archived the original C2--C5 results in the replication
-repository for transparency. Section~4.5 was rewritten to present the
-pre-registered B7 dose--response results for both Qwen (five seeds per dose)
-and Gemma~3 G2 (three seeds, 50\% removal), with paired $t$-tests and 95\,\%
-confidence intervals. The learning-rate equivalence prediction is reported
-with its 90\,\% CI and without claiming formal equivalence.
+We disclosed the pipeline inconsistency, withdrew the original C1/C5
+inference, replaced it with the paired B7 dose--response analysis, and
+reported the distinct Gemma~3 outcome without attributing both patterns
+to the same mechanism.
 
-\msloc{Section~4.5 (B7 and G2 dose--response; pre-registration; LR
-equivalence); Section~6 (mechanism limitation); replication repository
-(original C1--C5 archived).}
+\msloc{Section~4.5 (pipeline correction, B7, G2, and learning-rate
+comparison); Section~6 (mechanistic and generalization limits).}
 
-% ─────────────────────────────────────────────────────────────────────────────
-\rconcern{Reviewer \#1}{Concern \#5}{Reproducibility package}
+\rconcern{Reviewer \#1}{Concern \#5}{Scope of the reproducibility package}
 
-\rquote{What complete code, checkpoints, prompts, seeds, and raw outputs will
-support independent reproduction?}
+\rquote{What complete code, checkpoints, prompts, seeds, and raw outputs
+will support independent reproduction?}
 
 \arhead{Author response:}
-Independent reproduction requires more than aggregate retention tables. The
-reproducibility section (Section~A.1) has been expanded to specify the exact
-model checkpoint identifiers and revisions for all three backbones; train and
-evaluation question IDs, and the baseline-correct $K_0$ sets ($|K_0|=78$ for
-Qwen; $|K_{0,\mathrm{rank}}|=46$ and $|K_{0,\mathrm{G2}}|=44$ for Gemma~3,
-see Section~3.6); prompt and chat templates used for synthetic data generation
-and deterministic evaluation; distinct decoding settings
-(\texttt{do\_sample=False} and \texttt{temperature=0} for evaluation);
-correctness normalization and alias-expansion code; training configurations,
-software versions, random seeds, data-order and downsampling masks;
-per-generation retention counts and boolean correctness vectors included in
-the consolidated CSV; and scripts to regenerate every table and figure.
+We agree that aggregate tables alone are insufficient and that the scope
+of the public materials must be described precisely. The revised
+reproducibility description identifies the model checkpoints, question
+partitions and baseline-correct \(K_0\) sets, generation and evaluation
+prompts, decoding settings, training configurations, seeds, and the
+per-seed results used in the reported analyses. It also directs readers
+to the associated archive at
+\url{https://doi.org/10.5281/zenodo.23146342}.
+
+Importantly, we distinguish archived analysis materials from artifacts
+that are not publicly deposited. The described release includes
+consolidated results and replication scripts, but raw token-level
+predictions, trained adapter checkpoints, and base-model weights are not
+included. We therefore do not claim that the archive alone permits a
+complete token-level audit or byte-for-byte reconstruction of every
+training run. Scripts introduced or revised after release
+\texttt{v1.0.3} must be identified by the version in which they are
+actually deposited; they should not be attributed to the earlier release.
 
 \arhead{Author action:}
-The replication package contains all analysis and figure-generation scripts;
-the consolidated results CSV (G1--G5, 27 executed training runs,
-per-generation per-seed retention); all 11 publication figures at 300\,dpi;
-and the pre-registration commit for B7 (\texttt{a916ebf}). The package does
-\emph{not} contain raw token-level predictions, adapter checkpoints (available
-on request; $\approx$70\,MB each in bf16), or base-model weights. It is
-archived at \url{https://doi.org/10.5281/zenodo.23146342}. Release
-\texttt{v1.0.3} contains the initial replication scripts and data; revised
-analysis scripts will be deposited in a subsequent release. Running
-\texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers
-(15/15 checks pass).
+We expanded the reproducibility and data-availability description to
+state what the public package contains, what it does not contain, and
+which archive version supports each reproduction claim.
 
-\msloc{Section~A.1 (repository and data access, expanded).}
+\msloc{Appendix~A.1 (reproducibility and data availability).}
 
-% ══════════════════════════════════════════════════════════════════════════════
+
 \section*{Reviewer 2}
 
 % ─────────────────────────────────────────────────────────────────────────────
