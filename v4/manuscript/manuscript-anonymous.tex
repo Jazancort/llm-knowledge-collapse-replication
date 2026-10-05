@@ -56,7 +56,7 @@
 
 \begin{document}
 \let\WriteBookmarks\relax
-\def\floatpagefraction{.6}
+\def\floatpagefraction{.85}
 \def\textfraction{.1}
 \def\topfraction{.9}
 \def\bottomfraction{.9}
@@ -491,7 +491,7 @@ reported as the mean across adapted matrices.
 Table~\ref{tab:notation} summarises all symbols used in this section and in
 the results.  Symbols are listed in order of first appearance.
 
-\begin{table}[!tp]
+\begin{table}[!htbp]
 \caption{\rev{Symbol definitions used throughout the methodology and results.
 All adapter-level quantities ($\mathrm{erank}$, $\|\cdot\|_F$) are averaged
 across adapted LoRA modules within a model.}}
@@ -760,7 +760,7 @@ one hour on either device. These timings are reported to document that the full
 protocol is reproducible on workstation-class hardware (see
 Appendix~\ref{app:repo} for code and data access).
 
-\begin{figure*}[!t]
+\begin{figure*}[!htbp]
   \centering
   \includegraphics[width=\textwidth]{figs/scratch/fig1_overview.pdf}%
   \vspace{4pt}
@@ -787,7 +787,7 @@ magnitude, module topology, and synthetic exposure, affect recursive stability.
 Table~\ref{tab:axes} summarizes the experimental axes, the manipulated variable,
 and the tested range.
 
-\begin{table}[!t]
+\begin{table}[!htbp]
 \caption{Experimental axes and their corresponding pressure
 components.}\label{tab:axes}
 \begin{tabular}{@{}c l >{\raggedright}p{2.5cm} >{\raggedright\arraybackslash}p{4.2cm}@{}}
@@ -1070,7 +1070,7 @@ quantitatively in Section~\ref{sec:results}; the remaining factors are held
 constant within each experimental pipeline.
 
 
-\begin{table*}[!tp]
+\begin{table*}[!htbp]
 \caption{\rev{Sources of variation in the recursive fine-tuning
 protocol and the corresponding experimental control. G3 and G4 refer to
 dedicated within-session ablations (Section~\ref{sec:results}). ``Held
@@ -1164,7 +1164,7 @@ loss; on
 supported by multi-seed experiments, whereas single-seed results are presented
 as supporting evidence.
 
-\begin{figure*}[!t]
+\begin{figure*}[!htbp]
 \centering
 \includegraphics[width=0.95\textwidth]{figs/final/fig_regime_examples.pdf}
 \caption{Representative response evolution under the three recursive regimes
@@ -1299,7 +1299,7 @@ sweep. In the homeostatic regime, facts lost at one generation are recovered at
 similar rates (net loss $\approx 0$), indicating bounded oscillation rather than
 progressive forgetting. In the degradative regime, \rev{losses exceeded recoveries in the single seed analysed (Table~\ref{tab:transitions}), producing monotonic net displacement.}
 
-\begin{table}[!tp]
+\begin{table}[!htbp]
 \caption{Item-level transitions across recursive generations on
 Qwen~2.5~1.5B (seed~15, $\rev{\Kcard = 78}$). C$\to$W (Correct$\to$Wrong): facts lost;
 W$\to$C (Wrong$\to$Correct): facts recovered.\textsuperscript{\dag}}\label{tab:transitions}
@@ -1446,7 +1446,7 @@ Figure~\ref{fig:combined_traj} presents the retention trajectories for all three
 backbones, enabling direct visual comparison of the regime structure across
 architectures.
 
-\begin{figure*}[!t]
+\begin{figure*}[!htbp]
   \centering
   \includegraphics[width=0.95\textwidth]{figs/scratch/fig_combined_trajectories.png}
   \caption{$K_0$ retention trajectories over ten recursive generations across
@@ -1813,7 +1813,7 @@ archived in the replication repository (Section~\ref{app:repo}).}
 Figure~\ref{fig:interventions} visualizes the retention and effect-size
 comparison across conditions.
 
-\rev{\begin{figure}[!tp]
+\rev{\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/scratch/fig_interventions.png}
   \caption{Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5, included for
@@ -1849,7 +1849,7 @@ levels; effective rank is not portable across architectures
 protocol without inferring which backbone operated at higher relative
 pressure.}
 
-\rev{\begin{figure}[!tp]
+\rev{\begin{figure}[!htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig9_dose_response.png}
   \caption{Dose--response of synthetic exposure reduction on factual retention
@@ -1947,7 +1947,7 @@ training pipelines (Section~\ref{sec:disc_practical}).
 
 \subsection{Effective training pressure as framework}\label{sec:disc_pressure}
 
-\begin{figure*}[!t]
+\begin{figure*}[!htbp]
   \centering
   \includegraphics[width=0.75\textwidth]{figs/scratch/fig_etp_framework.png}
   \caption{Pressure-response relationship guiding recursive fine-tuning
@@ -1993,7 +1993,7 @@ into a single predictive scalar remains an important direction for future work.}
 Table~\ref{tab:evidence} summarizes how each component of the framework is
 supported by independent experimental evidence.
 
-\begin{table}[!tp]
+\begin{table}[!htbp]
 \caption{Evidence matrix: mapping framework components to supporting
 experiments.}\label{tab:evidence}
 \footnotesize
@@ -2107,7 +2107,7 @@ more productive than treating collapse as a monolithic threat.
 To clarify the scope of the present findings, Table~\ref{tab:generalization}
 distinguishes what the evidence supports from what remains open.
 
-\begin{table}[!tp]
+\begin{table}[!htbp]
 \caption{Scope of generalization: what the present evidence supports versus
 what remains unknown.}\label{tab:generalization}
 \footnotesize
@@ -2287,7 +2287,7 @@ Cross-architecture threshold normalization was attempted using several
 architectural ratios, none of which aligned the thresholds between Qwen and
 Gemma~3 (Table~\ref{tab:normalization}).
 
-\begin{table}[!tp]
+\begin{table}[!htbp]
 \caption{Cross-architecture threshold normalization attempts. Threshold erank
 values: Qwen ${\approx}$50--88, Gemma~3 ${\approx}$3--6, E2B ${\approx}$5--13. None of
 the tested normalizations aligned thresholds across
