@@ -768,10 +768,7 @@ rank.
 
 \item \textbf{Method comparison (QLoRA vs FFT).} We compare QLoRA $r=16$
 against FFT at $\mathrm{LR}=10^{-6}$, selected because it produces the closest
-available perturbation proxy ($\|BA\|_F \approx 0.42$ vs FFT drift $\approx
-0.39$). Because the LoRA Frobenius norm and the FFT weight drift measure
-different geometric quantities, this constitutes a comparison at comparable
-perturbation levels rather than an exact match. Both
+available method comparator ($\|BA\|_F \approx 0.42$ for QLoRA; FFT drift $d(t) \approx 0.39$). \rev{Because these quantities measure different geometric properties, this is an exploratory comparison between training methods, not a perturbation-matched pairing.} Both
 are run for 10 generations with three seeds.
 
 \item \textbf{Module topology (supportive ablation).} On Qwen, we compare
@@ -862,11 +859,7 @@ the parameters after one generation of fine-tuning.
 % [v4] A6 RESOLVIDO: abs_drift = mean absolute por parâmetro, confirmado no código
 This scalar summarizes the
 average displacement of the model in weight space under FFT. For QLoRA, the
-closest available perturbation proxy is the Frobenius norm of the composed
-adapter update, $\|BA\|_F$. These two quantities are not geometrically identical:
-one measures displacement of the full model weights, while the other measures
-the magnitude of a low-rank update. We therefore use them only as approximate
-perturbation proxies when selecting the FFT/QLoRA comparison in Axis~3.
+\rev{closest available method comparator} is the Frobenius norm of the composed adapter update, $\|BA\|_F$. These two quantities measure different geometric properties (full-weight displacement vs.\ low-rank update magnitude); the FFT/QLoRA comparison in Axis~3 is therefore exploratory, not perturbation-matched.
 
 \subsection{Output-distribution diagnostics}\label{sec:metrics}
 
@@ -1063,7 +1056,7 @@ Replicated on Gemma~3~1B~IT ($r\geq10$ degradative) and Gemma~4~E2B~IT ($r=64$ d
 
 Pipeline version &
 Different code paths could introduce discrepancies &
-Each experiment uses a dedicated script and commit; see the replication repository for the per-experiment manifest. \\
+\rev{Each experiment uses a dedicated script; per-experiment script names and run conditions are documented in the repository README. Commit-level traceability is available in the git log but not listed here.} \\
 
 \addlinespace
 
@@ -1794,8 +1787,8 @@ $p=\GtwoPtenFifty$), respectively ($n=3$ paired seeds per dose).
 At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen, indicating
 near-arrest of progressive loss.}
 \rev{The absolute gain at dose~$=50\%$ Gen10 is larger for Gemma~3 G2
-($\GtwoDeltatenFifty$~pp, $K_{0,\mathrm{G2}}{=}44$) than for Qwen B7
-($\BsevenDeltatenFifty$~pp, $K_0{=}78$). The two experiments used different
+($\GtwoDeltatenFifty$~pp, $|K_{0,\mathrm{G2}}|{=}44$) than for Qwen B7
+($\BsevenDeltatenFifty$~pp, $|K_0|{=}78$). The two experiments used different
 backbones, different evaluation set sizes, and different baseline retention
 levels; effective rank is not portable across architectures
 (Section~\ref{sec:res_backbone}), so we report the gains within each
@@ -1813,7 +1806,7 @@ pressure.}
   Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $|K_0|=78$).
   Shaded bands: 95\,\% confidence intervals from paired $t$-tests.
   The absolute gain is larger for Gemma~3 G2 ($|K_{0,\mathrm{G2}}|{=}44$)
-  than for Qwen B7 ($K_0{=}78$); effective rank is not portable across
+  than for Qwen B7 ($|K_0|{=}78$); effective rank is not portable across
   architectures, so the two curves are reported within their respective
   protocols rather than as a cross-backbone pressure comparison.
   Dashed horizontal line: no change ($\Delta=0$~pp).}\label{fig:dose_response_crossbackbone}
@@ -2298,14 +2291,10 @@ introducing residual confounding in the method comparison. Additionally,
 \rev{Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization. The G3 ablation re-ran the same protocol in bf16 (no base-weight quantization) and produced identical regime classifications, though a full causal conclusion awaits per-item audit. Although}
 the quantized base remains static across generations and adapters are trained in
 higher precision, the interaction between quantization error and high-rank
-adapter updates has not been isolated. A comparison against standard 16-bit LoRA
-would be needed to fully disentangle quantization effects from rank effects.
+adapter updates has not been isolated. \rev{The G3 ablation provides a bf16 comparison at $r=16$ and $r=256$, though its scope is limited to Qwen and its provenance audit is ongoing; a systematic comparison across all ranks and backbones was not conducted.}
 
 \rev{The primary dose--response experiments (B7 and G2) are tested only at $r=256$ on Qwen and $r=10$ on Gemma~3. The exploratory C1--C5 pilot is archived but not used in primary estimates.} The interventions are tested only at the $r=256$
-boundary on Qwen. Whether comparable sensitivity exists at other ranks, on other
-backbones, or with different datasets has not been established. The restriction to a single \rev{lowest-pressure degradative configuration tested} is deliberate: the purpose of
-these experiments is to demonstrate pressure sensitivity at the regime
-transition, not to propose a general mitigation method. Whether the same
+\rev{Whether comparable sensitivity exists at other ranks, on other backbones, or with different datasets has not been established.} Whether the same
 intervention would recover stability under extreme pressure (e.g., FFT at high
 learning rate) remains untested.
 
@@ -2344,7 +2333,7 @@ is not an artefact of verbosity-induced scoring inflation.}
 seed-level variance estimation or formal regime classification under the
 same statistical protocol applied to Qwen and Gemma~3. The E2B results are
 therefore treated as exploratory and supportive: they demonstrate that degradative
-behaviour at sub-threshold pressure is \rev{observed in a single-seed run} on a second-generation
+degradative behaviour at $r=64$ is \rev{observed in a single-seed run} on a second-generation
 architecture, but they do not constitute an independent replication of the
 quantitative threshold estimates.}
 
@@ -2414,10 +2403,8 @@ their effects are additive or interactive.
 
 \section{Project repository and data access}\label{app:repo}
 
-\rev{Version v1.0.3 of the replication package contains the initial experimental scripts, raw outputs, and a draft manuscript. The current submission's revised manuscript
-source, response-to-reviewers letter, \rev{aggregated per-seed per-generation results (G1--G5, 27 executed training runs (one run = one seed-configuration pair, comprising the full generation sequence for that condition; G5 runs 5 generations), CSV format)},
-canonical numbers (112 \LaTeX{} macros), all analysis scripts, and all publication
-figures — is archived at:
+\rev{The replication package is archived at the links below (version v1.0.3). This snapshot contains the initial experimental scripts, raw outputs, aggregated per-seed per-generation results (G1--G5, 27 executed training runs), and a draft manuscript. The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
+
 
 \begin{itemize}
   \item \textbf{Zenodo} (permanent, citable):
