@@ -205,7 +205,7 @@ R1-3 & External validity \textsc{part} &
        & \S3.2, \S6, Tab.~S2 \\
 R1-4 & Exposure: Qwen versus Gemma~3 &
        Pipeline inconsistency disclosed; two pre-registered
-       dose--response experiments replace the pilot & \S3.8, \S4.5 \\
+       dose--response experiments replace the pilot & \S3.7, \S4.5 \\
 R1-5 & Reproducibility &
        Checkpoint revisions, prompts, seeds, masks, item-level vectors,
        raw generations and adapters deposited & \S3.3, App.~A \\
@@ -215,15 +215,15 @@ R1-5 & Reproducibility &
 \multicolumn{4}{@{}p{15cm}}{\textit{Framework conceptual; Gemma~4 uncited; limited scale. → Contribution restated as design and evidence; Gemma~4 cited and disambiguated; scale stated as a limitation. [\S1, \S3.3, \S6]}}\\[2pt]
 \addlinespace[2pt]
 R2-1.1 & ETP in Fig.~1 before definition & Fig.~1 carries full name; ETP introduced in \S1 & \S1, Fig.~1 \\
-R2-1.2 & MTLD without expansion & Expanded as ``Moving-Average Type-Token Ratio'' & \S3.5.3 \\
+R2-1.2 & MTLD without expansion & Expanded as ``Measure of Textual Lexical Diversity'' & \S3.6 \\
 R2-1.3 & KL, JS, coverage in Fig.~1 without definition & Removed from Fig.~1; replaced with Distinct-$n$, MTLD, stopword ratio & Fig.~1 \\
-R2-1.4 & bf16 without expanded form & Expanded as ``16-bit brain-float'' at first use & \S4.6 \\
+R2-1.4 & bf16 without expanded form & Expanded as ``16-bit brain-float'' at first use & \S4.1 \\
 R2-1.5 & SVD without expansion & Expanded as ``singular value decomposition'' & \S3.5.1 \\
 R2-1.6 & TCE without expansion & Expanded as ``Truncated Cross-Entropy'' & \S3.1 \\
 R2-1.7 & QLoRA/LoRA inconsistent expansion & Both expanded at first use in \S1 & \S1 \\
 R2-1.8 & ``Homeo.'' in Table~2 undefined & ``Homeostatic'' written in full throughout & Tab.~1, body text \\
 R2-1.9 & $K_0$ dual use (set and metric) & $K_0$ = set; $|K_0|$ = cardinality; $R(t)$ = retention ratio & \S3.2, Eq.~1 \\
-R2-1.10 & $T$, $D1\_T$, $D10$, $\Delta I$, Instability SDI notation & SDI-3 rewritten; generation index in subscript; $n$-gram order in superscript & \S3.5.3, Eq.~6 \\
+R2-1.10 & $T$, $D1\_T$, $D10$, $\Delta I$, Instability SDI notation & SDI-3 rewritten; generation index in subscript; $n$-gram order in superscript & \S3.6, Eq.~6 \\
 \addlinespace[2pt]
 R2-2.1 & Eq.~1 garbled (``Retention.t~/'') & Rendering fault traced to re-distillation; Eq.~1 rewritten & Eq.~1 \\
 R2-2.2 & Eq.~2 missing negative sign (math error) & $-\sum p_i\log p_i$ restored; $p_i$ defined separately & Eq.~2 \\
@@ -232,24 +232,24 @@ R2-2.4 & Table~7: ``$5\imath 10^6$'' & Rendering fault corrected; glyph audit sc
 \addlinespace[2pt]
 R2-3.a & Qwen threshold: Abstract/\S4.2.3 vs.\ \S5.1 ``up to rank~150'' & ``up to~150'' deleted; two boundaries distinguished (29.5--50.2; 50.2--87.6) & \S5.1, Abstract \\
 R2-3.b & $r=128$: ``Bounded'' in Tab.~2 but ``above-threshold'' in \S4.4.3 & ``above-threshold'' replaced by ``transition-zone configuration'' throughout & \S4.4.3 \\
-R2-3.c & $r=256$ called ``boundary configuration'' & Removed; $r=256$ consistently labeled degradative & \S4.1, Tab.~4 \\
+R2-3.c & $r=256$ called ``boundary configuration'' & Removed; $r=256$ consistently labeled degradative & \S3.4, \S4.5, \S5.4, Tab.~4 \\
 R2-3.d & Gemma~3 range: \S5.2 says ``$r{\geq}16$'' but Tab.~4 shows $r{=}10,12,14$ degradative & Text corrected to ``$r \geq 10$''; boundary stated as ``below $r=10$'' & \S5.2 \\
-R2-3.e & Abstract: ``three to five seeds'' overclaim & Corrected to ``three seeds'' (only $r=4$ and $r=16$ have five) & Abstract \\
-R2-3.f & FFT on Gemma~3 ``confirms'' magnitude axis & ``confirms'' replaced by ``is consistent with''; limitations stated & \S4.3.1 \\
+R2-3.e & Abstract: ``three to five seeds'' overclaim & Corrected to ``three or five independent seeds for most headline conditions (six for the pooled $r{=}256$ estimate)''; Gemma~3 conditions with five seeds identified explicitly & Abstract, \S1, \S3.8 \\
+R2-3.f & FFT on Gemma~3 ``confirms'' magnitude axis & ``confirms'' replaced by ``is consistent with''; limitations stated & \S4.3.3 \\
 R2-3.g & C5 removal: \S3.4 ``$15^{\circ}$~removal'' vs.\ 5\% tokens & C1--C5 pilot excluded from all estimates; new experiments (B7, G2) use example fractions only & \S3.7, \S4.5 \\
 \addlinespace[2pt]
 R2-4.a & No formal tests, CI, or $p$-values & Paired $t$-tests with 95\,\% CI added at every dose level; sign and permutation tests at anchor ranks & \S4.1, \S4.5, \S4.6 \\
 R2-4.b & ETP framework not quantified & No scalar predictor derived; ETP labeled exploratory post-training summary & \S3.5, \S6 \\
-R2-4.c & Normalization failed; no alternative proposed & Five normalizations reported as negative result; per-backbone calibration protocol specified & \S5.3, Tab.~13 \\
+R2-4.c & Normalization failed; no alternative proposed & Five normalizations reported as negative result; per-backbone calibration protocol specified & \S4.2.3, \S6, Tab.~13 \\
 R2-4.d & ``ETP is just a conceptual label'' & Conceded; contribution restated as factorial design, pre-registered evidence, and empirical finding & \S1 \\
 R2-4.e & Gemma~4 E2B: no citation, confusion with Gemma~3n, architecture unsourced & Ref.~[41] added; model distinguished from Gemma~3n~E2B in text and Tab.~2 & \S3.3, Tab.~2 \\
 R2-4.f & ``Sharp transition'' weakened by sparse grid / wide intervals & ``sharp'' withdrawn throughout; claim restated as threshold-like pattern on a tested grid & \S1, \S5 \\
 \addlinespace[2pt]
-R2-5.1 & Duplicate arXiv ID in references & Resolved; correct arXiv ID assigned & \texttt{cas-refs.bib} \\
-R2-5.2 & Publication year incorrect for one entry & Year corrected & \texttt{cas-refs.bib} \\
-R2-5.3 & Gemma~4 E2B lacks a citation & Ref.~[41] (arXiv:2607.02770) added & \texttt{cas-refs.bib} \\
-R2-5.4 & Ref.~[7] preprint status not declared & Labeled ``Non-peer-reviewed preprint (arXiv)'' in the list & \texttt{cas-refs.bib} \\
-R2-5.5 & Reference list not harmonized & Harmonized: journal/conference format consistent; Soutif-Cormerais attribution corrected & \texttt{cas-refs.bib} \\
+R2-5.a & Duplicate arXiv ID in references & Resolved; correct arXiv ID assigned & \texttt{cas-refs.bib} \\
+R2-5.b & Publication year incorrect for one entry & Year corrected & \texttt{cas-refs.bib} \\
+R2-5.c & Gemma~4 E2B lacks a citation & Ref.~[41] (arXiv:2607.02770) added & \texttt{cas-refs.bib} \\
+R2-5.d & Ref.~[7] preprint status not declared & Labeled ``Non-peer-reviewed preprint (arXiv)'' in the list & \texttt{cas-refs.bib} \\
+R2-5.e & Reference list not harmonized & Harmonized: journal/conference format consistent; Soutif-Cormerais attribution corrected & \texttt{cas-refs.bib} \\
 \end{longtable}
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -550,10 +550,9 @@ summarizes which contrasts isolate individual axes, which remain
 partially confounded, and what additional experiments (e.g., a design
 that varies rank alone while holding quantization, optimizer, data order,
 and seed fixed simultaneously) would be required to draw fully causal
-conclusions. We have added: \newtext{The available controls establish
-directional consistency across multiple configurations; they do not
-permit fully causal attribution of the observed effects to individual
-pressure axes in isolation.}
+conclusions. A dedicated paragraph in \S4.2.1 states explicitly which
+contrasts isolate individual axes, which remain partially confounded,
+and what additional experiments would be needed for fully causal attribution.
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
@@ -866,10 +865,9 @@ text. This has been corrected: Figure~1 no longer carries ETP unexpanded,
 and the term is introduced in full (``effective training pressure'') at
 its first use in Section~1. The abbreviation is then formally defined
 in Section~3.5, where it is needed for the compound labels ETP-design
-and ETP-observed. The revised Figure~1 caption states:
-\newtext{Stage 3: Pressure manipulation along five axes (nominal
-rank, learning rate, method, module topology, and synthetic-data dose);
-see Section~3.5 for the effective training pressure (ETP) framework.}
+and ETP-observed. The revised Figure~1 names each stage explicitly,
+lists all five pressure axes in Card~3, and labels Card~6 as
+``Effective training pressure (ETP) --- boundary identification''.
 
 \textbf{Unexpanded abbreviations.}
 All abbreviations listed by the reviewer have been expanded at first
