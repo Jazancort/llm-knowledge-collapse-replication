@@ -177,7 +177,7 @@ experimental framework rather than a validated, transferable predictor.
 We revised the ETP definition, qualified the G5 interpretation, and added
 the requirements for future prospective calibration.
 
-\msloc{Section~3.5 (ETP definition); Section~4.4 (G5); Section~6
+\msloc{Section~3.5 (ETP definition); Section~4.6 (G5 prospective test); Section~6
 (prospective validation and limitations).}
 
 \rconcerntitle{Reviewer \#1}{Concern \#2}{Separating pressure effects from confounders}
@@ -222,7 +222,7 @@ We separated design variables from post-training diagnostics, documented
 the controls and their limitations, and distinguished the paired G3
 comparison from the descriptive cross-protocol Qwen contrast.
 
-\msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.2
+\msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.1 (rank sweep); Section~4.2.1
 (Qwen comparisons); Section~4.3.1 (Gemma~3); Section~4.6 (G3 and G4).}
 
 \rconcerntitle{Reviewer \#1}{Concern \#3}{External validity of the evaluation}
@@ -269,9 +269,9 @@ This question exposed a substantive problem with the original comparison.
 C1 and C5 followed different evaluation pipelines, including differences
 in \(K_0\) construction and data loading. The previously reported
 \(9.0\)- and \(9.4\)-percentage-point intervention gains cannot therefore
-serve as evidence of stabilization. We also clarified the dose terminology:
-C5 removed 15\% of training \emph{examples}, corresponding to
-approximately 5\% of \emph{tokens}. Under a matched pipeline with three
+serve as evidence of stabilization. We also clarified that the pilot is excluded from all estimates;
+every dose in the two pre-registered experiments is specified
+as a fraction of training examples removed, with no token-based figure. Under a matched pipeline with three
 paired seeds, the estimated effect of that smaller intervention was
 \(+1.9\) percentage points and was inconclusive.
 
@@ -303,8 +303,8 @@ inference, replaced it with the paired B7 dose--response analysis, and
 reported the distinct Gemma~3 outcome without attributing both patterns
 to the same mechanism.
 
-\msloc{Section~4.5 (pipeline correction, B7, G2, and learning-rate
-comparison); Section~6 (mechanistic and generalization limits).}
+\msloc{Section~4.5 (dose--response experiments B7 and G2); Section~4.6
+(learning-rate comparison); Section~6 (mechanistic and generalization limits).}
 
 \rconcerntitle{Reviewer \#1}{Concern \#5}{Scope of the reproducibility package}
 
@@ -475,8 +475,8 @@ reviewer proposed:
   \mathrm{erank}(BA) = \exp\!\left(-\sum_i p_i \log p_i\right),
   \qquad p_i = \frac{\sigma_i}{\sum_j \sigma_j}
 \]
-with \newtext{$p_i \ge 0$ and $\sum_i p_i = 1$} stated in Table~1. The
-symbol $\sigma_i$ now denotes only the singular values of $\Delta W$.\ \
+with \newtext{$\hat{\sigma}_i \ge 0$ and $\sum_i \hat{\sigma}_i = 1$} stated in Table~1. The
+symbol $\hat{\sigma}_i$ denotes the normalised singular weight; $\sigma_i$ are the raw singular values of $\Delta W$.\ \
 (Eq.~2, \S3.5.1, p.~8; Table~1, p.~25) \\
 
 (c) & Eq.~6 signs, log ratios, $\Delta I$ &
@@ -595,8 +595,8 @@ is now stated at the level of individual claims rather than once in
 aggregate: headline conditions use three or five seeds (six for the
 pooled $r=256$ estimate), intermediate ablations use a single seed and
 are labelled descriptive, and the two classes are never pooled when a
-headline claim is made. An $N$ column was added to every results table so
-that the basis of each number is visible without consulting the text.
+headline claim is made. An $N$ column was added to the rank-sweep and dose--response tables;
+the remaining tables (Tables~7--9) state $N$ in a footnote.
 Contribution~1 in the Introduction, which carried the same overclaim, was
 corrected with it.
 \newtext{(Abstract, p.~1; \S1, p.~3; \S3.8, p.~9; Tables~4--10)}

@@ -122,9 +122,9 @@ pipelines.
 \begin{highlights}
 \item \rev{Rank-dependent threshold-like transition between homeostatic and degradative regimes}
 \item \rev{Regime boundaries differ ${\sim}10{\times}$ across backbones (erank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
-\item \rev{Adapter rank and learning rate jointly determine the operating regime}
+\item \rev{Adapter rank and learning rate \rev{both shift the observed operating regime}}
 \item Output drift accompanies degradative regimes while factual retention stays bounded
-\item \rev{A pre-registered 50\% synthetic exposure reduction strongly attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, retention improved at Gen~10 without a reduction in the observed rate of loss}
+\item \rev{A pre-registered 50\% synthetic exposure reduction \rev{substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, retention improved at Gen~10 without a reduction in the observed rate of loss}
 \end{highlights}
 
 % ============================================================
@@ -472,7 +472,7 @@ across adapted LoRA modules within a model.}}
 \textbf{Symbol} & \textbf{Definition} \\
 \midrule
 $K_0$          & \rev{Set of items in $Q$ answered correctly at generation~0;
-                 $|K_0|$ (also written $n_0$) denotes its cardinality; $n_0$ is protocol-specific (e.g., 78 for main Qwen, 46 for Gemma rank, 44 for G2 dose)} \\
+                 $|K_0|$ denotes the cardinality of the anchor set; values: 78 (main Qwen runs), 46 (Gemma rank), 44 (G2 dose)} \\
 $R(t)$         & Factual retention at generation~$t$: fraction of $K_0$ items
                  still correct \\
 $\theta^{(0)}$ & Pretrained backbone weights \\
@@ -1868,7 +1868,7 @@ We do not report an operational pressure index $\Pi$ for G5: the effective rank
 of each adapter was measured (mean $\mathrm{erank}\approx51$ for $r=128$,
 $\approx16$ for $r=32$), but the pre-specification did not fix a threshold on
 $\Pi$, and the three cells were selected by nominal rank and learning rate, not
-by $\Pi$ value. One of the three pre-specified regime classifications was not
+by $\Pi$ value. One of the three \rev{two of the three pre-specified regime classifications were confirmed; one classification} was not
 met; G5 is therefore exploratory evidence for the ordering, not a confirmatory
 test of the full classification scheme.
 All three cells used a single seed; the prospective result is therefore exploratory.}
@@ -1964,7 +1964,7 @@ Generalizes cross-backbone & Gemma~3 ($N=5$) + \rev{E2B rank sweep ($N=1$)} \\
 
 Two features of this framework merit emphasis. First, the threshold is
 backbone-dependent: Gemma~3 transitions at effective rank 3--6, while Qwen
-remains outside the degradative regime up to effective rank ${\sim}$50. No simple normalization by architectural
+remains outside the \rev{degradative regime up to effective rank ${\sim}$50 on Qwen --- the upper boundary of the bounded regime --- and directly beyond effective rank ${\sim}$6 on Gemma~3, where no bounded regime was observed}. No simple normalization by architectural
 parameters (hidden dimension, depth, head count) aligned these thresholds. This
 likely reflects properties of the pretrained backbone not captured by simple
 architectural dimensions. Second, the framework does not assume that the three
@@ -2054,7 +2054,7 @@ Regime transition exists & Threshold at larger scales \\
 \addlinespace
 Pressure dependence & Exact functional form \\
 \addlinespace
-Steep, configuration-dependent boundary & Behavior beyond Gen10 \\
+\rev{Configuration-dependent boundary within the tested grid} & Behavior beyond Gen10 \\
 \addlinespace
 Reproducibility (3--5 seeds) & Transfer to non-factoid tasks \\
 \addlinespace
@@ -2328,8 +2328,7 @@ pressure as an organizing framework for recursive stability under
 parameter-efficient fine-tuning. The central finding is that recursive
 degradation is a pressure-gated phenomenon: increasing update capacity,
 perturbation magnitude, or synthetic exposure \rev{can each shift} the system from homeostatic to degradative behavior, with the transition being
-\rev{threshold-like within the tested grid}, backbone-dependent, and reproducible across the seeds evaluated. Cross-backbone replication further
-shows that degradation in the above-threshold regime is progressive and does not
+\rev{threshold-like within the tested grid}, backbone-dependent, and reproducible across the seeds evaluated. Cross-backbone replication \rev{further indicates} that degradation in the above-threshold regime is progressive and does not
 stabilize within the observed horizon. \rev{Pre-registered dose--response
 experiments on two backbones show that a 50\% reduction in synthetic exposure
 \rev{substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, it improved
@@ -2376,7 +2375,7 @@ their effects are additive or interactive.
     (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
-\rev{Running \texttt{python scripts/make\_all.py} from the package root in the current checkout reproduces all canonical numbers reported in this paper (15/15 consistency checks pass in the HEAD commit; this script is not part of the v1.0.3 snapshot).}
+\rev{Running \texttt{python scripts/make\_all.py} from the package root in the current checkout \rev{regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper (15/15 checks in the HEAD commit; this script is not part of the v1.0.3 snapshot).}}
 Running \texttt{python scripts/figures/fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not
