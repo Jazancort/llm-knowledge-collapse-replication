@@ -695,6 +695,13 @@ check. Architectural metadata are taken from the released model configurations.
     family}.
 \end{itemize}
 
+
+\rev{All three backbones were retrieved from the Hugging Face Hub at
+fixed revisions. The repository identifiers and commit hashes are listed
+in supplementary Table~S1 and in \texttt{configs/checkpoints.yaml} of
+the replication package, so that the identical weights can be
+obtained.}
+
 QLoRA experiments load the base model in 4-bit
 NormalFloat (NF4) quantization with double quantization and bfloat16 compute
 dtype, following the QLoRA protocol~\citep{dettmers2023}. Full fine-tuning
@@ -1549,8 +1556,7 @@ $r=256$, even the lowest evaluated learning rate ($5 \times 10^{-6}$) produces
 measurable degradation (89.7\%). Conversely, reducing learning rate partially
 offsets the effect of higher rank: $r=256$ with $\mathrm{LR}=5 \times 10^{-6}$
 retains 89.7\%, compared to 84.6\% at $\mathrm{LR}=10^{-5}$ and 82.1\% at
-$\mathrm{LR}=2 \times 10^{-5}$. This \rev{is consistent with the regime depending jointly on update capacity and perturbation magnitude, although the single-seed design does not permit a formal interaction test} rather than on
-either axis in isolation.
+$\mathrm{LR}=2 \times 10^{-5}$. This \rev{is consistent with the regime depending jointly on update capacity and perturbation magnitude rather than on either axis in isolation, although the single-seed design does not permit a formal interaction test.}
 
 \begin{figure}
   \centering
@@ -1962,9 +1968,16 @@ Generalizes cross-backbone & Gemma~3 ($N=5$) + \rev{E2B rank sweep ($N=1$)} \\
 \end{tabularx}
 \end{table}
 
-Two features of this framework merit emphasis. First, the threshold is
-backbone-dependent: Gemma~3 transitions at effective rank 3--6, while Qwen
-remains outside the \rev{degradative regime up to effective rank ${\sim}$50 on Qwen --- the upper boundary of the bounded regime --- and directly beyond effective rank ${\sim}$6 on Gemma~3, where no bounded regime was observed}. No simple normalization by architectural
+Two features of this framework merit emphasis. First, the threshold is backbone-dependent, and the two backbones are
+not described by the same boundary. \rev{On Qwen the tested grid places
+the homeostatic-to-bounded transition between effective ranks 29.5
+($r=64$) and 50.2 ($r=128$), and the bounded-to-degradative transition
+between 50.2 and 87.6 ($r=256$); the 50--88 interval quoted in the
+Abstract is the second of these. On Gemma~3, where no bounded regime
+was observed, the 3--6 interval is the transition from homeostatic
+directly to degradative. The two intervals are therefore not the same
+kind of object.}
+No simple normalization by architectural
 parameters (hidden dimension, depth, head count) aligned these thresholds. This
 likely reflects properties of the pretrained backbone not captured by simple
 architectural dimensions. Second, the framework does not assume that the three
@@ -2079,8 +2092,7 @@ drops from 2673 to 745. This dissociation between factual retention and
 distributional quality provides the principal motivation for using
 output-distribution diagnostics as complementary monitoring signals.
 
-Two distinct degradation phenotypes emerge above the pressure threshold. At
-intermediate capacity ($r=128$), the model accumulates filler words and
+\rev{Two distinct degradation phenotypes emerge at and above the transition zone. In the transition-zone configuration ($r=128$),} the model accumulates filler words and
 repetitive function tokens while preserving enough factual content to maintain
 bounded retention. At high capacity ($r=256$), the model instead generates
 lexically diverse but factually unanchored responses. These patterns appear to
@@ -2311,11 +2323,78 @@ horizon) and G2 (Gemma~3 $r=10$, Gen10). Whether the same sensitivity exists at 
 ranks, on other backbones, or with different training datasets
 has not been established.}
 
-Finally, the present work establishes which variables shift which regimes,
-but does not yet derive a quantitative formulation combining the three pressure
-components into a single scalar predictor. Whether such a formulation can be
-obtained, for instance through multivariate regression on a larger configuration
-space, remains an open question for future work.
+Finally, the present work establishes which variables shift which
+regimes, but does not derive a quantitative formulation combining the
+three pressure components into a single scalar predictor.
+
+\rev{A prospective calibration of effective training pressure on an
+unseen backbone would require the following protocol, which we specify
+here as a concrete target for future work rather than as a result of the
+present study. (i)~\emph{Pilot sweep}: run two nominal ranks spanning
+roughly one order of magnitude for five recursive generations with a
+single seed, recording $\mathrm{erank}(\Delta W)$ per generation.
+(ii)~\emph{Backbone-local calibration}: estimate the regime boundary as
+the interval between the highest pilot configuration whose Gen1--Gen5
+retention slope is indistinguishable from zero and the lowest whose
+slope is negative. (iii)~\emph{Pre-specification}: register, before any
+further run, two configurations on opposite sides of the calibrated
+interval, together with the outcome criterion and the decision rule.
+(iv)~\emph{Held-out evaluation}: execute both configurations to Gen10
+with at least three seeds. (v)~\emph{Reporting}: report the
+pre-registered prediction, the observed classification, and any
+discrepancy, irrespective of direction. Steps (i)--(ii) cost
+approximately two pilot runs per backbone. The present study performed
+neither the pre-specification nor the held-out evaluation on an unseen
+backbone. This per-backbone procedure is also the practical alternative
+we propose to the architectural normalisations in
+Table~\ref{tab:normalization}, none of which aligned the thresholds
+across backbones.}
+
+\rev{A prospective calibration of effective training pressure on an
+unseen backbone would require the following protocol, which we specify
+here as a concrete target for future work rather than as a result of the
+present study. (i)~\emph{Pilot sweep}: run two nominal ranks spanning
+roughly one order of magnitude for five recursive generations with a
+single seed, recording $\mathrm{erank}(\Delta W)$ per generation.
+(ii)~\emph{Backbone-local calibration}: estimate the regime boundary as
+the interval between the highest pilot configuration whose Gen1--Gen5
+retention slope is indistinguishable from zero and the lowest whose
+slope is negative. (iii)~\emph{Pre-specification}: register, before any
+further run, two configurations on opposite sides of the calibrated
+interval, together with the outcome criterion and the decision rule.
+(iv)~\emph{Held-out evaluation}: execute both configurations to Gen10
+with at least three seeds. (v)~\emph{Reporting}: report the
+pre-registered prediction, the observed classification, and any
+discrepancy, irrespective of direction. Steps (i)--(ii) cost
+approximately two pilot runs per backbone. The present study performed
+neither the pre-specification nor the held-out evaluation on an unseen
+backbone. This per-backbone procedure is also the practical alternative
+we propose to the architectural normalisations in
+Table~\ref{tab:normalization}, none of which aligned the thresholds
+across backbones.}
+
+\rev{A prospective calibration of effective training pressure on an
+unseen backbone would require the following protocol, which we specify
+here as a concrete target for future work rather than as a result of the
+present study. (i)~\emph{Pilot sweep}: run two nominal ranks spanning
+roughly one order of magnitude for five recursive generations with a
+single seed, recording $\mathrm{erank}(\Delta W)$ per generation.
+(ii)~\emph{Backbone-local calibration}: estimate the regime boundary as
+the interval between the highest pilot configuration whose Gen1--Gen5
+retention slope is indistinguishable from zero and the lowest whose
+slope is negative. (iii)~\emph{Pre-specification}: register, before any
+further run, two configurations on opposite sides of the calibrated
+interval, together with the outcome criterion and the decision rule.
+(iv)~\emph{Held-out evaluation}: execute both configurations to Gen10
+with at least three seeds. (v)~\emph{Reporting}: report the
+pre-registered prediction, the observed classification, and any
+discrepancy, irrespective of direction. Steps (i)--(ii) cost
+approximately two pilot runs per backbone. The present study performed
+neither the pre-specification nor the held-out evaluation on an unseen
+backbone. This per-backbone procedure is also the practical alternative
+we propose to the architectural normalisations in
+Table~\ref{tab:normalization}, none of which aligned the thresholds
+across backbones.}
 
 % ============================================================
 % 7. CONCLUSION
@@ -2375,8 +2454,8 @@ their effects are additive or interactive.
     (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
-\rev{Running \texttt{python scripts/make\_all.py} from the package root in the current checkout \rev{regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper (15/15 checks in the HEAD commit; this script is not part of the v1.0.3 snapshot).}}
-Running \texttt{python scripts/figures/fig9\_dose\_response.py} regenerates
+\rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout \rev{regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper (15/15 checks in the HEAD commit; this script is not part of the v1.0.3 snapshot).}}
+Running \texttt{python figs/src/fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not
 redistributed; exact checkpoint identifiers are listed in

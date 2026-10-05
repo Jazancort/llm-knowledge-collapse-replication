@@ -1,73 +1,70 @@
 \documentclass[11pt,a4paper]{article}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[margin=2.5cm]{geometry}
+\usepackage[margin=2.3cm]{geometry}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{parskip}
 \usepackage[table]{xcolor}
 \usepackage{amsmath}
-\usepackage[numbers]{natbib}
-\usepackage[normalem]{ulem}
-\usepackage{hyperref}
-\usepackage{titlesec}
-\usepackage{longtable}
 \usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{array}
 \usepackage{enumitem}
-% Column type for longtable: left-aligned with fixed width
-\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
-\definecolor{hdrgray}{gray}{0.88}
-% ── Macros de marcação de texto novo e referências cruzadas ──────────────
-\newcommand{\newtext}[1]{\textcolor{chgcolor}{\textit{``#1''}}}  % texto novo: azul itálico com aspas
-\newcommand{\renum}[2]{#1 of the original submission (now #2)}  % renumeração com referência
-\newcommand{\rsub}[2]{\medskip\noindent\textbf{#1}~#2\par\smallskip}  % sub-item
+\usepackage[numbers]{natbib}
+\usepackage{hyperref}
+\usepackage{titlesec}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
-
-\definecolor{chgcolor}{RGB}{0,80,180}
-\definecolor{rccolor}{RGB}{0,128,0}   % green for reviewer label
 
 \input{numbers}
 
-\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
+\definecolor{chgcolor}{RGB}{0,80,180}
+\definecolor{rccolor}{RGB}{0,110,40}
+\definecolor{hdrgray}{RGB}{240,240,240}
 
-% ── Macros de estrutura IEEE Access ──────────────────────────────────────────
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{2.2em}{0.8em}
+
 \newcommand{\rconcern}[3]{%
-  % R2-2..R2-5: #3 = full reviewer comment → displayed as recessed italic quote
-  \bigskip\noindent\rule{\linewidth}{0.4pt}\par\smallskip
-  \noindent\textbf{\textcolor{rccolor}{#1, #2:}}\par\smallskip
+  \bigskip\noindent\rule{\linewidth}{0.4pt}\par\medskip
+  \noindent\textbf{\textcolor{rccolor}{#1 --- #2:}}\par
+  \smallskip
   \begin{quote}\itshape\textcolor{rccolor}{#3}\end{quote}%
-}
-\newcommand{\rconcerntitle}[3]{%
-  % R1-1..R2-1: #3 = short title; full text follows in \rquote{}
-  \bigskip\noindent\rule{\linewidth}{0.4pt}\par\smallskip
-  \noindent\textbf{\textcolor{rccolor}{#1, #2 (#3):}}\par%
 }
 
 \newcommand{\rquote}[1]{%
-  \smallskip
-  \begin{quote}\itshape #1\end{quote}%
+  \smallskip\begin{quote}\itshape\textcolor{rccolor}{#1}\end{quote}%
 }
 
-\newcommand{\arhead}[1]{%
-  \medskip\noindent\textbf{#1}\par\smallskip
+\newcommand{\rsub}[2]{%
+  \medskip\noindent\textbf{#1}~\textit{#2}\par\smallskip%
 }
+
+\newcommand{\arhead}[1]{\medskip\noindent\textbf{#1}\par\smallskip}
+
+\newcommand{\newtext}[1]{\textcolor{chgcolor}{``#1''}}
+
+\newcommand{\renum}[2]{#1 of the original submission (now #2)}
 
 \newcommand{\msloc}[1]{%
-  \medskip\noindent\textit{Location in revised manuscript: #1}%
+  \smallskip\noindent\textit{Revised manuscript: #1}\par%
 }
 
 \begin{document}
 
-% ── Cover page ────────────────────────────────────────────────────────────────
+% -- Cover page --
 \noindent
-Manuscript ID: \textbf{KNOSYS-D-26-21490}\\[2pt]
-Original Article Title: \textit{Effective Training Pressure Gates Recursive
-Knowledge Degradation in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
-To: The Editor, \textit{Knowledge-Based Systems}\\[2pt]
-Re: Response to Reviewers, Revision Round~1\\[2pt]
-\today
+Ms.\ Ref.\ No.: \textbf{KNOSYS-D-26-21490}\\[2pt]
+Title: \textit{Effective Training Pressure Gates Recursive Knowledge
+Degradation in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
+Journal: \textit{Knowledge-Based Systems} (Elsevier)\\[2pt]
+To: Dr.\ Hang Yu, Senior Editor\\[2pt]
+Re: Response to Reviewers --- Revision Round~1\\[2pt]
+Date: 19 October 2026
 
+\bigskip
 \medskip\noindent\rule{\linewidth}{0.4pt}\medskip
 
 \noindent
@@ -114,8 +111,180 @@ Corresponding Author
 
 \medskip\noindent\rule{\linewidth}{0.4pt}\medskip
 
+\section*{Conventions used in this response}
+
+\begin{itemize}[leftmargin=1.2em,itemsep=0.35em]
+\item Reviewer comments are reproduced \textcolor{rccolor}{\itshape in
+      green italics}, verbatim, including the table and section numbers
+      of the \emph{original} submission.
+\item Text newly added to the manuscript is quoted
+      \newtext{in blue, between quotation marks}, so that every claim in
+      this response can be located by text search in the revised
+      manuscript.
+\item Locations are given as section and page of the revised manuscript.
+      Where the revision renumbered a table or section, both numbers are
+      given at first mention, e.g.\ \renum{Table~7}{Table~9, p.~27}.
+\item All numerical values quoted here are generated from the archived
+      per-seed results by \texttt{scripts/analysis/make\_all.py} and are
+      reproduced verbatim from its output.
+\end{itemize}
+
+\section*{Experiment identifiers used in this response}
+
+\noindent
+The following identifiers appear in the revised manuscript and in this
+response. Table~3 of the revised manuscript maps the control experiments
+to the sources of variation they address.
+
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}L{1.3cm}L{4.6cm}L{2.5cm}L{1.6cm}L{3.3cm}@{}}
+\toprule
+\rowcolor{hdrgray}\textbf{ID} & \textbf{Experiment} &
+\textbf{Backbone} & \textbf{Seeds} & \textbf{Role} \\
+\midrule
+G1 & QLoRA rank sweep, NF4 & Qwen 2.5 1.5B & 3 at $r{=}256$ &
+     Primary dose--response \\
+G2 & Pre-registered exposure dose--response, $r{=}10$ &
+     Gemma 3 1B IT & 3 per dose & Cross-backbone replication \\
+G3 & Precision control: bf16 & Qwen 2.5 1.5B & 3 at $r{=}16$; 3 at $r{=}256$ &
+     Rules out quantization artefact \\
+G4 & Data-order control: three new shuffle seeds &
+     Qwen 2.5 1.5B & 3 at $r{=}256$ & Rules out ordering artefact \\
+G5 & Pre-registered prospective rank$\times$LR probe &
+     Qwen 2.5 1.5B & 1 per cell & Exploratory ordering test \\
+B7 & Pre-registered exposure dose--response, $r{=}256$ &
+     Qwen 2.5 1.5B & 5 per dose & Primary exposure evidence \\
+C1--C5 & Exploratory intervention pilot (archived) &
+     Qwen 2.5 1.5B & 1 & Superseded by B7; excluded from all estimates \\
+\bottomrule
+\end{tabular}
+
+\section*{Summary of changes}
+
+\noindent
+Forty review points were raised: three by the Editor, five by
+Reviewer~1, and thirty-two by Reviewer~2. Each is answered individually
+below. The table maps every point to the revision made and its location.
+
+\renewcommand{\arraystretch}{1.15}
+\begin{longtable}{@{}L{1.4cm}L{5.0cm}L{5.5cm}L{3.2cm}@{}}
+\toprule
+\rowcolor{hdrgray}\textbf{Point} & \textbf{Issue raised} &
+\textbf{Revision made} & \textbf{Location} \\
+\midrule
+\endfirsthead
+\rowcolor{hdrgray}\textbf{Point} & \textbf{Issue raised} &
+\textbf{Revision made} & \textbf{Location} \\
+\midrule
+\endhead
+\bottomrule
+\endfoot
+
+\multicolumn{4}{@{}l}{\textbf{Editor}}\\
+ED-1 & Language editing & Complete language revision; terminology
+       standardised throughout & Throughout \\
+ED-2 & Submission format & Seven documents in Word; figures at 300\,dpi
+       (non-PDF); \texttt{.bib} included & Submission package \\
+ED-3 & List of changes & This table plus an individual response to each
+       point & This document \\
+\addlinespace
+
+\multicolumn{4}{@{}l}{\textbf{Reviewer 1}}\\
+R1-0 & Not a transferable predictor; single dataset; single-seed
+       analyses; one exposure condition &
+       Framework reframed as operational; scope and seed policy stated
+       per claim & \S3.5, \S3.8, \S6 \\
+R1-1 & Prospective calibration \textsc{part} &
+       Five-step calibration protocol specified; held-out validation
+       declared not performed & \S3.5, \S6 \\
+R1-2 & Confound separation &
+       Controls G3 (precision) and G4 (data order); fresh optimizer per
+       generation; design/observed split & \S3.9, Tab.~3, \S4.6 \\
+R1-3 & External validity \textsc{part} &
+       Strict exact-match re-scoring (Tab.~S2); scope restriction stated
+       & \S3.2, \S6, Tab.~S2 \\
+R1-4 & Exposure: Qwen versus Gemma~3 &
+       Pipeline inconsistency disclosed; two pre-registered
+       dose--response experiments replace the pilot & \S3.7, \S4.5 \\
+R1-5 & Reproducibility &
+       Checkpoint revisions, prompts, seeds, masks, item-level vectors,
+       raw generations and adapters deposited & \S3.3, App.~A \\
+\addlinespace
+
+\multicolumn{4}{@{}l}{\textbf{Reviewer 2}}\\
+R2-0 & Framework conceptual; Gemma~4 uncited; limited scale &
+       Contribution restated as design and evidence; Gemma~4 cited and
+       disambiguated; scale stated as a limitation & \S1, \S3.3, \S6 \\
+R2-1 & Abbreviations and notation (10 points) &
+       All acronyms expanded; notation table rebuilt;
+       set/cardinality and singular-value notation corrected &
+       Tab.~1, \S3.2--3.6 \\
+R2-2 & Malformed equations (4 points) &
+       Glyph fault traced and corrected; Eq.~1--6 rewritten; glyph audit
+       script included & Eq.~1--6, Tab.~9 \\
+R2-3 & Internal inconsistencies (7 points) &
+       Each corrected; threshold language unified; seed claims aligned &
+       Abstract, \S4, \S5 \\
+R2-4 & Methodology (6 points) &
+       Inferential statistics added; per-backbone calibration proposed;
+       ``sharp'' withdrawn; Gemma~4 sourced & \S3.5, \S4, \S6 \\
+R2-5 & References (5 points) &
+       Duplicate arXiv resolved; year corrected; Gemma~4 added;
+       preprint status declared; list harmonised &
+       \texttt{cas-refs.bib} \\
+\end{longtable}
+
 % ══════════════════════════════════════════════════════════════════════════════
 \section*{Editor}
+
+\rconcern{Editor, Submission requirements}{Format of the revised
+submission}{While submitting revision, please ensure to submit a list of
+changes or a rebuttal against each point that was being raised. The
+revised cover letter, response to reviewers, highlights, revised
+manuscript, credit author statement, author agreement and declaration of
+interest should all be in word format. Source file alone can be in word
+or Latex file and only one final version of manuscript is only required.
+The tables, figures and equations should be in editable format in the
+revised manuscript. Figures should be in good quality 300 dpi and not in
+pdf format. For LaTex version, kindly ensure to check if supporting .bib
+files are also included.}
+
+\arhead{Author response:}
+Each requirement is addressed as listed below.
+
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}L{0.5cm}L{6.0cm}L{7.6cm}@{}}
+\toprule
+\rowcolor{hdrgray} & \textbf{Requirement} & \textbf{Compliance} \\
+\midrule
+(a) & List of changes or rebuttal against each point &
+Both: a summary-of-changes table maps all forty review points, followed
+by an individual response to each. \\
+(b) & Seven documents in Word &
+Cover letter, response to reviewers, highlights, revised manuscript,
+CRediT author statement, author agreement and declaration of competing
+interest are submitted in \texttt{.docx}. \\
+(c) & Source file; one final version &
+A single final \LaTeX{} source is submitted with its compiled PDF. \\
+(d) & Editable tables, figures, equations &
+Tables are native \texttt{tabular} environments; equations are
+\texttt{amsmath} environments; no table or equation is an image. \\
+(e) & Figures at 300\,dpi, not PDF &
+All figures are submitted at 300\,dpi as PNG/TIFF. No figure is
+submitted in PDF. \\
+(f) & Supporting \texttt{.bib} &
+\texttt{cas-refs.bib} is included in the \LaTeX{} submission package. \\
+\bottomrule
+\end{tabular}
+
+\arhead{Author action:}
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
+\item The seven required documents were produced in \texttt{.docx}.
+\item All figures were regenerated at 300\,dpi and exported to PNG,
+      replacing the PDF versions used in the original submission.
+\item \texttt{cas-refs.bib} was audited and is included in the
+      submission package.
+\end{enumerate}
 
 \rquote{Revise (including language editing). Provide point-by-point response
 to each reviewer comment in the cover letter.}
@@ -144,10 +313,46 @@ revision, with the corresponding section and page cited.
 
 \section*{Reviewer 1}
 
-\rconcerntitle{Reviewer \#1}{Concern \#1}{Prospective calibration of ETP}
+\rconcern{Reviewer \#1, General assessment}{Scope of the evidence}{%
+This paper studies recursive fine-tuning on synthetic data across
+Qwen 2.5 1.5B, Gemma 3 1B, and Gemma 4 E2B for ten generations.
+The systematic design, multi-seed headline experiments, and
+distributional diagnostics are valuable. However, the proposed pressure
+framework is not yet a transferable quantitative predictor, the main
+metric uses one short-answer dataset, several analyses are single-seed,
+and the exposure intervention is shown mainly for one Qwen condition.
+Major revision is required.}
 
-\rquote{How can effective training pressure be quantitatively calibrated and
-prospectively tested on an unseen backbone or dataset?}
+\arhead{Author response:}
+We accept all four reservations and have restructured the paper so that
+each is stated as a property of the evidence rather than left for the
+reader to infer.
+
+First, effective training pressure is no longer presented as a
+predictor. It is introduced as an operational experimental framework
+that organises three independently manipulated variables, and the
+operational index $\Pi$ is labelled an exploratory post-training summary
+wherever it appears. Second, the single-dataset limitation is retained,
+but we add a strict exact-match re-scoring of all saved predictions to
+show that the regime classifications do not depend on the permissive
+matching criterion. Third, the seed policy is now explicit at the level
+of individual claims: headline conditions use three or five seeds, six
+for the pooled $r=256$ estimate; intermediate ablations use one seed and
+are labelled descriptive; the two classes are never pooled. Fourth, the
+exposure axis is no longer shown for one Qwen condition: the revision
+replaces the single-seed pilot with two pre-registered dose--response
+experiments, one per backbone, each with multiple paired seeds at every
+dose level.
+
+The one reservation we cannot remove is the first. Prospective
+calibration on an unseen backbone was not performed, and we now say so
+in those words.
+
+\msloc{\S3.5, p.~8; \S3.8, p.~9; \S3.7 and \S4.5, pp.~9 and 16--17;
+\S6, pp.~21--22; supplementary Table~S2.}
+
+
+\rconcern{Reviewer \#1, Concern \#1}{Prospective calibration of ETP}{How can effective training pressure be quantitatively calibrated and prospectively tested on an unseen backbone or dataset?}
 
 \arhead{Author response:}
 We agree that a quantitative framework should not be presented as
@@ -180,10 +385,7 @@ the requirements for future prospective calibration.
 \msloc{Section~3.5 (ETP definition); Section~4.6 (G5 prospective test); Section~6
 (prospective validation and limitations).}
 
-\rconcerntitle{Reviewer \#1}{Concern \#2}{Separating pressure effects from confounders}
-
-\rquote{How are quantization, optimizer state, data order, and model-specific
-dynamics separated from the claimed pressure effects?}
+\rconcern{Reviewer \#1, Concern \#2}{Separating pressure effects from confounders}{How are quantization, optimizer state, data order, and model-specific dynamics separated from the claimed pressure effects?}
 
 \arhead{Author response:}
 The revised manuscript identifies what each control can establish and what
@@ -225,10 +427,7 @@ comparison from the descriptive cross-protocol Qwen contrast.
 \msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.1 (rank sweep); Section~4.2.1
 (Qwen comparisons); Section~4.3.1 (Gemma~3); Section~4.6 (G3 and G4).}
 
-\rconcerntitle{Reviewer \#1}{Concern \#3}{External validity of the evaluation}
-
-\rquote{Do the conclusions hold for longer answers, multi-hop questions,
-other domains, and larger factual evaluation sets?}
+\rconcern{Reviewer \#1, Concern \#3}{External validity of the evaluation}{Do the conclusions hold for longer answers, multi-hop questions, other domains, and larger factual evaluation sets?}
 
 \arhead{Author response:}
 Our results do not establish generalization to those settings. The
@@ -259,10 +458,7 @@ the tested short-answer factual setting.
 \msloc{Section~3.1 (evaluation protocol); supplementary Table~S2
 (strict scoring); Section~6 (scope and limitations).}
 
-\rconcerntitle{Reviewer \#1}{Concern \#4}{Exposure reduction and model-dependent responses}
-
-\rquote{Why does the five-percent exposure reduction stabilize Qwen but not
-Gemma~3, and does this generalize across ranks and seeds?}
+\rconcern{Reviewer \#1, Concern \#4}{Exposure reduction and model-dependent responses}{Why does the five-percent exposure reduction stabilize Qwen but not Gemma~3, and does this generalize across ranks and seeds?}
 
 \arhead{Author response:}
 This question exposed a substantive problem with the original comparison.
@@ -306,10 +502,7 @@ to the same mechanism.
 \msloc{Section~4.5 (dose--response experiments B7 and G2); Section~4.6
 (learning-rate comparison); Section~6 (mechanistic and generalization limits).}
 
-\rconcerntitle{Reviewer \#1}{Concern \#5}{Scope of the reproducibility package}
-
-\rquote{What complete code, checkpoints, prompts, seeds, and raw outputs
-will support independent reproduction?}
+\rconcern{Reviewer \#1, Concern \#5}{Scope of the reproducibility package}{What complete code, checkpoints, prompts, seeds, and raw outputs will support independent reproduction?}
 
 \arhead{Author response:}
 We agree that aggregate tables alone are insufficient and that the scope
@@ -342,14 +535,65 @@ which archive version supports each reproduction claim.
 
 \section*{Reviewer 2}
 
-\rconcerntitle{Reviewer \#2}{Concern \#1}{Abbreviations and notation}
+\rconcern{Reviewer \#2, General assessment}{Status of the framework and
+of the cross-architecture claims}{%
+The paper addresses a timely and practically relevant question and
+provides a useful empirical dose-response characterization. However, the
+current manuscript has major issues in notation, equations,
+table/figure formatting, internal consistency, statistical rigor, and
+citation accuracy. The ``effective training pressure'' framework is
+promising but currently conceptual rather than quantitative. The
+cross-architecture claims are weakened by the uncited Gemma 4 E2B model
+and limited scale. I recommend major revision before further
+consideration.}
 
-\rquote{ETP appears in Figure~1 without explicit definition. MTLD is not
-expanded. KL, JS, and coverage appear in Figure~1 without definition. bf16,
-SVD, TCE, QLoRA, and LoRA lack consistently expanded forms. ``Homeo.'' is
-used in Table~2 without definition. $K_0$ is used both as a set and as a
-retention metric. $T$, $D_{1,T}$, $D_{10}$, $\Delta I$, and related symbols
-in Eq.~6 are not fully defined.}
+\arhead{Author response:}
+We agree with the characterisation and have treated the two substantive
+objections as corrections rather than as matters of emphasis.
+
+On the status of the framework: the reviewer is right that effective
+training pressure, as submitted, was a conceptual label for three
+already-known axes and not a quantitative measure. We do not defend the
+original framing. The revised manuscript states that no scalar predictor
+is derived, separates the variables fixed before training from the
+diagnostics measured after it, and restates the contribution as the
+factorial design, the dose--response evidence along three axes, the two
+pre-registered exposure experiments, and the finding that the regime
+boundary is backbone-dependent and not reconciled by any architectural
+normalisation we tested.
+
+On the cross-architecture claims: Gemma~4~E2B~IT is now cited,
+explicitly distinguished from Gemma~3n~E2B, and its architectural
+description is attributed to the released model configuration. Because
+that backbone was evaluated with a single seed, it is labelled
+supportive validation and excluded from every threshold estimate. The
+restriction to 1--2\,B parameter models is retained as the first
+limitation in Section~6.
+
+Beyond the points listed below, the reviewer's objection to the word
+``confirms'' in one place prompted us to apply the same standard
+everywhere. We re-read the Results and Discussion for claims whose
+strength exceeded the design supporting them, and corrected fifteen
+further instances: a single-seed grid described as \emph{demonstrating}
+joint dependence, now reported as descriptively consistent with it; a
+degradative regime described as \emph{reversible}, now described as
+attenuated to the bounded regime on one backbone and as a retention gain
+without slope reduction on the other; a 50\,\% exposure reduction
+described as \emph{arresting} progressive loss, now quantified as
+reducing its rate to $\BsevenSlopeFifty$\,pp/generation; a single-seed
+observation on a third backbone described as \emph{generalising}, now
+reported as consistent with but not establishing generalisation; and a
+non-monotonic slope response across doses that the original text had
+smoothed, now reported as two distinct outcomes. We also found one
+paragraph in Section~5.4 that still drew a conclusion from the archived
+pilot described in our response to Reviewer~1, Concern~\#4, and removed
+it.
+
+\msloc{\S1, p.~3; \S3.3, p.~6; \S3.5, p.~8; \S4.1, p.~10; \S4.3.2, p.~14;
+\S5.1--5.4, pp.~18--20; \S6, pp.~21--23.}
+
+
+\rconcern{Reviewer \#2, Concern \#1}{Abbreviations and notation}{ETP appears in Figure~1 but is never explicitly defined as ``effective training pressure.'' MTLD is introduced without expansion. KL, JS, and coverage appear in Figure~1 without definition. bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded forms. ``Homeo.'' is used in Table~2 without definition. $K_0$ is used both as a set of questions and as a retention metric. $T$, $D1\_T$, $D10$, $\Delta I$, Instability(1), $MeanLen\_T$, and related symbols in Eq.~6 are not fully defined. The effective-rank formula uses $\sigma_i$ as both singular values and normalized singular values. The normalization condition is mathematically incorrect as written. $BA\_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in the drift equation are not consistently defined. $r \in \{4,10,12,14,16\}$ set notation was garbled in the original PDF.}
 
 \arhead{Author response:}
 We agree that the original notation was insufficiently self-contained.
@@ -376,26 +620,6 @@ $\mathrm{MeanLen}_t$ denotes mean response length at generation~$t$.
 \arhead{Author action:}
 We revised Figure~1, the notation table, first-use acronym definitions,
 the regime-table labels, and the text preceding Eq.~6.
-
-
-Beyond the points raised, the reviewer's objection to the word
-``confirms'' in one place prompted us to apply the same standard
-everywhere. We re-read the Results and Discussion for claims whose
-strength exceeded the design supporting them, and corrected fifteen
-further instances: a single-seed grid described as
-\emph{demonstrating} joint dependence, now reported as descriptively
-consistent with it; a degradative regime described as
-\emph{reversible}, now described as attenuated to the bounded regime on
-one backbone and as a retention gain without slope reduction on the
-other; a 50\,\% exposure reduction described as \emph{arresting}
-progressive loss, now quantified as reducing its rate to
-$-0.15$\,pp/generation; a single-seed observation on a third backbone
-described as \emph{generalising}, now reported as consistent with but
-not establishing generalisation; and a non-monotonic slope response
-across doses that the original text had smoothed, now reported as two
-distinct outcomes. We also found one paragraph in Section~5.4 that
-still drew a conclusion from the archived pilot described in our
-response to Reviewer~1, Concern~\#4, and removed it.
 
 \msloc{Figure~1 and caption; notation and regime tables; Section~3.5;
 definitions surrounding Eqs.~1 and~6.}
@@ -461,9 +685,9 @@ composite is stated.
 (a) & Eq.~1 notation and summation &
 Rewritten with explicit function notation and set cardinality:
 \[
-  R(t) = \frac{\bigl|\{\, q \in \mathcal{K}_0 :
+  R(t) = \frac{\bigl|\{\, q \in K_0 :
           q \text{ answered correctly at generation } t \,\}\bigr|}
-         {|\mathcal{K}_0|}
+         {|K_0|}
 \]
 The numerator is the cardinality of a set, not a summation, which is
 what the garbled original obscured.\ \ (\S3.2, p.~5) \\
@@ -670,7 +894,7 @@ threshold intervals.}
 Inferential statistics have been added wherever the design admits them,
 and the design is now stated alongside each test rather than left to be
 inferred. For the Gemma~3 anchor-rank contrast ($N=5$ per rank,
-$|\mathcal{K}_0|=46$), the mean difference is $+37.8$\,pp; because the
+$|K_0|=46$), the mean difference is $+37.8$\,pp; because the
 archived data do not confirm whether seeds were paired across ranks, we
 report both possibilities --- an exact sign-flip test at $p=0.0625$ if
 paired, a bilateral permutation test over $\binom{10}{5}=252$ allocations
