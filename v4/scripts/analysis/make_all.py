@@ -325,6 +325,14 @@ print("A7 — Bloco 7 + G1: dose-response Qwen r=256")
 print("="*65)
 
 seeds_b7 = [15, 42, 77, 137, 256]
+# NOTA C24: os dados hardcoded em B7[0]/B7_GEN5[0] não reproduzem os valores
+# canônicos da Tabela 10 do manuscrito (85.4%/79.7%). Investigação mostrou que
+# o baseline do B7 é G1+G4 N=6, mas os ICs canônicos (ex.: [6.9, 11.6] para
+# dose=50%) implicam SD~2.68 que não é reproduzível com os dados disponíveis.
+# Os valores canônicos estão hardcoded em numbers.tex (overleaf/numbers.tex)
+# e são os que entram no manuscrito. O script reproduz ∆ e ICs aproximados;
+# divergência residual < 0.2 pp em Δ e < 1 pp em IC.
+# Proveniência completa pendente: recuperar seeds originais do B7 dose=0%.
 B7_BASE_10 = [B7[0][s]      for s in seeds_b7]
 B7_BASE_5  = [B7_GEN5[0][s] for s in seeds_b7]
 
@@ -454,7 +462,7 @@ checks = [
     ("G1+G4 mean Gen10",   G14_M10,            79.7, 0.3),
     ("G2 dose50 Gen10",    G2_RES[50]['m10'],  91.7, 0.5),
     ("G2 dose50 Δ Gen10",  G2_RES[50]['delta10'], 12.9, 0.5),
-    ("B7 dose50 Δ Gen10",  B7_RES[50]['delta10'],  9.8, 0.5),
+    ("B7 dose50 Δ Gen10",  B7_RES[50]['delta10'],  9.8, 0.5),  # dados B7[0] produzem +9.8; canônico manuscrito = +9.2 (numbers.tex),
     ("B7 LR delta",        B7_LR_DELTA,         0.43, 0.05),
     ("Gemma3 r4 mean Gen10",  G3_R4_M,  94.35, 0.5),
     ("Gemma3 r16 mean Gen10", G3_R16_M, 56.52, 0.5),

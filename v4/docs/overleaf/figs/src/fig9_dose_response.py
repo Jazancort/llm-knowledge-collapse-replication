@@ -39,8 +39,8 @@ C_QWEN  = '#E67E22'   # laranja — Qwen
 # ── Dados: Δpp Gen10 vs baseline por dose ────────────────────────────────────
 # Bloco7 Qwen r=256 N=5 (make_all.py A7)
 qwen_doses  = np.array([0, 10, 25, 50])
-qwen_delta  = np.array([0.0, 2.4, 5.5, 9.8])   # Δpp Gen10 vs baseline
-qwen_se     = np.array([0.0, 1.9, 2.4, 1.3])    # CI half-width / 1.96 ≈ SE (conservador)
+qwen_delta  = np.array([0.0, 1.8, 4.9, 9.2])   # Δpp Gen10 vs baseline (canônico manuscrito)
+qwen_se     = np.array([0.0, 2.96, 2.45, 1.20])  # CI half-width / 1.96: doses 10%=[-1.1,4.7], 25%=[2.5,7.2], 50%=[6.9,11.6]
 
 # G2 Gemma3 r=10 N=3 (make_all.py A8)
 gemma_doses = np.array([0, 10, 25, 50])
