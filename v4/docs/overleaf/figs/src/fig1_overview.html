@@ -1,316 +1,389 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Figure 1 — Experimental Pipeline Overview</title>
-  <style>
-    :root {
-      --ink: #111827;
-      --muted: #4b5563;
-      --paper: #ffffff;
-      --line: rgba(17, 24, 39, 0.12);
-      --shadow: 0 4px 16px rgba(17, 24, 39, 0.06);
-      --radius: 6px;
-      --blue: #1e40af;
-      --blue-bg: #eff6ff;
-      --blue-border: #93c5fd;
-      --green: #166534;
-      --green-bg: #f0fdf4;
-      --green-border: #86efac;
-      --amber: #92400e;
-      --amber-bg: #fffbeb;
-      --amber-border: #fcd34d;
-      --red: #991b1b;
-      --red-bg: #fef2f2;
-      --red-border: #fca5a5;
-      --purple: #5b21b6;
-      --purple-bg: #f5f3ff;
-      --purple-border: #c4b5fd;
-      --slate: #334155;
-      --slate-bg: #f8fafc;
-      --slate-border: #cbd5e1;
-    }
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  
+  @page {
+    size: 900pt 336pt;
+    margin: 0;
+  }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-    body {
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
-      background: var(--paper);
-      color: var(--ink);
-      padding: 32px;
-      display: flex;
-      justify-content: center;
-    }
+  body {
+    width: 900px;
+    height: 336px;
+    background: #ffffff;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #111827;
+    position: relative;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    .pipeline {
-      width: 920px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
+  /* SVG connectors layer */
+  .connectors {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 900px;
+    height: 336px;
+    pointer-events: none;
+    z-index: 1;
+  }
 
-    .stage {
-      width: 100%;
-      display: grid;
-      grid-template-columns: 56px 1fr;
-      gap: 16px;
-      align-items: start;
-    }
+  /* Grid container for cards */
+  .grid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 900px;
+    height: 336px;
+    z-index: 2;
+  }
 
-    .stage-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      font-weight: 800;
-      color: white;
-      flex-shrink: 0;
-      margin-top: 12px;
-    }
+  /* Card base */
+  .card {
+    position: absolute;
+    width: 254px;
+    height: 144px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1.5px solid #e5e7eb;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
 
-    .stage-card {
-      width: 100%;
-      padding: 16px 20px;
-      border-radius: var(--radius);
-      border: 1.5px solid;
-    }
+  /* Positions */
+  .card-1 { left: 32px; top: 12px; border-top: 3.5px solid #0072b2; }
+  .card-2 { left: 323px; top: 12px; border-top: 3.5px solid #009e73; }
+  .card-3 { left: 614px; top: 12px; border-top: 3.5px solid #e69f00; }
+  .card-4 { left: 32px; top: 180px; border-top: 3.5px solid #d55e00; }
+  .card-5 { left: 323px; top: 180px; border-top: 3.5px solid #cc79a7; }
+  .card-6 { left: 614px; top: 180px; border-top: 3.5px solid #56b4e9; }
 
-    .stage-title {
-      font-size: 0.92rem;
-      font-weight: 800;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
+  /* Header */
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px 6px;
+  }
 
-    .stage-content {
-      font-size: 0.88rem;
-      font-weight: 500;
-      line-height: 1.5;
-      color: var(--muted);
-    }
+  .badge {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
 
-    .stage-content strong {
-      color: var(--ink);
-      font-weight: 700;
-    }
+  .b1 { background: #0072b2; }
+  .b2 { background: #009e73; }
+  .b3 { background: #e69f00; }
+  .b4 { background: #d55e00; }
+  .b5 { background: #cc79a7; }
+  .b6 { background: #56b4e9; }
 
-    .sub-items {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
+  .title {
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -0.01em;
+  }
 
-    .sub-item {
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 0.78rem;
-      font-weight: 700;
-      border: 1px solid;
-    }
+  /* Body list */
+  .card-body {
+    padding: 2px 12px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+    justify-content: flex-start;
+  }
 
-    .connector {
-      width: 56px;
-      display: flex;
-      justify-content: center;
-      padding: 4px 0;
-    }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 9.8px;
+    line-height: 1.35;
+    color: #374151;
+  }
 
-    .connector-line {
-      width: 2px;
-      height: 24px;
-      background: var(--line);
-      position: relative;
-    }
+  .bullet {
+    width: 4.5px;
+    height: 4.5px;
+    border-radius: 50%;
+    margin-top: 4.5px;
+    flex-shrink: 0;
+  }
 
-    .connector-line::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
-      border-top: 6px solid rgba(17, 24, 39, 0.25);
-    }
+  .bul1 { background: #0072b2; }
+  .bul2 { background: #009e73; }
+  .bul3 { background: #e69f00; }
+  .bul4 { background: #d55e00; }
+  .bul5 { background: #cc79a7; }
+  .bul6 { background: #56b4e9; }
 
-    /* Stage colors */
-    .s1 .stage-number { background: var(--blue); }
-    .s1 .stage-card { border-color: var(--blue-border); background: var(--blue-bg); }
-    .s1 .stage-title { color: var(--blue); }
-    .s1 .sub-item { background: white; border-color: var(--blue-border); color: var(--blue); }
+  .item strong {
+    font-weight: 600;
+    color: #111827;
+  }
 
-    .s2 .stage-number { background: var(--green); }
-    .s2 .stage-card { border-color: var(--green-border); background: var(--green-bg); }
-    .s2 .stage-title { color: var(--green); }
-    .s2 .sub-item { background: white; border-color: var(--green-border); color: var(--green); }
+  /* Loop box in Card 2 */
+  .loop-box {
+    margin-top: 3px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 9px;
+    font-style: italic;
+    color: #4b5563;
+    text-align: center;
+  }
 
-    .s3 .stage-number { background: var(--amber); }
-    .s3 .stage-card { border-color: var(--amber-border); background: var(--amber-bg); }
-    .s3 .stage-title { color: var(--amber); }
-    .s3 .sub-item { background: white; border-color: var(--amber-border); color: var(--amber); }
+  /* Regimes in Card 5 */
+  .regimes {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 2px;
+  }
 
-    .s4 .stage-number { background: var(--purple); }
-    .s4 .stage-card { border-color: var(--purple-border); background: var(--purple-bg); }
-    .s4 .stage-title { color: var(--purple); }
-    .s4 .sub-item { background: white; border-color: var(--purple-border); color: var(--purple); }
+  .regime-pill {
+    padding: 3px 7px;
+    border-radius: 4px;
+    font-size: 8.8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    border: 1px solid;
+    white-space: nowrap;
+  }
 
-    .s5 .stage-number { background: var(--red); }
-    .s5 .stage-card { border-color: var(--red-border); background: var(--red-bg); }
-    .s5 .stage-title { color: var(--red); }
-    .s5 .sub-item { background: white; border-color: var(--red-border); color: var(--red); }
+  .reg-homeo {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+    color: #065f46;
+  }
+  .reg-homeo strong { font-weight: 700; color: #047857; margin-right: 4px; }
 
-    .s6 .stage-number { background: var(--slate); }
-    .s6 .stage-card { border-color: var(--slate-border); background: var(--slate-bg); }
-    .s6 .stage-title { color: var(--slate); }
-    .s6 .sub-item { background: white; border-color: var(--slate-border); color: var(--slate); }
+  .reg-bounded {
+    background: #fefce8;
+    border-color: #fde047;
+    color: #854d0e;
+  }
+  .reg-bounded strong { font-weight: 700; color: #a16207; margin-right: 4px; }
 
-    .feedback-arrow {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 0;
-      margin-left: 56px;
-    }
+  .reg-deg {
+    background: #fef2f2;
+    border-color: #fecaca;
+    color: #991b1b;
+  }
+  .reg-deg strong { font-weight: 700; color: #b91c1c; margin-right: 4px; }
 
-    .feedback-label {
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--muted);
-      background: white;
-      padding: 2px 8px;
-      border: 1px dashed var(--line);
-      border-radius: 3px;
-    }
-
-    @media print {
-      body { padding: 0; background: white; }
-      .pipeline { width: 100%; }
-    }
-  </style>
+</style>
 </head>
 <body>
 
-<div class="pipeline">
+  <!-- SVG Connectors Layer -->
+  <svg class="connectors" viewBox="0 0 900 336">
+    <defs>
+      <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M 0 1.5 L 8 5 L 0 8.5 z" fill="#6b7280"/>
+      </marker>
+      <marker id="arrow-down" viewBox="0 0 10 10" refX="5" refY="6" markerWidth="6" markerHeight="6" orient="auto">
+        <path d="M 1.5 0 L 5 8 L 8.5 0 z" fill="#6b7280"/>
+      </marker>
+    </defs>
 
-  <!-- Stage 1 -->
-  <div class="stage s1">
-    <div class="stage-number">1</div>
-    <div class="stage-card">
-      <div class="stage-title">Data Preparation &amp; Baseline</div>
-      <div class="stage-content">
-        <strong>2,000 training questions</strong> (TriviaQA) + <strong>200 held-out</strong> for evaluation.
-        Base model evaluated at Gen 0 to establish <strong>K<sub>0</sub></strong> factual baseline per backbone.
+    <!-- Arrow 1 -> 2 -->
+    <line x1="289" y1="84" x2="317" y2="84" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+
+    <!-- Arrow 2 -> 3 -->
+    <line x1="580" y1="84" x2="608" y2="84" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+
+    <!-- U-turn Connector 3 -> 4 -->
+    <!-- Starts at bottom of Card 3 (x=741, y=156), goes down to y=168, left to x=159, down to Card 4 (y=176) -->
+    <path d="M 741 156 L 741 168 L 159 168 L 159 176" fill="none" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow-down)" stroke-linejoin="round" />
+
+    <!-- Arrow 4 -> 5 -->
+    <line x1="289" y1="252" x2="317" y2="252" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+
+    <!-- Arrow 5 -> 6 -->
+    <line x1="580" y1="252" x2="608" y2="252" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+  </svg>
+
+  <div class="grid">
+    <!-- Card 1 -->
+    <div class="card card-1">
+      <div class="card-header">
+        <div class="badge b1">1</div>
+        <div class="title">Data Preparation</div>
       </div>
-      <div class="sub-items">
-        <span class="sub-item">Qwen 2.5 1.5B (K&#8320;=78)</span>
-        <span class="sub-item">Gemma 3 1B (K&#8320;=46)</span>
-        <span class="sub-item">Gemma 4 E2B (K&#8320;=76)</span>
+      <div class="card-body">
+        <div class="item">
+          <div class="bullet bul1"></div>
+          <div><strong>TriviaQA</strong> rc.nocontext</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul1"></div>
+          <div><strong>2,000 train</strong> / 200 eval questions</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul1"></div>
+          <div><strong>K&#8320; factual baseline</strong> (held-out)</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul1"></div>
+          <div>Bidirectional substring matching</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="card card-2">
+      <div class="card-header">
+        <div class="badge b2">2</div>
+        <div class="title">Recursive Training</div>
+      </div>
+      <div class="card-body">
+        <div class="item">
+          <div class="bullet bul2"></div>
+          <div><strong>QLoRA</strong> 4-bit NF4 / FFT</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul2"></div>
+          <div>Fresh adapter each generation</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul2"></div>
+          <div><strong>10 generations</strong> G&#8321; &rarr; G&#8321;&#8320;</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul2"></div>
+          <div>3 backbones: Qwen, Gemma 3, 4</div>
+        </div>
+        <div class="loop-box">
+          &#8635; Output Gen t &rarr; training for Gen t+1
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card card-3">
+      <div class="card-header">
+        <div class="badge b3">3</div>
+        <div class="title">Pressure Axes</div>
+      </div>
+      <div class="card-body">
+        <div class="item">
+          <div class="bullet bul3"></div>
+          <div><strong>Adapter rank</strong> &mdash; 4, 16, 32, 64, 128, 256</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul3"></div>
+          <div><strong>Learning rate</strong> &mdash; 1e-6 to 2e-5</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul3"></div>
+          <div><strong>Rank &times; LR</strong> interaction matrix</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul3"></div>
+          <div><strong>Exposure</strong> &mdash; 0/10/25/50% removal</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card card-4">
+      <div class="card-header">
+        <div class="badge b4">4</div>
+        <div class="title">Multi-Metric Evaluation</div>
+      </div>
+      <div class="card-body">
+        <div class="item">
+          <div class="bullet bul4"></div>
+          <div><strong>K&#8320; retention</strong> &mdash; factual preservation</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul4"></div>
+          <div><strong>Distribution shift</strong> &mdash; KL, JS, Distinct-n</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul4"></div>
+          <div><strong>Lexical diversity</strong> &mdash; MTLD, Stopword Ratio</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul4"></div>
+          <div><strong>Effective rank</strong> &mdash; exp(H(&sigma;)) of B&times;A</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card card-5">
+      <div class="card-header">
+        <div class="badge b5">5</div>
+        <div class="title">Regime Classification</div>
+      </div>
+      <div class="card-body">
+        <div class="regimes">
+          <div class="regime-pill reg-homeo">
+            <strong>Homeostatic</strong> &mdash; retention &gt; 90%, stable
+          </div>
+          <div class="regime-pill reg-bounded">
+            <strong>Bounded</strong> &mdash; stable retention, distribution drifts
+          </div>
+          <div class="regime-pill reg-deg">
+            <strong>Degradative</strong> &mdash; retention declines ~2&ndash;6 pp/gen
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="card card-6">
+      <div class="card-header">
+        <div class="badge b6">6</div>
+        <div class="title">Pressure-Regime Mapping</div>
+      </div>
+      <div class="card-body">
+        <div class="item">
+          <div class="bullet bul6"></div>
+          <div><strong>ETP threshold</strong> identification</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul6"></div>
+          <div><strong>Regime transitions:</strong> threshold-like within grid</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul6"></div>
+          <div><strong>Cross-backbone</strong> generalization</div>
+        </div>
+        <div class="item">
+          <div class="bullet bul6"></div>
+          <div>Rank, LR, exposure &rarr; unified pressure</div>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="connector"><div class="connector-line"></div></div>
-
-  <!-- Stage 2 -->
-  <div class="stage s2">
-    <div class="stage-number">2</div>
-    <div class="stage-card">
-      <div class="stage-title">Recursive Training (Replace-Only)</div>
-      <div class="stage-content">
-        Each generation: fresh adapter trained on previous generation's synthetic outputs.
-        <strong>10 recursive generations</strong>, strict data replacement (no accumulation).
-      </div>
-      <div class="sub-items">
-        <span class="sub-item">QLoRA (4-bit NF4)</span>
-        <span class="sub-item">Full Fine-Tuning</span>
-        <span class="sub-item">3-5 seeds</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="connector"><div class="connector-line"></div></div>
-
-  <!-- Stage 3 -->
-  <div class="stage s3">
-    <div class="stage-number">3</div>
-    <div class="stage-card">
-      <div class="stage-title">Pressure Manipulation (5 Axes)</div>
-      <div class="stage-content">
-        Systematic variation of effective training pressure along independent experimental axes.
-      </div>
-      <div class="sub-items">
-        <span class="sub-item">Rank (r=4 to 256)</span>
-        <span class="sub-item">Learning Rate (10&#8315;&#8310; to 2&#215;10&#8315;&#8309;)</span>
-        <span class="sub-item">Method (QLoRA vs FFT)</span>
-        <span class="sub-item">Module Topology</span>
-        <span class="sub-item">Synthetic Exposure (0/10/25/50% removal)</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="connector"><div class="connector-line"></div></div>
-
-  <!-- Stage 4 -->
-  <div class="stage s4">
-    <div class="stage-number">4</div>
-    <div class="stage-card">
-      <div class="stage-title">Evaluation</div>
-      <div class="stage-content">
-        Per-generation measurement of factual retention, distributional shift, and adapter properties.
-      </div>
-      <div class="sub-items">
-        <span class="sub-item">K&#8320; Retention</span>
-        <span class="sub-item">Effective Rank</span>
-        <span class="sub-item">Response Length</span>
-        <span class="sub-item">Distinct-n</span>
-        <span class="sub-item">MTLD</span>
-        <span class="sub-item">Stopword Ratio</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="connector"><div class="connector-line"></div></div>
-
-  <!-- Stage 5 -->
-  <div class="stage s5">
-    <div class="stage-number">5</div>
-    <div class="stage-card">
-      <div class="stage-title">Regime Classification</div>
-      <div class="stage-content">
-        Each configuration classified based on retention trajectory and distributional behavior.
-      </div>
-      <div class="sub-items">
-        <span class="sub-item">Homeostatic (&gt;90%)</span>
-        <span class="sub-item">Bounded (factual stable, distribution degrades)</span>
-        <span class="sub-item">Degradative (progressive loss)</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="connector"><div class="connector-line"></div></div>
-
-  <!-- Stage 6 -->
-  <div class="stage s6">
-    <div class="stage-number">6</div>
-    <div class="stage-card">
-      <div class="stage-title">Pressure-Regime Mapping</div>
-      <div class="stage-content">
-        <strong>Effective Training Pressure</strong> identified as organizing principle: regime transitions are threshold-like within the tested grid, backbone-dependent, and controllable through multiple axes.
-      </div>
-    </div>
-  </div>
-
-</div>
 
 </body>
 </html>

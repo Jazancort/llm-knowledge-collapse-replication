@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+import os
+import sys
+from pathlib import Path
+from playwright.sync_api import sync_playwright
+import fitz
+
+BASE_DIR = Path(r"G:\Lab\Labcity\LLM\Artigo\Paradoxo - springer\Paradoxo\llm-knowledge-collapse (paper)")
+
+HTML_CONTENT = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -387,3 +395,71 @@
 
 </body>
 </html>
+"""
+
+def generate():
+    # 1. Write HTML to source locations
+    src_paths = [
+        BASE_DIR / "v4" / "figs" / "src" / "fig1_overview.html",
+        BASE_DIR / "v4" / "manuscript" / "figs" / "src" / "fig1_overview.html",
+        BASE_DIR / "v4" / "docs" / "overleaf" / "figs" / "src" / "fig1_overview.html",
+        BASE_DIR / "v3" / "figs" / "fig1_overview.html",
+    ]
+    for p in src_paths:
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(HTML_CONTENT, encoding="utf-8")
+        print(f"Updated HTML: {p}")
+
+    # 2. Render vector PDF via Playwright
+    pdf_out = BASE_DIR / "v4" / "manuscript" / "figs" / "scratch" / "fig1_overview.pdf"
+    pdf_out.parent.mkdir(parents=True, exist_ok=True)
+
+    with sync_playwright() as p:
+        browser = p.chromium.launch(executable_path=r"C:\Program Files\Google\Chrome\Application\chrome.exe")
+        page = browser.new_page(viewport={"width": 900, "height": 336})
+        page.set_content(HTML_CONTENT)
+        page.wait_for_load_state("networkidle")
+        
+        # Save vector PDF with exact 900px x 336px dimensions
+        page.pdf(
+            path=str(pdf_out),
+            width="900px",
+            height="336px",
+            print_background=True,
+            margin={"top": "0px", "right": "0px", "bottom": "0px", "left": "0px"},
+        )
+        print(f"Rendered vector PDF: {pdf_out}")
+
+        # Also save high-res PNG preview
+        png_out = BASE_DIR / "v4" / "manuscript" / "figs" / "scratch" / "fig1_overview.png"
+        page.screenshot(path=str(png_out), scale="device")
+        print(f"Rendered PNG preview: {png_out}")
+
+        browser.close()
+
+    # Copy PDF and PNG to other scratch folders
+    target_scratch = [
+        BASE_DIR / "v4" / "docs" / "overleaf" / "figs" / "scratch",
+        BASE_DIR / "v4" / "figs" / "scratch",
+    ]
+    for d in target_scratch:
+        d.mkdir(parents=True, exist_ok=True)
+        import shutil
+        try:
+            shutil.copy2(str(pdf_out), str(d / "fig1_overview.pdf"))
+            shutil.copy2(str(png_out), str(d / "fig1_overview.png"))
+            print(f"Copied to: {d}")
+        except Exception as e:
+            print(f"Notice when copying to {d}: {e}")
+
+    # 3. Verify PDF with PyMuPDF
+    doc = fitz.open(str(pdf_out))
+    page = doc[0]
+    print(f"PDF verified: pages={len(doc)}, mediabox={page.rect}, drawings={len(page.get_drawings())}, text_len={len(page.get_text())}")
+    pix = page.get_pixmap(dpi=150)
+    preview_path = BASE_DIR / "fig1_new_preview.png"
+    pix.save(str(preview_path))
+    print(f"Saved visual verification preview to: {preview_path}")
+
+if __name__ == "__main__":
+    generate()
