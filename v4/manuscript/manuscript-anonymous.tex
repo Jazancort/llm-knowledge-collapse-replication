@@ -669,7 +669,7 @@ check. Architectural metadata are taken from the released model configurations.
     \item \textbf{Gemma 4 E2B IT}\footnote{Available at
     \url{https://huggingface.co/google/gemma-4-e2b-it};
     \rev{see \citet{gemma4_2026} for the technical report.}} is used as additional
-    validation from a third backbone. The released configuration specifies
+    \rev{validation from a third backbone}. The released configuration specifies
     % [v4] A8 RESOLVIDO: config.json confirmado 2× na Athena — 1536/35/8heads/1KVhead. .tex correto.
     % NOVO: num_kv_shared_layers=20 (layers 15-34 não têm v_proj). LoRA adapta 50 módulos, não 70.
     35 layers, hidden size 1536, and grouped-query attention with 8 attention
@@ -761,7 +761,7 @@ sweep the learning rate across four logarithmically spaced values ($10^{-6}$,
 $5{\times}10^{-6}$, $10^{-5}$, $2{\times}10^{-5}$), selected to span one
 order of magnitude within the practical range commonly used for LLM
 fine-tuning~\citep{hu2022,dettmers2023}. This range produced per-generation
-weight drift $d(t)$ (mean absolute change per parameter) from 0.39 to 3.48, enabling perturbation-magnitude
+\rev{weight drift $d(t)$ (mean absolute change per parameter)} from 0.39 to 3.48, enabling perturbation-magnitude
 dose-response analysis. This axis tests whether
 perturbation magnitude drives the regime transition independently of adapter
 rank.
@@ -937,7 +937,7 @@ the synthetic training stream in Section~\ref{sec:intervention}.
 
 \subsection{Synthetic-exposure interventions}\label{sec:intervention}
 
-The interventions in Axis~5 test whether the degradative regime can be shifted
+\rev{The interventions in Axis~5 test whether the degradative regime can be shifted
 back toward homeostasis by reducing synthetic training exposure. The primary
 evidence comes from two pre-registered dose--response experiments, one on each
 backbone.
@@ -953,6 +953,7 @@ An independent pre-registered experiment applies the same four dose levels to
 Gemma~3~1B~IT at $r=10$. The evaluation set is $|K_{0,\mathrm{G2}}|=44$ items
 (established by the \texttt{g1\_rank10} pipeline; see Section~\ref{sec:k0}).
 
+}
 \rev{A prior exploratory pilot (C1--C5) used a qualitatively different
 experimental design: five discrete intervention strategies (baseline, prompt
 constraint, length filtering, canonical extraction, and random downsampling)
@@ -972,7 +973,7 @@ multi-seed headline comparisons and single-seed supporting ablations.
 All headline comparisons are evaluated with multiple independent training seeds
 \rev{(three for most Qwen conditions, five for Gemma~3 anchor ranks, five for B7/Qwen dose-response, and three for G2/Gemma~3 dose-response)}. These
 include the Qwen rank-sweep endpoints ($r=16$ and $r=256$), the Gemma~3 anchor
-ranks ($r=4$, homeostatic, and $r=16$, degradative), the QLoRA--FFT comparison, and the dose--response synthetic
+\rev{ranks ($r=4$, homeostatic, and $r=16$, degradative), the QLoRA--FFT comparison, and the dose--response synthetic}
 exposure interventions. \rev{Supporting ablations are evaluated with a single seed. The dose-response experiments (B7, G2) use multiple seeds across all doses (not only at endpoints).} Supporting
 ablations are evaluated with a single seed and labeled as such. We do not pool
 single-seed and multi-seed results when making headline claims.
@@ -991,8 +992,8 @@ the entire sweep provides stronger evidence than any single pairwise comparison.
 Effect sizes are reported as absolute percentage-point gaps in factual retention.
 For QLoRA--FFT comparisons, gaps are reported per seed and as a mean. For
 synthetic-exposure interventions, we report the improvement over the \rev{0\%-removed
-within-pipeline baseline} at the same generation; the earlier C1--C5 pilot used a
-different evaluation pipeline and is not used as the primary reference. We do not claim precise threshold locations
+within-pipeline baseline} at the same generation; \rev{the earlier C1--C5 pilot used a
+different evaluation pipeline and is not used as the primary reference.} We do not claim precise threshold locations
 or a universal effective-rank value at which degradation begins; instead, we
 identify the interval between adjacent tested settings where the regime
 transition occurs. Single-seed observations are used as exploratory or
