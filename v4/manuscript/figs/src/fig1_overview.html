@@ -227,8 +227,9 @@
     <!-- Arrow 2 -> 3 -->
     <line x1="592" y1="118" x2="612" y2="118" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)" />
 
-    <!-- U-turn Connector 3 -> 4 -->
-    <path d="M 754 222 L 754 237 L 146 237 L 146 250" fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow-down)" stroke-linejoin="round" />
+    <!-- U-turn Connector 3 -> 4 (rounded corners, radius ≈12px) -->
+    <path d="M 754 222 L 754 229 Q 754 241 742 241 L 158 241 Q 146 241 146 249"
+          fill="none" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow-down)"/>
 
     <!-- Arrow 4 -> 5 -->
     <line x1="288" y1="354" x2="308" y2="354" stroke="#6b7280" stroke-width="2" marker-end="url(#arrow)" />
