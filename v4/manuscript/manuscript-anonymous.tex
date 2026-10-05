@@ -68,7 +68,7 @@ emerges, remains bounded, or can be reversed under parameter-efficient
 fine-tuning remain poorly understood.
 \rev{Through systematic dose-response experiments spanning three backbones
 (Qwen~2.5~1.5B, Gemma~3~1B, and Gemma~4~E2B), ten recursive generations,
-and three to six independent seeds for headline conditions (single seed for
+and \rev{three or five independent seeds for most headline conditions (six seeds for the pooled $r=256$ analysis); single seed for
 intermediate ablations), we investigate how factual retention changes as
 adapter capacity, perturbation magnitude, and synthetic exposure vary.}
 These experiments reveal a common empirical organizing principle, which we
@@ -213,7 +213,7 @@ The main contributions of this work are:
     quality degrades substantially while factual retention remains bounded.
     \item We show that synthetic exposure is a third pressure axis: a
     pre-registered dose--response (five paired seeds) demonstrates that any
-    reduction of 10--50\% raises Gen~5 retention by approximately 5\,pp,
+    reduction of 10--50\% raises Gen~5 retention by \rev{3.6--4.4\,pp},
     with the Gen~10 benefit graded (\rev{$+9.2$}\,pp at 50\%; 95\%~CI $[6.9, 11.6]$).
     A 50\% reduction matches halving the learning rate, consistent with
     exposure acting through the per-generation update budget.
@@ -1547,9 +1547,7 @@ either axis in isolation.
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig_rank_lr_heatmap.png}
   \caption{Rank $\times$ learning-rate joint pattern on Qwen~2.5~1.5B
-  (Gen5 retention). Non-parallel slopes indicate that rank and learning rate
-  jointly determine the operating regime: higher rank amplifies the effect of
-  increased learning rate, and vice versa.}\label{fig:heatmap}
+  (Gen5 retention). \rev{Descriptive non-parallel trends suggest that rank and learning rate may jointly determine the operating regime, but the single-seed design is hypothesis-generating rather than confirmatory.}}\label{fig:heatmap}
 \end{figure}
 
 \subsubsection{
@@ -1725,9 +1723,9 @@ A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
 protocol registered as \texttt{a916ebf} before any run) shows that the
 Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
 \rev{$+4.9$}\,pp at 25\% ($p = 0.005$, 95\%~CI $[2.5, 7.2]$), and
-\rev{$+9.2$}\,pp at 50\% ($p = 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
+\rev{$+9.2$}\,pp at 50\% ($p < 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
-paired $t$-test \rev{$p = 0.009$, $0.003$, $0.001$}). A 50\% reduction
+paired $t$-test \rev{$p = 0.009$, $0.003$, $p < 0.001$}). A 50\% reduction
 effectively arrests progressive loss: the Gen~5$\to$10 slope is
 $-0.14$\,pp/generation versus $-0.96$\,pp/generation at 0\%, shifting the
 system from the degradative to the bounded regime by the criterion of
@@ -1758,8 +1756,7 @@ comparison across conditions.
   transparency. These results use a different evaluation pipeline from the
   primary dose--response experiments (B7/G2) and are not used in the primary
   effect estimates. (a)~$K_0$ retention by condition. (b)~Retention improvement
-  relative to the corresponding unmodified arm; error bars reflect the range across three seeds or
-  masks.}\label{fig:interventions}
+  relative to the corresponding unmodified arm; \rev{error bars reflect the range across the available pilot replicates (replicate type varies by panel; these exploratory results are not directly comparable with the main seeded experiments)}.}\label{fig:interventions}
 \end{figure}}
 
 \rev{These results demonstrate that the Qwen $r=256$ configuration responds to
@@ -1818,9 +1815,7 @@ competing mitigation pipeline.
 
 Collectively, the five experimental axes establish that recursive stability
 under PEFT is governed by a multidimensional pressure landscape: update
-capacity, perturbation magnitude, and synthetic exposure each independently
-shift the system between regimes, these axes interact rather than operate in
-isolation, and the regime boundary is backbone-dependent. The following section
+capacity, perturbation magnitude, and synthetic exposure \rev{can each shift} the system between regimes under the evaluated conditions; the axes may interact rather than operate in isolation, and the regime boundary is backbone-dependent. The following section
 interprets these findings in the context of prior work.
 
 % ============================================================
@@ -2141,7 +2136,7 @@ recursive stability. For applications where recursive synthetic data reuse is
 anticipated, selecting a rank that places the system well below the observed
 pressure threshold is a practical strategy for maintaining recursive stability.
 On Qwen~2.5~1.5B, ranks at or below 64 (effective rank $\leq 30$) remained
-\rev{stable through the evaluated horizon ($r=4$,$32$: Gen5; others: Gen10) with no sign of drift.} Although
+\rev{stable through the evaluated horizon ($r=16$,$64$: Gen10, no sign of drift; $r=4$,$32$: Gen5 only, treated as single-generation ablations}.} Although
 the numerical threshold is backbone-dependent, the underlying principle appears
 consistent across the evaluated models: lower effective training pressure is
 associated with greater recursive stability in the tested configurations. When
@@ -2240,7 +2235,7 @@ may eventually degrade given sufficient generations, and configurations
 classified as bounded may stabilize or worsen.
 
 Multi-seed evaluation is used for headline comparisons (three seeds), while
-supporting ablations are evaluated with a single seed. This provides consistent
+This provides consistent
 descriptive patterns but limited statistical power for formal inference. The
 observed consistency across seeds supports consistency under the evaluated
 conditions but does not substitute for larger-scale replication.
@@ -2326,8 +2321,7 @@ is not an artefact of verbosity-induced scoring inflation.}
 (ten generations each). A single execution does not permit
 seed-level variance estimation or formal regime classification under the
 same statistical protocol applied to Qwen and Gemma~3. The E2B results are
-therefore treated as exploratory and supportive: they demonstrate that degradative
-degradative behaviour at $r=64$ is \rev{observed in a single-seed run} on a second-generation
+therefore treated as exploratory and supportive: they demonstrate that degradative behaviour at $r=64$ is \rev{observed in a single-seed run} on a second-generation
 architecture, but they do not constitute an independent replication of the
 quantitative threshold estimates.}
 
@@ -2359,8 +2353,7 @@ recursive generations, and multiple seeds, we identified effective training
 pressure as an organizing framework for recursive stability under
 parameter-efficient fine-tuning. The central finding is that recursive
 degradation is a pressure-gated phenomenon: increasing update capacity,
-perturbation magnitude, or synthetic exposure each independently shifts the
-system from homeostatic to degradative behavior, with the transition being
+perturbation magnitude, or synthetic exposure \rev{can each shift} the system from homeostatic to degradative behavior, with the transition being
 abrupt, backbone-dependent, and reproducible. Cross-backbone replication further
 shows that degradation in the above-threshold regime is progressive and does not
 stabilize within the observed horizon. \rev{Pre-registered dose--response
