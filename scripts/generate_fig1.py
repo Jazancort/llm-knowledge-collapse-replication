@@ -64,8 +64,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     height: 208px;
     background: #ffffff;
     border-radius: 8px;
-    border: 1.5px solid #e5e7eb;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1.5px solid #d1d5db;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -425,7 +424,10 @@ def generate():
 
     with sync_playwright() as p:
         browser = p.chromium.launch(executable_path=r"C:\Program Files\Google\Chrome\Application\chrome.exe")
-        page = browser.new_page(viewport={"width": 900, "height": 480})
+        # device_scale_factor=3 → rasterized elements at ~390 DPI at print size (textwidth≈493pt)
+        context = browser.new_context(device_scale_factor=3)
+        page = context.new_page()
+        page.set_viewport_size({"width": 900, "height": 480})
         page.set_content(HTML_CONTENT)
         page.wait_for_load_state("networkidle")
         
@@ -439,11 +441,12 @@ def generate():
         )
         print(f"Rendered vector PDF: {pdf_out}")
 
-        # Also save high-res PNG preview
+        # Save high-res PNG: device_scale_factor=3 → 2700×1440px ≈ 394 DPI at print size
         png_out = BASE_DIR / "v4" / "manuscript" / "figs" / "scratch" / "fig1_overview.png"
-        page.screenshot(path=str(png_out), scale="device")
+        page.screenshot(path=str(png_out), full_page=True)
         print(f"Rendered PNG preview: {png_out}")
 
+        context.close()
         browser.close()
 
     # Copy PDF and PNG to other scratch folders
