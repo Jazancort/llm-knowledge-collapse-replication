@@ -256,6 +256,7 @@ g14_5  = g1_5  + [G4[s]['gen5']  for s in G4]
 g14_10 = g1_10 + [G4[s]['gen10'] for s in G4]
 G14_M5,  G14_SD5,  _ = ms(g14_5)
 G14_M10, G14_SD10, _ = ms(g14_10)
+G14_SLOPE, _ = slope_pp_gen(g14_5, g14_10)  # N=6, G1+G4
 G14_CI5_LO, G14_CI5_HI   = ci95(g14_5)
 G14_CI10_LO, G14_CI10_HI = ci95(g14_10)
 
@@ -358,6 +359,10 @@ for dose in [10, 25, 50]:
 b7_50_5  = [B7_GEN5[50][s] for s in seeds_b7]
 b7_50_10 = [B7[50][s] for s in seeds_b7]
 B7_SLOPE50, _ = slope_pp_gen(b7_50_5, b7_50_10)
+# Slope dose=0% (braço baseline B7, N=5)
+b7_0_5  = [B7_GEN5[0][s] for s in seeds_b7]
+b7_0_10 = [B7[0][s] for s in seeds_b7]
+B7_SLOPE0, _ = slope_pp_gen(b7_0_5, b7_0_10)
 
 # LR equivalência
 lr5e6_vals  = [B7_LR5E6_GEN5[s] for s in [15, 137, 256]]
@@ -495,6 +500,7 @@ macros.append(macro("GoneSDten",     G1_SD10))
 macros.append(macro("GoneCItenLo",   G1_CI10_LO))
 macros.append(macro("GoneCItenHi",   G1_CI10_HI))
 macros.append(macro("GoneSlope",     G1_SLOPE))
+macros.append(macro("GoneFourteenSlope", G14_SLOPE))  # G1+G4 N=6
 macros.append(macro("GoneSeedFifteenFive",  G1[15]['gen5']))
 macros.append(macro("GoneSeedFifteenTen",   G1[15]['gen10']))
 macros.append(macro("GoneSeedOneThreeSevenFive", G1[137]['gen5']))
@@ -570,6 +576,7 @@ for dose in [10, 25, 50]:
     macros.append(macro(f"BsevenCItenHi{tag}",   B7_RES[dose]['ci10hi']))
     macros.append(macro(f"BsevenPten{tag}",      B7_RES[dose]['p10'],
                         fmt="{:.3f}"))
+macros.append(macro("BsevenSlopeZero",    B7_SLOPE0,  fmt="{:+.2f}"))  # dose=0% N=5
 macros.append(macro("BsevenSlopeFifty",  B7_SLOPE50, fmt="{:+.2f}"))
 macros.append(macro("BsevenLRdelta",     B7_LR_DELTA, fmt="{:+.2f}"))
 
