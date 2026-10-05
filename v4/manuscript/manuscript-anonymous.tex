@@ -293,7 +293,7 @@ different questions. Whereas \citet{keisha2025} characterize stages of knowledge
 collapse under recursive full fine-tuning, we map how factual retention responds
 as effective training pressure varies under parameter-efficient fine-tuning.
 These differences are reflected in the training protocol (replace-only QLoRA
-versus accumulated FFT) and evaluation methodology (exact-match $K_0$ retention
+versus accumulated FFT) and evaluation methodology (\rev{bidirectional substring-based $K_0$ retention}
 versus multi-format assessment). Although both studies include Gemma~3~1B, the
 different protocols preclude direct quantitative comparison.
 
@@ -598,8 +598,8 @@ backbone.
 % [v4-rev2] P1: dois K0 distintos para Gemma3 de dois pipelines diferentes
 \rev{The $K_0$ sizes are: $|K_0|=78$ for Qwen~2.5~1.5B and $|K_0|=76$ for
 Gemma~4~E2B~IT. For Gemma~3~1B~IT, two evaluation sets arise from two distinct
-experimental pipelines: the \rev{rank-sweep experiments} (G3,
-Section~\ref{sec:res_backbone}) use $|K_{0,\mathrm{rank}}|=46$ items, established
+experimental pipelines: the \rev{rank-sweep experiments}
+(Section~\ref{sec:res_backbone}) use $|K_{0,\mathrm{rank}}|=46$ items, established
 by the \texttt{gemma3\_c5correct} pipeline; the dose-response experiment (G2,
 Section~\ref{sec:intervention}) uses $|K_{0,\mathrm{G2}}|=44$ items, established
 by the \texttt{g1\_rank10} pipeline. The 44-item set is a strict subset of the
@@ -679,8 +679,8 @@ check. Architectural metadata are taken from the released model configurations.
     35 query and 15 value matrices (layers 0--14 only), for 50 adapted
     modules in total. We evaluate three ranks ($r=4$,
     $r=16$, $r=64$) with a single seed over ten generations to test whether
-    the dose-response structure generalizes beyond the Qwen and Gemma~3
-    families.
+    the dose-response structure \rev{holds across a third backbone within the Gemma
+    family}.
 \end{itemize}
 
 QLoRA experiments load the base model in 4-bit
@@ -739,7 +739,7 @@ components.}\label{tab:axes}
 \midrule
 1 & Capacity & QLoRA rank $r$ & $\{4, 16, 32, 64, 128, 256\}$ \\
 2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\
-3 & Method & QLoRA vs FFT & Matched pert., $N{=}3$ \\
+3 & Method & QLoRA vs FFT & \rev{Exploratory comparison at similar magnitude}, $N{=}3$ \\
 4 & Topology & Target modules & Attention vs full-linear \\
 5 & Exposure & Training examples & \rev{0\%, 10\%, 25\%, 50\% removed (paired dose--response; B7/Qwen $r{=}256$, $n{=}5$; G2/Gemma~3 $r{=}10$, $n{=}3$)} \\
 \bottomrule
@@ -1008,7 +1008,7 @@ This inventory responds directly to the question of whether observed regime
 transitions might be attributable to confounds rather than to the manipulated
 axis. Controls marked with a dedicated experiment (G3, G4) are evaluated
 quantitatively in Section~\ref{sec:results}; the remaining entries rely on
-held constant across all conditions within a backbone.
+\rev{held constant within each experimental pipeline}.
 
 
 \begin{table*}[tp]
@@ -1475,8 +1475,8 @@ FFT          & $2{\times}10^{-5}$ & 3.48               & 84.6\% \\
 
 \subsubsection{QLoRA versus FFT: exploratory comparison at similar perturbation magnitude}
 To compare the two update mechanisms at similar perturbation, we selected FFT at
-LR$\,=10^{-6}$ (drift 0.39) as the closest available match to QLoRA $r=16$
-($\|BA\|_F \approx 0.42$). Both were run for 10 generations with three seeds.
+LR$\,=10^{-6}$ (drift 0.39) as \rev{the closest available comparator to} QLoRA $r=16$
+($\|BA\|_F \approx 0.42$; \rev{the two measures differ in geometry and this comparison is exploratory}). Both were run for 10 generations with three seeds.
 As illustrated in Figure~\ref{fig:fft_qlora}, the separation between the
 trajectories is established after the first recursive generation and remains
 nearly constant thereafter.
@@ -1709,7 +1709,7 @@ exposure can shift the system back from a degradative to a near-homeostatic
 configuration. The primary evidence comes from the two pre-registered
 dose--response experiments described in Section~\ref{sec:intervention}:
 B7 on Qwen $r=256$ ($n=5$ paired seeds, $|K_0|=78$) and G2 on Gemma~3 $r=10$
-($n=3$ paired seeds, $K_{0,\mathrm{G2}}=44$).
+($n=3$ paired seeds, $|K_{0,\mathrm{G2}}|=44$).
 
 \rev{Table~\ref{tab:interventions} reports $K_0$ retention and the gain over
 the 0\% within-pipeline baseline for each dose level on Qwen $r=256$.}
@@ -1809,10 +1809,10 @@ pressure.}
   across two backbones (Gen10, $K_0$-conditioned). Each curve shows the mean
   improvement ($\Delta$pp) over the respective unmodified baseline as the
   fraction of synthetic training examples removed increases from 0\% to 50\%.
-  Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $K_{0,\mathrm{G2}}=44$).
+  Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $|K_{0,\mathrm{G2}}|=44$).
   Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $|K_0|=78$).
   Shaded bands: 95\,\% confidence intervals from paired $t$-tests.
-  The absolute gain is larger for Gemma~3 G2 ($K_{0,\mathrm{G2}}{=}44$)
+  The absolute gain is larger for Gemma~3 G2 ($|K_{0,\mathrm{G2}}|{=}44$)
   than for Qwen B7 ($K_0{=}78$); effective rank is not portable across
   architectures, so the two curves are reported within their respective
   protocols rather than as a cross-backbone pressure comparison.
@@ -2294,7 +2294,7 @@ its predictive utility for new architectures.
 The perturbation-matching comparison between QLoRA and FFT relies on approximate
 proxies ($\|BA\|_F$ for QLoRA versus mean absolute weight drift for FFT). These
 quantities are operationally comparable but not geometrically identical,
-introducing residual confounding in the method comparison. Additionally, all
+introducing residual confounding in the method comparison. Additionally,
 \rev{Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization. The G3 ablation re-ran the same protocol in bf16 (no base-weight quantization) and produced identical regime classifications, though a full causal conclusion awaits per-item audit. Although}
 the quantized base remains static across generations and adapters are trained in
 higher precision, the interaction between quantization error and high-rank
@@ -2344,7 +2344,7 @@ is not an artefact of verbosity-induced scoring inflation.}
 seed-level variance estimation or formal regime classification under the
 same statistical protocol applied to Qwen and Gemma~3. The E2B results are
 therefore treated as exploratory and supportive: they demonstrate that degradative
-behaviour at sub-threshold pressure is reproducible on a second-generation
+behaviour at sub-threshold pressure is \rev{observed in a single-seed run} on a second-generation
 architecture, but they do not constitute an independent replication of the
 quantitative threshold estimates.}
 
@@ -2414,7 +2414,7 @@ their effects are additive or interactive.
 
 \section{Project repository and data access}\label{app:repo}
 
-\rev{The replication package for this paper — including the revised manuscript
+\rev{Version v1.0.3 of the replication package contains the initial experimental scripts, raw outputs, and a draft manuscript. The current submission's revised manuscript
 source, response-to-reviewers letter, \rev{aggregated per-seed per-generation results (G1--G5, 27 executed training runs (one run = one seed-configuration pair, comprising the full generation sequence for that condition; G5 runs 5 generations), CSV format)},
 canonical numbers (112 \LaTeX{} macros), all analysis scripts, and all publication
 figures — is archived at:
