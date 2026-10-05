@@ -123,7 +123,7 @@ Corresponding Author
       manuscript.
 \item Locations are given as section and page of the revised manuscript.
       Where the revision renumbered a table or section, both numbers are
-      given at first mention, e.g.\ \renum{Table~7}{Table~9, p.~27}.
+      given at first mention, e.g.\ \renum{Table~7}{Table~9}.
 \item All numerical values quoted here are generated from the archived
       per-seed results by \texttt{scripts/analysis/make\_all.py} and are
       reproduced verbatim from its output.
@@ -398,22 +398,22 @@ in those words.
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{ETP reframed (Section~3.5, p.~7).}
+\item \textbf{ETP reframed (Section~3.5).}
       \newtext{``ETP index $\Pi$ is an exploratory post-training
       summary; not available prospectively; not validated as a
       transferable predictor.''} Added to Section~3.5, Abstract, and~\S7.
 \item \textbf{Strict re-scoring (supplementary Table~S2).}
       All saved predictions re-scored under strict exact-match.
       Regime classifications consistent under both scorers.
-\item \textbf{Seed policy formalized (Section~3.7, p.~10).}
+\item \textbf{Seed policy formalized (Section~3.7).}
       Multi-seed confirmatory versus single-seed descriptive
       distinguished and applied consistently.
-\item \textbf{B7 and G2 replace C1/C5 (Section~4.5, p.~17).}
+\item \textbf{B7 and G2 replace C1/C5 (Section~4.5).}
       Pre-registered dose--response with statistics for both backbones.
 \end{enumerate}
 
-\msloc{\S3.5, p.~7; \S3.8, p.~10; \S3.7 and \S4.5, pp.~10 and 17;
-\S6, pp.~22--23; supplementary Table~S2.}
+\msloc{\S3.5; \S3.8; \S3.7 and \S4.5, p17;
+\S6; supplementary Table~S2.}
 
 
 \rconcern{Reviewer \#1, Concern \#1}{Prospective calibration of ETP}{How can effective training pressure be quantitatively calibrated and prospectively tested on an unseen backbone or dataset?}
@@ -488,26 +488,26 @@ of regimes, not as a confirmatory prospective test.
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{ETP redefined (Section~3.5, p.~7).}
+\item \textbf{ETP redefined (Section~3.5).}
       The distinction between ETP-design and ETP-observed variables was
       formalized. The following sentence was added to Section~3.5:
       \newtext{``The ETP index $\Pi$ is an exploratory post-training
       summary; it is not available prospectively and has not been
       validated as a transferable quantitative predictor across
       architectures or datasets.''}
-\item \textbf{Abstract and conclusion qualified (Abstract, p.~1;
-      Section~7, p.~23).}
+\item \textbf{Abstract and conclusion qualified (Abstract;
+      Section~7).}
       The abstract now bounds the ETP claim: \newtext{``We identify
       effective training pressure as an organizing principle for the
       observed regime structure; this framework is not yet a transferable
       quantitative predictor, as cross-architecture normalization did not
       align the observed boundaries.''} The conclusion repeats this
       qualification.
-\item \textbf{Prospective calibration protocol added (Section~6, p.~22).}
+\item \textbf{Prospective calibration protocol added (Section~6).}
       A five-step protocol specifying the requirements for a genuine
       prospective test on an unseen backbone was added to Section~6 as
       a direction for future work (see the five-step list above).
-\item \textbf{G5 interpretation qualified (Section~4.6, p.~18).}
+\item \textbf{G5 interpretation qualified (Section~4.6).}
       The G5 result is now described as \newtext{``exploratory evidence
       for the ordering of regime boundaries, not a confirmatory
       prospective test: no threshold was pre-specified and the backbone
@@ -589,19 +589,19 @@ pressure axes in isolation.''}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{Optimizer state documented (Section~3.1, p.~5).}
+\item \textbf{Optimizer state documented (Section~3.1).}
       The sentence \newtext{``A fresh adapter and optimizer are
       initialized at the start of every generation; no optimizer state
       is carried across generations''} was added to Section~3.1.
-\item \textbf{Quantization check scoped (Section~4.2.1, p.~12).}
+\item \textbf{Quantization check scoped (Section~4.2.1).}
       The bf16 check is now described as an implementation consistency
       check, not a causal isolation. The $p$-value ($p=0.25$, $N=3$)
       and the limitation are stated explicitly.
-\item \textbf{Data-order caveat added (Section~4.2.3, p.~14).}
+\item \textbf{Data-order caveat added (Section~4.2.3).}
       The G4 comparison is described as simultaneously changing seed
       and data order; the $p=0.70$ result is qualified accordingly.
 \item \textbf{Summary paragraph on confounding added
-      (Section~4.2.1, p.~12).}
+      (Section~4.2.1).}
       A paragraph listing the available controls, their limitations,
       and the experiments required for fully causal inference was added
       to Section~4.2.1.
@@ -665,7 +665,7 @@ open empirical question and are outside the scope of this study.''}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{Evaluation-set size qualified (Section~3.2, p.~5).}
+\item \textbf{Evaluation-set size qualified (Section~3.2).}
       The sentence \newtext{``Results should be interpreted as
       regime-level tendencies rather than precise quantitative
       estimates''} was added to Section~3.2.
@@ -674,7 +674,7 @@ open empirical question and are outside the scope of this study.''}
       exact-match. Results are tabulated in supplementary Table~S2.
       The main text states: \newtext{``Regime classifications are
       consistent under strict exact-match scoring (Table~S2).''}
-\item \textbf{Domain scope bounded (Section~6, p.~22).}
+\item \textbf{Domain scope bounded (Section~6).}
       A sentence explicitly limiting the conclusions to TriviaQA
       short-answer factual questions was added to Section~6.
 \end{enumerate}
@@ -736,18 +736,18 @@ formal equivalence.
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{C1/C5 comparison withdrawn (Section~4.5, p.~17).}
+\item \textbf{C1/C5 comparison withdrawn (Section~4.5).}
       The sentence describing the C1/C5 gains was replaced with:
       \newtext{``The C1/C5 pilot used a different evaluation pipeline;
       its results are retained for transparency but are not used      in any quantitative inference.''}
-\item \textbf{B7 Qwen dose--response with statistics (Section~4.5, p.~17).}
+\item \textbf{B7 Qwen dose--response with statistics (Section~4.5).}
       Paired $t$-tests and 95\% CIs added at all four dose levels.
       Slope comparison ($-0.15$ versus $-1.13$\,pp/generation at
       50\% versus 0\% removal) stated explicitly.
-\item \textbf{G2 Gemma~3 dose--response with statistics (Section~4.5, p.~17).}
+\item \textbf{G2 Gemma~3 dose--response with statistics (Section~4.5).}
       Results reported with endpoint gain, CI, $p$-value, and
       explicit note that the rate of loss was not reduced.
-\item \textbf{Mechanistic caveat (Section~6, p.~22).}
+\item \textbf{Mechanistic caveat (Section~6).}
       Sentence added: whether the effect is driven by update-budget
       reduction or data-composition change was not established;
       a steps-matched comparison would be required.
@@ -803,16 +803,16 @@ version for each.
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{Appendix~A rewritten (p.~24).}
+\item \textbf{Appendix~A rewritten.}
       The reproducibility appendix was expanded to enumerate what the
       archive contains (per-seed results, scripts, configurations,
       evaluation protocol) and what it does not contain (raw predictions,
       checkpoints, base weights), with the reason for each omission.
-\item \textbf{Archive contents cited (Appendix~A, p.~24).}
+\item \textbf{Archive contents cited (Appendix~A).}
       The sentence \newtext{``The archive permits reproduction of all
       reported statistics and figures from the consolidated per-seed
       results files''} was added as the opening of Appendix~A.
-\item \textbf{Version discipline documented (Appendix~A, p.~24).}
+\item \textbf{Version discipline documented (Appendix~A).}
       Each script in the archive is now identified by the release
       version in which it first appears, distinguishing v1.0.3
       (initial release) from the current revision.
@@ -915,8 +915,8 @@ paragraph in Section~5.4 that still drew a conclusion from the archived
 pilot described in our response to Reviewer~1, Concern~\#4, and removed
 it.
 
-\msloc{\S1, p.~1; \S3.3, p.~6; \S3.5, p.~7; \S4.1, p.~11; \S4.3.2, p.~14;
-\S5.1--5.4, pp.~19--21; \S6, pp.~22--23.}
+\msloc{\S1; \S3.3; \S3.5; \S4.1; \S4.3.2;
+\S5.1--5.4; \S6.}
 
 
 \rconcern{Reviewer \#2, Concern \#1}{Abbreviations and notation}{ETP appears in Figure~1 but is never explicitly defined as ``effective training pressure.'' MTLD is introduced without expansion. KL, JS, and coverage appear in Figure~1 without definition. bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded forms. ``Homeo.'' is used in Table~2 without definition. $K_0$ is used both as a set of questions and as a retention metric. $T$, $D1\_T$, $D10$, $\Delta I$, Instability(1), $MeanLen\_T$, and related symbols in Eq.~6 are not fully defined. The effective-rank formula uses $\sigma_i$ as both singular values and normalized singular values. The normalization condition is mathematically incorrect as written. $BA\_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in the drift equation are not consistently defined. $r \in \{4,10,12,14,16\}$ set notation was garbled in the original PDF.}
@@ -1076,7 +1076,7 @@ Rewritten with explicit function notation and set cardinality:
          {|K_0|}
 \]
 The numerator is the cardinality of a set, not a summation, which is
-what the garbled original obscured.\ \ (\S3.2, p.~5) \\
+what the garbled original obscured.\ \ (\S3.2) \\
 
 (b) & Eq.~2 missing sign and summation; normalization incorrect &
 Accepted as a mathematical error and corrected in the notation the
@@ -1087,7 +1087,7 @@ reviewer proposed:
 \]
 with \newtext{$\hat{\sigma}_i \ge 0$ and $\sum_i \hat{\sigma}_i = 1$} stated in Table~1. The
 symbol $\hat{\sigma}_i$ denotes the normalized singular weight; $\sigma_i$ are the raw singular values of $\Delta W$.\ \
-(Eq.~2, \S3.5.1, p.~9; Table~1, p.~25) \\
+(Eq.~2, \S3.5.1; Table~1) \\
 
 (c) & Eq.~6 signs, log ratios, $\Delta I$ &
 Rewritten with each ratio oriented so that all three terms increase
@@ -1103,16 +1103,16 @@ convention $0\log 0 = 0$, and the interpretive statement
 \newtext{a positive SDI-3 score indicates cumulative distributional
 deterioration}. Each term is named in the preceding prose: verbosity
 increase, unigram diversity decrease, loss of item-level response
-stability.\ \ (Eq.~6, \S3.6, p.~9) \\
+stability.\ \ (Eq.~6, \S3.6) \\
 
 (d) & $5\times10^{-6}$; check elsewhere &
 The value is the learning rate $5\times10^{-6}$ in
-\renum{Table~7}{Table~9, p.~27}; both the multiplication sign and the
+\renum{Table~7}{Table~9}; both the multiplication sign and the
 negative exponent were lost to the glyph fault. The instruction to check
 elsewhere was followed systematically: the audit covers every equation,
 table cell, figure label and caption, and also recovered the garbled set
 expressions, now rendered as $r \in \{4, 10, 12, 14, 16\}$ and
-$r \in \{10, 12, 14\}$.\ \ (Table~9, p.~27; \S3.4, p.~7) \\
+$r \in \{10, 12, 14\}$.\ \ (Table~9; \S3.4) \\
 \end{longtable}
 
 \arhead{Author action:}
@@ -1137,8 +1137,8 @@ $r \in \{10, 12, 14\}$.\ \ (Table~9, p.~27; \S3.4, p.~7) \\
       its table.
 \end{enumerate}
 
-\msloc{\S3.2, p.~5; \S3.4, p.~7; \S3.5.1, p.~8; \S3.6, p.~9; Table~1, p.~25;
-Table~9, p.~27; replication package (audit script and output).}
+\msloc{\S3.2; \S3.4; \S3.5.1; \S3.6; Table~1;
+Table~9; replication package (audit script and output).}
 
 \rconcern{Reviewer \#2, Concern \#3}{Technical and data
 inconsistencies}{(a) Qwen threshold inconsistency: Abstract and
@@ -1180,7 +1180,7 @@ observed, the ``3--6'' interval is the transition from homeostatic
 directly to degradative. The two intervals are therefore not the same
 kind of object, and the revision no longer compares them as though they
 were.
-\newtext{(\S4.2.3, p.~14; \S5.1, p.~18; Abstract, p.~1)}
+\newtext{(\S4.2.3; \S5.1; Abstract)}
 
 \rsub{(b)}{$r=128$ labeled above-threshold while classified Bounded.}
 Corrected. ``Above-threshold configurations'' now refers exclusively to
@@ -1189,22 +1189,22 @@ $r=256$. The $r=128$ configuration is described as a
 signatures emerge without a progressive retention trajectory, which is
 precisely the dissociation we report for it, and which the original label
 obscured.
-\newtext{(\S4.4.3, p.~16; \S5.3, p.~19)}
+\newtext{(\S4.4.3; \S5.3)}
 
 \rsub{(c)}{$r=256$ called a boundary configuration.}
 Corrected throughout. The reviewer is right that the boundary lies
 between $r=128$ and $r=256$, not at $r=256$. Every occurrence now reads
 \newtext{lowest-pressure degradative configuration tested}, which states
 what the configuration is without implying that it sits on the boundary.
-\newtext{(\S3.4, p.~9; \S4.5, pp.~16--17; \S5.4, p.~20)}
+\newtext{(\S3.4; \S4.5; \S5.4)}
 
 \rsub{(d)}{Gemma~3 degradative range.}
-Corrected. \renum{Table~4}{Table~6, p.~27} reports 78.3\,\%, 73.9\,\% and
+Corrected. \renum{Table~4}{Table~6} reports 78.3\,\%, 73.9\,\% and
 69.6\,\% at $r=10$, 12 and 14 respectively, all degradative at Gen~5, so
 ``$r \geq 16$'' was inconsistent with our own data. The text now reads
 \newtext{$r \geq 10$ on Gemma~3} and locates the boundary \newtext{below
 $r=10$}, between effective ranks 3 and 6.
-\newtext{(\S5.2, p.~19; Table~6, p.~27)}
+\newtext{(\S5.2; Table~6)}
 
 \rsub{(e)}{Seed count in the Abstract.}
 Corrected, and the correction goes beyond the Abstract. The seed policy
@@ -1216,7 +1216,7 @@ headline claim is made. An $N$ column was added to the rank-sweep and dose--resp
 the remaining tables (Tables~7--9) state $N$ in a footnote.
 Contribution~1 in the Introduction, which carried the same overclaim, was
 corrected with it.
-\newtext{(Abstract, p.~1; \S1, p.~3; \S3.8, p.~9; Tables~4--10)}
+\newtext{(Abstract; \S1; \S3.8; Tables~4--10)}
 
 \rsub{(f)}{FFT on Gemma~3 described as confirmatory.}
 Accepted. A single-seed, non-monotonic result cannot confirm anything,
@@ -1228,7 +1228,7 @@ non-monotonic pattern at $\mathrm{LR}=5\times10^{-6}$ limits interpretation.
 We treat this as descriptive evidence rather than confirmatory
 generalization.} Contribution~2 in the Introduction carried the same
 overclaim and was corrected.
-\newtext{(\S1, p.~3; \S4.3.3, pp.~14--15)}
+\newtext{(\S1; \S4.3.3)}
 
 \rsub{(g)}{C5 removal percentage.}
 The reviewer identified a genuine ambiguity, and the revision removes it
@@ -1243,11 +1243,11 @@ replace it, exposure is specified exclusively as the fraction of training
 examples removed --- 0\,\%, 10\,\%, 25\,\%, 50\,\% --- with no token-based
 figure anywhere. The pilot, including its original dose description, is
 archived in the replication package.
-\newtext{(\S3.7, p.~9; \S4.5, pp.~16--17; Figure~9, p.~25)}
+\newtext{(\S3.7; \S4.5; Figure~9)}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{Qwen threshold (a) corrected (Section~5.1, p.~19).}
+\item \textbf{Qwen threshold (a) corrected (Section~5.1).}
       ``Up to effective rank~150'' deleted. Two distinct boundaries stated:
       \newtext{``homeostatic-to-bounded: effective ranks 29.5--50.2;
       bounded-to-degradative: 50.2--87.6.''} Corrected systematically,
@@ -1256,7 +1256,7 @@ archived in the replication package.
       $r=128$: \newtext{``transition-zone configuration ($r=128$)''};
       $r=256$: \newtext{``lowest-pressure degradative configuration tested
       ($r=256$)''} at every occurrence.
-\item \textbf{Gemma~3 range (d) corrected (Section~5.2, p.~19).}
+\item \textbf{Gemma~3 range (d) corrected (Section~5.2).}
       \newtext{``$r \geq 10$ on Gemma~3''} (was ``$r \geq 16$''),
       consistent with Table~4.
 \item \textbf{Seed count (e) corrected and $N$ column added.}
@@ -1275,9 +1275,9 @@ archived in the replication package.
       stated; all corrected.
 \end{enumerate}
 
-\msloc{Abstract, p.~1; \S1, p.~1; \S3.4, p.~7; \S3.7, p.~10; \S3.8, p.~10;
-\S4.2.3, p.~14; \S4.3.3, pp.~14--15; \S4.4.3, p.~15; \S4.5, pp.~16--17;
-\S5.1--5.4, pp.~18--20; Tables~4--10, pp.~26--27.}
+\msloc{Abstract; \S1; \S3.4; \S3.7; \S3.8;
+\S4.2.3; \S4.3.3; \S4.4.3; \S4.5;
+\S5.1--5.4; Tables~4--10.}
 
 \rconcern{Reviewer \#2, Concern \#4}{Methodology}{No formal statistical
 tests, confidence intervals, or p-values are reported. The effective
@@ -1314,7 +1314,7 @@ exchangeable under the relevant null --- the 17.7\,pp gap between the
 three-seed $r=16$ condition and the six-seed $r=256$ estimate, which
 differ in rank, precision protocol and seed assignment simultaneously ---
 the comparison is labeled descriptive and no test is reported.
-\newtext{(\S4.1, p.~10; \S4.2.1, p.~12; \S4.5, pp.~16--17; \S4.6, p.~17)}
+\newtext{(\S4.1; \S4.2.1; \S4.5; \S4.6)}
 
 \rsub{(b)}{The framework is not quantified.}
 Correct, and the revision no longer implies otherwise. No scalar
@@ -1329,14 +1329,14 @@ labeled \newtext{an exploratory post-training summary} and is
 \newtext{not used as a validated quantitative threshold}. Developing a
 quantitative formulation is listed as future work, with the protocol a
 prospective test would require specified in Section~6.
-\newtext{(\S3.5, p.~8; \S6, p.~22)}
+\newtext{(\S3.5; \S6)}
 
 \rsub{(c)}{Normalisation failed with no alternative proposed.}
 The reviewer asks for the constructive half of a negative result, and the
 original manuscript supplied only the negative half. Five normalizations
 were tested --- by hidden dimension, its square root, layer count,
 attention heads, and key--value heads --- and none aligned the thresholds
-across backbones (Table~13, p.~28). We retain that table as a reported
+across backbones (Table~13). We retain that table as a reported
 negative result and now propose what we believe the finding implies: that
 a transferable constant should not be sought, and that calibration must
 be per-backbone. Section~6 specifies the procedure concretely --- a pilot
@@ -1347,7 +1347,7 @@ from zero and the lowest whose slope is negative --- together with its
 cost, which is approximately two short runs per backbone. We present this
 as the practical alternative to a universal normalization rather than as a
 validated method, since we have not executed it on an unseen backbone.
-\newtext{(\S4.2.3, p.~14; \S6, p.~22; Table~13, p.~28)}
+\newtext{(\S4.2.3; \S6; Table~13)}
 
 \rsub{(d)}{Not a new quantitative measure.}
 We agree, and we do not defend the original framing. Effective training
@@ -1364,7 +1364,7 @@ normalization we tested. The organizing value of the framework is that
 three independently manipulated variables move the system across the same
 qualitative boundary, which is an empirical observation and is presented
 as one.
-\newtext{(\S1, p.~3; \S3.5, p.~8; \S5.1, p.~18; Table~11, p.~28)}
+\newtext{(\S1; \S3.5; \S5.1; Table~11)}
 
 \rsub{(e)}{Gemma~4 E2B: citation, possible confusion with Gemma~3n E2B,
 unsourced architecture.}
@@ -1385,7 +1385,7 @@ single seed, so it is labeled supportive validation, excluded from every
 threshold estimate, and the limitation is stated in those terms ---
 \newtext{they do not constitute an independent replication of the
 quantitative threshold estimates}.
-\newtext{(\S3.3, p.~6; \S4.2.2, p.~12; \S6, p.~23; Table~S1)}
+\newtext{(\S3.3; \S4.2.2; \S6; Table~S1)}
 
 \rsub{(f)}{``Sharp transition'' weakened by sparse grids and wide intervals.}
 Accepted, and the correction is larger than a word substitution. ``Sharp''
@@ -1405,7 +1405,7 @@ phrase used throughout is \newtext{a threshold-like transition within the
 tested grid}, and Section~5.1 now states that \newtext{the present
 experiments do not establish a precise threshold value that will
 generalize to other settings}.
-\newtext{(Abstract, p.~1; \S1, p.~3; \S5.1, p.~18; \S7, p.~22)}
+\newtext{(Abstract; \S1; \S5.1; \S7)}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
@@ -1416,11 +1416,11 @@ generalize to other settings}.
       assumption stated. \newtext{``We report exact $p$-values regardless
       of conventional thresholds; small $N$ limits power even when
       direction is fully consistent across all seeds.''}
-\item \textbf{ETP reframed (b) (Section~3.5, p.~7).}
+\item \textbf{ETP reframed (b) (Section~3.5).}
       Restructured around the design/observed distinction.
       \newtext{``ETP is not a new quantitative measure; it is an
       organizational label for three independently manipulated axes.''}
-\item \textbf{Calibration procedure added (b) (Section~6, p.~22).}
+\item \textbf{Calibration procedure added (b) (Section~6).}
       Five-step per-backbone calibration proposed as the alternative
       to universal normalization, with cost stated.
 \item \textbf{Contribution statement rewritten (Section~1 and~5.1).}
@@ -1435,9 +1435,7 @@ generalize to other settings}.
       non-adjacent-dose argument withdrawn; grid spacing quoted.
 \end{enumerate}
 
-\msloc{\S1, p.~1; \S3.3, p.~6; \S3.5, p.~7; \S4.1, p.~11; \S4.2.1--4.2.3,
-pp.~12--14; \S4.5--4.6, pp.~17--18; \S5.1, p.~19; \S6, pp.~22--23; \S7,
-p.~22; Table~11, p.~28; Table~13, p.~28; Table~S1.}
+\msloc{\S1; \S3.3; \S3.5; \S4.1; \S4.2.1--4.2.3; \S4.5--4.6; \S5.1; \S6; \S7; Table~11; Table~13; Table~S1.}
 
 \rconcern{Reviewer \#2, Concern \#5}{Other format problems}{Reference
 [12] and [33] share the same arXiv number: arXiv:2408.14572. This is a
@@ -1541,6 +1539,6 @@ field. \texttt{cas-refs.bib} is included in the submission package. \\
 \end{enumerate}
 
 \msloc{\texttt{cas-refs.bib} (full list); entries [6], [7], [12], [20], [31],
-[32], [33], [41]; \S2.2, p.~4; \S2.3--2.4, p.~4; \S3.3, p.~6; Table~S1.}
+[32], [33], [41]; \S2.2; \S2.3--2.4; \S3.3; Table~S1.}
 
 \end{document}
