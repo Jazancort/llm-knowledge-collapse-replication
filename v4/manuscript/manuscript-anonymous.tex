@@ -1376,8 +1376,8 @@ bounded.
 A notable feature of the degradative regime on Gemma~3 is that the mean
 effective rank remains constant at approximately 9.2 throughout all ten
 generations, even as retention declines from 85\% to 57\%. This suggests that
-effective rank operates as a regime gate---determining whether the system
-enters the degradative regime---rather than as a continuous predictor of the
+effective rank operates as a regime gate, determining whether the system
+enters the degradative regime, rather than as a continuous predictor of the
 rate of degradation within that regime.
 
 To localize the threshold more precisely, we additionally evaluated intermediate
@@ -1971,7 +1971,7 @@ motivation for treating them as manifestations of a common organizing principle.
 The framework is empirical rather than theoretical. We do not propose a
 closed-form expression that combines rank, learning rate, and exposure into a
 single scalar predictor. Instead, the experiments reveal that each variable independently
-controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $\BsevenSlopeFifty$\,pp/generation, whereas a 10\% reduction did not --- its slope was $-1.49$\,pp/generation, marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.
+controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $\BsevenSlopeFifty$\,pp/generation, whereas a 10\% reduction did not; its slope was $-1.49$\,pp/generation, marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.
 \rev{This pattern is consistent with the system operating near a regime boundary, though the present experiments do not establish a precise threshold value that will generalize to other settings.}}
 
 \rev{The contribution is the existence and reproducibility of this

@@ -792,12 +792,12 @@ and limited scale. I recommend major revision before further
 consideration.}
 
 \arhead{Author response:}
-We sincerely thank Reviewer~\#2 for the detailed and constructive evaluation of the manuscript. The general assessment correctly identifies two substantive problems --- overclaiming on cross-architecture generalization and the notation/rendering defects --- alongside a range of specific technical issues. We have treated all of these as corrections rather than as matters of perspective, and the revision addresses each point with specific changes to the text, figures, and notation.
+We sincerely thank Reviewer~\#2 for the detailed and constructive evaluation of the manuscript. The general assessment correctly identifies two substantive problems, namely overclaiming on cross-architecture generalization and the notation/rendering defects, alongside a range of specific technical issues. We have treated all of these as corrections rather than as matters of perspective, and the revision addresses each point with specific changes to the text, figures, and notation.
 
 We agree with the characterization and have treated all objections as
 corrections rather than as matters of emphasis. The two substantive
-issues --- the conceptual rather than quantitative status of the ETP
-framework and the weakness of the cross-architecture claims --- are
+issues, the conceptual rather than quantitative status of the ETP
+framework and the weakness of the cross-architecture claims, are
 addressed first. The specific technical corrections are addressed in
 the individual responses below.
 
@@ -1119,8 +1119,8 @@ Editorial Manager's re-distillation step maps percent signs to the degree
 sign codepoint in the LM Math font. The reviewer's quotation therefore
 simultaneously identifies the inconsistency and provides independent
 confirmation, in the reviewer's own text, of the rendering defect this
-revision corrects. The underlying inconsistency --- 15\,\% examples
-versus $\approx$5\,\% tokens --- is resolved as described below.
+revision corrects. The underlying inconsistency (15\,\% examples
+versus $\approx$5\,\% tokens) is resolved as described below.
 
 All seven are accepted. They are not matters of emphasis: each is a
 statement in the manuscript that did not match the design or the table
@@ -1224,7 +1224,7 @@ the C1--C5 pilot was found to compare arms produced by different
 evaluation pipelines and is excluded from every estimate in the paper
 (see Reviewer~1, Concern~\#4). In the two pre-registered experiments that
 replace it, exposure is specified exclusively as the fraction of training
-examples removed --- 0\,\%, 10\,\%, 25\,\%, 50\,\% --- with no token-based
+examples removed (0\,\%, 10\,\%, 25\,\%, 50\,\%) with no token-based
 figure anywhere. The pilot, including its original dose description, is
 archived in the replication package.
 \newtext{(\S3.7; \S4.5; Figure~9)}
@@ -1289,9 +1289,9 @@ and the design is now stated alongside each test rather than left to be
 inferred. For the Gemma~3 anchor-rank contrast ($N=5$ per rank,
 $|K_0|=46$), the mean difference is $+37.8$\,pp; because the
 archived data do not confirm whether seeds were paired across ranks, we
-report both possibilities --- an exact sign-flip test at $p=0.0625$ if
+report both possibilities: an exact sign-flip test at $p=0.0625$ if
 paired, a bilateral permutation test over $\binom{10}{5}=252$ allocations
-at $p=0.0079$ if independent --- with Hedges' $g \approx 13.3$ under
+at $p=0.0079$ if independent, with Hedges' $g \approx 13.3$ under
 either reading. For the Qwen rank contrast, the clean comparison is the
 G3 paired design (same seeds, same precision, rank the only variable):
 per-seed differences of $+15$, $+13$ and $+15$ items out of 78, mean
@@ -1300,18 +1300,18 @@ rather than suppress it: the direction is consistent across all three
 pairs, but three pairs cannot produce a small $p$, and we say so. For the
 two dose--response experiments, paired $t$-tests with 95\,\% confidence
 intervals are reported at every dose level. Where groups are not
-exchangeable under the relevant null --- the 17.7\,pp gap between the
+exchangeable under the relevant null (the 17.7\,pp gap between the
 three-seed $r=16$ condition and the six-seed $r=256$ estimate, which
-differ in rank, precision protocol and seed assignment simultaneously ---
+differ in rank, precision protocol and seed assignment simultaneously)
 the comparison is labeled descriptive and no test is reported.
 \newtext{(\S4.1; \S4.2.1; \S4.5; \S4.6)}
 
 \rsub{(b)}{The framework is not quantified.}
 Correct, and the revision no longer implies otherwise. No scalar
 predictor is derived. The manuscript now separates the variables fixed
-before training --- nominal rank, learning rate, training steps, dose
-fraction --- from the quantities measured after it --- effective rank,
-weight drift, response length, SDI-3 --- and states that the latter
+before training (nominal rank, learning rate, training steps, dose
+fraction) from the quantities measured after it (effective rank,
+weight drift, response length, SDI-3), and states that the latter
 \newtext{are not available prospectively; they therefore serve as
 post-hoc explanatory variables rather than pre-specified predictors}. The
 operational index $\Pi = \mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ is
@@ -1324,16 +1324,16 @@ prospective test would require specified in Section~6.
 \rsub{(c)}{Normalisation failed with no alternative proposed.}
 The reviewer asks for the constructive half of a negative result, and the
 original manuscript supplied only the negative half. Five normalizations
-were tested --- by hidden dimension, its square root, layer count,
-attention heads, and key--value heads --- and none aligned the thresholds
+were tested (by hidden dimension, its square root, layer count,
+attention heads, and key--value heads), and none aligned the thresholds
 across backbones (Table~13). We retain that table as a reported
 negative result and now propose what we believe the finding implies: that
 a transferable constant should not be sought, and that calibration must
-be per-backbone. Section~6 specifies the procedure concretely --- a pilot
+be per-backbone. Section~6 specifies the procedure concretely: a pilot
 sweep of two ranks spanning roughly an order of magnitude, five
 generations, single seed; the boundary estimated as the interval between
 the highest configuration whose early retention slope is indistinguishable
-from zero and the lowest whose slope is negative --- together with its
+from zero and the lowest whose slope is negative, together with its
 cost, which is approximately two short runs per backbone. We present this
 as the practical alternative to a universal normalization rather than as a
 validated method, since we have not executed it on an unseen backbone.
@@ -1364,7 +1364,7 @@ possible confusion, which we should have pre-empted: the model is
 Gemma~4~E2B~IT, a distinct release from Gemma~3n~E2B, and the revision
 states this explicitly rather than relying on the reader to infer it from
 the version number. The architectural description is attributed to the
-released model configuration rather than asserted --- 35 layers, hidden
+released model configuration rather than asserted: 35 layers, hidden
 size 1536, grouped-query attention with 8 attention heads and 1
 key--value head, and key--value projections shared across the final 20 of
 35 layers, which is why a LoRA adapter targeting \texttt{q\_proj} and
@@ -1372,7 +1372,7 @@ key--value head, and key--value projections shared across the final 20 of
 identifier and revision hash are listed in supplementary Table~S1. We
 also constrain what the backbone is used for: it was evaluated with a
 single seed, so it is labeled supportive validation, excluded from every
-threshold estimate, and the limitation is stated in those terms ---
+threshold estimate, and the limitation is stated in those terms:
 \newtext{they do not constitute an independent replication of the
 quantitative threshold estimates}.
 \newtext{(\S3.3; \S4.2.2; \S6; Table~S1)}
@@ -1465,7 +1465,7 @@ the bibliography. \\
 (b) & [32] year 2024 with a December 2025 arXiv ID &
 Corrected to 2025. The entry is Rathore et al., \emph{How Much Is Too
 Much? Exploring LoRA Rank Trade-offs for Retaining Knowledge and Domain
-Robustness}, and the venue --- AACL-IJCNLP 2025 --- is now given
+Robustness}, and the venue (AACL-IJCNLP 2025) is now given
 alongside the preprint identifier, which resolves the inconsistency the
 reviewer detected rather than merely changing the digit. \\
 
