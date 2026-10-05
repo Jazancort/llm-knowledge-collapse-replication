@@ -214,7 +214,7 @@ The main contributions of this work are:
     \item We show that synthetic exposure is a third pressure axis: a
     pre-registered dose--response (five paired seeds) demonstrates that any
     reduction of 10--50\% raises Gen~5 retention by approximately 5\,pp,
-    with the Gen~10 benefit graded ($+9.8$\,pp at 50\%; 95\%~CI $[6.9, 12.8]$).
+    with the Gen~10 benefit graded (\rev{$+9.2$}\,pp at 50\%; 95\%~CI $[6.9, 12.8]$).
     A 50\% reduction matches halving the learning rate, consistent with
     exposure acting through the per-generation update budget.
 \end{enumerate}
@@ -592,8 +592,7 @@ as training data.
 The subset of held-out questions answered correctly at generation~0 defines
 $K_0$. For example, for Qwen~2.5~1.5B, $|K_0|=78$ out of 200 held-out
 questions. Other backbones have their own fixed $K_0$ sets (invariant within each pipeline, though Gemma~3 has two distinct sets from two pipelines), determined once at
-generation~0 and held constant across all experimental conditions for that
-backbone.
+generation~0 and \rev{held constant within each experimental pipeline}.
 % [v4] A5 — K0 por backbone declarado explicitamente para evitar ambiguidade
 % [v4-rev2] P1: dois K0 distintos para Gemma3 de dois pipelines diferentes
 \rev{The $K_0$ sizes are: $|K_0|=78$ for Qwen~2.5~1.5B and $|K_0|=76$ for
@@ -1055,7 +1054,7 @@ Replicated on Gemma~3~1B~IT ($r\geq10$ degradative) and Gemma~4~E2B~IT ($r=64$ d
 
 Pipeline version &
 Different code paths could introduce discrepancies &
-\rev{Each experiment uses a dedicated script; per-experiment script names and run conditions are documented in the repository README. Commit-level traceability is available in the git log but not listed here.} \\
+\rev{Each experiment uses a dedicated script; per-experiment script names and run conditions are documented in the repository README. \rev{Per-execution commit traceability was not systematically recorded; the git log provides version history but does not identify the commit used in each individual run.}} \\
 
 \addlinespace
 
@@ -1464,8 +1463,8 @@ FFT          & $2{\times}10^{-5}$ & 3.48               & 84.6\% \\
 \rev{{\footnotesize QLoRA $r=16$ and FFT LR\,$=10^{-6}$: $N=3$ seeds. All other rows: $N=1$ seed (seed~15).}}
 \end{table}
 
-\subsubsection{QLoRA versus FFT: exploratory comparison at similar perturbation magnitude}
-To compare the two update mechanisms at similar perturbation, we selected FFT at
+\subsubsection{QLoRA versus FFT: exploratory method comparison without perturbation-magnitude matching}
+\rev{To compare the two update mechanisms (exploratory; perturbation magnitudes are not matched), we selected FFT at}
 LR$\,=10^{-6}$ (drift 0.39) as \rev{the closest available comparator to} QLoRA $r=16$
 ($\|BA\|_F \approx 0.42$; \rev{the two measures differ in geometry and this comparison is exploratory}). Both were run for 10 generations with three seeds.
 As illustrated in Figure~\ref{fig:fft_qlora}, the separation between the
@@ -1493,13 +1492,12 @@ QLoRA Gen10 retention is 97.4\% across all three seeds; FFT achieves
 91.9\% (range 91.0--92.3\%). The ranges do not overlap across any seed pairing.
 
 Item-level analysis reveals an asymmetry between the two methods. Under FFT, the
-same six $K_0$ items are lost across all three seeds (cross-seed Jaccard
-similarity 1.0), indicating a deterministic fragile-fact floor: these facts are
+\rev{six $K_0$ items form a common loss core across seeds (all six lost in every seed-pair comparison), indicating a deterministic fragile-fact floor:} these facts are
 consistently displaced by full-parameter updates regardless of seed. Under
 QLoRA, only two to three facts are lost per seed, and the overlap between facts
 lost by QLoRA and facts lost by FFT is zero across all seed pairs (Jaccard 0.0).
 In this low-perturbation regime, low-rank adaptation loses fewer facts and loses
-different facts than full fine-tuning at \rev{a proximately similar perturbation level (the two measures are not geometrically equivalent; this comparison is exploratory)}.
+different facts than full fine-tuning at \rev{an exploratory method comparison (the two measures are not geometrically equivalent; this comparison is exploratory)}.
 
 This pattern is referred to as a stable fragile-fact floor under FFT: certain facts
 are reliably displaced by full-parameter updates, whereas low-rank updates
@@ -1713,10 +1711,10 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \toprule
 \rev{Dose} & \rev{Ret.\ (Gen5)} & \rev{$\Delta$ Gen5} & \rev{Ret.\ (Gen10)} & \rev{$\Delta$ Gen10} & \rev{$N_\mathrm{seeds}$} \\
 \midrule
-0\%  & 84.0\% & ---             & 79.1\% & ---             & 5 \\
-10\% & 89.0\% & $+5.0$\,pp      & 81.6\% & $+2.4$\,pp      & 5 \\
-25\% & 89.2\% & $+5.3$\,pp      & 84.6\% & $+5.5$\,pp      & 5 \\
-50\% & 89.7\% & $+5.7$\,pp      & 88.9\% & $+9.8$\,pp      & 5 \\
+0\%  & \rev{84.6\%} & ---             & \rev{79.7\%} & ---             & 5 \\
+10\% & 89.0\% & \rev{$+4.4$}\,pp & 81.6\% & \rev{$+1.9$}\,pp & 5 \\
+25\% & 89.2\% & \rev{$+4.6$}\,pp & 84.6\% & \rev{$+4.9$}\,pp & 5 \\
+50\% & 89.7\% & \rev{$+5.1$}\,pp & 88.9\% & \rev{$+9.2$}\,pp & 5 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1726,9 +1724,9 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \rev{\textbf{Qwen dose--response (B7).}
 A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
 protocol registered as \texttt{a916ebf} before any run) shows that the
-Gen~10 benefit is graded: $+2.4$\,pp at 10\% removal ($p = 0.002$, $n=5$),
-$+5.5$\,pp at 25\% (95\%~CI $[0.4, 10.5]$, $p = 0.039$), and
-$+9.8$\,pp at 50\% (95\%~CI $[6.9, 12.8]$, $p = 0.0008$). At Gen~5, the
+Gen~10 benefit is graded: \rev{$+1.9$}\,pp at 10\% removal ($p = 0.002$, $n=5$),
+\rev{$+4.9$}\,pp at 25\% (95\%~CI $[0.4, 10.5]$, $p = 0.039$), and
+\rev{$+9.2$}\,pp at 50\% (95\%~CI $[6.9, 12.8]$, $p = 0.0008$). At Gen~5, the
 gains are smaller and more uniform ($+5.0$, $+5.3$, $+5.7$\,pp;
 paired $t$-test $p = 0.002$, $0.014$, $0.002$). A 50\% reduction
 effectively arrests progressive loss: the Gen~5$\to$10 slope is
@@ -1975,7 +1973,7 @@ Drift accompanies degradation & 5 distribution metrics \\
 \addlinespace
 Capacity $\times$ magnitude \rev{joint dependence} & Rank $\times$ LR matrix ($3{\times}3$) \\
 \addlinespace
-Generalizes cross-backbone & Gemma~3 (N=5) + E2B dose-response \\
+Generalizes cross-backbone & Gemma~3 ($N=5$) + \rev{E2B rank sweep ($N=1$)} \\
 \bottomrule
 \end{tabularx}
 \end{table}
