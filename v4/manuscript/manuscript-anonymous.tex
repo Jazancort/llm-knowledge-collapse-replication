@@ -214,7 +214,7 @@ The main contributions of this work are:
     \item We show that synthetic exposure is a third pressure axis: a
     pre-registered dose--response (five paired seeds) demonstrates that any
     reduction of 10--50\% raises Gen~5 retention by approximately 5\,pp,
-    with the Gen~10 benefit graded (\rev{$+9.2$}\,pp at 50\%; 95\%~CI $[6.9, 12.8]$).
+    with the Gen~10 benefit graded (\rev{$+9.2$}\,pp at 50\%; 95\%~CI $[6.9, 11.6]$).
     A 50\% reduction matches halving the learning rate, consistent with
     exposure acting through the per-generation update budget.
 \end{enumerate}
@@ -1497,7 +1497,7 @@ consistently displaced by full-parameter updates regardless of seed. Under
 QLoRA, only two to three facts are lost per seed, and the overlap between facts
 lost by QLoRA and facts lost by FFT is zero across all seed pairs (Jaccard 0.0).
 In this low-perturbation regime, low-rank adaptation loses fewer facts and loses
-different facts than full fine-tuning at \rev{an exploratory method comparison (the two measures are not geometrically equivalent; this comparison is exploratory)}.
+\rev{In this exploratory, non-magnitude-matched comparison, QLoRA loses fewer $K_0$ items than FFT; item-level differences remain descriptive.}
 
 This pattern is referred to as a stable fragile-fact floor under FFT: certain facts
 are reliably displaced by full-parameter updates, whereas low-rank updates
@@ -1711,10 +1711,10 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \toprule
 \rev{Dose} & \rev{Ret.\ (Gen5)} & \rev{$\Delta$ Gen5} & \rev{Ret.\ (Gen10)} & \rev{$\Delta$ Gen10} & \rev{$N_\mathrm{seeds}$} \\
 \midrule
-0\%  & \rev{84.6\%} & ---             & \rev{79.7\%} & ---             & 5 \\
-10\% & 89.0\% & \rev{$+4.4$}\,pp & 81.6\% & \rev{$+1.9$}\,pp & 5 \\
-25\% & 89.2\% & \rev{$+4.6$}\,pp & 84.6\% & \rev{$+4.9$}\,pp & 5 \\
-50\% & 89.7\% & \rev{$+5.1$}\,pp & 88.9\% & \rev{$+9.2$}\,pp & 5 \\
+0\%  & \rev{85.4\%} & ---             & \rev{79.7\%} & ---             & 5 \\
+10\% & 89.0\% & \rev{$+3.6$}\,pp & \rev{81.5\%} & \rev{$+1.8$}\,pp & 5 \\
+25\% & 89.2\% & \rev{$+3.8$}\,pp & 84.6\% & \rev{$+4.9$}\,pp & 5 \\
+50\% & 89.7\% & \rev{$+4.4$}\,pp & \rev{89.0\%} & \rev{$+9.2$}\,pp & 5 \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -1724,11 +1724,11 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \rev{\textbf{Qwen dose--response (B7).}
 A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
 protocol registered as \texttt{a916ebf} before any run) shows that the
-Gen~10 benefit is graded: \rev{$+1.9$}\,pp at 10\% removal ($p = 0.002$, $n=5$),
-\rev{$+4.9$}\,pp at 25\% (95\%~CI $[0.4, 10.5]$, $p = 0.039$), and
-\rev{$+9.2$}\,pp at 50\% (95\%~CI $[6.9, 12.8]$, $p = 0.0008$). At Gen~5, the
-gains are smaller and more uniform ($+5.0$, $+5.3$, $+5.7$\,pp;
-paired $t$-test $p = 0.002$, $0.014$, $0.002$). A 50\% reduction
+Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.168$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
+\rev{$+4.9$}\,pp at 25\% ($p = 0.006$, 95\%~CI $[2.5, 7.2]$), and
+\rev{$+9.2$}\,pp at 50\% ($p = 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
+gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
+paired $t$-test \rev{$p = 0.009$, $0.003$, $0.001$}). A 50\% reduction
 effectively arrests progressive loss: the Gen~5$\to$10 slope is
 $-0.14$\,pp/generation versus $-0.96$\,pp/generation at 0\%, shifting the
 system from the degradative to the bounded regime by the criterion of
@@ -2280,7 +2280,7 @@ erank / KV heads   & 25.0--44.0   & 3.0--6.0     & 5.0--13.0    & No \\
 therefore not portable across backbones without empirical calibration, limiting
 its predictive utility for new architectures.
 
-The perturbation-matching comparison between QLoRA and FFT relies on approximate
+\rev{The exploratory QLoRA--FFT comparison} relies on approximate
 proxies ($\|BA\|_F$ for QLoRA versus mean absolute weight drift for FFT). These
 \rev{quantities measure different geometric properties; this comparison between methods is exploratory and not perturbation-magnitude matched.} Additionally,
 \rev{Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization. The G3 ablation re-ran the same protocol in bf16 (no base-weight quantization) and produced identical regime classifications, though a full causal conclusion awaits per-item audit. Although}
@@ -2398,7 +2398,7 @@ their effects are additive or interactive.
 
 \section{Project repository and data access}\label{app:repo}
 
-\rev{The replication package is archived at the links below (version v1.0.3). This snapshot contains the initial experimental scripts, raw outputs, aggregated per-seed per-generation results (G1--G5, 27 executed training runs, where one run is one configuration-$\times$-seed trajectory carried to its planned horizon: Gen5 for $r=4$,$32$ and G5; Gen10 for all others), and a draft manuscript. The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
+\rev{The replication package is archived at the links below (version v1.0.3). This snapshot contains the initial experimental scripts, raw outputs, aggregated per-seed per-generation results (G1--G5, 27 executed training runs, where one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon), and a draft manuscript. The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
 
 
 \begin{itemize}
