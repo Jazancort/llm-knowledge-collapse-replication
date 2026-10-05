@@ -81,11 +81,13 @@ study. Accordingly, we describe effective training pressure as an
 \emph{operational experimental framework}, not a validated universal
 predictor.
 
-The pre-registered G5 experiment (three cells, one seed) provides
-exploratory evidence that the operational regime index correctly
-predicts qualitative behavior (homeostatic vs.\ bounded) for
-pre-specified configurations on the tested backbone. Prediction of the
-exact degradative threshold remains uncalibrated.
+The pre-registered G5 experiment (three single-seed cells on Qwen) provides
+limited exploratory evidence: retention was ordered in the expected direction
+for 2 of 3 pre-specified configurations (the degradative cell was classified
+as bounded rather than degradative). No operational $\Pi$ threshold was
+reported for G5 because the threshold was not pre-specified, and the
+experiment does not test an unseen backbone or dataset. Prospective
+calibration remains future work.
 
 
 \smallskip\noindent\textit{Location in revised manuscript: Section~3.5 (ETP as framework, revised); Section~\ref{sec:limitations}
@@ -109,10 +111,12 @@ quantization of the base weights, with adapters trained in bf16. A dedicated
 ablation (G3, three seeds each at $r=16$ and $r=256$) runs the same protocol
 with standard bf16 precision and no base-weight quantization.
 G3 results show that the regime classification is preserved under both
-precision settings: at $r=16$ bf16 achieves Gen10=97.4\%, identical to the
-NF4 baseline; at $r=256$ bf16 achieves Gen10=79.1\%, within 0.0~pp of the
-NF4 condition. The delta between NF4 and bf16 is $\leq$0.1~pp at both
-ranks. Quantization is therefore not driving the observed regime separation.
+precision settings: at $r=16$ bf16 achieves Gen10=97.4\% (76/78 per seed),
+while the original NF4 single-seed $r=16$ result was 96.2\% (75/78); these
+use different seeds and pipelines and are not a paired comparison. At $r=256$
+bf16 achieves Gen10=79.1\%, within 0.0~pp of the NF4 G1$+$G4 mean (same
+seeds, matched protocol). Quantization is therefore not the primary driver
+of the observed regime separation.
 
 
 \smallskip\noindent\textit{Location in revised manuscript: Section~3.9 (tab:controls); Section~4.6 (G3 results).}
@@ -273,7 +277,7 @@ and the data-loading code path. When C1 and C5 are re-run under an
 identical pipeline with paired seeds, the effect of ${\sim}5\%$ example
 removal is only $+1.9$\,pp (not distinguishable from zero at $n=3$). This
 discrepancy is acknowledged explicitly in the revised manuscript (ll.~1708--1713)
-and the original C2--C5 results are preserved in Appendix~A for transparency.
+and the original C2--C5 results are archived in the replication repository (Section~\ref{app:repo}) for transparency.
 This discrepancy was uncovered as a direct result of the reviewer's question.
 
 \textbf{Pre-registered dose--response (Bloco~7).}
@@ -422,8 +426,9 @@ All four acronyms now have explicit parenthetical expansions at first use:
 \textcolor{blue}{``full fine-tuning (FFT)''} at l.~75;
 \textcolor{blue}{``singular value decomposition (SVD)''} at l.~332;
 \textcolor{blue}{``Quantized Low-Rank Adaptation (QLoRA)''} at l.~333.
-The term \textit{bf16} (BFloat16) is glossed on first use. TCE does not
-appear in the revised manuscript. LoRA was already expanded in the Related
+The term \textit{bf16} (BFloat16) is glossed on first use. TCE (Truncated Cross-Entropy) is cited in the Related Work section as
+a mitigation method from prior literature~\citep{zibakhsh2024};
+it does not appear in the Methods or Results of this paper. LoRA was already expanded in the Related
 Work section.
 
 
@@ -451,9 +456,7 @@ This dual use is not always clear.
 
 
 We have added a dedicated notation table (Table~1, ll.~438--445) that
-distinguishes the two uses explicitly: $K_0$ denotes the integer cardinality
-of the held-out question set answered correctly at generation~0; $R(t) =
-K_t/K_0$ denotes the retention ratio at generation~$t$. The symbols $R(t)$,
+distinguishes the two uses explicitly: $K_0$ denotes the \emph{set} of held-out questions answered correctly at generation~0; $|K_0|$ denotes its cardinality (e.g., $|K_0|=78$ for Qwen); and $R(t) = |K_t|/|K_0|$ denotes the retention ratio at generation~$t$. The symbols $R(t)$,
 $d(t)$, and the efficiency numerator have been harmonised throughout
 Equations~1--6 and the surrounding prose.
 
@@ -470,11 +473,11 @@ $\mathrm{MeanLen}_T$, and related symbols in Eq.~6 are not fully defined.
 
 All symbols in Eq.~6 (SDI-3) and its supporting quantities are now defined in
 Table~1 (tab:notation) and in the inline text preceding the equations:
-$T$ = number of generations evaluated; $D_{1,T}$ and $D_{10}$ = content
-efficiency at generation~1 and generation~10; $\Delta I$ = absolute change in
-content efficiency over the evaluation horizon; $\mathrm{Instability}(1)$ =
-SDI-3 sub-score at the first generation; $\mathrm{MeanLen}_T$ = mean response
-length averaged over all $T$ generations.
+$T$ = evaluation horizon in generations; $D_{1,t}$ = Distinct-1 unigram diversity
+of synthetic responses at generation~$t$; $\Delta I = \mathrm{Instability}(T) - \mathrm{Instability}(1)$,
+where $\mathrm{Instability}(t)$ is the fraction of training items whose
+normalized response differs between generation~$t{-}1$ and generation~$t$;
+$\mathrm{MeanLen}_t$ = mean response length in words at generation~$t$.
 
 
 \smallskip\noindent\textit{Location in revised manuscript: Table~1 (tab:notation); prose preceding Eq.~6.}
@@ -768,7 +771,7 @@ re-run under an identical pipeline with paired seeds, the effect of
 ${\sim}5\%$ example removal is $+1.9$\,pp (not distinguishable from zero,
 $n=3$). The dose--response reported in Section~4.5 (Bloco~7) replaces
 those comparisons; the original C2--C5 results are preserved in
-Appendix~A for transparency.
+the replication repository for transparency.
 
 
 \smallskip\noindent\textit{Location in revised manuscript: Section~3.7 (definition of C5 doses); Section~4.5 l.~1708--1713.}

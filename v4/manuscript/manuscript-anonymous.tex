@@ -772,7 +772,7 @@ modules. This tests whether stability depends on module location or effective
 update capacity. Single-seed; supportive evidence only.
 
 \item \textbf{Synthetic exposure (intervention).} We manipulate the synthetic
-training stream in the Qwen $r=256$ boundary regime. Interventions include
+training stream at Qwen $r=256$, the lowest-pressure degradative configuration tested. Interventions include
 length filtering, and paired dose--response downsampling (0\%, 10\%, 25\%, 50\%
 removal), and short-answer constraining. Design detailed in
 Section~\ref{sec:intervention}.
@@ -1613,10 +1613,7 @@ varied vocabulary while losing factual anchoring. We refer to this as an
 \textit{elaborative drift} phenotype: the model produces longer, lexically
 diverse, but factually unanchored responses.
 
-The two above-threshold configurations therefore exhibit distinct distributional
-failure modes despite both departing from stable behavior: $r=128$ degrades
-through filler accumulation, while $r=256$ degrades through elaborative
-dispersion.
+\rev{The $r=128$ (bounded) and $r=256$ (degradative) configurations therefore exhibit distinct distributional failure modes despite both departing from stable behavior: $r=128$ degrades through filler accumulation, while $r=256$ degrades through elaborative dispersion.}
 
 These observations motivate a descriptive three-regime taxonomy:
 
@@ -1989,7 +1986,7 @@ nonzero fraction of synthetic data \citep{dohmatob2025}. Our results do not
 contradict these findings. Rather, they help localize the experimental
 conditions under which qualitatively similar degradation emerges in our
 recursive fine-tuning setting: the degradative configurations ($r=256$ on Qwen,
-$r \geq 16$ on Gemma~3, FFT at high learning rates) are qualitatively
+\rev{$r \geq 10$ on Gemma~3 (including $r \in \{10,12,14\}$ at Gen~5)}, FFT at high learning rates) are qualitatively
 consistent with the collapse dynamics these works describe.
 
 The contribution of the present work is locating where, in the space of
