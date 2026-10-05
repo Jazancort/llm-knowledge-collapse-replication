@@ -59,7 +59,7 @@ HTML_CONTENT = """<!DOCTYPE html>
   /* Card base */
   .card {
     position: absolute;
-    width: 254px;
+    width: 276px;
     height: 144px;
     background: #ffffff;
     border-radius: 8px;
@@ -70,13 +70,13 @@ HTML_CONTENT = """<!DOCTYPE html>
     overflow: hidden;
   }
 
-  /* Positions */
-  .card-1 { left: 32px; top: 12px; border-top: 3.5px solid #0072b2; }
-  .card-2 { left: 323px; top: 12px; border-top: 3.5px solid #009e73; }
-  .card-3 { left: 614px; top: 12px; border-top: 3.5px solid #e69f00; }
-  .card-4 { left: 32px; top: 180px; border-top: 3.5px solid #d55e00; }
-  .card-5 { left: 323px; top: 180px; border-top: 3.5px solid #cc79a7; }
-  .card-6 { left: 614px; top: 180px; border-top: 3.5px solid #56b4e9; }
+  /* Positions: 8px side margin, 276px card width, 28px gap → 8+276+28+276+28+276+8 = 900 */
+  .card-1 { left: 8px; top: 12px; border-top: 3.5px solid #0072b2; }
+  .card-2 { left: 312px; top: 12px; border-top: 3.5px solid #009e73; }
+  .card-3 { left: 616px; top: 12px; border-top: 3.5px solid #e69f00; }
+  .card-4 { left: 8px; top: 180px; border-top: 3.5px solid #d55e00; }
+  .card-5 { left: 312px; top: 180px; border-top: 3.5px solid #cc79a7; }
+  .card-6 { left: 616px; top: 180px; border-top: 3.5px solid #56b4e9; }
 
   /* Header */
   .card-header {
@@ -220,21 +220,20 @@ HTML_CONTENT = """<!DOCTYPE html>
       </marker>
     </defs>
 
-    <!-- Arrow 1 -> 2 -->
-    <line x1="289" y1="84" x2="317" y2="84" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+    <!-- Arrow 1 -> 2 (card1 right=284, card2 left=312, gap=28) -->
+    <line x1="288" y1="84" x2="308" y2="84" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
 
-    <!-- Arrow 2 -> 3 -->
-    <line x1="580" y1="84" x2="608" y2="84" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+    <!-- Arrow 2 -> 3 (card2 right=588, card3 left=616, gap=28) -->
+    <line x1="592" y1="84" x2="612" y2="84" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
 
-    <!-- U-turn Connector 3 -> 4 -->
-    <!-- Starts at bottom of Card 3 (x=741, y=156), goes down to y=168, left to x=159, down to Card 4 (y=176) -->
-    <path d="M 741 156 L 741 168 L 159 168 L 159 176" fill="none" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow-down)" stroke-linejoin="round" />
+    <!-- U-turn Connector 3 -> 4 (card3 center x=754, card4 center x=146) -->
+    <path d="M 754 156 L 754 168 L 146 168 L 146 176" fill="none" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow-down)" stroke-linejoin="round" />
 
     <!-- Arrow 4 -> 5 -->
-    <line x1="289" y1="252" x2="317" y2="252" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+    <line x1="288" y1="252" x2="308" y2="252" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
 
     <!-- Arrow 5 -> 6 -->
-    <line x1="580" y1="252" x2="608" y2="252" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
+    <line x1="592" y1="252" x2="612" y2="252" stroke="#6b7280" stroke-width="1.8" marker-end="url(#arrow)" />
   </svg>
 
   <div class="grid">
