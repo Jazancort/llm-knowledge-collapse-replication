@@ -19,6 +19,7 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{amsmath}
+\usepackage{lastpage}
 \usepackage{caption}
 \usepackage{float}
 \captionsetup{font={small,sf}, labelfont={bf,small}}
@@ -175,7 +176,7 @@ different axis of the training pipeline. Together, these studies confirm that
 recursive degradation is a real and well-characterized phenomenon.
 
 Despite these findings, modern adaptation pipelines rely predominantly on
-parameter-efficient methods such as LoRA \citep{hu2022} and QLoRA
+parameter-efficient methods such as \rev{Low-Rank Adaptation (LoRA)} \citep{hu2022} and \rev{its quantized variant, QLoRA}
 \citep{dettmers2023}, which dramatically reduce computational cost while
 preserving downstream performance. \citet{biderman2024} observed qualitatively
 that LoRA ``learns less and forgets less,'' but it remains unknown how this
@@ -229,7 +230,7 @@ The main contributions of this work are:
     pre-registered dose--response (five paired seeds) shows that \rev{the tested
     reductions of 10\%, 25\%, and 50\%} each raised Gen~5 retention by \rev{3.6--4.4\,pp},
     with the Gen~10 benefit graded (\rev{$+9.2$}\,pp at 50\%; 95\%~CI $[6.9, 11.6]$).
-    \rev{On Qwen, a 50\% reduction yielded a similar point estimate to halving the learning rate; formal equivalence and mechanism were not established.}
+    \r\rev{On Qwen, a 50\% reduction yielded a similar point estimate to halving the learning rate; formal equivalence and mechanism were not established.}
 \end{enumerate}
 
 The remainder of this paper reviews related work, formalizes the proposed
@@ -480,7 +481,7 @@ $\theta^{(t)}$ & Adapter-augmented weights at generation~$t$ \\
 $\Delta W = BA$& Low-rank LoRA update matrix ($B \in \mathbb{R}^{d\times r}$,
                  $A \in \mathbb{R}^{r\times d}$) \\
 $\sigma_i$     & $i$-th singular value of $\Delta W$ \\
-$\hat{\sigma}_i = \sigma_i / \sum_j \sigma_j$ & Normalised singular weight \\
+$\hat{\sigma}_i = \sigma_i / \sum_j \sigma_j$, $p_i \equiv \hat{\sigma}_i$ & \rev{Normalised singular weight; $p_i \ge 0$, $\sum_i p_i = 1$} \\
 $\mathrm{erank}(\Delta W)$ & Effective rank:
                  $\exp\!\bigl(-\sum_i \hat{\sigma}_i \log \hat{\sigma}_i\bigr)$ \\
 $\|\Delta W\|_F$ & Frobenius norm of composed update, averaged across modules \\
@@ -828,7 +829,7 @@ our experiments manipulate each component separately and show that changes along
 any of the three axes can move the system between bounded and degradative
 regimes.
 
-\rev{We distinguish \emph{ETP-design} variables, which are fixed before training and
+\rev{We abbreviate \rev{effective training pressure as ETP} and distinguish two classes of variable. \emph{ETP-design} variables are fixed before training and
 directly manipulated in our factorial design (nominal adapter rank $r$, learning
 rate $\eta$, number of training steps, and synthetic-data dose fraction), from
 \emph{ETP-observed} variables, which are measured after training as diagnostic
@@ -1230,7 +1231,7 @@ under the G3 bf16 protocol with the same three seeds (15/137/256); all three run
 returned \RsixteenMten\% Gen10 retention.
 \rev{The cleanest seed-level rank comparison is the G3 within-protocol design,
 where the same three seeds were run at both $r=16$ and $r=256$ under identical
-bf16 precision. Per-seed Gen10 differences are $+15$, $+13$, and $+15$ correct
+\rev{bfloat16 (bf16)} precision. Per-seed Gen10 differences are $+15$, $+13$, and $+15$ correct
 items out of 78, a mean of $+18.4$~pp. An exact sign-flip test gives $p=0.25$
 ($N=3$, bilateral); the effect is consistent in direction across all three pairs
 but the sample size limits formal power.}
@@ -1334,7 +1335,7 @@ evaluated only to localize the transition boundary and were therefore not
 extended to Gen10. All three exhibited progressive
 degradation at Gen5: retention of 78.3\% ($r=10$, effective rank 6.37), 73.9\%
 ($r=12$, effective rank 7.35), and 69.6\% ($r=14$, effective rank 8.37). These
-values place the Gemma~3 regime boundary between effective ranks 3 and 6.
+values place the Gemma~3 regime boundary between effective ranks 3 and 6, \rev{that is, below $r=10$}.
 
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
 \caption{QLoRA rank sweep on Gemma~3~1B~IT. Anchor ranks ($r=4$ and $r=16$),
@@ -1812,7 +1813,7 @@ pressure.}
 \end{figure}}
 
 Taken together, the intervention experiments show that the 
-\rev{degradative trajectory can be attenuated under the evaluated 
+\r\rev{degradative trajectory can be attenuated under the evaluated 
 conditions. On Qwen, a 50\% reduction moved the system from the degradative to the bounded regime; on Gemma~3, it raised Gen~10 retention without reducing the rate of loss. Neither outcome constitutes a return to homeostatic behaviour.} These results the \rev{lowest-pressure degradative configuration tested}, complementing the
 capacity and perturbation results presented in the preceding sections. We note
 that verification-based approaches \citep{yi2025} represent an orthogonal
@@ -1917,7 +1918,8 @@ motivation for treating them as manifestations of a common organizing principle.
 The framework is empirical rather than theoretical. We do not propose a
 closed-form expression that combines rank, learning rate, and exposure into a
 single scalar predictor. Instead, the experiments reveal that each variable independently
-controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $\BsevenSlopeFifty$\,pp/generation, whereas a 10\% reduction did not --- its slope was $-1.49$\,pp/generation, marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.}
+controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $\BsevenSlopeFifty$\,pp/generation, whereas a 10\% reduction did not --- its slope was $-1.49$\,pp/generation, marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.
+\rev{This pattern is consistent with the system operating near a regime boundary, though the present experiments do not establish a precise threshold value that will generalize to other settings.}}
 
 \rev{The contribution is the existence and reproducibility of this
 \rev{threshold-like transition within the tested grid}, not the numerical threshold itself.} The present work does not claim that the
@@ -2184,7 +2186,7 @@ consider:
     architecture, as cross-backbone transfer of numerical values is unreliable.
 \end{itemize}
 
-The exposure axis was tested at one rank per backbone: $r=256$ on Qwen and $r=10$ on Gemma~3, each the lowest-pressure degradative configuration available on that backbone. Under the paired dose--response protocol both backbones responded, but in different forms: on Qwen the rate of progressive loss fell, whereas on Gemma~3 the Gen~10 retention level rose without a change in that rate. An earlier single-seed pilot on Gemma~3 at $r=16$ appeared to show no response at all, but that pilot compared arms produced by different evaluation pipelines and is excluded from the estimates reported here; whether graded doses would alter the outcome at $r=16$ remains untested. Update capacity and perturbation magnitude generalised across the evaluated backbones; exposure sensitivity is demonstrated for the two configurations tested, and its transferability to other ranks is uninvestigated. \rev{This asymmetry reinforces that effective training pressure should not be read as implying identical sensitivity along all axes across architectures.}
+The exposure axis was tested at one rank per backbone: $r=256$ on Qwen and $r=10$ on Gemma~3, each the lowest-pressure degradative configuration available on that backbone. Under the paired dose--response protocol both backbones responded, but in different forms: on Qwen the rate of progressive loss fell, whereas on Gemma~3 the Gen~10 retention level rose without a change in that rate. An earlier single-seed pilot on Gemma~3 at $r=16$ appeared to show no response at all, but that pilot compared arms produced by different evaluation pipelines and is excluded from the estimates reported here; whether graded doses would alter the outcome at $r=16$ remains untested. Update capacity and perturbation magnitude \rev{generalized across the evaluated backbones}; exposure sensitivity is demonstrated for the two configurations tested, and its transferability to other ranks is uninvestigated. \rev{This asymmetry reinforces that effective training pressure should not be read as implying identical sensitivity along all axes across architectures.}
 
 These considerations are derived from experiments on 1--2B parameter models with
 factoid QA data. Their applicability to larger models, different domains, or
@@ -2311,7 +2313,7 @@ therefore treated as exploratory and supportive: they demonstrate that degradati
 architecture, but they do not constitute an independent replication of the
 quantitative threshold estimates.}
 
-\rev{The mechanism through which reduced synthetic exposure stabilises
+\rev{The mechanism through which reduced synthetic exposure \rev{stabilizes}
 recursive retention was not established. Two candidate mechanisms are
 plausible: the per-generation update budget (fewer training steps per
 generation for lower-dose conditions) and data composition (\rev{a smaller number and different selection of synthetic training examples}

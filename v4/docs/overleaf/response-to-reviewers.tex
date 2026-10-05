@@ -182,7 +182,7 @@ below. The table maps every point to the revision made and its location.
 
 \multicolumn{4}{@{}l}{\textbf{Editor}}\\
 ED-1 & Language editing & Complete language revision; terminology
-       standardised throughout & Throughout \\
+       standardized throughout & Throughout \\
 ED-2 & Submission format & Seven documents in Word; figures at 300\,dpi
        (non-PDF); \texttt{.bib} included & Submission package \\
 ED-3 & List of changes & This table plus an individual response to each
@@ -230,7 +230,7 @@ R2-4 & Methodology (6 points) &
        ``sharp'' withdrawn; Gemma~4 sourced & \S3.5, \S4, \S6 \\
 R2-5 & References (5 points) &
        Duplicate arXiv resolved; year corrected; Gemma~4 added;
-       preprint status declared; list harmonised &
+       preprint status declared; list harmonized &
        \texttt{cas-refs.bib} \\
 \end{longtable}
 
@@ -301,8 +301,11 @@ evaluation setting.
 The manuscript underwent a complete language revision prior to
 resubmission, covering grammar, terminology consistency, and the
 removal of residual non-English constructions. Terminology was
-standardised throughout (Homeostatic / Bounded / Degradative;
-``effective training pressure'' written in full at every occurrence),
+standardized throughout (Homeostatic / Bounded / Degradative;
+the term ``effective training pressure'' is written in full at
+first use and wherever a claim is made about it; the abbreviation
+ETP is introduced explicitly in Section~3.5 and used thereafter
+only in the compound labels ETP-design and ETP-observed),
 and all abbreviations are now expanded at first use. Should the Editor
 consider a further round of professional language editing necessary,
 we will gladly commission Elsevier's Author Services before
@@ -331,14 +334,14 @@ reader to infer.
 First, effective training pressure is no longer presented as a
 predictor. It is introduced as an operational experimental framework
 that organises three independently manipulated variables, and the
-operational index $\Pi$ is labelled an exploratory post-training summary
+operational index $\Pi$ is labeled an exploratory post-training summary
 wherever it appears. Second, the single-dataset limitation is retained,
 but we add a strict exact-match re-scoring of all saved predictions to
 show that the regime classifications do not depend on the permissive
 matching criterion. Third, the seed policy is now explicit at the level
 of individual claims: headline conditions use three or five seeds, six
 for the pooled $r=256$ estimate; intermediate ablations use one seed and
-are labelled descriptive; the two classes are never pooled. Fourth, the
+are labeled descriptive; the two classes are never pooled. Fourth, the
 exposure axis is no longer shown for one Qwen condition: the revision
 replaces the single-seed pilot with two pre-registered dose--response
 experiments, one per backbone, each with multiple paired seeds at every
@@ -365,7 +368,7 @@ diagnostics, not used to define a prospective threshold.
 
 Within the tested protocols, we can locate changes in retention trajectories
 between adjacent configurations. Those intervals do not establish a universal
-numerical ETP threshold: the attempted cross-architecture normalisations did
+numerical ETP threshold: the attempted cross-architecture normalizations did
 not align the observed boundaries. A prospective test on an unseen backbone
 or dataset would require a calibration rule and outcome criterion specified
 in advance, followed by evaluation on held-out conditions without refitting
@@ -484,8 +487,12 @@ Qwen configuration and protocol; it is not inferred from the invalid
 C1/C5 comparison.
 
 Gemma~3 showed a different response. In G2, 50\% removal at \(r=10\)
-increased Generation~10 retention by \(7.7\) percentage points across
-three paired seeds, but the Generation~5--10 slope was approximately
+raised Generation~10 retention by $\GtwoDeltatenFifty$~percentage points
+across three paired seeds (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
+$p=\GtwoPtenFifty$); the 10\% and 25\% doses gave $\GtwoDeltatenTen$ and
+$\GtwoDeltatenTfive$~points respectively. The Generation~5--10 slope was
+$\GtwoSlopeFifty$~pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%
+--- equal within rounding, so the Generation~5--10 slope was approximately
 \(-0.91\) percentage points per generation in both arms. The intervention
 improved endpoint retention without demonstrably slowing later loss.
 Neither experiment identifies the mechanism or establishes that the
@@ -560,12 +567,12 @@ diagnostics measured after it, and restates the contribution as the
 factorial design, the dose--response evidence along three axes, the two
 pre-registered exposure experiments, and the finding that the regime
 boundary is backbone-dependent and not reconciled by any architectural
-normalisation we tested.
+normalization we tested.
 
 On the cross-architecture claims: Gemma~4~E2B~IT is now cited,
 explicitly distinguished from Gemma~3n~E2B, and its architectural
 description is attributed to the released model configuration. Because
-that backbone was evaluated with a single seed, it is labelled
+that backbone was evaluated with a single seed, it is labeled
 supportive validation and excluded from every threshold estimate. The
 restriction to 1--2\,B parameter models is retained as the first
 limitation in Section~6.
@@ -582,7 +589,7 @@ without slope reduction on the other; a 50\,\% exposure reduction
 described as \emph{arresting} progressive loss, now quantified as
 reducing its rate to $\BsevenSlopeFifty$\,pp/generation; a single-seed
 observation on a third backbone described as \emph{generalising}, now
-reported as consistent with but not establishing generalisation; and a
+reported as consistent with but not establishing generalization; and a
 non-monotonic slope response across doses that the original text had
 smoothed, now reported as two distinct outcomes. We also found one
 paragraph in Section~5.4 that still drew a conclusion from the archived
@@ -609,8 +616,8 @@ from Figure~1 because they are not computed in the reported experiments.
 We have also separated the set from the metric: $K_0$ denotes the set of
 held-out questions answered correctly at generation~0, $|K_0|$ its
 cardinality, and $R(t)$ the retention ratio at generation~$t$. For SDI-3,
-$T$ denotes the evaluation horizon, $D_{1,t}$ denotes Distinct-1 at
-generation~$t$, and $D_{1,0}$ denotes its generation-0 value; the comma
+$T$ denotes the evaluation horizon, $\mathrm{D1}_t$ denotes Distinct-1 at
+generation~$t$, and $\mathrm{D1}_0$ denotes its generation-0 value; the comma
 distinguishes the latter from the ambiguous $D_{10}$. We define
 $\Delta I=\mathrm{Instability}(T)-\mathrm{Instability}(1)$, where
 $\mathrm{Instability}(t)$ is the fraction of training items whose normalized
@@ -664,8 +671,8 @@ script and output are included in the replication package.
 \medskip\noindent\emph{The mathematical defects.}
 Equation~2 was wrong as written, not merely mis-rendered, and we have
 adopted the reviewer's formulation. The original text used $\sigma_i$
-for both the singular values and their normalisation, which makes the
-normalisation condition circular. The revision introduces a separate
+for both the singular values and their normalization, which makes the
+normalization condition circular. The revision introduces a separate
 symbol for the normalised weights and states the condition explicitly.
 Equation~6 was underspecified: the sign convention and the direction of
 the diversity ratio were not stated, so the sign of SDI-3 could not be
@@ -692,7 +699,7 @@ Rewritten with explicit function notation and set cardinality:
 The numerator is the cardinality of a set, not a summation, which is
 what the garbled original obscured.\ \ (\S3.2, p.~5) \\
 
-(b) & Eq.~2 missing sign and summation; normalisation incorrect &
+(b) & Eq.~2 missing sign and summation; normalization incorrect &
 Accepted as a mathematical error and corrected in the notation the
 reviewer proposed:
 \[
@@ -779,7 +786,7 @@ rank 87.57 and is degradative, so no claim of homeostasis beyond that
 value can stand. The deeper problem the reviewer exposes is that we were
 using a single figure to describe two different boundaries. The revision
 distinguishes them. On Qwen, the tested grid places the transition from
-homeostatic to bounded behaviour between effective ranks 29.5 ($r=64$)
+homeostatic to bounded behavior between effective ranks 29.5 ($r=64$)
 and 50.2 ($r=128$), and the transition from bounded to degradative
 between 50.2 and 87.6 ($r=256$). The ``50--88'' interval quoted in the
 Abstract is the second of these. On Gemma~3, where no bounded regime was
@@ -789,7 +796,7 @@ kind of object, and the revision no longer compares them as though they
 were.
 \newtext{(\S4.2.3, p.~14; \S5.1, p.~18; Abstract, p.~1)}
 
-\rsub{(b)}{$r=128$ labelled above-threshold while classified Bounded.}
+\rsub{(b)}{$r=128$ labeled above-threshold while classified Bounded.}
 Corrected. ``Above-threshold configurations'' now refers exclusively to
 $r=256$. The $r=128$ configuration is described as a
 \newtext{transition-zone configuration}, in which distributional
@@ -818,7 +825,7 @@ Corrected, and the correction goes beyond the Abstract. The seed policy
 is now stated at the level of individual claims rather than once in
 aggregate: headline conditions use three or five seeds (six for the
 pooled $r=256$ estimate), intermediate ablations use a single seed and
-are labelled descriptive, and the two classes are never pooled when a
+are labeled descriptive, and the two classes are never pooled when a
 headline claim is made. An $N$ column was added to the rank-sweep and dose--response tables;
 the remaining tables (Tables~7--9) state $N$ in a footnote.
 Contribution~1 in the Introduction, which carried the same overclaim, was
@@ -831,7 +838,7 @@ and ``confirms'' has been replaced by \newtext{is consistent with}. The
 non-monotonicity is now reported rather than smoothed over: Gen~5
 retention was 78.3\,\% at $\eta=10^{-6}$, 54.3\,\% at $5\times10^{-6}$,
 and 63.0\,\% at $10^{-5}$, and the text states that \newtext{the
-non-monotonic pattern at $\eta = 5\times10^{-6}$ limits interpretation.
+non-monotonic pattern at $\mathrm{LR}=5\times10^{-6}$ limits interpretation.
 We treat this as descriptive evidence rather than confirmatory
 generalization.} Contribution~2 in the Introduction carried the same
 overclaim and was corrected.
@@ -910,7 +917,7 @@ intervals are reported at every dose level. Where groups are not
 exchangeable under the relevant null --- the 17.7\,pp gap between the
 three-seed $r=16$ condition and the six-seed $r=256$ estimate, which
 differ in rank, precision protocol and seed assignment simultaneously ---
-the comparison is labelled descriptive and no test is reported.
+the comparison is labeled descriptive and no test is reported.
 \newtext{(\S4.1, p.~10; \S4.2.1, p.~12; \S4.5, pp.~16--17; \S4.6, p.~17)}
 
 \rsub{(b)}{The framework is not quantified.}
@@ -922,7 +929,7 @@ weight drift, response length, SDI-3 --- and states that the latter
 \newtext{are not available prospectively; they therefore serve as
 post-hoc explanatory variables rather than pre-specified predictors}. The
 operational index $\Pi = \mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ is
-labelled \newtext{an exploratory post-training summary} and is
+labeled \newtext{an exploratory post-training summary} and is
 \newtext{not used as a validated quantitative threshold}. Developing a
 quantitative formulation is listed as future work, with the protocol a
 prospective test would require specified in Section~6.
@@ -930,7 +937,7 @@ prospective test would require specified in Section~6.
 
 \rsub{(c)}{Normalisation failed with no alternative proposed.}
 The reviewer asks for the constructive half of a negative result, and the
-original manuscript supplied only the negative half. Five normalisations
+original manuscript supplied only the negative half. Five normalizations
 were tested --- by hidden dimension, its square root, layer count,
 attention heads, and key--value heads --- and none aligned the thresholds
 across backbones (Table~13, p.~28). We retain that table as a reported
@@ -942,7 +949,7 @@ generations, single seed; the boundary estimated as the interval between
 the highest configuration whose early retention slope is indistinguishable
 from zero and the lowest whose slope is negative --- together with its
 cost, which is approximately two short runs per backbone. We present this
-as the practical alternative to a universal normalisation rather than as a
+as the practical alternative to a universal normalization rather than as a
 validated method, since we have not executed it on an unseen backbone.
 \newtext{(\S4.2.3, p.~14; \S6, p.~22; Table~13, p.~28)}
 
@@ -957,7 +964,7 @@ capacity that is not captured by existing accounts of recursive collapse;
 two pre-registered exposure experiments, one per backbone; and the
 finding that the regime boundary is backbone-dependent by roughly an
 order of magnitude and is not reconciled by any architectural
-normalisation we tested. The organising value of the framework is that
+normalization we tested. The organising value of the framework is that
 three independently manipulated variables move the system across the same
 qualitative boundary, which is an empirical observation and is presented
 as one.
@@ -978,7 +985,7 @@ key--value head, and key--value projections shared across the final 20 of
 \texttt{v\_proj} adapts 35 query and 15 value matrices. The repository
 identifier and revision hash are listed in supplementary Table~S1. We
 also constrain what the backbone is used for: it was evaluated with a
-single seed, so it is labelled supportive validation, excluded from every
+single seed, so it is labeled supportive validation, excluded from every
 threshold estimate, and the limitation is stated in those terms ---
 \newtext{they do not constitute an independent replication of the
 quantitative threshold estimates}.
@@ -1001,7 +1008,7 @@ Gemma~3 the relevant interval spans effective ranks 3.07 to 6.37. The
 phrase used throughout is \newtext{a threshold-like transition within the
 tested grid}, and Section~5.1 now states that \newtext{the present
 experiments do not establish a precise threshold value that will
-generalise to other settings}.
+generalize to other settings}.
 \newtext{(Abstract, p.~1; \S1, p.~3; \S5.1, p.~18; \S7, p.~22)}
 
 \arhead{Author action:}
@@ -1015,7 +1022,7 @@ generalise to other settings}.
       distinction, and the operational index was qualified at every
       occurrence.
 \item Section~6 (p.~22) gained the per-backbone calibration procedure as
-      the proposed alternative to a universal normalisation, with its
+      the proposed alternative to a universal normalization, with its
       cost stated.
 \item The contribution statement in Section~1 and the framework
       discussion in Section~5.1 were rewritten to claim the design and
@@ -1045,7 +1052,7 @@ others only arXiv, some lack page numbers or venues.}
 
 \arhead{Author response:}
 All five are accepted and corrected. The first three were errors of fact
-in the bibliography; the fourth concerns how a source is characterised in
+in the bibliography; the fourth concerns how a source is characterized in
 the text; the fifth required an audit of the whole list.
 
 \renewcommand{\arraystretch}{1.25}
@@ -1096,7 +1103,7 @@ closest prior work on factual degradation under recursive training and
 omitting it would misrepresent the literature. \\
 
 (e) & Inconsistent reference formatting &
-The full list was audited and harmonised to one convention: works
+The full list was audited and harmonized to one convention: works
 published at a venue carry the venue, year and, where applicable, volume
 and pages; preprints carry the arXiv identifier and year; works that are
 both carry the venue with the identifier appended, as for [32]. Entries
@@ -1121,7 +1128,7 @@ field. \texttt{cas-refs.bib} is included in the submission package. \\
       comparison qualified in the text, with [6] added as the
       peer-reviewed anchor for the phenomenon.
 \item Every entry was checked against the published record for venue,
-      year, volume, pages and identifier, and the list was harmonised to
+      year, volume, pages and identifier, and the list was harmonized to
       a single convention. Three further entries ([31], [20], and one
       with an incomplete venue) not mentioned by the reviewer were found
       and corrected in the same pass.
