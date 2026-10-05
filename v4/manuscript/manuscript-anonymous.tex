@@ -123,9 +123,9 @@ pipelines.
 \begin{highlights}
 \item \rev{Rank-dependent threshold-like transition between homeostatic and degradative regimes}
 \item \rev{Regime boundaries differ ${\sim}10{\times}$ across backbones (erank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
-\item \rev{Adapter rank and learning rate {both shift the observed operating regime}}
+\item \rev{Adapter rank and learning rate both shift the observed operating regime}
 \item Output drift accompanies degradative regimes while factual retention stays bounded
-\item \rev{A pre-registered 50\% synthetic exposure reduction {substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, retention improved at Gen~10 without a reduction in the observed rate of loss}
+\item \rev{A 50\% synthetic exposure cut improved retention on both backbones tested}
 \end{highlights}
 
 % ============================================================
@@ -730,13 +730,16 @@ Appendix~\ref{app:repo} for code and data access).
   \centering
   \includegraphics[width=0.98\textwidth]{figs/scratch/fig1_overview.pdf}%
   \vspace{4pt}
-  \caption{Overview of the experimental pipeline: (1)~data preparation and
-  $K_0$ baseline establishment; (2)~recursive training over ten generations
-  across three backbones; (3)~pressure manipulation along five axes (rank,
-  learning rate, method, module topology, exposure); (4)~evaluation of
-  retention, distributional shift, and effective rank; (5)~regime
-  classification; (6)~effective training pressure framework
-  synthesis.}\label{fig:methodology}
+  \caption{\rev{Overview of the experimental pipeline. (1)~Data preparation and
+  $K_0$ baseline establishment across three backbones (Qwen~2.5~1.5B,
+  Gemma~3~1B, Gemma~4~E2B). (2)~Recursive training over ten generations
+  with strict data replacement. (3)~Pressure manipulation along five axes:
+  rank, learning rate, method, module topology, and synthetic-data dose
+  (0/10/25/50\% removal). (4)~Per-generation evaluation of factual
+  retention ($K_0$), effective rank, response length, Distinct-$n$, MTLD,
+  and stopword ratio. (5)~Regime classification (Homeostatic, Bounded,
+  Degradative). (6)~Pressure-regime mapping: effective training pressure
+  identified as the organizing principle for regime transitions.}}\label{fig:methodology}
 \end{figure*}
 
 \subsection{Experimental axes}\label{sec:axes}
@@ -1739,7 +1742,7 @@ Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
 paired $t$-test \rev{$p = 0.009$, $0.003$, $p < 0.001$}). A 50\% reduction
 \rev{reduces the rate of progressive loss to $\BsevenSlopeFifty$\,pp/generation} versus $\BsevenSlopeZero$\,pp/generation at 0\% (mean across five seeds), shifting the system from the degradative to the bounded regime by the criterion of
-Section~\ref{sec:res_capacity}.
+Section~\ref{sec:res_capacity}.\footnote{\rev{Three Gen5$\to$Gen10 slopes for Qwen $r=256$: $\GoneFourteenSlope$\,pp/generation (G1+G4, $N=6$), $\GoneSlope$\,pp/generation (G1 subset, $N=3$), and $\BsevenSlopeZero$\,pp/generation (dose-response 0\% arm, $N=5$). The differences reflect design and seed composition, not backbone variation.}}
 
 The pre-registered prediction that 50\% removal would match halving the
 learning rate (from $\eta = 10^{-5}$ to $5\times 10^{-6}$) was numerically similar:
