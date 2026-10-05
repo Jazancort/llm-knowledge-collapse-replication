@@ -48,7 +48,7 @@
 Manuscript ID: \textbf{KNOSYS-D-26-21490}\\[2pt]
 Original Article Title: \textit{Effective Training Pressure Gates Recursive
 Knowledge Degradation in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
-To: Knowledge-Based Systems Editor (Elsevier)\\[2pt]
+To: The Editor, \textit{Knowledge-Based Systems}\\[2pt]
 Re: Response to Reviewers, Revision Round~1\\[2pt]
 \today
 
@@ -57,40 +57,44 @@ Re: Response to Reviewers, Revision Round~1\\[2pt]
 \noindent
 Dear Editor and Reviewers,
 
-We sincerely thank you for the thorough and constructive evaluation of our
-manuscript. The reviewers identified concrete problems with the original
-submission: a pipeline inconsistency in the synthetic-exposure experiment,
-notation ambiguities in the equations, and overclaims about the prospective
-predictive power of the ETP framework. Addressing them has substantially
-improved the work. We are grateful for the opportunity to revise and
-resubmit.
+We thank you for your careful and constructive evaluation of our manuscript.
+Your comments prompted substantive revisions to the experimental account,
+statistical reporting, notation, and scope of our conclusions. We respond to
+each comment below and indicate the corresponding changes in the manuscript.
 
-The key enhancements in this revised version include: (1)~a corrected and
-pre-registered dose--response experiment replacing the original C3/C5
-comparison, which we identified as being affected by a pipeline inconsistency;
-(2)~a clear separation between ETP-design variables (directly manipulated
-before training) and ETP-observed post-training diagnostics, with the
-operational pressure index now labelled as exploratory; (3)~seed-level exact
-permutation tests and paired $t$-tests with 95\,\% confidence intervals for
-all headline comparisons; (4)~corrected and fully defined notation for $K_0$,
-$R(t)$, and all symbols in Equations~1--6; and (5)~an expanded reproducibility
-section specifying checkpoint identifiers, decoding configurations, and all
-scripts required to regenerate tables and figures.
+The most consequential correction concerns the original synthetic-exposure
+comparison. During revision, we identified that its baseline and intervention
+conditions had been evaluated through different pipeline paths, including
+differences in the construction of the baseline-correct question set
+($K_0$). Consequently, we no longer rely on that comparison as evidence for
+the previously reported intervention effect. The revised manuscript instead
+presents paired dose--response experiments conducted under consistent
+pipelines. On Qwen, reducing synthetic exposure attenuated the
+Generation~5--10 retention decline at the 50\% reduction level. On Gemma~3,
+the corresponding intervention improved Generation~10 retention but did not
+attenuate the decline over that interval. We have revised the interpretation
+to preserve this distinction rather than proposing a common mechanism that
+the experiments do not establish.
 
-We are submitting: (a)~this point-by-point response document;
-(b)~a highlighted revised manuscript showing all changes in blue;
-(c)~a clean final manuscript (LaTeX source + PDF); and
-(d)~the replication package archived at
-\url{https://doi.org/10.5281/zenodo.23146342}.
+We have also clarified the status of effective training pressure (ETP). It is
+now presented as an operational framework for organizing experimental
+conditions and their observed diagnostics, not as a validated universal
+scalar predictor or an architecture-independent threshold. Additional
+revisions distinguish controlled comparisons from descriptive contrasts,
+report the available seed-level uncertainty, define the notation used in the
+equations and figures, and state the limits of the factual-retention
+evaluation.
 
-Revised text quoted from the manuscript appears in \textcolor{chgcolor}{blue}.
+The responses that follow identify the action taken for each concern and
+direct the reader to the relevant part of the revised manuscript. Revised
+manuscript passages quoted in this letter appear in
+\textcolor{chgcolor}{blue}.
 
 \bigskip
 \noindent
 Respectfully submitted on behalf of all authors,\\[6pt]
 Julio Leite Azancort Neto\\
-Ph.D.\ Candidate in Applied Computing\\
-Main and Corresponding Author
+Corresponding Author
 
 \medskip\noindent\rule{\linewidth}{0.4pt}\medskip
 
@@ -101,13 +105,19 @@ Main and Corresponding Author
 to each reviewer comment in the cover letter.}
 
 \arhead{Author response:}
-The manuscript has been revised throughout for clarity and language. The
-point-by-point response follows.
+Thank you for this guidance. We have edited the manuscript throughout for
+language and clarity, with particular attention to the description of
+experimental conditions, the distinction between results and
+interpretations, and the consistency of terminology across sections. We have
+also moderated claims that extended beyond the tested architectures or
+evaluation setting.
 
 \arhead{Author action:}
-We engaged Elsevier's Author Services English Language Editing service. All
-reviewer concerns below received dedicated revisions with precise locations
-cited.
+This letter provides a separate response to every concern raised by
+Reviewers~1 and~2. Each response describes the revision or, where a
+requested conclusion cannot be established from the available experiments,
+states that limitation explicitly. Locations in the revised manuscript are
+provided with the individual responses below.
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section*{Reviewer 1}
