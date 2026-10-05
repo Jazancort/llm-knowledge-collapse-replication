@@ -66,10 +66,11 @@ However, recursively retraining models on their own outputs can progressively
 degrade factual knowledge. The conditions under which recursive degradation
 emerges, remains bounded, or can be reversed under parameter-efficient
 fine-tuning remain poorly understood.
-\rev{Through systematic dose-response experiments spanning three backbones
-(Qwen~2.5~1.5B, Gemma~3~1B, and Gemma~4~E2B), ten recursive generations,
-and three or five independent seeds for most headline conditions (six seeds for the pooled $r=256$ analysis); single seed for
-intermediate ablations), we investigate how factual retention changes as
+\rev{Through systematic dose--response experiments spanning three backbones
+(Qwen~2.5~1.5B, Gemma~3~1B, and Gemma~4~E2B), up to ten recursive
+generations, and three or five independent seeds for most headline
+conditions (six for the pooled $r=256$ estimate), with single-seed
+supporting ablations, we investigate how factual retention changes as
 adapter capacity, perturbation magnitude, and synthetic exposure vary.}
 These experiments reveal a common empirical organizing principle, which we
 term effective training pressure. We find:
@@ -89,8 +90,7 @@ and (5)~\rev{pre-registered dose--response experiments on two backbones:
 reducing synthetic exposure by 50\% arrests progressive degradation
 (Qwen $r=256$: Gen~5$\to$10 slope $\BsevenSlopeFifty$\,pp/generation,
 $\Delta\!=\!\BsevenDeltatenFifty$\,pp at Gen10; Gemma~3 $r=10$:
-$\Delta\!=\!\GtwoDeltatenFifty$\,pp at Gen10) and, on Qwen, matches the effect
-of halving the learning rate.}
+$\Delta\!=\!\GtwoDeltatenFifty$\,pp at Gen10) and, on Qwen, \rev{yielded a similar point estimate to halving the learning rate; formal equivalence was not established.}}
 \rev{A three-cell, single-seed prospective probe showed retention ordered in the expected direction, but one pre-specified regime classification was not met; calibration of a scalar pressure threshold remains unresolved.}
 These findings characterize recursive degradation as a pressure-dependent
 phenomenon whose stability depends on a multidimensional control landscape,
@@ -858,7 +858,7 @@ the parameters after one generation of fine-tuning.
 % [v4] A6 RESOLVIDO: abs_drift = mean absolute por parâmetro, confirmado no código
 This scalar summarizes the
 average displacement of the model in weight space under FFT. For QLoRA, the
-\rev{closest available method comparator} is the Frobenius norm of the composed adapter update, $\|BA\|_F$. These two quantities measure different geometric properties (full-weight displacement vs.\ low-rank update magnitude); the FFT/QLoRA comparison in Axis~3 is therefore exploratory, not perturbation-matched.
+\rev{lowest-learning-rate FFT reference for this comparison} is the Frobenius norm of the composed adapter update, $\|BA\|_F$. These two quantities measure different geometric properties (full-weight displacement vs.\ low-rank update magnitude); the FFT/QLoRA comparison in Axis~3 is therefore exploratory, not perturbation-matched.
 
 \subsection{Output-distribution diagnostics}\label{sec:metrics}
 
@@ -966,8 +966,9 @@ All headline comparisons are evaluated with multiple independent training seeds
 \rev{(three for most Qwen conditions, five for Gemma~3 anchor ranks, five for B7/Qwen dose-response, and three for G2/Gemma~3 dose-response)}. These
 include the Qwen rank-sweep endpoints ($r=16$ and $r=256$), the Gemma~3 anchor
 \rev{ranks ($r=4$, homeostatic, and $r=16$, degradative), the QLoRA--FFT comparison, and the dose--response synthetic}
-exposure interventions. \rev{Supporting ablations are evaluated with a single seed. The dose-response experiments (B7, G2) use multiple seeds across all doses (not only at endpoints).} Supporting
-ablations are evaluated with a single seed and labeled as such. We do not pool
+exposure interventions. \rev{The dose--response experiments (B7, G2) use multiple seeds at
+every tested dose. Supporting ablations use a single seed and are
+labelled as descriptive.} We do not pool
 single-seed and multi-seed results when making headline claims.
 
 For multi-seed conditions, we report per-seed values together with the mean and
@@ -1565,10 +1566,9 @@ limits interpretation. We treat this as descriptive evidence rather than
 confirmatory generalization.}
 
 Both update capacity (Axis~1) and perturbation magnitude (Axis~2) each produce
-dose-response relationships with factual retention, and these axes interact
-rather than operating independently. The regime transition therefore reflects a
-multidimensional pressure landscape in which multiple control variables jointly
-determine recursive stability. The next section examines how these regimes
+dose-response relationships with factual retention. \rev{The single-seed $3{\times}3$ grid shows descriptive evidence of joint dependence; formal interaction testing requires replication.} The regime transition therefore reflects a
+multidimensional pressure landscape in which multiple control variables are
+associated with recursive stability. The next section examines how these regimes
 manifest in the distributional properties of the synthetic outputs.
 
 \subsection{Distributional signatures of degradation}\label{sec:res_distribution}
@@ -1727,7 +1727,7 @@ Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
 paired $t$-test \rev{$p = 0.009$, $0.003$, $p < 0.001$}). A 50\% reduction
 effectively arrests progressive loss: the Gen~5$\to$10 slope is
-$-0.14$\,pp/generation versus $-0.96$\,pp/generation at 0\%, shifting the
+$-0.14$\,pp/generation versus \rev{$-1.13$}\,pp/generation at 0\% (mean across five seeds, difference of Gen10$-$Gen5 divided by five generations), shifting the
 system from the degradative to the bounded regime by the criterion of
 Section~\ref{sec:res_capacity}.
 
@@ -2070,7 +2070,7 @@ Reproducibility (3--5 seeds) & Transfer to non-factoid tasks \\
 \addlinespace
 Cross-backbone regime structure & Cross-architecture normalization \\
 \addlinespace
-Capacity $\times$ magnitude interact & \rev{Exposure sensitivity beyond B7/Qwen $r=256$ and G2/Gemma~3 $r=10$} \\
+Capacity $\times$ magnitude \rev{show joint dependence descriptively} & \rev{Exposure sensitivity beyond B7/Qwen $r=256$ and G2/Gemma~3 $r=10$} \\
 \addlinespace
 Magnitude axis cross-backbone & Interaction strength at scale \\
 \bottomrule
@@ -2136,7 +2136,7 @@ recursive stability. For applications where recursive synthetic data reuse is
 anticipated, selecting a rank that places the system well below the observed
 pressure threshold is a practical strategy for maintaining recursive stability.
 On Qwen~2.5~1.5B, ranks at or below 64 (effective rank $\leq 30$) remained
-\rev{stable through the evaluated horizon ($r=16$,$64$: Gen10, no sign of drift; $r=4$,$32$: Gen5 only, treated as single-generation ablations).} Although
+\rev{stable through the evaluated horizon ($r=16$,$64$: Gen10, no sign of drift; $r=4$,$32$: Gen5 only, treated as single-seed, Gen-5-only ablations).} Although
 the numerical threshold is backbone-dependent, the underlying principle appears
 consistent across the evaluated models: lower effective training pressure is
 associated with greater recursive stability in the tested configurations. When
@@ -2234,11 +2234,11 @@ Gen10 are unknown: configurations classified as stable over this horizon
 may eventually degrade given sufficient generations, and configurations
 classified as bounded may stabilize or worsen.
 
-Multi-seed evaluation is used for headline comparisons (three seeds), while
-This provides consistent
-descriptive patterns but limited statistical power for formal inference. The
-observed consistency across seeds supports consistency under the evaluated
-conditions but does not substitute for larger-scale replication.
+Headline comparisons use three or five independent seeds, depending on
+the experiment; the pooled Qwen $r=256$ estimate uses six. \rev{Supporting
+ablations are single-seed, limiting formal inference, particularly for
+the rank--learning-rate grid. Consistency across the replicated
+conditions does not substitute for larger-scale replication.}
 
 Cross-architecture threshold normalization was attempted using several
 architectural ratios, none of which aligned the thresholds between Qwen and
