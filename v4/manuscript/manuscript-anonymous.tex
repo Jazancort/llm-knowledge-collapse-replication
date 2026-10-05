@@ -68,7 +68,7 @@ emerges, remains bounded, or can be reversed under parameter-efficient
 fine-tuning remain poorly understood.
 \rev{Through systematic dose-response experiments spanning three backbones
 (Qwen~2.5~1.5B, Gemma~3~1B, and Gemma~4~E2B), ten recursive generations,
-and \rev{three or five independent seeds for most headline conditions (six seeds for the pooled $r=256$ analysis); single seed for
+and three or five independent seeds for most headline conditions (six seeds for the pooled $r=256$ analysis); single seed for
 intermediate ablations), we investigate how factual retention changes as
 adapter capacity, perturbation magnitude, and synthetic exposure vary.}
 These experiments reveal a common empirical organizing principle, which we
@@ -2136,7 +2136,7 @@ recursive stability. For applications where recursive synthetic data reuse is
 anticipated, selecting a rank that places the system well below the observed
 pressure threshold is a practical strategy for maintaining recursive stability.
 On Qwen~2.5~1.5B, ranks at or below 64 (effective rank $\leq 30$) remained
-\rev{stable through the evaluated horizon ($r=16$,$64$: Gen10, no sign of drift; $r=4$,$32$: Gen5 only, treated as single-generation ablations}.} Although
+\rev{stable through the evaluated horizon ($r=16$,$64$: Gen10, no sign of drift; $r=4$,$32$: Gen5 only, treated as single-generation ablations).} Although
 the numerical threshold is backbone-dependent, the underlying principle appears
 consistent across the evaluated models: lower effective training pressure is
 associated with greater recursive stability in the tested configurations. When
