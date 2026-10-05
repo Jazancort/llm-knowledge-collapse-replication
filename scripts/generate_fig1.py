@@ -182,9 +182,10 @@ HTML_CONTENT = """<!DOCTYPE html>
     font-size: 11px;
     font-weight: 500;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
     border: 1px solid;
-    white-space: nowrap;
+    line-height: 1.35;
   }
 
   .reg-homeo {
