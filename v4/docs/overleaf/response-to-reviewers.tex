@@ -253,6 +253,8 @@ pdf format. For LaTex version, kindly ensure to check if supporting .bib
 files are also included.}
 
 \arhead{Author response:}
+We sincerely thank the Editor for the detailed submission requirements and for the opportunity to revise and resubmit this manuscript to \textit{Knowledge-Based Systems}. We have carefully addressed each of the seven requirements and confirm that all necessary documents have been prepared according to the journal's specifications.
+
 Each requirement is addressed as listed below.
 
 \renewcommand{\arraystretch}{1.2}
@@ -330,6 +332,8 @@ and the exposure intervention is shown mainly for one Qwen condition.
 Major revision is required.}
 
 \arhead{Author response:}
+We sincerely thank Reviewer~\#1 for the thorough and balanced assessment of this work. The four reservations identified in the general evaluation directly shaped the priorities of the revision, and we are grateful for the level of engagement with the experimental design. Addressing these reservations has substantially improved the precision of the claims and the transparency of the limitations.
+
 We accept all four reservations and have restructured the paper so that
 each is stated as a property of the evidence rather than left for the
 reader to infer.
@@ -361,6 +365,8 @@ in those words.
 \rconcern{Reviewer \#1, Concern \#1}{Prospective calibration of ETP}{How can effective training pressure be quantitatively calibrated and prospectively tested on an unseen backbone or dataset?}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for this critical observation. The question of prospective calibration goes to the heart of whether the effective training pressure framework can be used as a predictive instrument before running experiments on a new backbone, or only as a post-hoc explanatory concept. We acknowledge that the original manuscript was not sufficiently precise on this distinction, and the revision addresses it directly by separating ETP-design variables from ETP-observed diagnostics and by stating explicitly what a prospective test would require.
+
 We agree that a quantitative framework should not be presented as
 prospectively predictive without validation on held-out settings. The revised
 manuscript therefore distinguishes variables specified before training
@@ -396,6 +402,8 @@ the requirements for future prospective calibration.
 \rconcern{Reviewer \#1, Concern \#2}{Separating pressure effects from confounders}{How are quantization, optimizer state, data order, and model-specific dynamics separated from the claimed pressure effects?}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for this methodologically important concern. Separating the contribution of individual pressure axes (adapter rank, learning rate, quantization, data composition) from one another and from model-specific dynamics is a genuine challenge in this factorial design, and the reviewer is correct that the original manuscript did not state these limitations with sufficient precision. The revision makes explicit what each control arm establishes, what remains confounded by construction, and what additional experiments would be required to disentangle the effects.
+
 The revised manuscript identifies what each control can establish and what
 remains confounded. For quantization, G3 compares Qwen at \(r=16\) and
 \(r=256\) under the same bf16 protocol and three paired seeds. The
@@ -438,6 +446,8 @@ comparison from the descriptive cross-protocol Qwen contrast.
 \rconcern{Reviewer \#1, Concern \#3}{External validity of the evaluation}{Do the conclusions hold for longer answers, multi-hop questions, other domains, and larger factual evaluation sets?}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for raising the question of external validity. The concern is legitimate: the evaluation in the original manuscript was conducted on short-answer factual questions (TriviaQA) with exact-match scoring, and claims about longer answers, multi-hop questions, or other domains were not supported by the data. The revision explicitly scopes the findings to the evaluation protocol used and positions generalization as an open empirical question rather than an established result.
+
 Our results do not establish generalization to those settings. The
 evaluation concerns short-answer factual questions. It uses a held-out set
 of 200 questions disjoint from the 2,000-question synthetic training
@@ -469,6 +479,8 @@ the tested short-answer factual setting.
 \rconcern{Reviewer \#1, Concern \#4}{Exposure reduction and model-dependent responses}{Why does the five-percent exposure reduction stabilize Qwen but not Gemma~3, and does this generalize across ranks and seeds?}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for this critical observation, which identified a substantive methodological problem that the original manuscript did not address adequately. The five-percent pilot result (C1/C5) and the pre-registered dose--response experiments (B7, G2) used different evaluation pipelines and cannot be directly compared. By highlighting this, the reviewer prompted us to withdraw a comparison that was not supported by the data and to replace it with a properly paired analysis that isolates the dose effect within a single consistent protocol.
+
 This question exposed a substantive problem with the original comparison.
 C1 and C5 followed different evaluation pipelines, including differences
 in \(K_0\) construction and data loading. The previously reported
@@ -518,6 +530,8 @@ to the same mechanism.
 \rconcern{Reviewer \#1, Concern \#5}{Scope of the reproducibility package}{What complete code, checkpoints, prompts, seeds, and raw outputs will support independent reproduction?}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for emphasizing the importance of a complete and verifiable reproducibility package. Reproducibility is a foundational requirement for experimental work in machine learning, and the reviewer is correct that aggregate summary tables alone are insufficient to support independent replication. The revision describes precisely what the public package contains, what it does not contain and why, and what a researcher would need to reproduce the headline results.
+
 We agree that aggregate tables alone are insufficient and that the scope
 of the public materials must be described precisely. The revised
 reproducibility description identifies the model checkpoints, question
@@ -561,6 +575,8 @@ and limited scale. I recommend major revision before further
 consideration.}
 
 \arhead{Author response:}
+We sincerely thank Reviewer~\#2 for the detailed and constructive evaluation of the manuscript. The general assessment correctly identifies two substantive problems --- overclaiming on cross-architecture generalization and the notation/rendering defects --- alongside a range of specific technical issues. We have treated all of these as corrections rather than as matters of perspective, and the revision addresses each point with specific changes to the text, figures, and notation.
+
 We agree with the characterization and have treated the two substantive
 objections as corrections rather than as matters of emphasis.
 
@@ -609,6 +625,8 @@ it.
 \rconcern{Reviewer \#2, Concern \#1}{Abbreviations and notation}{ETP appears in Figure~1 but is never explicitly defined as ``effective training pressure.'' MTLD is introduced without expansion. KL, JS, and coverage appear in Figure~1 without definition. bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded forms. ``Homeo.'' is used in Table~2 without definition. $K_0$ is used both as a set of questions and as a retention metric. $T$, $D1\_T$, $D10$, $\Delta I$, Instability(1), $MeanLen\_T$, and related symbols in Eq.~6 are not fully defined. The effective-rank formula uses $\sigma_i$ as both singular values and normalized singular values. The normalization condition is mathematically incorrect as written. $BA\_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in the drift equation are not consistently defined. $r \in \{4,10,12,14,16\}$ set notation was garbled in the original PDF.}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for this observation. Self-contained notation is an essential condition for a manuscript that introduces several non-standard abbreviations (ETP, SDI-3, the regime labels) and a complex factorial design. The reviewer correctly identified that ETP appeared in Figure~1 before it was defined in the text, and that several notational choices --- particularly the disambiguation between generation subscripts and $n$-gram orders in the diversity metrics --- were insufficiently clear. The revision addresses each point directly.
+
 We agree that the original notation was insufficiently self-contained.
 The term is written in full at first use; the abbreviation ETP is
 introduced explicitly in Section~3.5, where it is required for
@@ -648,6 +666,8 @@ log ratios, and the $\Delta I$ term are not consistently defined. What is
 $5\text{\i}10^6$ in Table~7? Please check also elsewhere.}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for this detailed audit of the equations and tables. The rendering defects identified by the reviewer (garbled summation in Eq.~1, missing negative sign in Eq.~2, unclear terms in Eq.~6) are serious, and we take full responsibility for not having detected and resolved them in the original submission. We have traced the root cause to the re-distillation of embedded font subsets by the Editorial Manager, corrected all mathematical errors identified, and changed the font pipeline to prevent recurrence of the rendering fault.
+
 Two of these points are defects in the mathematics and two are defects
 in the rendering, and we treat them separately because they have
 different causes.
@@ -781,6 +801,8 @@ the conclusion that this ``confirms'' the magnitude axis is too strong.
 Section~4.5 reports approximately 5\% token reduction.}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for the systematic and rigorous audit of the technical claims and numerical consistency of the manuscript. All seven inconsistencies identified are genuine errors or overclaims: each is a statement in the manuscript that did not match the data as reported in the tables, or that made a claim stronger than the evidence supports. We accept every point without reservation and have corrected each one in the revised manuscript. We are grateful for the level of attention to detail that this review demonstrates.
+
 All seven are accepted. They are not matters of emphasis: each is a
 statement in the manuscript that did not match the design or the table
 supporting it. We answer them individually and, where the correction
@@ -904,6 +926,7 @@ Gemma~3n E2B, and its architecture is described without a source. The
 threshold intervals.}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for this thorough methodological critique. The absence of formal statistical tests and confidence intervals is a significant limitation of the original manuscript, and the reviewer is correct that aggregate patterns alone are insufficient to distinguish true effects from noise in small-sample experimental designs. The other sub-concerns --- the use of pre-registered versus exploratory analyses, the confounding of multiple experimental changes, and the language of overclaiming --- are equally important. We address each sub-concern in turn and have made corresponding changes to the manuscript.
 
 \rsub{(a)}{No formal tests, confidence intervals, or $p$-values.}
 Inferential statistics have been added wherever the design admits them,
@@ -1059,6 +1082,8 @@ formatting is inconsistent: some entries include conference proceedings,
 others only arXiv, some lack page numbers or venues.}
 
 \arhead{Author response:}
+We sincerely thank the reviewer for the careful verification of the bibliography, reference formatting, and source attributions. The duplicate arXiv identifier, the missing identifiers for preprints, and the label assigned to reference~[41] are all genuine errors that should have been caught before the original submission. We accept all five points and have corrected each in the revised bibliography.
+
 All five are accepted and corrected. The first three were errors of fact
 in the bibliography; the fourth concerns how a source is characterized in
 the text; the fifth required an audit of the whole list.
