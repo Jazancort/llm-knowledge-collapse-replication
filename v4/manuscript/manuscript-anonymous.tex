@@ -763,7 +763,7 @@ rank.
 
 \item \textbf{Method comparison (QLoRA vs FFT).} We compare QLoRA $r=16$
 against FFT at $\mathrm{LR}=10^{-6}$, selected because it produces the closest
-available method comparator ($\|BA\|_F \approx 0.42$ for QLoRA; FFT drift $d(t) \approx 0.39$). \rev{Because these quantities measure different geometric properties, this is an exploratory comparison between training methods, not a perturbation-matched pairing.} Both
+exploratory, unpaired-by-magnitude reference ($\|BA\|_F \approx 0.42$ for QLoRA; FFT drift $d(t) \approx 0.39$; these method-specific quantities are not directly comparable). \rev{Because these quantities measure different geometric properties, this is an exploratory comparison between training methods, not a perturbation-matched pairing.} Both
 are run for 10 generations with three seeds.
 
 \item \textbf{Module topology (supportive ablation).} On Qwen, we compare
@@ -2131,7 +2131,7 @@ adapter rank is a directly controllable parameter with predictable effects on
 recursive stability. For applications where recursive synthetic data reuse is
 anticipated, selecting a rank that places the system well below the observed
 pressure threshold is a practical strategy for maintaining recursive stability.
-On Qwen~2.5~1.5B, $r=16$ and $r=64$ showed stable retention through Gen10 under the evaluated protocol; $r=4$ and $r=32$ were \rev{evaluated only at Gen5 (single seed, single-seed Gen-5-only ablations)} and cannot be used as evidence of multi-generation stability. Although
+On Qwen~2.5~1.5B, $r=16$ and $r=64$ showed stable retention through Gen10 under the evaluated protocol; $r=4$ and $r=32$ were \rev{evaluated only at Gen5 (single-seed, Gen-5-only ablations)} and cannot be used as evidence of multi-generation stability. Although
 the numerical threshold is backbone-dependent, the underlying principle appears
 consistent across the evaluated models: lower effective training pressure is
 associated with greater recursive stability in the tested configurations. When
@@ -2154,8 +2154,9 @@ quality assessment.
 
 Regarding intervention design, the \rev{dose--response results demonstrate that boundary}
 configurations are sensitive to graded changes in synthetic exposure. \rev{A 50\%
-reduction arrests progressive loss on both tested backbones; smaller doses
-(10--25\%) produce partial, dose-proportional benefits. An exploratory pilot at
+reduction strongly attenuated progressive loss on Qwen B7; on Gemma~3 G2,
+it improved Gen10 retention without reducing the observed rate of loss.
+Smaller doses (10--25\%) produced partial, dose-proportional retention benefits. An exploratory pilot at
 ${\sim}5\%$ downsampling did not replicate under paired evaluation ($+1.9$\,pp,
 $n=3$), indicating that marginal reductions at this level are not robustly
 effective in the evaluated configurations.} When
