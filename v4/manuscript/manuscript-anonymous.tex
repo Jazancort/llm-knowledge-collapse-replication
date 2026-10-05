@@ -21,6 +21,9 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{amsmath}
+\newcommand{\Kcard}{\lvert K_0\rvert}
+\newcommand{\KcardG}[1]{\lvert K_{0,\mathrm{#1}}\rvert}
+
 \usepackage{caption}
 \usepackage{float}
 \captionsetup{font={small,sf}, labelfont={bf,small}}
@@ -29,6 +32,24 @@
 \pdfgentounicode=1
 \input{glyphtounicode}
 \InputIfFileExists{glyphtounicode-cmr.tex}{}{}
+% Mapeamentos para operadores matemáticos LM não cobertos pela tabela padrão
+\pdfglyphtounicode{minus}{2212}
+\pdfglyphtounicode{multiply}{00D7}
+\pdfglyphtounicode{element}{2208}
+\pdfglyphtounicode{approxequal}{2248}
+\pdfglyphtounicode{percent}{0025}
+\pdfglyphtounicode{plusminus}{00B1}
+\pdfglyphtounicode{lessequal}{2264}
+\pdfglyphtounicode{greaterequal}{2265}
+\pdfglyphtounicode{summationtext}{2211}
+\pdfglyphtounicode{summationdisplay}{2211}
+\pdfglyphtounicode{braceleft}{007B}
+\pdfglyphtounicode{braceright}{007D}
+\pdfglyphtounicode{radical}{221A}
+\pdfglyphtounicode{parenleftbig}{0028}
+\pdfglyphtounicode{parenrightbig}{0029}
+\pdfglyphtounicode{bracketleftbig}{005B}
+\pdfglyphtounicode{bracketrightbig}{005D}
 \usepackage{adjustbox}
 \renewcommand{\arraystretch}{1.8}
 
@@ -127,11 +148,11 @@ pipelines.
 % HIGHLIGHTS
 % ============================================================
 \begin{highlights}
-\item \rev{Rank-dependent threshold-like transition between homeostatic and degradative regimes}
-\item \rev{Regime boundaries differ tenfold across backbones (effective rank 3--6 on Gemma~3 vs 50--88 on Qwen)}
-\item \rev{Adapter rank and learning rate both shift the observed operating regime}
+\item Rank-dependent threshold-like transition between homeostatic and degradative regimes
+\item Regime boundaries differ tenfold across backbones (effective rank 3--6 vs 50--88)
+\item Adapter rank and learning rate both shift the observed operating regime
 \item Output drift accompanies degradative regimes while factual retention stays bounded
-\item \rev{A 50\% synthetic exposure cut improved retention on both backbones tested}
+\item A 50\% synthetic exposure cut improved retention on both backbones tested
 \end{highlights}
 
 % ============================================================
@@ -224,7 +245,7 @@ The main contributions of this work are:
 \rev{a threshold-like transition within the tested grid} on Qwen
     and replicating the same qualitative structure on Gemma~3 at a
     substantially lower threshold (effective rank 3--6 versus 50--88),
-    \rev{confirmed across three to six independent seeds for headline conditions; intermediate ablations use a single seed and are labeled descriptive}.
+    \rev{confirmed across three or five independent seeds (six for the pooled $r=256$ estimate) for headline conditions; intermediate ablations use a single seed and are labeled descriptive}.
     \item We demonstrate that full fine-tuning learning-rate sweeps on both
     Qwen and Gemma~3 reproduce the same dose-response pattern, \rev{providing evidence consistent with the phenomenon responding} to perturbation magnitude rather than being
     specific to low-rank adaptation.
@@ -371,7 +392,7 @@ explores stability under recursive data regimes. \citet{biderman2024} observed
 that LoRA implicitly regularizes adaptation, concluding that it ``learns less
 and forgets less'' than full fine-tuning. Recent preprints further suggest that
 higher LoRA ranks increase forgetting while improving plasticity
-\citep{biderman2024incremental,ding2024ranktrade},
+\citep{soutifcormerais2024forgetting,ding2024ranktrade},
 a pattern consistent with the dose-response relationship we observe. Emerging
 frameworks attempt to operationalize this stability through structural matrix
 constraints \citep{fawi2024curlora}. In
@@ -487,9 +508,11 @@ $\theta^{(t)}$ & Adapter-augmented weights at generation~$t$ \\
 $\Delta W = BA$& Low-rank LoRA update matrix ($B \in \mathbb{R}^{d\times r}$,
                  $A \in \mathbb{R}^{r\times d}$) \\
 $\sigma_i$     & $i$-th singular value of $\Delta W$ \\
-$\hat{\sigma}_i = \sigma_i / \sum_j \sigma_j$, $p_i \equiv \hat{\sigma}_i$ & \rev{Normalised singular weight; $p_i \ge 0$, $\sum_i p_i = 1$} \\
+$p_i$          & \rev{Normalised singular weight, $p_i = \sigma_i / \sum_j \sigma_j$;
+                 $p_i \ge 0$ and $\sum_i p_i = 1$} \\
 $\mathrm{erank}(\Delta W)$ & Effective rank:
-                 $\exp\!\bigl(-\sum_i \hat{\sigma}_i \log \hat{\sigma}_i\bigr)$ \\
+                 $\exp\!\bigl(-\sum_i p_i \log p_i\bigr)$
+                 (Eq.~\ref{eq:erank}) \\
 $\|\Delta W\|_F$ & Frobenius norm of composed update, averaged across modules \\
 $d(t)$         & Parameter drift: mean absolute weight change
                  $\theta^{(t)}-\theta^{(0)}$ \\
@@ -610,12 +633,15 @@ configurations are kept strictly separate: evaluation responses are never used
 as training data.
 
 The subset of held-out questions answered correctly at generation~0 defines
-$K_0$. For example, for Qwen~2.5~1.5B, $|K_0|=78$ out of 200 held-out
+$K_0$. For example, for Qwen~2.5~1.5B, $\Kcard=78$ out of 200 held-out
 questions. Other backbones have their own fixed $K_0$ sets (invariant within each pipeline, though Gemma~3 has two distinct sets from two pipelines), determined once at
 generation~0 and \rev{held constant within each experimental pipeline}.
+\rev{A strict exact-match re-evaluation of the same saved predictions is
+reported in supplementary Table~S2; it is used throughout as a sensitivity
+check on the permissive criterion.}
 % [v4] A5 — K0 por backbone declarado explicitamente para evitar ambiguidade
 % [v4-rev2] P1: dois K0 distintos para Gemma3 de dois pipelines diferentes
-\rev{The $K_0$ sizes are: $|K_0|=78$ for Qwen~2.5~1.5B and $|K_0|=76$ for
+\rev{The $K_0$ sizes are: $\Kcard=78$ for Qwen~2.5~1.5B and $|K_0|=76$ for
 Gemma~4~E2B~IT. For Gemma~3~1B~IT, two evaluation sets arise from two distinct
 experimental pipelines: the \rev{rank-sweep experiments}
 (Section~\ref{sec:res_backbone}) use $|K_{0,\mathrm{rank}}|=46$ items, established
@@ -763,15 +789,16 @@ and the tested range.
 \begin{table}[tp]
 \caption{Experimental axes and their corresponding pressure
 components.}\label{tab:axes}
-\begin{tabular}{@{}cll>{\raggedright\arraybackslash}p{5.5cm}@{}}
+\begin{tabular}{@{}c l >{\raggedright}l >{\raggedright\arraybackslash}p{5.5cm}@{}}
 \toprule
-\# & Axis & Variable & Range \\
+\textbf{\#} & \textbf{Axis} & \textbf{Variable} & \textbf{Range} \\
 \midrule
-1 & Capacity & QLoRA rank $r$ & $\{4, 16, 32, 64, 128, 256\}$ \\
-2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\
-3 & Method & QLoRA vs FFT & \rev{Exploratory method comparison (no perturbation-magnitude matching)}, $N{=}3$ \\
-4 & Topology & Target modules & Attention vs full-linear \\
-5 & Exposure & Training examples & \rev{0\%--50\% removed (paired dose--response; Qwen $r{=}256$, $n{=}5$; Gemma~3 $r{=}10$, $n{=}3$)} \\
+1 & Capacity & QLoRA rank $r$ & $\{4, 16, 32, 64, 128, 256\}$ \\[2pt]
+2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\[2pt]
+3 & Method & QLoRA vs FFT & \rev{Exploratory method comparison (no perturbation-magnitude matching)}, $N{=}3$ \\[2pt]
+4 & Topology & Target modules & Attention-only vs full-linear \\[2pt]
+5 & Exposure & Training examples & \rev{$0\%$, $10\%$, $25\%$, $50\%$ removed;
+  paired dose--response (B7: Qwen $r{=}256$, $n{=}5$; G2: Gemma~3 $r{=}10$, $n{=}3$)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -841,7 +868,7 @@ regimes.
 
 \rev{We abbreviate effective training pressure as ETP and distinguish two classes of variable. \emph{ETP-design} variables are fixed before training and
 directly manipulated in our factorial design (nominal adapter rank $r$, learning
-rate $\eta$, number of training steps, and synthetic-data dose fraction). \emph{ETP-observed} variables, which are measured after training as diagnostic
+rate $\eta$, number of training steps, and synthetic-data dose fraction). \emph{ETP-observed} variables are measured after training and serve as diagnostic
 proxies (effective rank, mean absolute weight drift $d(t)$, response length, and
 SDI-3). Effective rank and drift track how much pressure was actually applied to
 the model, but they are not available prospectively; they therefore serve as
@@ -855,10 +882,14 @@ To quantify update capacity beyond nominal rank, we compute the effective rank
 of the composed LoRA update matrices $BA$ after training at each generation.
 Following \citet{roy2007}, the effective rank is defined as
 \begin{equation}\label{eq:erank}
-    \mathrm{erank}(BA) =
-    \exp\!\left(-\sum_i \hat{\sigma}_i \log \hat{\sigma}_i\right),
+    \operatorname{erank}(\Delta W)
+    \;=\;
+    \exp\!\left(-\sum_{i} p_i \log p_i\right),
+    \qquad
+    p_i \;=\; \frac{\sigma_i}{\sum_{j} \sigma_j},
 \end{equation}
-where $\hat{\sigma}_i = \sigma_i / \sum_j \sigma_j$ are the normalized singular
+\rev{where $\sigma_i$ denotes the $i$-th singular value of $\Delta W$,
+$p_i \ge 0$, and $\sum_i p_i = 1$. The convention $0 \log 0 = 0$ applies.}
 values of $BA$. This measure captures how many singular directions carry
 substantial weight in the adapter update. A rank-$r$ adapter with uniformly
 distributed singular values reaches $\mathrm{erank}=r$, whereas an update
@@ -1033,8 +1064,8 @@ recursive fine-tuning setup to the experimental control used to address it.
 This inventory responds directly to the question of whether observed regime
 transitions might be attributable to confounds rather than to the manipulated
 axis. Controls marked with a dedicated experiment (G3, G4) are evaluated
-quantitatively in Section~\ref{sec:results}; the remaining entries rely on
-\rev{held constant within each experimental pipeline}.
+quantitatively in Section~\ref{sec:results}; the remaining factors are held
+constant within each experimental pipeline.
 
 
 \begin{table*}[tp]
@@ -1185,7 +1216,7 @@ Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
 256\textsuperscript{*} & 34.9M & 10 & \rev{\GoneFourMten\%}  & 87.57 & \rev{6} & \rev{Degradative} \\
 \bottomrule
 \end{tabular*}
-{\footnotesize \textsuperscript{*}Mean across \rev{six independent seeds (G1: seeds 15/137/256; G4: seeds 42/101/202); the three-seed G1 subset alone gives 79.1\%. See \S4.6.}}
+{\footnotesize \textsuperscript{*}Mean across \rev{six independent seeds (G1: seeds 15/137/256; G4: seeds 42/101/202); the three-seed G1 subset alone gives $\GoneMten\%$. See \S4.6.}}
 \end{table}
 
 The longitudinal trajectories (Fig.~\ref{fig:trajectories}) reveal distinct
@@ -1218,7 +1249,7 @@ $r=256$, retention declines progressively,
 % Inclinação pós-adaptação (Gen5→Gen10) é ~1.0 pp/gen para r=256.
 reaching \rev{$\GoneFourMten\%$} (mean across \rev{six seeds, G1$+$G4}) by Gen10 with no sign of
 stabilization within the observed horizon. The post-adaptation slope
-\rev{(Gen5 to Gen10, $N=6$) is $\GoneFourteenSlope$~pp per generation; the three-seed G1 subset alone gives $\GoneSlope$~pp/generation.}
+\rev{(Gen5 to Gen10, $N=6$) is $\GoneFourteenSlope$~pp per generation; the three-seed G1 subset alone gives $\GoneSlope$~pp/generation.}\footnote{\rev{Three Gen5$\to$Gen10 slopes for Qwen $r=256$: $\GoneFourteenSlope$\,pp/generation (G1+G4, $N=6$), $\GoneSlope$\,pp/generation (G1, $N=3$), and $\BsevenSlopeZero$\,pp/generation (dose--response 0\% arm, $N=5$). All slopes are endpoint differences, $(R(10)-R(5))/5$, on unrounded per-arm means.}}
 
 The dose-response curve (Fig.~\ref{fig:trajectories}b) reveals several
 additional features. First, \rev{retention is non-increasing across the six tested ranks, spanning more than an order of magnitude in trainable parameters (545K to 34.9M), with $r=4$ and $r=32$ evaluated at Gen~5 and the remainder at Gen~10; the comparison therefore spans two horizons and is reported as ordinal rather than as a single monotonic curve}. Second, the
@@ -1449,8 +1480,8 @@ Section~\ref{sec:limitations}.
   architectures.}\label{fig:cross_backbone}
 \end{figure}
 
-Having established that the regime structure generalizes across architectures,
-with the key visual features visible in Figure~\ref{fig:cross_backbone}: (i)~all
+The regime structure generalizes across architectures.
+Figure~\ref{fig:cross_backbone} shows three features: (i)~all
 three backbones exhibit a transition from blue (homeostatic) to red
 (degradative) markers as effective rank increases; (ii)~the transition occurs at
 substantially different x-axis positions across backbones; and (iii)~the Qwen
@@ -1718,14 +1749,14 @@ component of effective training pressure: whether reducing synthetic data
 exposure can shift the system back from a degradative to a near-homeostatic
 configuration. The primary evidence comes from the two pre-registered
 dose--response experiments described in Section~\ref{sec:intervention}:
-B7 on Qwen $r=256$ ($n=5$ paired seeds, $|K_0|=78$) and G2 on Gemma~3 $r=10$
+B7 on Qwen $r=256$ ($n=5$ paired seeds, $\Kcard=78$) and G2 on Gemma~3 $r=10$
 ($n=3$ paired seeds, $|K_{0,\mathrm{G2}}|=44$).
 
 \rev{Table~\ref{tab:interventions} reports $K_0$ retention and the gain over
 the 0\% within-pipeline baseline for each dose level on Qwen $r=256$.}
 
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
-\caption{\rev{Dose--response on Qwen $r=256$ ($|K_0|=78$, $n=5$ paired seeds per
+\caption{\rev{Dose--response on Qwen $r=256$ ($\Kcard=78$, $n=5$ paired seeds per
 dose). Retention and gain ($\Delta$) relative to the 0\% within-pipeline
 baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \begin{tabular*}{\tblwidth}{@{} llrrrl@{} }
@@ -1815,7 +1846,7 @@ pressure.}
   improvement ($\Delta$pp) over the respective unmodified baseline as the
   fraction of synthetic training examples removed increases from 0\% to 50\%.
   Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $|K_{0,\mathrm{G2}}|=44$).
-  Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $|K_0|=78$).
+  Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $\Kcard=78$).
   Shaded bands: 95\,\% confidence intervals from paired $t$-tests.
   The absolute gain is larger for Gemma~3 G2 ($|K_{0,\mathrm{G2}}|{=}44$)
   than for Qwen B7 ($|K_0|{=}78$); effective rank is not portable across
@@ -1846,9 +1877,8 @@ interprets these findings in the context of prior work.
 Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization of the base
 weights. To verify that the regime classification is not an artifact of NF4, we
 re-ran the same protocol on Qwen using standard bf16 precision and no base-weight
-quantization (G3, three seeds at each of $r=16$ and $r=256$). At $r=16$, bf16
-yields $97.4\%$ Gen10, a difference of $\GthreeDeltatenSixteen$~pp from the NF4
-baseline; at $r=256$ the difference is $\GthreeDeltatenTwoFiveSix$~pp.
+quantization (G3, three seeds at each of $r=16$ and $r=256$). At $r=16$, bf16 returned $76/78 = 97.4\%$ at Gen10 against $75/78 = 96.2\%$ for
+the single-seed NF4 sweep (Table~\ref{tab:rank_sweep}), a difference of one item ($+1.28$~pp; the two conditions also differ in seed count).; at $r=256$ the difference is $\GthreeDeltatenTwoFiveSix$~pp.
 The G1 (NF4) and G3 (bf16) runs produced identical aggregate retention counts
 for the matched seeds at $r=256$; run-level provenance and item-level outputs
 are audited separately before interpreting this agreement as evidence about
@@ -2296,10 +2326,10 @@ evaluated only under the present experimental conditions. Their effectiveness as
 monitoring signals in production settings, including reliability across domains
 and deployment conditions, has not been assessed. Regarding the $K_0$ metric
 itself, substring matching could in principle confound verbosity-induced format
-changes with genuine knowledge loss. \rev{The C2 intervention from the exploratory pilot (which
-constrains response format to short answers) improves retention without fully
-restoring baseline levels, indicating that the degradation measured by $K_0$
-reflects actual factual displacement rather than format masking alone.}
+changes with genuine knowledge loss. The
+strict exact-match re-evaluation reported in supplementary Table~S2 addresses
+this directly: absolute retention levels are lower under the strict scorer,
+but the direction of every regime classification is unchanged.
 
 \rev{The retention metric $K_0$ uses bidirectional substring matching, which
 is intentionally permissive: a generated response counts as correct if it

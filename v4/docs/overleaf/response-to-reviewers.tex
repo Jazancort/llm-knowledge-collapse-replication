@@ -117,10 +117,11 @@ Corresponding Author
 \item Reviewer comments are reproduced \textcolor{rccolor}{\itshape in
       green italics}, verbatim, including the table and section numbers
       of the \emph{original} submission.
-\item Text newly added to the manuscript is quoted
-      \newtext{in blue, between quotation marks}, so that every claim in
-      this response can be located by text search in the revised
-      manuscript.
+\item Text newly added to the manuscript appears \newtext{in blue}.
+      Where a passage is quoted verbatim, it appears between
+      ``quotation marks'' and can be located by text search in the
+      revised manuscript. Where the revision is summarised rather than
+      quoted, the relevant section is cited instead.
 \item Locations are given as section and page of the revised manuscript.
       Where the revision renumbered a table or section, both numbers are
       given at first mention, e.g.\ \renum{Table~7}{Table~9}.
@@ -353,17 +354,17 @@ manuscript so that each is stated explicitly as a property of the evidence.
 
 \textbf{Reservation~1: ETP is not yet a transferable quantitative predictor.}
 ETP is now described as an operational experimental framework, not a
-validated predictor. \newtext{``The ETP index $\Pi$ is an exploratory
+validated predictor. \newtext{The ETP index $\Pi$ is an exploratory
 post-training summary; it is not available prospectively and has not been
 validated as a transferable quantitative predictor across architectures or
-datasets.''} This sentence appears in Section~3.5, the Abstract, and~\S7.
+datasets.} This sentence appears in Section~3.5, the Abstract, and~\S7.
 
 \textbf{Reservation~2: The main metric uses one short-answer dataset.}
 Strict exact-match re-scoring of all saved predictions was added
 (supplementary Table~S2). The evaluation scope is now bounded explicitly:
-\newtext{``The evaluation is conducted on short-answer factual questions
+\newtext{The evaluation is conducted on short-answer factual questions
 (TriviaQA); results for longer answers, multi-hop questions, or other
-domains constitute an open empirical question.''}
+domains constitute an open empirical question.}
 
 \textbf{Reservation~3: Several analyses are single-seed.}
 The seed policy is now explicit at the level of individual claims
@@ -375,46 +376,6 @@ categories are never pooled.
 The single-seed C1/C5 pilot has been replaced by two pre-registered
 dose--response experiments (B7: Qwen, five seeds; G2: Gemma~3, three seeds),
 each at four dose levels within a single consistent evaluation pipeline.
-
-First, effective training pressure is no longer presented as a
-predictor. It is introduced as an operational experimental framework
-that organises three independently manipulated variables, and the
-operational index $\Pi$ is labeled an exploratory post-training summary
-wherever it appears. Second, the single-dataset limitation is retained,
-but we add a strict exact-match re-scoring of all saved predictions to
-show that the regime classifications do not depend on the permissive
-matching criterion. Third, the seed policy is now explicit at the level
-of individual claims: headline conditions use three or five seeds, six
-for the pooled $r=256$ estimate; intermediate ablations use one seed and
-are labeled descriptive; the two classes are never pooled. Fourth, the
-exposure axis is no longer shown for one Qwen condition: the revision
-replaces the single-seed pilot with two pre-registered dose--response
-experiments, one per backbone, each with multiple paired seeds at every
-dose level.
-
-The one reservation we cannot remove is the first. Prospective
-calibration on an unseen backbone was not performed, and we now say so
-in those words.
-
-\arhead{Author action:}
-\begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{ETP reframed (Section~3.5).}
-      \newtext{``ETP index $\Pi$ is an exploratory post-training
-      summary; not available prospectively; not validated as a
-      transferable predictor.''} Added to Section~3.5, Abstract, and~\S7.
-\item \textbf{Strict re-scoring (supplementary Table~S2).}
-      All saved predictions re-scored under strict exact-match.
-      Regime classifications consistent under both scorers.
-\item \textbf{Seed policy formalized (Section~3.7).}
-      Multi-seed confirmatory versus single-seed descriptive
-      distinguished and applied consistently.
-\item \textbf{B7 and G2 replace C1/C5 (Section~4.5).}
-      Pre-registered dose--response with statistics for both backbones.
-\end{enumerate}
-
-\msloc{\S3.5; \S3.8; \S3.7 and \S4.5, p17;
-\S6; supplementary Table~S2.}
-
 
 \rconcern{Reviewer \#1, Concern \#1}{Prospective calibration of ETP}{How can effective training pressure be quantitatively calibrated and prospectively tested on an unseen backbone or dataset?}
 
@@ -453,10 +414,10 @@ training and directly manipulated in the factorial design.
 ETP-observed variables are effective rank and mean absolute weight drift
 $d(t)$; these are measured after training as diagnostic proxies for how
 much pressure was actually applied. The text now states:
-\newtext{``The ETP index $\Pi$ is an exploratory post-training summary
+\newtext{The ETP index $\Pi$ is an exploratory post-training summary
 of the variables manipulated in this study. It is not available
 prospectively and has not been validated as a transferable quantitative
-predictor across architectures or datasets.''} This sentence appears in
+predictor across architectures or datasets.} This sentence appears in
 Section~3.5, is restated in the abstract, and is reflected in the
 conclusion.
 
@@ -491,27 +452,27 @@ of regimes, not as a confirmatory prospective test.
 \item \textbf{ETP redefined (Section~3.5).}
       The distinction between ETP-design and ETP-observed variables was
       formalized. The following sentence was added to Section~3.5:
-      \newtext{``The ETP index $\Pi$ is an exploratory post-training
+      \newtext{The ETP index $\Pi$ is an exploratory post-training
       summary; it is not available prospectively and has not been
       validated as a transferable quantitative predictor across
-      architectures or datasets.''}
+      architectures or datasets.}
 \item \textbf{Abstract and conclusion qualified (Abstract;
       Section~7).}
-      The abstract now bounds the ETP claim: \newtext{``We identify
+      The abstract now bounds the ETP claim: \newtext{We identify
       effective training pressure as an organizing principle for the
       observed regime structure; this framework is not yet a transferable
       quantitative predictor, as cross-architecture normalization did not
-      align the observed boundaries.''} The conclusion repeats this
+      align the observed boundaries.} The conclusion repeats this
       qualification.
 \item \textbf{Prospective calibration protocol added (Section~6).}
       A five-step protocol specifying the requirements for a genuine
       prospective test on an unseen backbone was added to Section~6 as
       a direction for future work (see the five-step list above).
 \item \textbf{G5 interpretation qualified (Section~4.6).}
-      The G5 result is now described as \newtext{``exploratory evidence
+      The G5 result is now described as \newtext{exploratory evidence
       for the ordering of regime boundaries, not a confirmatory
       prospective test: no threshold was pre-specified and the backbone
-      was not held out from the design.''} The classification discrepancy
+      was not held out from the design.} The classification discrepancy
       (high-pressure cell predicted Degradative, returned Bounded) is
       reported explicitly.
 \end{enumerate}
@@ -543,26 +504,26 @@ protocol differ across those groups, and we do not use that comparison as
 a rank-only hypothesis test. The bf16 check is an implementation
 consistency check, not a complete causal account of the observed
 trajectories. The revised manuscript states explicitly:
-\newtext{``The bf16 comparison (G3) establishes that the rank contrast
+\newtext{The bf16 comparison (G3) establishes that the rank contrast
 is directionally consistent under quantization-matched conditions
 ($p=0.25$, $N=3$ pairs); it does not isolate the rank effect from
-quantization nor establish a statistically conclusive result.''}
+quantization nor establish a statistically conclusive result.}
 
 \textbf{Optimizer state.}
 Under the reported protocol, a fresh optimizer is instantiated for each
 recursive generation; optimizer state is therefore not carried across
 generations. We have made this explicit in Section~3.1 with the sentence:
-\newtext{``A fresh adapter and optimizer are initialized at the start
-of every generation; no optimizer state is carried across generations.''}
+\newtext{A fresh adapter and optimizer are initialized at the start
+of every generation; no optimizer state is carried across generations.}
 
 \textbf{Data order.}
 In Group~G4, both the random seed and the data order changed relative
 to Group~G1. The Generation~10 comparison ($N=3+3$, permutation
 $p=0.70$) consequently does not isolate a data-order effect, and the
 non-significant result does not prove that order has no effect. We have
-added this caveat explicitly: \newtext{``G4 changes both seed and data
+added this caveat explicitly: \newtext{G4 changes both seed and data
 order simultaneously; the $p=0.70$ permutation result does not isolate
-either variable independently.''}
+either variable independently.}
 
 \textbf{Model-specific dynamics.}
 For Gemma~3, the $r=4$ versus $r=16$ contrast involves five independent
@@ -572,9 +533,9 @@ where available) yields $p=0.0625$. We report both results with their
 differing interpretations: the permutation test suggests the difference
 exceeds chance under independence, while the sign-flip result reflects
 the uncertainty from only three paired seeds. The revised manuscript
-states: \newtext{``We report both $p$-values because the pairing status
+states: \newtext{We report both $p$-values because the pairing status
 is not fully confirmed across conditions; the two tests bracket the
-inferential uncertainty without overclaiming in either direction.''}
+inferential uncertainty without overclaiming in either direction.}
 
 \textbf{Summary of what remains confounded.}
 The revision includes a dedicated paragraph in Section~4.2.1 that
@@ -582,17 +543,17 @@ summarizes which contrasts isolate individual axes, which remain
 partially confounded, and what additional experiments (e.g., a design
 that varies rank alone while holding quantization, optimizer, data order,
 and seed fixed simultaneously) would be required to draw fully causal
-conclusions. We have added: \newtext{``The available controls establish
+conclusions. We have added: \newtext{The available controls establish
 directional consistency across multiple configurations; they do not
 permit fully causal attribution of the observed effects to individual
-pressure axes in isolation.''}
+pressure axes in isolation.}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
 \item \textbf{Optimizer state documented (Section~3.1).}
-      The sentence \newtext{``A fresh adapter and optimizer are
+      The sentence \newtext{A fresh adapter and optimizer are
       initialized at the start of every generation; no optimizer state
-      is carried across generations''} was added to Section~3.1.
+      is carried across generations} was added to Section~3.1.
 \item \textbf{Quantization check scoped (Section~4.2.1).}
       The bf16 check is now described as an implementation consistency
       check, not a causal isolation. The $p$-value ($p=0.25$, $N=3$)
@@ -605,17 +566,6 @@ pressure axes in isolation.''}
       A paragraph listing the available controls, their limitations,
       and the experiments required for fully causal inference was added
       to Section~4.2.1.
-\end{enumerate}eed-assignment assumptions rather than treating
-either test as universally applicable.
-
-\arhead{Author action:}
-We separated design variables from post-training diagnostics, documented
-the controls and their limitations, and distinguished the paired G3
-comparison from the descriptive cross-protocol Qwen contrast.
-
-\msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.1 (rank sweep); Section~4.2.1
-(Qwen comparisons); Section~4.3.1 (Gemma~3); Section~4.6 (G3 and G4).}
-
 \rconcern{Reviewer \#1, Concern \#3}{External validity of the evaluation}{Do the conclusions hold for longer answers, multi-hop questions, other domains, and larger factual evaluation sets?}
 
 \arhead{Author response:}
@@ -636,10 +586,10 @@ the assessment of sampling variability and provide more stable retention
 estimates, but expanding the evaluation set alone would not change the
 composition of the synthetic training stream and would not address
 generalization to other domains or answer formats. The revised manuscript
-states: \newtext{``The evaluation set ($|K_0|=78$ for Qwen; $|K_0|=46$
+states: \newtext{The evaluation set ($|K_0|=78$ for Qwen; $|K_0|=46$
 for Gemma~3) is small by NLP evaluation standards; results should be
 interpreted as regime-level tendencies rather than precise quantitative
-estimates.''}
+estimates.}
 
 \textbf{Answer format and length.}
 The primary scorer uses bidirectional substring matching to accommodate
@@ -649,31 +599,31 @@ exact-match re-evaluation of all saved predictions. Absolute retention
 scores are lower under strict scoring, while the qualitative regime
 classifications are consistent across both scorers. This sensitivity
 check is reported in supplementary Table~S2. The revised manuscript adds:
-\newtext{``Strict exact-match re-scoring of all saved predictions confirms
+\newtext{Strict exact-match re-scoring of all saved predictions confirms
 that regime classifications are not an artifact of the permissive substring
-criterion (supplementary Table~S2).''}
+criterion (supplementary Table~S2).}
 
 \textbf{Domain and task generalization.}
 The conclusions are explicitly scoped to short-answer factual recall on
 TriviaQA. Whether the observed regime structure and dose--response effects
 generalize to longer answers, multi-hop reasoning, or other domains is an
 open empirical question that the current experiments do not address.
-The revised manuscript adds to Section~6: \newtext{``The evaluation is
+The revised manuscript adds to Section~6: \newtext{The evaluation is
 restricted to short-answer factual questions; results for longer-form
 generation, multi-hop reasoning, code, or other domains constitute an
-open empirical question and are outside the scope of this study.''}
+open empirical question and are outside the scope of this study.}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
 \item \textbf{Evaluation-set size qualified (Section~3.2).}
-      The sentence \newtext{``Results should be interpreted as
+      The sentence \newtext{Results should be interpreted as
       regime-level tendencies rather than precise quantitative
-      estimates''} was added to Section~3.2.
+      estimates} was added to Section~3.2.
 \item \textbf{Strict re-scoring added (supplementary Table~S2).}
       All saved model predictions were re-scored under strict
       exact-match. Results are tabulated in supplementary Table~S2.
-      The main text states: \newtext{``Regime classifications are
-      consistent under strict exact-match scoring (Table~S2).''}
+      The main text states: \newtext{Regime classifications are
+      consistent under strict exact-match scoring (Table~S2).}
 \item \textbf{Domain scope bounded (Section~6).}
       A sentence explicitly limiting the conclusions to TriviaQA
       short-answer factual questions was added to Section~6.
@@ -682,17 +632,22 @@ open empirical question and are outside the scope of this study.''}
 \msloc{Section~3.2 (evaluation protocol); supplementary Table~S2
 (strict scoring); Section~6 (scope and limitations).}
 
+\end{enumerate}
+
+\msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.1 (rank sweep); Section~4.2.1
+(Qwen comparisons); Section~4.3.1 (Gemma~3); Section~4.6 (G3 and G4).}
+
 \rconcern{Reviewer \#1, Concern \#4}{Exposure reduction and model-dependent responses}{Why does the five-percent exposure reduction stabilize Qwen but not Gemma~3, and does this generalize across ranks and seeds?}
 
 \arhead{Author response:}
 We sincerely thank the reviewer for this critical observation. This concern directly exposed a substantive methodological problem in the original manuscript that we had failed to identify ourselves: the five-percent exposure pilot (C1/C5) and the pre-registered dose--response experiments (B7, G2) used different evaluation pipelines and are therefore not directly comparable. The reviewer's question prompted us to withdraw the original C1/C5 inference, to replace it with a properly paired dose--response analysis, and to report the backbone-dependent responses with formal statistical tests and confidence intervals.
 
 \textbf{The original comparison was invalid.}
-C1 and C5 followed different evaluation pipelines, including differences in $K_0$ construction and data loading. The previously reported $9.0$- and $9.4$-percentage-point intervention gains cannot therefore serve as evidence of stabilization. Furthermore, the pilot used single-seed evaluations and compared conditions that differed in pipeline construction, not only in the dose level. We do not defend this comparison. The revised manuscript states: \newtext{``The C1/C5 pilot used a different evaluation pipeline from the pre-registered B7 and G2 experiments; the previously reported gains are withdrawn and replaced by the paired dose--response analysis.''}
+C1 and C5 followed different evaluation pipelines, including differences in $K_0$ construction and data loading. The previously reported $9.0$- and $9.4$-percentage-point intervention gains cannot therefore serve as evidence of stabilization. Furthermore, the pilot used single-seed evaluations and compared conditions that differed in pipeline construction, not only in the dose level. We do not defend this comparison. The revised manuscript states: \newtext{The C1/C5 pilot used a different evaluation pipeline from the pre-registered B7 and G2 experiments; the previously reported gains are withdrawn and replaced by the paired dose--response analysis.}
 
-\medskip\noindent\textbf{The Qwen dose--response evidence (B7).}The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=0.160$), $+4.9$\,pp at 25\% ($p=0.005$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $-0.15$\,pp/generation, compared with $-1.13$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{``At 50\% removal (B7, five paired seeds), Generation~10 retention increased by $+9.2$\,pp (95\%~CI $[6.9,11.6]$, $p{<}0.001$) and the Generation~5--10 slope was attenuated from $-1.13$ to $-0.15$\,pp/generation.''}
+\medskip\noindent\textbf{The Qwen dose--response evidence (B7).}The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=0.160$), $+4.9$\,pp at 25\% ($p=0.005$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $-0.15$\,pp/generation, compared with $-1.13$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{At 50\% removal (B7, five paired seeds), Generation~10 retention increased by $+9.2$\,pp (95\%~CI $[6.9,11.6]$, $p{<}0.001$) and the Generation~5--10 slope was attenuated from $-1.13$ to $-0.15$\,pp/generation.}
 
-\medskip\noindent\textbf{The Gemma~3 dose--response evidence (G2).}The Gemma~3 response was different in kind. In Experiment~G2, 50\% removal at $r=10$ raised Generation~10 retention by $\GtwoDeltatenFifty$\,pp across three paired seeds (95\%~CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$), with the 10\% and 25\% doses giving $\GtwoDeltatenTen$ and $\GtwoDeltatenTfive$\,pp, respectively. The Generation~5--10 slope was $\GtwoSlopeFifty$\,pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, equal within rounding. The intervention improved endpoint retention without demonstrably slowing later loss. The revised manuscript adds: \newtext{``On Gemma~3~1B at $r=10$, 50\% removal improved Generation~10 retention by $\GtwoDeltatenFifty$\,pp but did not reduce the observed rate of loss ($\GtwoSlopeFifty$ versus $\GtwoSlopeZero$\,pp/generation).''}
+\medskip\noindent\textbf{The Gemma~3 dose--response evidence (G2).}The Gemma~3 response was different in kind. In Experiment~G2, 50\% removal at $r=10$ raised Generation~10 retention by $\GtwoDeltatenFifty$\,pp across three paired seeds (95\%~CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$), with the 10\% and 25\% doses giving $\GtwoDeltatenTen$ and $\GtwoDeltatenTfive$\,pp, respectively. The Generation~5--10 slope was $\GtwoSlopeFifty$\,pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, equal within rounding. The intervention improved endpoint retention without demonstrably slowing later loss. The revised manuscript adds: \newtext{On Gemma~3~1B at $r=10$, 50\% removal improved Generation~10 retention by $\GtwoDeltatenFifty$\,pp but did not reduce the observed rate of loss ($\GtwoSlopeFifty$ versus $\GtwoSlopeZero$\,pp/generation).}
 
 \textbf{Why the responses differ between backbones.}
 The reviewer asks whether the dose--response generalizes across ranks and seeds. For Qwen, it does: the B7 experiment uses five paired seeds at $r=256$ and shows a graded, statistically significant response. For Gemma~3, the G2 experiment uses three paired seeds at $r=10$, which is already in the degradative regime for that backbone, and shows endpoint improvement without rate reduction. Whether the same pattern holds at other ranks or with more seeds is an open empirical question. The mechanism (whether the effect is driven by update budget reduction or by data composition change) was not established; a steps-matched comparison would be required to disentangle the two.
@@ -726,37 +681,6 @@ $p=\GtwoPtenFifty$); the 10\% and 25\% doses gave $\GtwoDeltatenTen$ and
 $\GtwoDeltatenTfive$~points respectively. The Generation~5--10 slope was
 $\GtwoSlopeFifty$~pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, equal within rounding. The
 intervention improved endpoint retention without demonstrably slowing later loss.
-
-h arms. The intervention
-improved endpoint retention without demonstrably slowing later loss.
-Neither experiment identifies the mechanism or establishes that the
-effect generalizes across untested ranks. Similar point estimates for
-50\% exposure removal and a halved learning rate are not presented as
-formal equivalence.
-
-\arhead{Author action:}
-\begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{C1/C5 comparison withdrawn (Section~4.5).}
-      The sentence describing the C1/C5 gains was replaced with:
-      \newtext{``The C1/C5 pilot used a different evaluation pipeline;
-      its results are retained for transparency but are not used      in any quantitative inference.''}
-\item \textbf{B7 Qwen dose--response with statistics (Section~4.5).}
-      Paired $t$-tests and 95\% CIs added at all four dose levels.
-      Slope comparison ($-0.15$ versus $-1.13$\,pp/generation at
-      50\% versus 0\% removal) stated explicitly.
-\item \textbf{G2 Gemma~3 dose--response with statistics (Section~4.5).}
-      Results reported with endpoint gain, CI, $p$-value, and
-      explicit note that the rate of loss was not reduced.
-\item \textbf{Mechanistic caveat (Section~6).}
-      Sentence added: whether the effect is driven by update-budget
-      reduction or data-composition change was not established;
-      a steps-matched comparison would be required.
-\end{enumerate}
-
-\msloc{Section~4.5 (dose--response experiments B7 and G2); Section~4.6
-(learning-rate comparison); Section~6 (mechanistic and generalization
-limitations).}
-
 \rconcern{Reviewer \#1, Concern \#5}{Scope of the reproducibility package}{What complete code, checkpoints, prompts, seeds, and raw outputs will support independent reproduction?}
 
 \arhead{Author response:}
@@ -789,10 +713,10 @@ under their respective licenses. The archive therefore supports
 replication of the statistical analysis and figure generation from
 pre-computed per-seed results, but not a byte-for-byte reconstruction
 of every training run. The revised Appendix~A states explicitly:
-\newtext{``The archive permits reproduction of all reported statistics
+\newtext{The archive permits reproduction of all reported statistics
 and figures from the consolidated per-seed results files. It does not
 include raw predictions, trained adapter checkpoints, or base-model
-weights, which must be obtained separately.''}
+weights, which must be obtained separately.}
 
 \textbf{Version discipline.}
 Scripts introduced or revised after the initial release must be
@@ -809,9 +733,9 @@ version for each.
       evaluation protocol) and what it does not contain (raw predictions,
       checkpoints, base weights), with the reason for each omission.
 \item \textbf{Archive contents cited (Appendix~A).}
-      The sentence \newtext{``The archive permits reproduction of all
+      The sentence \newtext{The archive permits reproduction of all
       reported statistics and figures from the consolidated per-seed
-      results files''} was added as the opening of Appendix~A.
+      results files} was added as the opening of Appendix~A.
 \item \textbf{Version discipline documented (Appendix~A).}
       Each script in the archive is now identified by the release
       version in which it first appears, distinguishing v1.0.3
@@ -860,11 +784,11 @@ exposure; and (iii)~the empirical finding that the regime boundary
 location is backbone-dependent and is not reconciled by any
 architectural normalization we tested. We do not claim to have derived
 a transferable quantitative predictor. The text now states explicitly:
-\newtext{``The effective training pressure framework organizes the
+\newtext{The effective training pressure framework organizes the
 three independently manipulated axes in this study. It is not a new
 quantitative measure and does not produce a transferable predictor;
 the cross-architecture normalization did not align the observed
-boundaries, and we report this failure rather than minimizing it.''}
+boundaries, and we report this failure rather than minimizing it.}
 
 \textbf{On the cross-architecture claims and Gemma~4 E2B.}
 The reviewer correctly identifies that Gemma~4~E2B~IT lacks a citation
@@ -875,17 +799,17 @@ Gemma~3n~E2B in both the text and the conditions table (Table~2).
 Because Gemma~4~E2B~IT was evaluated with a single seed, its results
 are labeled supportive validation and excluded from every threshold
 estimate and from all multi-seed statistical analyses. The revised
-manuscript states: \newtext{``Gemma~4~E2B~IT (single seed; supportive
+manuscript states: \newtext{Gemma~4~E2B~IT (single seed; supportive
 validation only) is evaluated for regime-level consistency but excluded
 from threshold estimates and multi-seed statistical comparisons; see
-Reference~[41] for the model description.''}
+Reference~[41] for the model description.}
 
 \textbf{On the scale limitation.}
 The restriction to 1--2\,B parameter models is acknowledged as the
-first limitation in Section~6: \newtext{``All experiments use
+first limitation in Section~6: \newtext{All experiments use
 1--2\,B parameter models; the regime structure and pressure thresholds
 at larger scales (7B+) are not established and constitute the most
-important direction for future work.''}
+important direction for future work.}
 
 \textbf{On the ``confirms'' language.}
 The reviewer's objection to the word ``confirms'' in one place prompted
@@ -937,9 +861,9 @@ and the term is introduced in full (``effective training pressure'') at
 its first use in Section~1. The abbreviation is then formally defined
 in Section~3.5, where it is needed for the compound labels ETP-design
 and ETP-observed. The revised Figure~1 caption states:
-\newtext{``Stage 3: Pressure manipulation along five axes (nominal
+\newtext{Stage 3: Pressure manipulation along five axes (nominal
 rank, learning rate, method, module topology, and synthetic-data dose);
-see Section~3.5 for the effective training pressure (ETP) framework.''}
+see Section~3.5 for the effective training pressure (ETP) framework.}
 
 \textbf{Unexpanded abbreviations.}
 All abbreviations listed by the reviewer have been expanded at first
@@ -955,9 +879,9 @@ These three metrics appeared in the original Figure~1 but are not
 computed in the reported experiments. They have been removed from
 Figure~1 entirely and replaced with the metrics that are actually
 computed: Distinct-$n$, MTLD, and stopword ratio. The revised
-Figure~1 caption now lists: \newtext{``Stage 4: Per-generation
+Figure~1 caption now lists: \newtext{Stage 4: Per-generation
 evaluation of factual retention ($K_0$), effective rank, response
-length, Distinct-$n$, MTLD, and stopword ratio.''}
+length, Distinct-$n$, MTLD, and stopword ratio.}
 
 \textbf{$K_0$ dual use.}
 The symbol $K_0$ was used both as a set (the questions answered
@@ -993,7 +917,8 @@ with $\theta_i^{(0)}$ denoting the frozen base-model value.
 
 \textbf{$r \in \{4,10,12,14,16\}$ garbling.}
 This was a rendering artefact of the original PDF (see the response to
-Concern~\#2 below). The set notation is now correct in the revised PDF.notes the evaluation horizon, $\mathrm{D1}_t$ denotes Distinct-1 at
+Concern~\#2 below). The set notation is now correct in the revised PDF.
+The evaluation horizon, $\mathrm{D1}_t$ denotes Distinct-1 at
 generation~$t$, and $\mathrm{D1}_0$ denotes its generation-0 value; the comma
 distinguishes the latter from the ambiguous $D_{10}$. We define
 $\Delta I=\mathrm{Instability}(T)-\mathrm{Instability}(1)$, where
@@ -1249,22 +1174,22 @@ archived in the replication package.
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
 \item \textbf{Qwen threshold (a) corrected (Section~5.1).}
       ``Up to effective rank~150'' deleted. Two distinct boundaries stated:
-      \newtext{``homeostatic-to-bounded: effective ranks 29.5--50.2;
-      bounded-to-degradative: 50.2--87.6.''} Corrected systematically,
+      \newtext{homeostatic-to-bounded: effective ranks 29.5--50.2;
+      bounded-to-degradative: 50.2--87.6.} Corrected systematically,
       not selectively.
 \item \textbf{Regime labels (b, c) corrected.}
-      $r=128$: \newtext{``transition-zone configuration ($r=128$)''};
-      $r=256$: \newtext{``lowest-pressure degradative configuration tested
-      ($r=256$)''} at every occurrence.
+      $r=128$: \newtext{transition-zone configuration ($r=128$)};
+      $r=256$: \newtext{lowest-pressure degradative configuration tested
+      ($r=256$)} at every occurrence.
 \item \textbf{Gemma~3 range (d) corrected (Section~5.2).}
-      \newtext{``$r \geq 10$ on Gemma~3''} (was ``$r \geq 16$''),
+      \newtext{$r \geq 10$ on Gemma~3} (was ``$r \geq 16$''),
       consistent with Table~4.
 \item \textbf{Seed count (e) corrected and $N$ column added.}
-      Abstract: \newtext{``Most headline conditions use three to five
-      seeds.''} $N$ column added to rank-sweep and dose--response tables;
+      Abstract: \newtext{Most headline conditions use three to five
+      seeds.} $N$ column added to rank-sweep and dose--response tables;
       remaining tables state $N$ in a footnote.
 \item \textbf{``Confirms'' (f) replaced; non-monotonic values reported.}
-      \newtext{``is consistent with''} in Contribution~2 and \S4.3.3;
+      \newtext{is consistent with} in Contribution~2 and \S4.3.3;
       non-monotonic values stated explicitly.
 \item \textbf{Token/example ambiguity (g) removed.}
       All dose specifications restricted to fractions of training examples;
@@ -1413,25 +1338,25 @@ generalize to other settings}.
       Exact permutation and sign-flip tests for rank contrasts; paired
       $t$-tests with 95\,\% CIs for all dose levels; Hedges' $g$ for the
       Gemma~3 anchor contrast. Each reported with $N$ and pairing
-      assumption stated. \newtext{``We report exact $p$-values regardless
+      assumption stated. \newtext{We report exact $p$-values regardless
       of conventional thresholds; small $N$ limits power even when
-      direction is fully consistent across all seeds.''}
+      direction is fully consistent across all seeds.}
 \item \textbf{ETP reframed (b) (Section~3.5).}
       Restructured around the design/observed distinction.
-      \newtext{``ETP is not a new quantitative measure; it is an
-      organizational label for three independently manipulated axes.''}
+      \newtext{ETP is not a new quantitative measure; it is an
+      organizational label for three independently manipulated axes.}
 \item \textbf{Calibration procedure added (b) (Section~6).}
       Five-step per-backbone calibration proposed as the alternative
       to universal normalization, with cost stated.
 \item \textbf{Contribution statement rewritten (Section~1 and~5.1).}
       Claims the factorial design and the evidence, not a measure.
-\item \textbf{Gemma~4 cited (c) (Section~3.3 and Table~2).}
+\item \textbf{Gemma~4 cited (e) (Section~3.3 and Table~2).}
       Cited as Ref.~[41], distinguished from Gemma~3n~E2B, labeled
       supportive validation (single seed; excluded from multi-seed
       analyses).
-\item \textbf{``Sharp''/``abrupt'' replaced (d) (throughout).}
-      All nine occurrences replaced with
-      \newtext{``threshold-like transition within the tested grid''};
+\item \textbf{``Sharp''/``abrupt'' replaced (f) (throughout).}
+      All nine occurrences of \textit{sharp} have been replaced with
+      \newtext{threshold-like transition within the tested grid};
       non-adjacent-dose argument withdrawn; grid spacing quoted.
 \end{enumerate}
 
@@ -1529,8 +1454,8 @@ field. \texttt{cas-refs.bib} is included in the submission package. \\
       Added as Ref.~[41]: \newtext{Gemma~Team, ``Gemma~4 Technical
       Report,'' arXiv:2607.02770, 2026.}
 \item \textbf{Reference~[7] qualified (d).}
-      Preprint status declared; \newtext{``(preprint; not peer-reviewed
-      at time of writing)''} added in text.
+      Preprint status declared; \newtext{(preprint; not peer-reviewed
+      at time of writing)} added in text.
 \item \textbf{Bibliography audited (e).}
       Every entry checked against published record for venue, year,
       volume, pages, and identifier. Three additional corrections found
