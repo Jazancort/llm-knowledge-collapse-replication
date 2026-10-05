@@ -634,7 +634,7 @@ temporary instability, and bounded oscillation even when aggregate retention is
 similar.
 
 Because the same normalization and alias-matching procedure is applied at every
-generation and to every condition within a backbone, our analysis emphasizes
+generation and to \rev{every condition within each experimental pipeline}, our analysis emphasizes
 relative retention dynamics rather than absolute TriviaQA benchmark performance.
 We report K0 retention as both a fraction and a percentage (e.g.,
 73/78 = 93.6\%). For multi-seed experiments, we report per-seed values and
@@ -739,7 +739,7 @@ components.}\label{tab:axes}
 \midrule
 1 & Capacity & QLoRA rank $r$ & $\{4, 16, 32, 64, 128, 256\}$ \\
 2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\
-3 & Method & QLoRA vs FFT & \rev{Exploratory comparison at similar magnitude}, $N{=}3$ \\
+3 & Method & QLoRA vs FFT & \rev{Exploratory method comparison (no perturbation-magnitude matching)}, $N{=}3$ \\
 4 & Topology & Target modules & Attention vs full-linear \\
 5 & Exposure & Training examples & \rev{0\%, 10\%, 25\%, 50\% removed (paired dose--response; B7/Qwen $r{=}256$, $n{=}5$; G2/Gemma~3 $r{=}10$, $n{=}3$)} \\
 \bottomrule
@@ -1008,8 +1008,7 @@ quantitatively in Section~\ref{sec:results}; the remaining entries rely on
 \caption{\rev{Sources of variation in the recursive fine-tuning
 protocol and the corresponding experimental control. G3 and G4 refer to
 dedicated within-session ablations (Section~\ref{sec:results}). ``Held
-constant'' denotes that the factor is fixed across all conditions for a given
-backbone.}}
+constant'' denotes that the factor is \rev{fixed within each experimental pipeline}.}}
 \label{tab:controls}
 \small
 \setlength{\tabcolsep}{4pt}
@@ -1449,8 +1448,7 @@ adapter or rank constraint.
 \begin{table}[width=.95\linewidth,cols=4,pos=htbp]
 \caption{FFT learning-rate sweep on Qwen~2.5~1.5B (seed~15, Gen3). Perturbation
 proxy is the mean absolute weight drift relative to the original model for FFT,
-and $\|BA\|_F$ for QLoRA. These are operationally comparable but not
-geometrically identical measures. QLoRA~$r=16$ is included as a reference
+and $\|BA\|_F$ for QLoRA. \rev{These measure different geometric properties and are not perturbation-matched; this is an exploratory method comparison.} QLoRA~$r=16$ is included as a reference
 point.}\label{tab:fft_sweep}
 \begin{tabular*}{\tblwidth}{@{} llll@{} }
 \toprule
@@ -1963,7 +1961,7 @@ experiments.}\label{tab:evidence}
 \toprule
 \textbf{Observation} & \textbf{Supporting evidence} \\
 \midrule
-Rank governs transition & Rank sweep, 6 values, $N{=}3$ at $r{=}16$, $r{=}256$ \\
+Rank governs transition & \rev{Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}1$ at $r{=}16$,$32$,$64$,$128$ (single-seed); $N{=}3$ bf16 control (G3) at $r{=}16$,$r{=}256$} \\
 \addlinespace
 Magnitude governs transition & FFT LR sweep, 4 values \\
 \addlinespace
@@ -2146,7 +2144,7 @@ recursive stability. For applications where recursive synthetic data reuse is
 anticipated, selecting a rank that places the system well below the observed
 pressure threshold is a practical strategy for maintaining recursive stability.
 On Qwen~2.5~1.5B, ranks at or below 64 (effective rank $\leq 30$) remained
-stable through ten recursive generations with no sign of drift. Although
+\rev{stable through the evaluated horizon ($r=4$,$32$: Gen5; others: Gen10) with no sign of drift.} Although
 the numerical threshold is backbone-dependent, the underlying principle appears
 consistent across the evaluated models: lower effective training pressure is
 associated with greater recursive stability in the tested configurations. When
@@ -2205,8 +2203,8 @@ protocol (B7/G2) was not applied to Gemma~3 $r=16$; whether graded doses
 (10--50\%) would alter this outcome remains untested.}
 While update-capacity and
 perturbation-magnitude effects generalized across the evaluated backbones,
-exposure sensitivity at the tested magnitude remains demonstrated only for
-the Qwen \rev{lowest-pressure degradative configuration tested}. This asymmetry reinforces that effective
+exposure sensitivity at the tested magnitude is demonstrated for B7 (Qwen $r=256$) and G2 (Gemma~3 $r=10$); transferability to other configurations remains
+uninvestigated. This asymmetry reinforces that effective
 training pressure should not be interpreted as implying identical sensitivity
 along all axes across architectures.
 
@@ -2286,14 +2284,13 @@ its predictive utility for new architectures.
 
 The perturbation-matching comparison between QLoRA and FFT relies on approximate
 proxies ($\|BA\|_F$ for QLoRA versus mean absolute weight drift for FFT). These
-quantities are operationally comparable but not geometrically identical,
-introducing residual confounding in the method comparison. Additionally,
+\rev{quantities measure different geometric properties; this comparison between methods is exploratory and not perturbation-magnitude matched.} Additionally,
 \rev{Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization. The G3 ablation re-ran the same protocol in bf16 (no base-weight quantization) and produced identical regime classifications, though a full causal conclusion awaits per-item audit. Although}
 the quantized base remains static across generations and adapters are trained in
 higher precision, the interaction between quantization error and high-rank
 adapter updates has not been isolated. \rev{The G3 ablation provides a bf16 comparison at $r=16$ and $r=256$, though its scope is limited to Qwen and its provenance audit is ongoing; a systematic comparison across all ranks and backbones was not conducted.}
 
-\rev{The primary dose--response experiments (B7 and G2) are tested only at $r=256$ on Qwen and $r=10$ on Gemma~3. The exploratory C1--C5 pilot is archived but not used in primary estimates.} The interventions are tested only at the $r=256$
+\rev{The primary dose--response experiments (B7 and G2) are tested only at $r=256$ on Qwen and $r=10$ on Gemma~3. The exploratory C1--C5 pilot is archived but not used in primary estimates.}
 \rev{Whether comparable sensitivity exists at other ranks, on other backbones, or with different datasets has not been established.} Whether the same
 intervention would recover stability under extreme pressure (e.g., FFT at high
 learning rate) remains untested.
@@ -2415,8 +2412,7 @@ their effects are additive or interactive.
     (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
-Running \texttt{python scripts/make\_all.py} from the package root reproduces all
-canonical numbers reported in this paper (15/15 consistency checks pass).
+\rev{Running \texttt{python scripts/make\_all.py} from the package root in the current checkout reproduces all canonical numbers reported in this paper (15/15 consistency checks pass in the HEAD commit; this script is not part of the v1.0.3 snapshot).}
 Running \texttt{python scripts/figures/fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not
