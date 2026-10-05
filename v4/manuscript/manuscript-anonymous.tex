@@ -123,9 +123,9 @@ pipelines.
 \begin{highlights}
 \item \rev{Rank-dependent threshold-like transition between homeostatic and degradative regimes}
 \item \rev{Regime boundaries differ ${\sim}10{\times}$ across backbones (erank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
-\item \rev{Adapter rank and learning rate \rev{both shift the observed operating regime}}
+\item \rev{Adapter rank and learning rate {both shift the observed operating regime}}
 \item Output drift accompanies degradative regimes while factual retention stays bounded
-\item \rev{A pre-registered 50\% synthetic exposure reduction \rev{substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, retention improved at Gen~10 without a reduction in the observed rate of loss}
+\item \rev{A pre-registered 50\% synthetic exposure reduction {substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, retention improved at Gen~10 without a reduction in the observed rate of loss}
 \end{highlights}
 
 % ============================================================
@@ -218,7 +218,7 @@ The main contributions of this work are:
 \rev{a threshold-like transition within the tested grid} on Qwen
     and replicating the same qualitative structure on Gemma~3 at a
     substantially lower threshold (effective rank 3--6 versus 50--88),
-    \rev{confirmed across three to six independent seeds for headline conditions; intermediate ablations use a single seed and are labelled descriptive}.
+    \rev{confirmed across three to six independent seeds for headline conditions; intermediate ablations use a single seed and are labeled descriptive}.
     \item We demonstrate that full fine-tuning learning-rate sweeps on both
     Qwen and Gemma~3 reproduce the same dose-response pattern, \rev{providing evidence consistent with the phenomenon responding} to perturbation magnitude rather than being
     specific to low-rank adaptation.
@@ -829,10 +829,9 @@ our experiments manipulate each component separately and show that changes along
 any of the three axes can move the system between bounded and degradative
 regimes.
 
-\rev{We abbreviate \rev{effective training pressure as ETP} and distinguish two classes of variable. \emph{ETP-design} variables are fixed before training and
+\rev{We abbreviate effective training pressure as ETP and distinguish two classes of variable. \emph{ETP-design} variables are fixed before training and
 directly manipulated in our factorial design (nominal adapter rank $r$, learning
-rate $\eta$, number of training steps, and synthetic-data dose fraction), from
-\emph{ETP-observed} variables, which are measured after training as diagnostic
+rate $\eta$, number of training steps, and synthetic-data dose fraction). \emph{ETP-observed} variables, which are measured after training as diagnostic
 proxies (effective rank, mean absolute weight drift $d(t)$, response length, and
 SDI-3). Effective rank and drift track how much pressure was actually applied to
 the model, but they are not available prospectively; they therefore serve as
@@ -991,7 +990,7 @@ include the Qwen rank-sweep endpoints ($r=16$ and $r=256$), the Gemma~3 anchor
 \rev{ranks ($r=4$, homeostatic, and $r=16$, degradative), the QLoRA--FFT comparison, and the dose--response synthetic}
 exposure interventions. \rev{The dose--response experiments (B7, G2) use multiple seeds at
 every tested dose. Supporting ablations use a single seed and are
-labelled as descriptive.} We do not pool
+labeled as descriptive.} We do not pool
 single-seed and multi-seed results when making headline claims.
 
 For multi-seed conditions, we report per-seed values together with the mean and
@@ -1114,8 +1113,9 @@ investigate whether increasing perturbation magnitude through full fine-tuning
 reproduces the same dose-response pattern (Section~\ref{sec:res_fft}), characterize the
 distributional signatures associated with above-threshold regimes
 (Section~\ref{sec:res_distribution}), and present evidence that \rev{graded
-reductions in synthetic exposure (50\% on Qwen B7) strongly attenuate progressive
-loss; on Gemma~3 G2, the 50\% dose improved Gen10 retention without reducing the observed rate of loss}
+reductions in synthetic exposure (50\% on \rev{Qwen~2.5~1.5B at $r=256$}) \rev{substantially} attenuate progressive
+loss; on 
+ev{Gemma~3~1B at $r=10$}, the 50\% dose improved Gen10 retention without reducing the observed rate of loss}
 (Section~\ref{sec:res_intervention}). Throughout this section, headline findings are
 supported by multi-seed experiments, whereas single-seed results are presented
 as supporting evidence.
@@ -1631,7 +1631,7 @@ varied vocabulary while losing factual anchoring. We refer to this as an
 \textit{elaborative drift} phenotype: the model produces longer, lexically
 diverse, but factually unanchored responses.
 
-\rev{The $r=128$ (bounded) and $r=256$ (\rev{lowest-pressure degradative}) and $r=128$ (\rev{transition-zone}) configurations therefore exhibit distinct distributional failure modes despite both departing from stable behavior: $r=128$ degrades through filler accumulation, while $r=256$ degrades through elaborative dispersion.}
+\rev{The transition-zone configuration ($r=128$) and the lowest-pressure degradative configuration tested ($r=256$) therefore exhibit distinct distributional failure modes despite both departing from stable behavior: $r=128$ degrades through filler accumulation, while $r=256$ degrades through elaborative dispersion.}
 
 These observations motivate a descriptive three-regime taxonomy:
 
@@ -1777,7 +1777,7 @@ not be interpreted as a universal property of recursive fine-tuning.}
 
 \rev{\textbf{Dose--response replication on Gemma~3.}
 A parallel pre-registered dose--response experiment on Gemma~3 at $r=10$
-(G2, three seeds, four doses) confirms that the exposure effect generalises
+(G2, three seeds, four doses) confirms that the exposure effect generalizes
 to a second backbone. At the unmodified baseline (dose~$=0\%$), Gemma~3 at
 $r=10$ shows progressive degradation ($\GtwoMtenZero\%\pm\GtwoSDtenZero$~pp
 Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
@@ -1785,7 +1785,7 @@ Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
 ($p=\GtwoPtenTen$), $\GtwoDeltatenTfive$~pp ($p=\GtwoPtenTfive$), and
 $\GtwoDeltatenFifty$~pp (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
 $p=\GtwoPtenFifty$), respectively ($n=3$ paired seeds per dose).
-At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (equal to the 0\% arm within rounding), \rev{indicating that \rev{no reduction in the rate of progressive loss was observed} for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
+At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (equal to the 0\% arm within rounding), \rev{indicating that {no reduction in the rate of progressive loss was observed} for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
 \rev{The absolute gain at dose~$=50\%$ Gen10 is larger for Gemma~3 G2
 ($\GtwoDeltatenFifty$~pp, $|K_{0,\mathrm{G2}}|{=}44$) than for Qwen B7
 ($\BsevenDeltatenFifty$~pp, $|K_0|{=}78$). The two experiments used different
@@ -1814,8 +1814,7 @@ pressure.}
 
 Taken together, the intervention experiments show that the 
 \rev{degradative trajectory can be attenuated under the evaluated 
-conditions. On Qwen, a 50\% reduction moved the system from the degradative to the bounded regime; on Gemma~3, it raised Gen~10 retention without reducing the rate of loss. Neither outcome constitutes a return to homeostatic behaviour.} These results the \rev{lowest-pressure degradative configuration tested}, complementing the
-capacity and perturbation results presented in the preceding sections. We note
+conditions. On Qwen, a 50\% reduction moved the system from the degradative to the bounded regime; on Gemma~3, it raised Gen~10 retention without reducing the rate of loss. Neither outcome constitutes a return to homeostatic behavior.} These results complement the capacity and perturbation findings presented in the preceding sections. We note
 that verification-based approaches \citep{yi2025} represent an orthogonal
 mitigation axis (filtering by quality rather than quantity); our exposure
 reduction experiments test boundary sensitivity rather than proposing a
@@ -1858,7 +1857,7 @@ Gen10 estimate of $\GoneFourMten\%\pm\GoneFourSDten$~pp
 (95\,\% CI $[\GoneFourCItenLo, \GoneFourCItenHi]$).}
 
 \rev{\textbf{Prospective rank$\times$learning-rate probe (G5).}
-As a prospective test of whether the regime ordering generalises to unseen
+As a prospective test of whether the regime ordering generalizes to unseen
 rank$\times$learning-rate configurations, we pre-registered three cells on
 Qwen~2.5~1.5B with a single seed (seed~15, five generations): a low-pressure
 cell ($r=128$, $\eta=5\times10^{-6}$), a high-pressure cell ($r=128$,
@@ -1875,8 +1874,7 @@ We do not report an operational pressure index $\Pi$ for G5: the effective rank
 of each adapter was measured (mean $\mathrm{erank}\approx51$ for $r=128$,
 $\approx16$ for $r=32$), but the pre-specification did not fix a threshold on
 $\Pi$, and the three cells were selected by nominal rank and learning rate, not
-by $\Pi$ value. One of the three \rev{two of the three pre-specified regime classifications were confirmed; one classification} was not
-met; G5 is therefore exploratory evidence for the ordering, not a confirmatory
+by $\Pi$ value. \rev{Two of the three pre-specified regime classifications were confirmed; the third was not.} G5 is therefore exploratory evidence for the ordering, not a confirmatory
 test of the full classification scheme.
 All three cells used a single seed; the prospective result is therefore exploratory.}
 \section{Discussion}\label{sec:discussion}
@@ -1922,7 +1920,7 @@ controls the same qualitative transition. \rev{Within the tested grid, retention
 \rev{This pattern is consistent with the system operating near a regime boundary, though the present experiments do not establish a precise threshold value that will generalize to other settings.}}
 
 \rev{The contribution is the existence and reproducibility of this
-\rev{threshold-like transition within the tested grid}, not the numerical threshold itself.} The present work does not claim that the
+{threshold-like transition within the tested grid}, not the numerical threshold itself.} The present work does not claim that the
 specific effective-rank values at which regimes change will generalize to
 arbitrary models or tasks. What appears to generalize is the qualitative
 structure: a pressure-dependent boundary separating stable from degradative
@@ -2106,7 +2104,7 @@ to factual loss (bounded in the first, progressive in the second).
 The elaborative drift phenotype is not unique to Qwen: the Gemma~4~E2B $r=64$
 configuration exhibits the same pattern (response length inflation from 3.6 to
 4.4 words, Distinct-1 collapse from 0.55 to 0.43, stopword ratio increase from
-0.23 to 0.28), \rev{Because that run used a single seed, the pattern is consistent with, but does not establish, generalisation of this signature across backbone families.}
+0.23 to 0.28). \rev{Because that run used a single seed, the pattern is consistent with, but does not establish, generalization of this signature across backbone families.}
 
 The practical implication is that monitoring recursive training systems solely
 through factual accuracy or loss metrics risks missing the onset of
@@ -2309,11 +2307,11 @@ is not an artefact of verbosity-induced scoring inflation.}
 (ten generations each). A single execution does not permit
 seed-level variance estimation or formal regime classification under the
 same statistical protocol applied to Qwen and Gemma~3. The E2B results are
-therefore treated as exploratory and supportive: they demonstrate that degradative behaviour at $r=64$ is \rev{observed in a single-seed run} on a second-generation
+therefore treated as exploratory and supportive: they demonstrate that degradative behavior at $r=64$ is \rev{observed in a single-seed run} on a second-generation
 architecture, but they do not constitute an independent replication of the
 quantitative threshold estimates.}
 
-\rev{The mechanism through which reduced synthetic exposure \rev{stabilizes}
+\rev{The mechanism through which reduced synthetic exposure {stabilizes}
 recursive retention was not established. Two candidate mechanisms are
 plausible: the per-generation update budget (fewer training steps per
 generation for lower-dose conditions) and data composition (\rev{a smaller number and different selection of synthetic training examples}
@@ -2329,51 +2327,7 @@ Finally, the present work establishes which variables shift which
 regimes, but does not derive a quantitative formulation combining the
 three pressure components into a single scalar predictor.
 
-\rev{A prospective calibration of effective training pressure on an
-unseen backbone would require the following protocol, which we specify
-here as a concrete target for future work rather than as a result of the
-present study. (i)~\emph{Pilot sweep}: run two nominal ranks spanning
-roughly one order of magnitude for five recursive generations with a
-single seed, recording $\mathrm{erank}(\Delta W)$ per generation.
-(ii)~\emph{Backbone-local calibration}: estimate the regime boundary as
-the interval between the highest pilot configuration whose Gen1--Gen5
-retention slope is indistinguishable from zero and the lowest whose
-slope is negative. (iii)~\emph{Pre-specification}: register, before any
-further run, two configurations on opposite sides of the calibrated
-interval, together with the outcome criterion and the decision rule.
-(iv)~\emph{Held-out evaluation}: execute both configurations to Gen10
-with at least three seeds. (v)~\emph{Reporting}: report the
-pre-registered prediction, the observed classification, and any
-discrepancy, irrespective of direction. Steps (i)--(ii) cost
-approximately two pilot runs per backbone. The present study performed
-neither the pre-specification nor the held-out evaluation on an unseen
-backbone. This per-backbone procedure is also the practical alternative
-we propose to the architectural normalisations in
-Table~\ref{tab:normalization}, none of which aligned the thresholds
-across backbones.}
 
-\rev{A prospective calibration of effective training pressure on an
-unseen backbone would require the following protocol, which we specify
-here as a concrete target for future work rather than as a result of the
-present study. (i)~\emph{Pilot sweep}: run two nominal ranks spanning
-roughly one order of magnitude for five recursive generations with a
-single seed, recording $\mathrm{erank}(\Delta W)$ per generation.
-(ii)~\emph{Backbone-local calibration}: estimate the regime boundary as
-the interval between the highest pilot configuration whose Gen1--Gen5
-retention slope is indistinguishable from zero and the lowest whose
-slope is negative. (iii)~\emph{Pre-specification}: register, before any
-further run, two configurations on opposite sides of the calibrated
-interval, together with the outcome criterion and the decision rule.
-(iv)~\emph{Held-out evaluation}: execute both configurations to Gen10
-with at least three seeds. (v)~\emph{Reporting}: report the
-pre-registered prediction, the observed classification, and any
-discrepancy, irrespective of direction. Steps (i)--(ii) cost
-approximately two pilot runs per backbone. The present study performed
-neither the pre-specification nor the held-out evaluation on an unseen
-backbone. This per-backbone procedure is also the practical alternative
-we propose to the architectural normalisations in
-Table~\ref{tab:normalization}, none of which aligned the thresholds
-across backbones.}
 
 \rev{A prospective calibration of effective training pressure on an
 unseen backbone would require the following protocol, which we specify
