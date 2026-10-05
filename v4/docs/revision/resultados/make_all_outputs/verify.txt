@@ -1,5 +1,5 @@
 make_all.py — verify.txt
-Gerado: 2026-10-04 17:06
+Gerado: 2026-10-05 01:28
 
 VERIFICAÇÕES vs CANÔNICOS
 =======================================================

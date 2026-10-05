@@ -9,6 +9,7 @@ GoneSDten,1.50,make_all.py
 GoneCItenLo,75.30,make_all.py
 GoneCItenHi,82.80,make_all.py
 GoneSlope,-1.28,make_all.py
+GoneFourteenSlope,-1.19,make_all.py
 GoneSeedFifteenFive,84.60,make_all.py
 GoneSeedFifteenTen,78.20,make_all.py
 GoneSeedOneThreeSevenFive,85.90,make_all.py
@@ -84,6 +85,7 @@ BsevenDeltatenFifty,+9.8,make_all.py
 BsevenCItenLoFifty,6.90,make_all.py
 BsevenCItenHiFifty,12.80,make_all.py
 BsevenPtenFifty,0.001,make_all.py
+BsevenSlopeZero,-1.13,make_all.py
 BsevenSlopeFifty,-0.14,make_all.py
 BsevenLRdelta,+0.43,make_all.py
 GthreeKzero,46,make_all.py
