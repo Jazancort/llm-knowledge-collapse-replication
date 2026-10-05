@@ -120,7 +120,11 @@ conditions (six for the pooled $r=256$ estimate), with single-seed
 supporting ablations, we investigate how factual retention changes as
 adapter capacity, perturbation magnitude, and synthetic exposure vary.}
 These experiments reveal a common empirical organizing principle, which we
-term effective training pressure. We find:
+term effective training pressure. The index $\Pi$ introduced in
+Section~\ref{sec:disc_pressure} is an exploratory post-training summary of the
+manipulated variables; it is not available prospectively and has not been
+validated as a transferable quantitative predictor across architectures or
+datasets. We find:
 (1)~\rev{a threshold-like transition within the tested grid} from homeostatic
 retention to progressive degradation as adapter rank increases, with the
 transition differing by roughly an order of magnitude across architectures
@@ -2425,7 +2429,10 @@ across backbones.}
 Through systematic dose-response experiments across three backbones, ten
 recursive generations, and multiple seeds, we identified effective training
 pressure as an organizing framework for recursive stability under
-parameter-efficient fine-tuning. The central finding is that recursive
+parameter-efficient fine-tuning. The index $\Pi$ quantifying this pressure is an
+exploratory post-training summary; it is not available prospectively and has
+not been validated as a transferable quantitative predictor across
+architectures or datasets. The central finding is that recursive
 degradation is a pressure-gated phenomenon: increasing update capacity,
 perturbation magnitude, or synthetic exposure \rev{can each shift} the system from homeostatic to degradative behavior, with the transition being
 \rev{threshold-like within the tested grid}, backbone-dependent, and reproducible across the seeds evaluated. Cross-backbone replication \rev{further indicates} that degradation in the above-threshold regime is progressive and does not
@@ -2470,9 +2477,17 @@ their effects are additive or interactive.
 
 \section{Project repository and data access}\label{app:repo}
 
-\rev{The replication package is archived at the links below (version v1.0.3). This snapshot contains the initial experimental scripts, raw outputs, aggregated per-seed per-generation results (G1--G5, 27 executed training runs, where one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon), and a draft manuscript. The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
+\rev{The replication package is archived at the links below (version v1.0.3). This snapshot contains:
+\begin{enumerate}[(i)]
+  \item the consolidated per-seed results files (one JSON per seed per arm, covering G1--G5, 27 executed training runs);
+  \item the training configuration files for each experimental arm;
+  \item the evaluation protocol, question partition identifiers, and the $K_0$ baseline sets for each backbone;
+  \item the figure-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (15/15 checks pass on the HEAD commit); and
+  \item the notation and rendering audit script \texttt{scripts/audits/glyph\_audit.py}.
+\end{enumerate}
+The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
 
-\rev{The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files. It does not include raw token-level predictions, trained adapter checkpoints, or base-model weights. Raw predictions and adapters are not included because they exceed practical size limits for data repositories; base-model weights are not redistributed and must be obtained from the original distributors. Repository identifiers for the base models are listed in supplementary Table~S1.}
+\rev{The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files. It does not include raw token-level predictions, trained adapter checkpoints, or base-model weights. Raw token-level predictions and adapters are not included because they exceed practical size limits for data repositories; base-model weights are not redistributed and must be obtained from the original distributors. Repository identifiers and revision hashes for the base models are listed in supplementary Table~S1.}
 
 
 \begin{itemize}
@@ -2484,11 +2499,11 @@ their effects are additive or interactive.
     (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
-\rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout \rev{regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper (15/15 checks in the HEAD commit; this script is not part of the v1.0.3 snapshot).}}
+\rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper (15/15 checks pass on the HEAD commit).}
 Running \texttt{python figs/src/fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not
-redistributed; repository identifiers are listed in supplementary
+redistributed; repository identifiers and revision hashes are listed in supplementary
 Table~S1.
 
 % Fix: cas-common AtEndDocument captures \thepage before refs/appendix pages
