@@ -183,7 +183,7 @@ protective property scales under repeated recursive pressure. At what adapter
 capacity does the protection fail? Is the boundary between stability and
 degradation gradual or sharp? Is it universal across architectures, or
 backbone-dependent? To our knowledge, no systematic dose-response analysis has
-characterized the sharpness, backbone-dependence, or reversibility of the
+characterized the \rev{steepness}, backbone-dependence, or reversibility of the
 stability boundary under parameter-efficient fine-tuning.
 
 Rather than treating adapter rank, learning rate, and synthetic exposure as
@@ -192,7 +192,7 @@ understood through a single organizing principle, which we term
 \textit{effective training pressure}. Through systematic experiments spanning
 three backbones (Qwen~2.5~1.5B, Gemma~3~1B, Gemma~4~E2B), a strict replace-only
 protocol over ten recursive generations, and multiple intervention strategies, we
-identify abrupt backbone-dependent transitions between homeostatic and degradative
+identify \rev{backbone-dependent transitions between homeostatic and degradative}
 recursive regimes and show that these transitions can be controlled through
 multiple independently manipulated variables.
 
@@ -214,7 +214,7 @@ The main contributions of this work are:
     \item We provide a systematic dose-response mapping between adapter rank and
     recursive factual retention, measured via a subset-based retention metric
     ($K_0$, Section~\ref{sec:k0}), identifying 
-\rev{an abrupt, threshold-like transition within the tested grid} on Qwen
+\rev{a threshold-like transition within the tested grid} on Qwen
     and replicating the same qualitative structure on Gemma~3 at a
     substantially lower threshold (effective rank 3--6 versus 50--88),
     confirmed across three to five independent seeds per condition.
@@ -1905,7 +1905,7 @@ training pipelines (Section~\ref{sec:disc_practical}).
   \caption{Pressure-response relationship guiding recursive fine-tuning
   stability. Factual retention transitions through three regimes as effective
   training pressure increases. Dashed lines mark backbone-dependent boundaries;
-  the transition is abrupt and its location varies by roughly an order of
+  the transition is \rev{threshold-like within the tested grid and its location varies by} roughly an order of
   magnitude across architectures.}\label{fig:etp}
 \end{figure*}
 
@@ -1921,15 +1921,13 @@ motivation for treating them as manifestations of a common organizing principle.
 The framework is empirical rather than theoretical. We do not propose a
 closed-form expression that combines rank, learning rate, and exposure into a
 single scalar predictor. Instead, the experiments reveal that each variable independently
-controls the same qualitative transition. \rev{The transition is abrupt within the tested
-parameter grid: at Gen~10, a 50\% reduction in synthetic exposure on Qwen B7 strongly attenuated progressive
-loss (\rev{$-0.15$}\,pp/generation), whereas a 10\% reduction did not
-(\rev{$-1.49$}\,pp/generation, close to the 0\% arm slope of $-1.13$\,pp/generation). This abruptness is consistent with the system operating
+controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved.}\,pp/generation), whereas a 10\% reduction did not
+(\rev{$-1.49$}\,pp/generation, close to the 0\% arm slope of $-1.13$\,pp/generation). \rev{This pattern} is consistent with the system operating
 near a regime boundary, though the present experiments do not establish a
-precise threshold value that will generalise to other settings.}
+precise threshold value that will generalise to other settings.
 
 \rev{The contribution is the existence and reproducibility of this
-abrupt transition within the tested grid, not the numerical threshold itself.} The present work does not claim that the
+\rev{threshold-like transition within the tested grid}, not the numerical threshold itself.} The present work does not claim that the
 specific effective-rank values at which regimes change will generalize to
 arbitrary models or tasks. What appears to generalize is the qualitative
 structure: a pressure-dependent boundary separating stable from degradative
@@ -1944,7 +1942,7 @@ multidimensional control landscape rather than a collection of separable
 single-variable effects. Beyond the interaction itself, two additional
 convergences support this interpretation:
 the transition boundary induced by each axis shares the same qualitative
-signature (abrupt rather than gradual), and the same distributional drift patterns
+signature (\rev{threshold-like rather than gradual within the tested grid}), and the same distributional drift patterns
 accompany degradation regardless of which axis crosses the threshold. These
 convergences would be coincidental under a model of three independent failure
 modes, but are naturally explained by a shared underlying sensitivity to the
@@ -1974,7 +1972,7 @@ Threshold is backbone-dependent & Qwen vs Gemma~3 ($10{\times}$ gap) \\
 \addlinespace
 Drift accompanies degradation & 5 distribution metrics \\
 \addlinespace
-\rev{Transition is abrupt within tested grid} & \rev{Dose--response plateau at Gen~5; graded at Gen~10} \\
+\rev{Transition is threshold-like within tested grid} & \rev{Dose--response plateau at Gen~5; graded at Gen~10} \\
 \addlinespace
 Capacity $\times$ magnitude \rev{joint dependence} & Rank $\times$ LR matrix ($3{\times}3$) \\
 \addlinespace
@@ -2365,7 +2363,7 @@ pressure as an organizing framework for recursive stability under
 parameter-efficient fine-tuning. The central finding is that recursive
 degradation is a pressure-gated phenomenon: increasing update capacity,
 perturbation magnitude, or synthetic exposure \rev{can each shift} the system from homeostatic to degradative behavior, with the transition being
-abrupt, backbone-dependent, and reproducible. Cross-backbone replication further
+\rev{threshold-like within the tested grid}, backbone-dependent, and reproducible across the seeds evaluated. Cross-backbone replication further
 shows that degradation in the above-threshold regime is progressive and does not
 stabilize within the observed horizon. \rev{Pre-registered dose--response
 experiments on two backbones show that a 50\% reduction in synthetic exposure
