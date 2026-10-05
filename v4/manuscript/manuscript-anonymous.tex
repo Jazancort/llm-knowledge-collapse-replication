@@ -85,10 +85,12 @@ that the transition is not unique to low-rank adaptation;
 (4)~a retention/distribution dissociation at intermediate pressure, where
 output efficiency degrades threefold while factual retention remains near 90\%;
 and (5)~\rev{pre-registered dose--response experiments on two backbones:
-reducing synthetic exposure by 50\% \rev{arrested} progressive degradation
-(Qwen $r=256$: Gen~5$\to$10 slope $\BsevenSlopeFifty$\,pp/generation,
-$\Delta\!=\!\BsevenDeltatenFifty$\,pp at Gen10; Gemma~3 $r=10$:
-$\Delta\!=\!\GtwoDeltatenFifty$\,pp at Gen10); on Qwen, the 50\% dose yielded a similar point estimate to halving the learning rate, but formal equivalence and mechanism were not established.}
+on Qwen $r=256$, a 50\% reduction strongly attenuated progressive degradation
+(Gen~5$\to$10 slope $\BsevenSlopeFifty$\,pp/generation,
+$\Delta\!=\!\BsevenDeltatenFifty$\,pp at Gen10) and yielded a similar point
+estimate to halving the learning rate (formal equivalence not established);
+on Gemma~3 $r=10$, retention improved at Gen10
+($\Delta\!=\!\GtwoDeltatenFifty$\,pp) without a reduction in the observed rate of loss.}
 \rev{A three-cell, single-seed prospective probe showed retention ordered in the expected direction, but one pre-specified regime classification was not met; calibration of a scalar pressure threshold remains unresolved.}
 These findings characterize recursive degradation as a pressure-dependent
 phenomenon whose stability depends on a multidimensional control landscape,
@@ -104,7 +106,7 @@ pipelines.
 \item \rev{Regime boundaries differ ${\sim}10{\times}$ across backbones (erank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
 \item \rev{Adapter rank and learning rate jointly determine the operating regime}
 \item Output drift accompanies degradative regimes while factual retention stays bounded
-\item \rev{A pre-registered 50\% synthetic exposure reduction arrests progressive loss on two backbones}
+\item \rev{A pre-registered 50\% synthetic exposure reduction strongly attenuated progressive loss on Qwen B7; on Gemma~3 G2, retention improved at Gen10 without a reduction in the observed rate of loss}
 \end{highlights}
 
 % ============================================================
@@ -207,8 +209,8 @@ The main contributions of this work are:
     retention/distribution dissociation at intermediate capacity, where output
     quality degrades substantially while factual retention remains bounded.
     \item We show that synthetic exposure is a third pressure axis: a
-    pre-registered dose--response (five paired seeds) demonstrates that any
-    reduction of 10--50\% raises Gen~5 retention by \rev{3.6--4.4\,pp},
+    pre-registered dose--response (five paired seeds) shows that \rev{the tested
+    reductions of 10\%, 25\%, and 50\%} each raised Gen~5 retention by \rev{3.6--4.4\,pp},
     with the Gen~10 benefit graded (\rev{$+9.2$}\,pp at 50\%; 95\%~CI $[6.9, 11.6]$).
     \rev{On Qwen, a 50\% reduction yielded a similar point estimate to halving the learning rate; formal equivalence and mechanism were not established.}
 \end{enumerate}
@@ -1087,8 +1089,8 @@ investigate whether increasing perturbation magnitude through full fine-tuning
 reproduces the same dose-response pattern (Section~\ref{sec:res_fft}), characterize the
 distributional signatures associated with above-threshold regimes
 (Section~\ref{sec:res_distribution}), and present evidence that \rev{graded
-reductions in synthetic exposure (50\% on both backbones) restore near-homeostatic
-behavior at the regime boundary}
+reductions in synthetic exposure (50\% on Qwen B7) strongly attenuate progressive
+loss; on Gemma~3 G2, the 50\% dose improved Gen10 retention without reducing the observed rate of loss}
 (Section~\ref{sec:res_intervention}). Throughout this section, headline findings are
 supported by multi-seed experiments, whereas single-seed results are presented
 as supporting evidence.
@@ -1905,9 +1907,9 @@ The framework is empirical rather than theoretical. We do not propose a
 closed-form expression that combines rank, learning rate, and exposure into a
 single scalar predictor. Instead, the experiments reveal that each variable independently
 controls the same qualitative transition. \rev{The transition is abrupt within the tested
-parameter grid: at Gen~10, a 50\% reduction in synthetic exposure arrests progressive
-loss ($-0.14$\,pp/generation), whereas a 10\% reduction does not
-($-1.48$\,pp/generation). This abruptness is consistent with the system operating
+parameter grid: at Gen~10, a 50\% reduction in synthetic exposure on Qwen B7 strongly attenuated progressive
+loss (\rev{$-0.15$}\,pp/generation), whereas a 10\% reduction did not
+(\rev{$-1.49$}\,pp/generation, close to the 0\% arm slope of $-1.13$\,pp/generation). This abruptness is consistent with the system operating
 near a regime boundary, though the present experiments do not establish a
 precise threshold value that will generalise to other settings.}
 
@@ -2129,7 +2131,7 @@ adapter rank is a directly controllable parameter with predictable effects on
 recursive stability. For applications where recursive synthetic data reuse is
 anticipated, selecting a rank that places the system well below the observed
 pressure threshold is a practical strategy for maintaining recursive stability.
-On Qwen~2.5~1.5B, $r=16$ and $r=64$ showed stable retention through Gen10 under the evaluated protocol; $r=4$ and $r=32$ were \rev{evaluated only at Gen5 (single seed, single-generation ablations)} and cannot be used as evidence of multi-generation stability. Although
+On Qwen~2.5~1.5B, $r=16$ and $r=64$ showed stable retention through Gen10 under the evaluated protocol; $r=4$ and $r=32$ were \rev{evaluated only at Gen5 (single seed, single-seed Gen-5-only ablations)} and cannot be used as evidence of multi-generation stability. Although
 the numerical threshold is backbone-dependent, the underlying principle appears
 consistent across the evaluated models: lower effective training pressure is
 associated with greater recursive stability in the tested configurations. When
@@ -2351,8 +2353,8 @@ abrupt, backbone-dependent, and reproducible. Cross-backbone replication further
 shows that degradation in the above-threshold regime is progressive and does not
 stabilize within the observed horizon. \rev{Pre-registered dose--response
 experiments on two backbones show that a 50\% reduction in synthetic exposure
-arrests progressive loss, with the effect magnitude depending on the backbone
-operating pressure. An exploratory ${\sim}5\%$ pilot, evaluated in a
+strongly attenuated progressive loss on Qwen B7; on Gemma~3 G2, it improved
+retention at Gen10 without reducing the observed rate of loss. An exploratory ${\sim}5\%$ pilot, evaluated in a
 different pipeline, did not replicate under paired conditions ($+1.9$\,pp,
 $n=3$).} This sensitivity is backbone-dependent. Distributional diagnostics further reveal
 that output quality can degrade substantially before factual loss becomes
