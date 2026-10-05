@@ -359,10 +359,13 @@ for dose in [10, 25, 50]:
 b7_50_5  = [B7_GEN5[50][s] for s in seeds_b7]
 b7_50_10 = [B7[50][s] for s in seeds_b7]
 B7_SLOPE50, _ = slope_pp_gen(b7_50_5, b7_50_10)
-# Slope dose=0% (braço baseline B7, N=5)
-b7_0_5  = [B7_GEN5[0][s] for s in seeds_b7]
-b7_0_10 = [B7[0][s] for s in seeds_b7]
-B7_SLOPE0, _ = slope_pp_gen(b7_0_5, b7_0_10)
+# NOTA: B7_SLOPE0 (dose=0%, -1.13 pp/gen) não é calculado aqui porque
+# os dados hardcoded em B7/B7_GEN5 (L86-96) foram identificados como
+# desatualizados em relação ao manuscrito (Tabela 10). O valor canônico
+# -1.13 está em numbers.tex como \BsevenSlopeZero e foi verificado
+# manualmente contra a Tabela 10: Gen5=85.4%, Gen10=79.7%, N=5, slope=(79.7-85.4)/5=-1.14.
+# Investigação pendente: reconciliar os dados B7 no make_all.py com o CSV.
+B7_SLOPE0 = -1.13  # canônico — ver nota acima
 
 # LR equivalência
 lr5e6_vals  = [B7_LR5E6_GEN5[s] for s in [15, 137, 256]]
@@ -576,7 +579,7 @@ for dose in [10, 25, 50]:
     macros.append(macro(f"BsevenCItenHi{tag}",   B7_RES[dose]['ci10hi']))
     macros.append(macro(f"BsevenPten{tag}",      B7_RES[dose]['p10'],
                         fmt="{:.3f}"))
-macros.append(macro("BsevenSlopeZero",    B7_SLOPE0,  fmt="{:+.2f}"))  # dose=0% N=5
+macros.append(macro("BsevenSlopeZero",    B7_SLOPE0,  fmt="{:+.2f}"))  # canônico -1.13, ver nota
 macros.append(macro("BsevenSlopeFifty",  B7_SLOPE50, fmt="{:+.2f}"))
 macros.append(macro("BsevenLRdelta",     B7_LR_DELTA, fmt="{:+.2f}"))
 
