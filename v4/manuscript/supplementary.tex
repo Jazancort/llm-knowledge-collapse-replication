@@ -1,0 +1,80 @@
+%% Supplementary Material — KNOSYS-D-26-21490
+%% Knowledge-Based Systems, Elsevier
+%% Template: CAS Double Column (cas-dc)
+
+\documentclass[a4paper,fleqn]{cas-dc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{url}
+\usepackage{microtype}
+
+\begin{document}
+
+\title{Supplementary Material for:\\
+Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs:
+A Multi-Axis Dose-Response Study}
+
+\maketitle
+
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+
+% ─────────────────────────────────────────────────────────────────────────────
+\section*{Table S1: Base-Model Checkpoint Identifiers}
+% ─────────────────────────────────────────────────────────────────────────────
+
+All three backbones were retrieved from the Hugging Face Hub without an explicit
+\texttt{revision=} argument; the loaded revision is therefore determined by the
+snapshot present in the local cache at the time of each experiment.
+The cache snapshot identifiers (commit SHA-1 hashes of the model repository
+at download time) are listed below and are sufficient to retrieve the identical
+weights from the Hub.
+The identifier for Gemma~4~E2B~IT reflects the snapshot downloaded on
+2026-06-26 and present in cache when the Gemma~4 experiments were executed
+(2026-06-27); a second snapshot (\texttt{3e22461}) was downloaded to the same
+cache on 2026-09-30 but was not used in any reported experiment.
+
+\begin{table}[!t]
+\caption{HuggingFace Hub snapshot identifiers (SHA-1) for the three
+base-model checkpoints used in this study. The SHA-1 identifies the exact
+commit of the model repository that was loaded; weights can be obtained via
+\texttt{AutoModelForCausalLM.from\_pretrained(repo\_id,
+revision=\textit{sha})}.
+\textsuperscript{$\dagger$}Retrieved without \texttt{revision=} parameter;
+inferred from HuggingFace cache active at execution time
+(see supplementary text above).}
+\label{tab:s1}
+\small
+\begin{tabularx}{\columnwidth}{@{}l>{\ttfamily\footnotesize}Xl@{}}
+\toprule
+\textbf{Backbone} & \multicolumn{1}{l}{\textbf{Repository identifier}} &
+                    \textbf{Snapshot SHA-1} \\
+\midrule
+Qwen 2.5-1.5B-Instruct
+  & Qwen/Qwen2.5-1.5B-Instruct
+  & \texttt{989aa798} \\
+  & & \texttt{0e4cf806f80c7fef2b1adb7bc71aa306} \\[4pt]
+Gemma 3 1B IT
+  & google/gemma-3-1b-it
+  & \texttt{dcc83ea8} \\
+  & & \texttt{41ab6100d6b47a070329e1ba4cf78752} \\[4pt]
+Gemma 4 E2B IT\textsuperscript{$\dagger$}
+  & google/gemma-4-E2B-it
+  & \texttt{70af34e2} \\
+  & & \texttt{0bd4b7a91f0de6b22675850c43922a03} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+The full 40-character SHA-1 strings are:
+\begin{itemize}
+\item Qwen~2.5-1.5B-Instruct: \texttt{989aa7980e4cf806f80c7fef2b1adb7bc71aa306}
+\item Gemma~3~1B~IT: \texttt{dcc83ea841ab6100d6b47a070329e1ba4cf78752}
+\item Gemma~4~E2B~IT: \texttt{70af34e20bd4b7a91f0de6b22675850c43922a03}
+\end{itemize}
+
+\noindent These identifiers are also listed in \texttt{configs/checkpoints.yaml}
+of the replication package (Zenodo DOI: \url{10.5281/zenodo.23146342}).
+
+\end{document}

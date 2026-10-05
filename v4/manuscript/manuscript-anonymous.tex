@@ -130,7 +130,9 @@ that are consistent with the same qualitative pattern, supporting the view
 that the transition is not unique to low-rank adaptation;
 (3)~a rank $\times$ learning-rate \rev{joint-dependence pattern (single-seed, $3{\times}3$ grid) descriptively consistent with the two axes not operating independently, pending multi-seed replication};
 (4)~a retention/distribution dissociation at intermediate pressure, where
-output efficiency degrades threefold while factual retention remains near 90\%;
+output efficiency degrades threefold while factual retention remains near 90\%
+under the bidirectional scoring criterion (Section~\ref{sec:k0}; scoring
+sensitivity discussed in Section~\ref{sec:limitations});
 and (5)~\rev{pre-registered dose--response experiments on two backbones:
 on Qwen $r=256$, a 50\% reduction \rev{substantially attenuated} progressive degradation
 (Gen~5$\to$10 slope $\BsevenSlopeFifty$\,pp/generation,
@@ -635,9 +637,6 @@ The subset of held-out questions answered correctly at generation~0 defines
 $K_0$. For example, for Qwen~2.5~1.5B, $\Kcard=78$ out of 200 held-out
 questions. Other backbones have their own fixed $K_0$ sets (invariant within each pipeline, though Gemma~3 has two distinct sets from two pipelines), determined once at
 generation~0 and \rev{held constant within each experimental pipeline}.
-\rev{A strict exact-match re-evaluation of the same saved predictions is
-reported in supplementary Table~S2; it is used throughout as a sensitivity
-check on the permissive criterion.}
 % [v4] A5 — K0 por backbone declarado explicitamente para evitar ambiguidade
 % [v4-rev2] P1: dois K0 distintos para Gemma3 de dois pipelines diferentes
 \rev{The $K_0$ sizes are: $\Kcard=78$ for Qwen~2.5~1.5B and $\KcardG{G4}=76$ for
@@ -1692,8 +1691,12 @@ These observations motivate a descriptive three-regime taxonomy:
     approximately 90\%): factual retention and output-distribution metrics are
     both stable.
     \item \textbf{Distributionally degraded, factually bounded} ($r=128$ on
-    Qwen): factual retention remains bounded while output-distribution metrics
-    degrade substantially.
+    Qwen): factual retention remains bounded under the bidirectional scoring
+    criterion while output-distribution metrics degrade substantially.
+    Because $r=128$ produces longer responses ($\approx$7~words versus
+    $\approx$2 at $r=16$), the reported retention figure may partially
+    reflect format effects (Section~\ref{sec:k0}); this classification
+    is therefore interpreted cautiously.
     \item \textbf{Factually degradative} ($r=256$ on Qwen): factual retention
     declines progressively and output distribution drifts.
 \end{enumerate}
@@ -2136,9 +2139,13 @@ Magnitude axis cross-backbone & Interaction strength at scale \\
 
 The distributional analysis in Section~\ref{sec:res_distribution} reveals that
 factual retention alone provides an incomplete picture of recursive degradation.
-The $r=128$ configuration on Qwen retains 89.7\% of $K_0$ facts through Gen10,
+The $r=128$ configuration on Qwen retains 89.7\% of $K_0$ facts through Gen10
+under the bidirectional scoring criterion,
 a level that could reasonably be interpreted as stable under a retention-only
-monitoring strategy. Yet its output distribution degrades substantially: content
+monitoring strategy. As noted in Section~\ref{sec:k0}, this figure may
+partially reflect format effects for the verbose responses generated at this
+rank; the distributional signals discussed here are therefore independent
+evidence that $r=128$ is not operating stably. Yet its output distribution degrades substantially: content
 efficiency collapses to 0.13, baseline persistence falls to 5.2\%, and MTLD
 drops from 2673 to 745. This dissociation between factual retention and
 distributional quality provides the principal motivation for using
@@ -2343,13 +2350,21 @@ contains any valid alias or is contained by one. This criterion is resilient to
 short-answer variation and aliasing, but it may overcount retention for
 configurations that produce longer, more verbose responses, because a long
 response is more likely to contain a short alias as a substring by chance.
-A strict exact-match re-evaluation on the same saved predictions
-(Section~\ref{sec:k0}) is reported in supplementary Table~S2; the direction of
-all regime classifications is unchanged, but absolute retention levels are
-lower under the strict scorer. The bidirectional criterion is retained as the
-primary metric because it better reflects the practical definition of factual
-recall, but the strict-match analysis confirms that the observed degradation
-is not an artefact of verbosity-induced scoring inflation.}
+The bidirectional substring criterion is retained as the primary
+metric because it better reflects the practical definition of factual recall
+for short-answer tasks. A strict exact-match criterion is not a valid
+sensitivity check for this design: $K_0$ is defined by the bidirectional
+criterion, so the denominator of any strict-EM retention ratio is
+backbone-specific and dataset-specific rather than a neutral baseline.
+Empirically, strict EM scores covary with response length
+in directions opposite to factual retention, measuring format convergence
+rather than knowledge preservation; this makes strict EM unsuitable
+for inter-regime comparison. The scoring leniency concern is therefore a
+genuine limitation: for configurations that produce verbose responses,
+particularly $r=128$ on Qwen ($\approx$7-word answers versus $\approx$2 at
+$r=16$), the reported retention may partially reflect format effects.
+This is stated as a limitation (Section~\ref{sec:limitations}) rather than
+controlled for.}
 
 \rev{The Gemma~4~E2B~IT backbone was evaluated with a single seed at $r \in \{4, 16, 64\}$
 (ten generations each). A single execution does not permit

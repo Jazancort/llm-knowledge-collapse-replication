@@ -201,8 +201,8 @@ R1-2 & Confound separation &
        Controls G3 (precision) and G4 (data order); fresh optimizer per
        generation; design/observed split & \S3.9, Tab.~3, \S4.6 \\
 R1-3 & External validity \textsc{part} &
-       Strict exact-match re-scoring (Tab.~S2); scope restriction stated
-       & \S3.2, \S6, Tab.~S2 \\
+       Scoring sensitivity documented as limitation; scope stated
+       & \S3.2, \S7 \\
 R1-4 & Exposure: Qwen versus Gemma~3 &
        Pipeline inconsistency disclosed; two pre-registered
        dose--response experiments replace the pilot & \S3.7, \S4.5 \\
@@ -376,11 +376,23 @@ validated as a transferable quantitative predictor across architectures or
 datasets.} This sentence appears in Section~3.5, the Abstract, and~\S7.
 
 \textbf{Reservation~2: The main metric uses one short-answer dataset.}
-Strict exact-match re-scoring of all saved predictions was added
-(supplementary Table~S2). The evaluation scope is now bounded explicitly:
-\newtext{The evaluation is conducted on short-answer factual questions
-(TriviaQA); results for longer answers, multi-hop questions, or other
-domains constitute an open empirical question.}
+A strict exact-match sensitivity analysis was investigated and is reported
+here as a methodological finding rather than a confirmatory table.
+$K_0$ was defined by the bidirectional substring criterion; under strict
+exact-match the generation-0 baseline performance is very low, because
+TriviaQA aliases rarely form exact substrings of the generated output. More
+critically, strict EM scores vary with response length in the opposite
+direction to retention: as training progresses, configurations that produce
+shorter outputs show higher EM while those that produce longer outputs show
+lower EM, independently of factual content. Strict EM therefore measures
+format convergence rather than factual retention, making it unsuitable as
+a cross-condition sensitivity check. The scoring leniency concern is stated
+as a genuine limitation in Section~7: for configurations that produce verbose
+responses (notably $r=128$), the reported retention may partially reflect
+format effects. This is now documented rather than controlled for, and the
+evaluation scope is bounded explicitly: \newtext{The evaluation is conducted
+on short-answer factual questions (TriviaQA); results for longer answers,
+multi-hop questions, or other domains constitute an open empirical question.}
 
 \textbf{Reservation~3: Several analyses are single-seed.}
 The seed policy is now explicit at the level of individual claims
@@ -604,15 +616,24 @@ estimates.}
 
 \textbf{Answer format and length.}
 The primary scorer uses bidirectional substring matching to accommodate
-short-answer variants. Because longer generated answers could spuriously
-benefit from that permissive criterion, we also report a strict
-exact-match re-evaluation of all saved predictions. Absolute retention
-scores are lower under strict scoring, while the qualitative regime
-classifications are consistent across both scorers. This sensitivity
-check is reported in supplementary Table~S2. The revised manuscript adds:
-\newtext{Strict exact-match re-scoring of all saved predictions confirms
-that regime classifications are not an artifact of the permissive substring
-criterion (supplementary Table~S2).}
+short-answer variants. A strict exact-match sensitivity analysis was
+investigated; the finding is reported here because it is informative about
+the measurement instrument rather than about regime membership. $K_0$
+was defined by the bidirectional criterion. Under strict exact-match,
+the generation-0 baseline performance is very low on TriviaQA aliases
+(which are rarely exact substrings of generated responses), so the
+effective $K_0$ under strict EM is too small to support regime
+classification. More critically, strict EM scores covary with response
+length in directions opposite to retention: configurations producing shorter
+outputs show higher EM; configurations producing longer outputs show lower
+EM. The strict-EM metric therefore measures format convergence, not
+factual preservation. The scoring leniency concern is documented as a
+limitation (Section~7) rather than dismissed: for configurations that
+produce verbose responses (notably $r=128$ on Qwen, which generates
+$\approx$7-word answers versus $\approx$2 at $r=16$), reported retention
+may partially reflect format effects, and the distributional diagnostics
+(Section~4.4) are therefore included as independent evidence that $r=128$
+is not operating in a stable regime.
 
 \textbf{Domain and task generalization.}
 The conclusions are explicitly scoped to short-answer factual recall on
@@ -630,18 +651,20 @@ open empirical question and are outside the scope of this study.}
       The sentence \newtext{Results should be interpreted as
       regime-level tendencies rather than precise quantitative
       estimates} was added to Section~3.2.
-\item \textbf{Strict re-scoring added (supplementary Table~S2).}
-      All saved model predictions were re-scored under strict
-      exact-match. Results are tabulated in supplementary Table~S2.
-      The main text states: \newtext{Regime classifications are
-      consistent under strict exact-match scoring (Table~S2).}
+\item \textbf{Scoring sensitivity documented as a limitation (Section~7).}
+      The strict exact-match investigation yielded a methodological finding
+      documented in Section~7: strict EM is not a valid cross-condition
+      sensitivity check for this evaluation design because it measures
+      format convergence rather than factual retention.
+      The scoring leniency concern for verbose configurations
+      (particularly $r=128$) is acknowledged explicitly.
 \item \textbf{Domain scope bounded (Section~6).}
       A sentence explicitly limiting the conclusions to TriviaQA
       short-answer factual questions was added to Section~6.
 \end{enumerate}
 
-\msloc{Section~3.2 (evaluation protocol); supplementary Table~S2
-(strict scoring); Section~6 (scope and limitations).}
+\msloc{Section~3.2 (evaluation protocol and scoring); Section~7
+(scoring sensitivity as limitation).}
 
 \rconcern{Reviewer \#1, Concern \#4}{Exposure reduction and model-dependent responses}{Why does the five-percent exposure reduction stabilize Qwen but not Gemma~3, and does this generalize across ranks and seeds?}
 
