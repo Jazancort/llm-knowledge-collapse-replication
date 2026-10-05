@@ -118,10 +118,9 @@ Corresponding Author
       green italics}, verbatim, including the table and section numbers
       of the \emph{original} submission.
 \item Text newly added to the manuscript appears \newtext{in blue}.
-      Where a passage is quoted verbatim, it appears between
-      ``quotation marks'' and can be located by text search in the
-      revised manuscript. Where the revision is summarised rather than
-      quoted, the relevant section is cited instead.
+      Where a passage from the revised manuscript is reproduced in this
+      letter, it is paraphrased or summarised; the relevant section is
+      cited so that the exact wording can be located in the revision.
 \item Locations are given as section and page of the revised manuscript.
       Where the revision renumbered a table or section, both numbers are
       given at first mention, e.g.\ \renum{Table~7}{Table~9}.
@@ -566,6 +565,16 @@ pressure axes in isolation.}
       A paragraph listing the available controls, their limitations,
       and the experiments required for fully causal inference was added
       to Section~4.2.1.
+\end{enumerate}
+
+\msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.1 (rank
+sweep); Section~4.2.1 (Qwen comparisons); Section~4.3.1 (Gemma~3);
+Section~4.6 (G3 and G4).}
+
+\arhead{Revised manuscript:}
+The revised manuscript implements these controls throughout
+Sections~3.5, 3.9, 4.1, 4.2.1, 4.3.1, and~4.6.
+
 \rconcern{Reviewer \#1, Concern \#3}{External validity of the evaluation}{Do the conclusions hold for longer answers, multi-hop questions, other domains, and larger factual evaluation sets?}
 
 \arhead{Author response:}
@@ -632,11 +641,6 @@ open empirical question and are outside the scope of this study.}
 \msloc{Section~3.2 (evaluation protocol); supplementary Table~S2
 (strict scoring); Section~6 (scope and limitations).}
 
-\end{enumerate}
-
-\msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.1 (rank sweep); Section~4.2.1
-(Qwen comparisons); Section~4.3.1 (Gemma~3); Section~4.6 (G3 and G4).}
-
 \rconcern{Reviewer \#1, Concern \#4}{Exposure reduction and model-dependent responses}{Why does the five-percent exposure reduction stabilize Qwen but not Gemma~3, and does this generalize across ranks and seeds?}
 
 \arhead{Author response:}
@@ -650,37 +654,42 @@ C1 and C5 followed different evaluation pipelines, including differences in $K_0
 \medskip\noindent\textbf{The Gemma~3 dose--response evidence (G2).}The Gemma~3 response was different in kind. In Experiment~G2, 50\% removal at $r=10$ raised Generation~10 retention by $\GtwoDeltatenFifty$\,pp across three paired seeds (95\%~CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$), with the 10\% and 25\% doses giving $\GtwoDeltatenTen$ and $\GtwoDeltatenTfive$\,pp, respectively. The Generation~5--10 slope was $\GtwoSlopeFifty$\,pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, equal within rounding. The intervention improved endpoint retention without demonstrably slowing later loss. The revised manuscript adds: \newtext{On Gemma~3~1B at $r=10$, 50\% removal improved Generation~10 retention by $\GtwoDeltatenFifty$\,pp but did not reduce the observed rate of loss ($\GtwoSlopeFifty$ versus $\GtwoSlopeZero$\,pp/generation).}
 
 \textbf{Why the responses differ between backbones.}
-The reviewer asks whether the dose--response generalizes across ranks and seeds. For Qwen, it does: the B7 experiment uses five paired seeds at $r=256$ and shows a graded, statistically significant response. For Gemma~3, the G2 experiment uses three paired seeds at $r=10$, which is already in the degradative regime for that backbone, and shows endpoint improvement without rate reduction. Whether the same pattern holds at other ranks or with more seeds is an open empirical question. The mechanism (whether the effect is driven by update budget reduction or by data composition change) was not established; a steps-matched comparison would be required to disentangle the two.
+The reviewer asks whether the dose--response generalizes across ranks and seeds.
+For Qwen, it does: the B7 experiment uses five paired seeds at $r=256$ and
+shows a graded, statistically significant response. For Gemma~3, the G2
+experiment uses three paired seeds at $r=10$ (degradative regime) and shows
+endpoint improvement without rate reduction. Whether the same pattern holds
+at other ranks or with more seeds is an open empirical question.
 
-This question exposed a substantive problem with the original comparison.
-C1 and C5 followed different evaluation pipelines, including differences
-in \(K_0\) construction and data loading. The previously reported
-\(9.0\)- and \(9.4\)-percentage-point intervention gains cannot therefore
-serve as evidence of stabilization. We also clarified that the pilot is excluded from all estimates;
-every dose in the two pre-registered experiments is specified
-as a fraction of training examples removed, with no token-based figure. Under a matched pipeline with three
-paired seeds, the estimated effect of the pilot intervention was
-\(+1.9\) percentage points and was inconclusive.
+\arhead{Author action:}
+\begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
+\item \textbf{C1/C5 pilot excluded from all estimates.}
+      The 9.0 and 9.4 percentage-point gains previously cited for C1 and C5
+      are no longer used as evidence of stabilization. The text notes that
+      those runs used a different evaluation pipeline and are excluded from
+      every quantitative estimate in the revision.
+\item \textbf{Qwen dose--response (B7) reported in Section~4.5.}
+      The B7 results (0\%, 10\%, 25\%, 50\% removal, five paired seeds at
+      $r=256$) are reported in Section~4.5: $+1.8$~pp at 10\% ($p=0.160$),
+      $+4.9$~pp at 25\% ($p=0.005$), $+9.2$~pp at 50\% ($p{<}0.001$).
+\item \textbf{Gemma~3 dose--response (G2) reported in Section~4.6.}
+      The G2 results ($r=10$, three paired seeds) are reported in
+      Section~4.6. Endpoint retention improved at 50\% removal; the
+      Generation~5--10 slope was equal within rounding, indicating
+      endpoint benefit without demonstrable slope attenuation.
+\item \textbf{Mechanistic caveat added in Section~4.6.}
+      Section~4.6 notes that the backbone difference may reflect rank or
+      seed-count specifics, and that a causal interpretation across backbones
+      is not supported by the current evidence.
+\end{enumerate}
 
-The revised Qwen evidence comes from the B7 dose--response experiment:
-0\%, 10\%, 25\%, and 50\% example removal at \(r=256\), with five paired
-seeds per dose. Relative to no removal, Generation~10 retention increased
-by \(+1.8\) percentage points at 10\% removal (\(p=0.160\)),
-\(+4.9\) points at 25\% (\(p=0.005\), 95\% CI \([2.5,7.2]\)),
-and \(+9.2\) points at 50\% (\(p<0.001\), 95\% CI \([6.9,11.6]\)).
-At 50\% removal, the Generation~5--10 retention slope was \(-0.15\)
-percentage points per generation, compared with \(-1.13\) without
-removal. Thus, attenuation of the later decline is supported for this
-Qwen configuration and protocol; it is not inferred from the invalid
-C1/C5 comparison.
+\msloc{Section~4.5 (Qwen B7 dose--response); Section~4.6 (Gemma~3 G2
+dose--response and mechanistic caveat); Section~3.5 (ETP framework and
+pilot exclusion).}
 
-Gemma~3 showed a different response. In G2, 50\% removal at \(r=10\)
-raised Generation~10 retention by $\GtwoDeltatenFifty$~percentage points
-across three paired seeds (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
-$p=\GtwoPtenFifty$); the 10\% and 25\% doses gave $\GtwoDeltatenTen$ and
-$\GtwoDeltatenTfive$~points respectively. The Generation~5--10 slope was
-$\GtwoSlopeFifty$~pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, equal within rounding. The
-intervention improved endpoint retention without demonstrably slowing later loss.
+\arhead{Revised manuscript:}
+The revised manuscript reports the B7 and G2 results in Sections~4.5 and~4.6
+and adds the mechanistic caveat in Section~4.6.
 \rconcern{Reviewer \#1, Concern \#5}{Scope of the reproducibility package}{What complete code, checkpoints, prompts, seeds, and raw outputs will support independent reproduction?}
 
 \arhead{Author response:}
@@ -901,12 +910,12 @@ $D10$ (generation index~10) and $D_{10}$ (Distinct-10). The
 $\Delta I$ term is defined inline with Eq.~6 as the difference in
 mean response length between generation~$T$ and generation~0.
 
-\textbf{Effective-rank formula ($\hat{\sigma}_i$ dual use).}
+\textbf{Effective-rank formula ($p_i$ notation).}
 The original Eq.~2 used $\sigma_i$ both for the raw singular values
-and for the normalized weights $p_i = \sigma_i / \sum_j \sigma_j$.
-The revision uses $\hat{\sigma}_i$ for the normalized weights,
-making the normalization condition $\sum_i \hat{\sigma}_i = 1$
-unambiguous.
+and for the normalized weights. The revision uses $p_i$ for the
+normalized weights, with $p_i = \sigma_i / \sum_j \sigma_j$,
+making the normalization condition $\sum_i p_i = 1$ explicit
+and unambiguous.
 
 \textbf{Drift equation ($BA_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$).}
 All symbols in the drift equation are now defined in the text
@@ -918,13 +927,6 @@ with $\theta_i^{(0)}$ denoting the frozen base-model value.
 \textbf{$r \in \{4,10,12,14,16\}$ garbling.}
 This was a rendering artefact of the original PDF (see the response to
 Concern~\#2 below). The set notation is now correct in the revised PDF.
-The evaluation horizon, $\mathrm{D1}_t$ denotes Distinct-1 at
-generation~$t$, and $\mathrm{D1}_0$ denotes its generation-0 value; the comma
-distinguishes the latter from the ambiguous $D_{10}$. We define
-$\Delta I=\mathrm{Instability}(T)-\mathrm{Instability}(1)$, where
-$\mathrm{Instability}(t)$ is the fraction of training items whose normalized
-response changes between generations $t-1$ and $t$.
-$\mathrm{MeanLen}_t$ denotes mean response length at generation~$t$.
 
 \arhead{Author action:}
 We revised Figure~1, the notation table, first-use acronym definitions,
@@ -1010,8 +1012,8 @@ reviewer proposed:
   \mathrm{erank}(BA) = \exp\!\left(-\sum_i p_i \log p_i\right),
   \qquad p_i = \frac{\sigma_i}{\sum_j \sigma_j}
 \]
-with \newtext{$\hat{\sigma}_i \ge 0$ and $\sum_i \hat{\sigma}_i = 1$} stated in Table~1. The
-symbol $\hat{\sigma}_i$ denotes the normalized singular weight; $\sigma_i$ are the raw singular values of $\Delta W$.\ \
+with \newtext{$p_i \ge 0$ and $\sum_i p_i = 1$} stated in Table~1. The
+symbol $p_i$ denotes the normalized singular weight; $\sigma_i$ are the raw singular values of $\Delta W$.\ \
 (Eq.~2, \S3.5.1; Table~1) \\
 
 (c) & Eq.~6 signs, log ratios, $\Delta I$ &
@@ -1044,13 +1046,17 @@ $r \in \{10, 12, 14\}$.\ \ (Table~9; \S3.4) \\
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
 \item \textbf{Font pipeline changed.}
       No embedded subset uses a non-standard encoding. The revised PDF
-      passes \texttt{audit/glyph\_audit.py} with zero flagged characters.
+      uses \texttt{cmap} and \texttt{glyphtounicode} to maximize
+      Unicode coverage; a residual number of Latin Modern Math Type~1
+      operators lack ToUnicode entries (a known limitation of that font
+      subset) and are flagged in the audit output, which is included in
+      the replication package.
       The fault was verified at the point where it appears, not only locally.
 \item \textbf{Equations 1, 2, 3 and 6 rewritten (Section~3.2 and~3.5--3.6).}
       Each was cross-checked against Table~1 term by term.
       Eq.~1: \newtext{$R(t)=|K_0 \cap A(t)|/|K_0|$}.
-      Eq.~2: \newtext{$\mathrm{erank}(M)=\exp(-\sum_i \hat{\sigma}_i \log
-      \hat{\sigma}_i)$, $\hat{\sigma}_i=\sigma_i/\sum_j\sigma_j$}.
+      Eq.~2: \newtext{$\mathrm{erank}(M)=\exp(-\sum_i p_i \log
+      p_i)$, $p_i=\sigma_i/\sum_j\sigma_j$}.
       Eq.~3 now shows absolute value and summation explicitly.
       Eq.~6 rewritten with all terms defined inline.
 \item \textbf{Glyph audit script included in replication package.}
