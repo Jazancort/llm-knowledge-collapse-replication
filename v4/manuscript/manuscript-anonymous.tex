@@ -217,10 +217,9 @@ The main contributions of this work are:
 \rev{a threshold-like transition within the tested grid} on Qwen
     and replicating the same qualitative structure on Gemma~3 at a
     substantially lower threshold (effective rank 3--6 versus 50--88),
-    confirmed across three to five independent seeds per condition.
+    \rev{confirmed across three to six independent seeds for headline conditions; intermediate ablations use a single seed and are labelled descriptive}.
     \item We demonstrate that full fine-tuning learning-rate sweeps on both
-    Qwen and Gemma~3 reproduce the same dose-response pattern, confirming that
-    the phenomenon responds to perturbation magnitude rather than being
+    Qwen and Gemma~3 reproduce the same dose-response pattern, \rev{providing evidence consistent with the phenomenon responding} to perturbation magnitude rather than being
     specific to low-rank adaptation.
     \item \rev{We present a single-seed rank $\times$ learning-rate pilot grid descriptively consistent with the two axes not operating independently; multi-seed replication is needed before formal interaction claims.}
     \item We show that output-distribution diagnostics reveal a
@@ -1138,8 +1137,7 @@ Table~\ref{tab:rank_sweep} summarizes K0 retention, effective rank, trainable
 parameters, and regime classification for each tested configuration. Across the evaluated range, three descriptive contrasts are relevant and must be kept separate.
 \rev{In the original single-seed rank sweep, the $r=16$ run retained 75 of 78
 facts at Gen10 ($96.2\%$). The G1 replicate set at $r=256$ retained
-$[61,\,63,\,61]$ of 78 facts across three seeds ($\rev{\GoneFourMten\% = 79.7\%}$
-mean). We therefore do not treat the single-seed $r=16$ value as a matched
+$[61,\,63,\,61]$ of 78 facts across three seeds (mean $\rev{\GoneMten\%}$; $\rev{\GoneFourMten\%}$ pooled over six seeds). We therefore do not treat the single-seed $r=16$ value as a matched
 replicate for $r=256$.}
 \rev{For matched G3 bf16 pairs (same three seeds, same protocol, rank the only
 variable), $r=16$ retained 76/78 in all three seeds while $r=256$ retained
@@ -1165,7 +1163,7 @@ Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
 32  & 4.4M  & 5  & 96.2\%  & 17.85 & \rev{1} & \rev{Homeostatic} \\
 64  & 8.7M  & 10 & 92.3\%  & 29.52 & \rev{1} & \rev{Homeostatic} \\
 128 & 17.4M & 10 & 89.7\%  & 50.16 & \rev{1} & Bounded \\
-256\textsuperscript{*} & 34.9M & 10 & 79.1\%  & 87.57 & \rev{3} & Degrad. \\
+256\textsuperscript{*} & 34.9M & 10 & \rev{\GoneFourMten\%}  & 87.57 & \rev{6} & \rev{Degradative} \\
 \bottomrule
 \end{tabular*}
 {\footnotesize \textsuperscript{*}Mean across \rev{six independent seeds (G1: seeds 15/137/256; G4: seeds 42/101/202); the three-seed G1 subset alone gives 79.1\%. See \S4.6.}}
@@ -1201,13 +1199,10 @@ $r=256$, retention declines progressively,
 % Inclinação pós-adaptação (Gen5→Gen10) é ~1.0 pp/gen para r=256.
 reaching \rev{$\GoneFourMten\%$} (mean across \rev{six seeds, G1$+$G4}) by Gen10 with no sign of
 stabilization within the observed horizon. The post-adaptation slope
-\rev{(Gen5 to Gen10, $N=6$) is $\GoneSlope$~pp per generation.}
+\rev{(Gen5 to Gen10, $N=6$) is $\GoneFourteenSlope$~pp per generation; the three-seed G1 subset alone gives $\GoneSlope$~pp/generation.}
 
 The dose-response curve (Fig.~\ref{fig:trajectories}b) reveals several
-additional features. First, the
-relationship between rank and retention is non-increasing across all
-six values, spanning more than an order of magnitude in trainable parameters
-(545K to 34.9M). \rev{Retention is non-increasing across the six tested ranks, with $r=4$ and $r=32$ evaluated at Gen~5 and the remainder at Gen~10; the comparison therefore spans two horizons and is reported as ordinal rather than as a single monotonic curve}. Second, the
+additional features. First, \rev{retention is non-increasing across the six tested ranks, spanning more than an order of magnitude in trainable parameters (545K to 34.9M), with $r=4$ and $r=32$ evaluated at Gen~5 and the remainder at Gen~10; the comparison therefore spans two horizons and is reported as ordinal rather than as a single monotonic curve}. Second, the
 decline accelerates at higher ranks: the gap between $r=64$ (92.3\%) and $r=256$
 (79.1\%) is substantially larger than any gap between adjacent lower-rank
 configurations. Third, effective rank increases sub-linearly with nominal rank
@@ -1250,8 +1245,7 @@ evidence.
 Table~\ref{tab:transitions} summarizes item-level transitions across the rank
 sweep. In the homeostatic regime, facts lost at one generation are recovered at
 similar rates (net loss $\approx 0$), indicating bounded oscillation rather than
-progressive forgetting. In the degradative regime, \rev{losses exceeded} recoveries in \rev{the single seed analysed (Table~5)}, and the balance
-recoveries, producing monotonic net displacement.
+progressive forgetting. In the degradative regime, \rev{losses exceeded recoveries in the single seed analysed (Table~\ref{tab:transitions}), producing monotonic net displacement.}
 
 \begin{table}[tp]
 \caption{Item-level transitions across recursive generations on
@@ -1630,7 +1624,7 @@ varied vocabulary while losing factual anchoring. We refer to this as an
 \textit{elaborative drift} phenotype: the model produces longer, lexically
 diverse, but factually unanchored responses.
 
-\rev{The $r=128$ (bounded) and $r=256$ (degradative) configurations therefore exhibit distinct distributional failure modes despite both departing from stable behavior: $r=128$ degrades through filler accumulation, while $r=256$ degrades through elaborative dispersion.}
+\rev{The $r=128$ (bounded) and $r=256$ (\rev{lowest-pressure degradative}) and $r=128$ (\rev{transition-zone}) configurations therefore exhibit distinct distributional failure modes despite both departing from stable behavior: $r=128$ degrades through filler accumulation, while $r=256$ degrades through elaborative dispersion.}
 
 These observations motivate a descriptive three-regime taxonomy:
 
@@ -1737,9 +1731,7 @@ Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 
 \rev{$+9.2$}\,pp at 50\% ($p < 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
 paired $t$-test \rev{$p = 0.009$, $0.003$, $p < 0.001$}). A 50\% reduction
-\rev{reduces the rate of progressive loss to $-0.15$\,pp/generation and moves the system to the bounded regime}: the Gen~5$\to$10 slope is
-\rev{$-0.15$}\,pp/generation versus \rev{$-1.13$}\,pp/generation at 0\% (mean across five seeds, difference of Gen10$-$Gen5 divided by five generations), shifting the
-system from the degradative to the bounded regime by the criterion of
+\rev{reduces the rate of progressive loss to $\BsevenSlopeFifty$\,pp/generation} versus $\BsevenSlopeZero$\,pp/generation at 0\% (mean across five seeds), shifting the system from the degradative to the bounded regime by the criterion of
 Section~\ref{sec:res_capacity}.
 
 The pre-registered prediction that 50\% removal would match halving the
@@ -1814,8 +1806,8 @@ pressure.}
 \end{figure}}
 
 Taken together, the intervention experiments show that the 
-ev{degradative trajectory can be attenuated under the evaluated conditions}. 
-ev{On Qwen, a 50\% reduction moved the system from the degradative to the bounded regime; on Gemma~3, it raised Gen~10 retention without reducing the rate of loss. Neither constitutes a return to homeostatic behaviour} in the \rev{lowest-pressure degradative configuration tested}, complementing the
+\rev{degradative trajectory can be attenuated under the evaluated 
+conditions. On Qwen, a 50\% reduction moved the system from the degradative to the bounded regime; on Gemma~3, it raised Gen~10 retention without reducing the rate of loss. Neither outcome constitutes a return to homeostatic behaviour.} These results the \rev{lowest-pressure degradative configuration tested}, complementing the
 capacity and perturbation results presented in the preceding sections. We note
 that verification-based approaches \citep{yi2025} represent an orthogonal
 mitigation axis (filtering by quality rather than quantity); our exposure
@@ -1919,8 +1911,7 @@ motivation for treating them as manifestations of a common organizing principle.
 The framework is empirical rather than theoretical. We do not propose a
 closed-form expression that combines rank, learning rate, and exposure into a
 single scalar predictor. Instead, the experiments reveal that each variable independently
-controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved.}\,pp/generation), whereas a 10\% reduction did not
-(\rev{$-1.49$\,pp/generation, marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.}
+controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $\BsevenSlopeFifty$\,pp/generation, whereas a 10\% reduction did not --- its slope was $-1.49$\,pp/generation, marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.}
 
 \rev{The contribution is the existence and reproducibility of this
 \rev{threshold-like transition within the tested grid}, not the numerical threshold itself.} The present work does not claim that the
@@ -1937,12 +1928,8 @@ single-variable effects. Beyond the interaction itself, two additional
 convergences support this interpretation:
 the transition boundary induced by each axis shares the same qualitative
 signature (\rev{threshold-like rather than gradual within the tested grid}), and the same distributional drift patterns
-accompany degradation regardless of which axis crosses the threshold. These
-convergences would be coincidental under a model of three independent failure
-modes, but are naturally explained by a shared underlying sensitivity to the
-magnitude of per-generation parameter perturbation. Developing a quantitative
-formulation that combines update capacity, perturbation magnitude, and exposure
-into a single predictive scalar remains an important direction for future work.
+accompany degradation regardless of which axis crosses the threshold. \rev{Developing a quantitative formulation that combines update capacity, perturbation magnitude, and exposure
+into a single predictive scalar remains an important direction for future work.}
 
 Table~\ref{tab:evidence} summarizes how each component of the framework is
 supported by independent experimental evidence.
@@ -2105,7 +2092,7 @@ to factual loss (bounded in the first, progressive in the second).
 The elaborative drift phenotype is not unique to Qwen: the Gemma~4~E2B $r=64$
 configuration exhibits the same pattern (response length inflation from 3.6 to
 4.4 words, Distinct-1 collapse from 0.55 to 0.43, stopword ratio increase from
-0.23 to 0.28), suggesting that \rev{The same pattern appears in the single-seed Gemma~4 E2B run, which is consistent with, but does not establish, generalisation of this signature across backbone families.}
+0.23 to 0.28), \rev{Because that run used a single seed, the pattern is consistent with, but does not establish, generalisation of this signature across backbone families.}
 
 The practical implication is that monitoring recursive training systems solely
 through factual accuracy or loss metrics risks missing the onset of
@@ -2157,8 +2144,7 @@ stable. These signals are computationally inexpensive and require no additional
 evaluation infrastructure beyond what is already needed for generation-level
 quality assessment.
 
-Regarding intervention design, the \rev{dose--response results demonstrate that boundary}
-configurations are sensitive to graded changes in synthetic exposure. \rev{A 50\%
+Regarding intervention design, the \rev{dose--response results indicate that the lowest-pressure degradative configurations tested} are sensitive to graded changes in synthetic exposure. \rev{A 50\%
 reduction strongly attenuated progressive loss on Qwen B7; on Gemma~3 G2,
 it improved Gen10 retention without reducing the observed rate of loss.
 Smaller doses (10--25\%) produced partial, dose-proportional retention benefits. An exploratory pilot at
