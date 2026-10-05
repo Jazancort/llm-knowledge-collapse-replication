@@ -1,172 +1,51 @@
 \documentclass[11pt,a4paper]{article}
-
-% ══════════════════════════════════════════════════════════════════════════════
-% HIGHLIGHT SWITCH
-% ══════════════════════════════════════════════════════════════════════════════
-% Três formas de controlar:
-%
-% 1. MANUAL (Overleaf ou compilação avulsa):
-%    Mude a linha \highlighttrue / \highlightfalse abaixo.
-%
-% 2. SCRIPT (build.ps1 — gera os dois PDFs de uma vez):
-%    O script passa \def\HIGHLIGHTOVERRIDE{1} ou {0} via linha de comando.
-%    Nesse caso a linha abaixo é ignorada automaticamente.
-%
-% 3. LINHA DE COMANDO direto:
-%    pdflatex "\def\HIGHLIGHTOVERRIDE{1}\input{response-to-reviewers}" -jobname=response-HIGHLIGHTED
-%    pdflatex "\def\HIGHLIGHTOVERRIDE{0}\input{response-to-reviewers}" -jobname=response-CLEAN
-% ══════════════════════════════════════════════════════════════════════════════
-\newif\ifhighlight
-
-% Detectar override externo; caso contrário usar o switch manual abaixo
-\ifdefined\HIGHLIGHTOVERRIDE
-  \ifnum\HIGHLIGHTOVERRIDE=1\relax
-    \highlighttrue
-  \else
-    \highlightfalse
-  \fi
-\else
-  \highlighttrue   % <── MUDE AQUI quando compilar manualmente
-\fi
-
-% ── packages ──────────────────────────────────────────────────────────────────
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{lmodern}
 \usepackage{microtype}
 \usepackage{parskip}
-\usepackage[table,dvipsnames]{xcolor}
-\usepackage{mdframed}
-\usepackage{soul}          % \hl{} para highlight de texto corrido
-\usepackage{enumitem}
+\usepackage[table]{xcolor}
+\usepackage{amsmath}
+\usepackage[numbers]{natbib}
+\usepackage[normalem]{ulem}
 \usepackage{hyperref}
-\usepackage{amsmath}      % \binom, \text
-\usepackage[numbers]{natbib}  % \citep, \citet
-\usepackage{ulem}         % \sout para \del{}
+\usepackage{titlesec}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\definecolor{chgcolor}{RGB}{0,80,180}
+
 % Macros canônicas do manuscrito
 \input{numbers}
-\usepackage{titlesec}
-\hypersetup{colorlinks=true, linkcolor=NavyBlue, urlcolor=NavyBlue, citecolor=NavyBlue}
 
-% ── colour palette ────────────────────────────────────────────────────────────
-\definecolor{quotebar}{RGB}{70,100,160}
-\definecolor{quotebg}{RGB}{245,248,252}
-\definecolor{sectionbar}{RGB}{25,55,115}
-\definecolor{chgcolor}{RGB}{0,80,180}        % azul para texto alterado
-\definecolor{newbg}{RGB}{230,242,255}        % fundo azul-claro (novo texto)
-\definecolor{delbg}{RGB}{255,225,225}        % fundo vermelho-claro (removido)
+% Section style: clean, minimal
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{0.5em}{}
+\titleformat{\subsection}{\normalsize\itshape}{}{0em}{}
 
-% ── highlight macros (condicionais) ───────────────────────────────────────────
-%
-%   \chg{texto}        texto alterado/inserido  → azul + fundo azul-claro (highlighted)
-%                                               → azul normal (clean)
-%   \del{texto}        texto removido           → riscado vermelho (highlighted)
-%                                               → invisível / omitido (clean)
-%   \ins{texto}        sinônimo de \chg para inserções longas
-%   \revised{trecho}   trecho do MS reproduzido na resposta → sempre azul
-%   \msnote{text}      nota de trabalho interna → só aparece com \highlighttrue
-%
-\newcommand{\chg}[1]{%
-  \ifhighlight
-    \begingroup\sethlcolor{newbg}\hl{#1}\endgroup
-  \else
-    #1%
-  \fi
-}
-
-\newcommand{\ins}[1]{\chg{#1}}   % alias
-
-\newcommand{\del}[1]{%
-  \ifhighlight
-    {\color{red}\sout{#1}}%
-  \else
-    % texto removido não aparece na versão limpa
-  \fi
-}
-
-\newcommand{\revised}[1]{\textcolor{chgcolor}{\textit{#1}}}
-
-\newcommand{\rev}[1]{\textcolor{chgcolor}{#1}}
-\newcommand{\msnote}[1]{%
-  \ifhighlight
-    \textit{\textcolor{gray!70}{[#1]}}%
-  \fi
-}
-
-% ── reviewer-quote environment ────────────────────────────────────────────────
-\newenvironment{rcomment}{%
-  \begin{mdframed}[
-    backgroundcolor=quotebg,
-    linecolor=quotebar,
-    linewidth=3pt,
-    topline=false,bottomline=false,rightline=false,
-    innerleftmargin=10pt,innerrightmargin=8pt,
-    innertopmargin=6pt,innerbottommargin=6pt,
-    skipabove=8pt,skipbelow=4pt
-  ]\itshape\small
-}{%
-  \end{mdframed}\vspace{2pt}%
-}
-
-% ── location macro (página/linha da alteração no manuscrito) ──────────────────
-%   \msloc{p.~14, ll.~327--345}
-\newcommand{\msloc}[1]{%
-  \par\vspace{2pt}%
-  \noindent\textbf{Location in revised manuscript:} \textit{#1}\par\vspace{4pt}%
-}
-
-% ── section style ─────────────────────────────────────────────────────────────
-\titleformat{\section}
-  {\large\bfseries\color{sectionbar}}{\thesection}{0.6em}{}
-  [\vspace{-4pt}\textcolor{sectionbar}{\rule{\linewidth}{0.6pt}}]
-\titleformat{\subsection}
-  {\normalsize\bfseries}{}{0em}{}
-
-% ══════════════════════════════════════════════════════════════════════════════
 \begin{document}
 
-% ── header ────────────────────────────────────────────────────────────────────
 \begin{center}
-  {\Large\bfseries Response to Reviewers}%
-  \ifhighlight\quad{\normalsize\color{red}[HIGHLIGHTED VERSION]}\fi\\[6pt]
-  {\large Knowledge-Based Systems — Elsevier}\\[4pt]
-  Manuscript ID: \textbf{KNOSYS-D-26-21490}\\[2pt]
-  \textit{Effective Training Pressure Gates Recursive Knowledge Degradation\\
-          in LLMs: A Multi-Axis Dose-Response Study}\\[4pt]
-  Revision round:~1\qquad Date: \today
+{\large\textbf{Response to Reviewers}}\\[4pt]
+\textit{Knowledge-Based Systems} (Elsevier)\\[2pt]
+Manuscript ID: KNOSYS-D-26-21490\\[2pt]
+\textit{Effective Training Pressure Gates Recursive Knowledge Degradation
+in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
+\today
 \end{center}
 
-\noindent\rule{\linewidth}{0.8pt}\vspace{4pt}
+\medskip\noindent
+We thank the editor and both reviewers for their careful and constructive
+reading of the manuscript. Each comment is addressed point by point below.
+Revised text quoted from the manuscript appears in \textcolor{chgcolor}{blue}.
 
-We thank the editor and both reviewers for their careful reading of the
-manuscript. Each point has been addressed systematically below. Changes to
-the manuscript text are shown in \revised{blue italic} when quoted in this
-letter\ifhighlight{ and highlighted in blue in the marked-up manuscript
-version}\fi.
-
-% ── legend (highlighted version only) ────────────────────────────────────────
-\ifhighlight
-\begin{mdframed}[
-  backgroundcolor=yellow!10,linecolor=orange!60,linewidth=1pt,
-  innerleftmargin=8pt,innerrightmargin=8pt,
-  innertopmargin=6pt,innerbottommargin=6pt,
-  skipabove=8pt,skipbelow=6pt
-]
-\textbf{Legend (highlighted version):}
-\quad \chg{inserted / changed text}\quad
-\del{deleted text}\quad
-\revised{text quoted from manuscript}
-\end{mdframed}
-\fi
-
-% ══════════════════════════════════════════════════════════════════════════════
+\bigskip
 \section*{Editor}
 
-\begin{rcomment}
-Revise (including language editing). Provide point-by-point response to
+\begin{quote}
+\itshape Revise (including language editing). Provide point-by-point response to
 each reviewer comment in the cover letter.
-\end{rcomment}
+\end{quote}
+
 
 We have revised the manuscript throughout for clarity and have used
 Elsevier's Author Services English Language Editing service. The
@@ -177,10 +56,11 @@ point-by-point response follows.
 
 \subsection{R1.Q1}
 
-\begin{rcomment}
-How can effective training pressure be quantitatively calibrated and
+\begin{quote}
+\itshape How can effective training pressure be quantitatively calibrated and
 prospectively tested on an unseen backbone or dataset?
-\end{rcomment}
+\end{quote}
+
 
 We agree that the present experiments do not establish a transferable
 scalar ETP predictor or a prospective threshold for an unseen backbone
@@ -209,15 +89,18 @@ predicts qualitative behavior (homeostatic vs.\ bounded) for
 pre-specified configurations on the tested backbone. Prediction of the
 exact degradative threshold remains uncalibrated.
 
-\msloc{Section~3.5 (ETP as framework, revised); Section~\ref{sec:limitations}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.5 (ETP as framework, revised); Section~\ref{sec:limitations}
 (prospective calibration protocol); Section~4.4 (G5 prospective results).}
+
 
 \subsection{R1.Q2}
 
-\begin{rcomment}
-How are quantization, optimizer state, data order, and model-specific
+\begin{quote}
+\itshape How are quantization, optimizer state, data order, and model-specific
 dynamics separated from the claimed pressure effects?
-\end{rcomment}
+\end{quote}
+
 
 We thank the reviewer for this precise question. The revised manuscript
 addresses each potential confound through a dedicated control, all of which
@@ -235,7 +118,9 @@ NF4 baseline; at $r=256$ bf16 achieves Gen10=79.1\%, within 0.0~pp of the
 NF4 condition. The delta between NF4 and bf16 is $\leq$0.1~pp at both
 ranks. Quantization is therefore not driving the observed regime separation.
 
-\msloc{Section~3.9 (tab:controls); Section~4.6 (G3 results).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.9 (tab:controls); Section~4.6 (G3 results).}
+
 
 \textbf{Optimizer state.}
 A fresh optimizer is instantiated at every generation; no momentum or
@@ -243,7 +128,9 @@ adaptive-rate state is carried forward between generations. This is held
 constant across all conditions within a backbone and cannot explain
 differences between conditions that share the same protocol.
 
-\msloc{Section~3.9 (tab:controls), ``Optimizer state'' row.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.9 (tab:controls), ``Optimizer state'' row.}
+
 
 \textbf{Training data order.}
 Ablation G4 runs Qwen at $r=256$ with three independent shuffle seeds
@@ -255,7 +142,9 @@ seed-to-seed variance already present within G1. The combined
 $N=6$ seed set (G1$+$G4) yields Gen10 = $79.7\%\pm1.7$~pp,
 with variance attributable to seed rather than order.
 
-\msloc{Section~3.9 (tab:controls); Section~4.6 (G4 results).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.9 (tab:controls); Section~4.6 (G4 results).}
+
 
 \textbf{ETP-design vs ETP-observed.}
 Following the reviewer's implicit distinction, we now separate two classes
@@ -269,7 +158,9 @@ post-training diagnostic proxies that track how much pressure was actually
 applied, not as pre-specified predictors. The revised text makes this
 distinction explicit and avoids treating erank as a prospective input.
 
-\msloc{Section~3.5 (ETP definition); Table~1 (tab:notation).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.5 (ETP definition); Table~1 (tab:notation).}
+
 
 \textbf{Seed-level contrast for the primary headline claim.}
 For the central Qwen result, the $r=16$ condition is represented by
@@ -295,16 +186,19 @@ over $\binom{10}{5}=252$ allocations gives $p=0.0079$. The effect is
 consistent and large in either case; we report both and clarify the
 seed assignment in the revised manuscript.
 
-\msloc{Section~4.2 (Qwen, G3 paired contrast, descriptive gap 17.7~pp);
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~4.2 (Qwen, G3 paired contrast, descriptive gap 17.7~pp);
 Section~4.3.1 (Gemma~3, $\Delta=+37.8$~pp, $p=0.0625$ sign-flip or
 $p=0.0079$ unpaired permutation).}
 
+
 \subsection{R1.Q3}
 
-\begin{rcomment}
-Do the conclusions hold for longer answers, multi-hop questions, other
+\begin{quote}
+\itshape Do the conclusions hold for longer answers, multi-hop questions, other
 domains, and larger factual evaluation sets?
-\end{rcomment}
+\end{quote}
+
 
 We thank the reviewer for this question, which targets the external validity
 of our findings. We address the three distinct concerns it raises: the
@@ -327,7 +221,9 @@ Bounded, or Degradative retain those classifications under strict scoring.
 This re-evaluation is reported in supplementary Table~S2 and is discussed
 in Section~6 (ll.~2181--2193).
 
-\msloc{Section~6, ll.~2181--2193; supplementary Table~S2.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~6, ll.~2181--2193; supplementary Table~S2.}
+
 
 \textbf{Dataset scope: single dataset, short factoid answers.}
 TriviaQA was chosen specifically to isolate factual retention from
@@ -340,13 +236,15 @@ reasoning, open-ended dialogue, or code synthesis, where output structure
 and evaluation criteria differ substantially. This scope restriction is
 stated explicitly in Section~6 (ll.~2094--2100).
 
-\msloc{Section~6, ll.~2094--2100.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~6, ll.~2094--2100.}
+
 
 \textbf{Larger factual evaluation sets.}
 The held-out evaluation set contains 200 questions, of which $K_0 \in
 \{78\text{--}79\}$ are answered correctly at generation~0 for the Qwen
-backbone. \rev{This evaluation set is disjoint from the 2{,}000-question
-synthetic training stream}: the 200 evaluation questions are held out
+backbone. This evaluation set is disjoint from the 2{,}000-question
+synthetic training stream: the 200 evaluation questions are held out
 and never used for synthetic-data generation or training
 (Section~3.1, ll.~521--523). Scaling the evaluation set would require
 a proportionally larger source corpus and would alter the training-data
@@ -357,14 +255,17 @@ mentioned in Section~6. The current set is consistent with comparable
 prior studies \citep{shumailov2024,keisha2025} and is sufficient to
 characterise regime-level differences across conditions.
 
-\msloc{Section~6, ll.~2094--2100; Section~3.1 (evaluation protocol).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~6, ll.~2094--2100; Section~3.1 (evaluation protocol).}
+
 
 \subsection{R1.Q4}
 
-\begin{rcomment}
-Why does the five-percent exposure reduction stabilize Qwen but not
+\begin{quote}
+\itshape Why does the five-percent exposure reduction stabilize Qwen but not
 Gemma~3, and does this generalize across ranks and seeds?
-\end{rcomment}
+\end{quote}
+
 
 We thank the reviewer for this question, which led directly to a
 substantially revised and pre-registered experiment. We address three issues
@@ -426,14 +327,17 @@ at $n=3$. The overall finding is: on Qwen B7, the 50\% dose strongly
 attenuated progressive loss; on Gemma~3 G2, it improved Gen~10 retention
 without reducing the observed rate of loss.
 
-\msloc{Section~4.5 (B7 Qwen and G2 Gemma~3 dose--response; pre-registration; LR equivalence); Section~6 (mechanism limitation, Gemma~3 r=16 pilot); repository (original C1--C5 pilot archived).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~4.5 (B7 Qwen and G2 Gemma~3 dose--response; pre-registration; LR equivalence); Section~6 (mechanism limitation, Gemma~3 r=16 pilot); repository (original C1--C5 pilot archived).}
+
 
 \subsection{R1.Q5}
 
-\begin{rcomment}
-What complete code, checkpoints, prompts, seeds, and raw outputs will
+\begin{quote}
+\itshape What complete code, checkpoints, prompts, seeds, and raw outputs will
 support independent reproduction?
-\end{rcomment}
+\end{quote}
+
 
 We agree that independent reproduction requires more than aggregate
 retention tables. We have expanded the reproducibility section
@@ -456,48 +360,57 @@ retention tables. We have expanded the reproducibility section
 \end{enumerate}
 
 We also specify which experiments reset adapters and optimizer states
-between generations. \rev{The replication package contains: (1)~all analysis and figure-generation scripts; (2)~the consolidated results CSV (G1--G5, 27 executed training runs, per-generation per-seed retention); (3)~all 11 publication figures at 300\,dpi; and (4)~the pre-registration commit for B7 (\texttt{a916ebf}). The package does \emph{not} contain raw token-level predictions, adapter checkpoints (available on request; $\approx$70\,MB each in bf16), or base-model weights (obtained from their original distributors). It is archived at \url{https://doi.org/10.5281/zenodo.23146342}. Release \texttt{v1.0.3} contains the initial replication scripts and data; the revised analysis scripts and updated \texttt{numbers.tex} from the current submission are not yet included and will be deposited in a subsequent release. Running \texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers (15/15 checks pass). An artifact manifest with SHA-256 hashes is in \texttt{MANIFEST.md}.}
+between generations. The replication package contains: (1)~all analysis and figure-generation scripts; (2)~the consolidated results CSV (G1--G5, 27 executed training runs, per-generation per-seed retention); (3)~all 11 publication figures at 300\,dpi; and (4)~the pre-registration commit for B7 (\texttt{a916ebf}). The package does \emph{not} contain raw token-level predictions, adapter checkpoints (available on request; $\approx$70\,MB each in bf16), or base-model weights (obtained from their original distributors). It is archived at \url{https://doi.org/10.5281/zenodo.23146342}. Release \texttt{v1.0.3} contains the initial replication scripts and data; the revised analysis scripts and updated \texttt{numbers.tex} from the current submission are not yet included and will be deposited in a subsequent release. Running \texttt{python scripts/make\_all.py} reproduces all 112 canonical numbers (15/15 checks pass). An artifact manifest with SHA-256 hashes is in \texttt{MANIFEST.md}.
 Base-model weights are obtained from their original
 distributors and are not redistributed. The revised appendix provides
 an artifact manifest mapping every reported figure and table to its
 generating data and script.
 
-\msloc{Section~\ref{app:repo} (repository and data access, expanded).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~\ref{app:repo} (repository and data access, expanded).}
+
 
 % ══════════════════════════════════════════════════════════════════════════════
 \section{Reviewer 2}
 
 \subsection{R2.1 --- Abbreviations and notation}
 
-\begin{rcomment}
-ETP appears in Figure~1 (``ETP threshold identification'') but is never
+\begin{quote}
+\itshape ETP appears in Figure~1 (``ETP threshold identification'') but is never
 explicitly defined as ``effective training pressure.''
-\end{rcomment}
+\end{quote}
+
 
 We agree. The revised manuscript does not use ``ETP'' as a standalone acronym.
 The term is introduced by name at l.~72
-(\revised{``which we term effective training pressure''}) and used in full
+(\textcolor{blue}{``which we term effective training pressure''}) and used in full
 throughout. Figure~1 (caption ll.~692--698) no longer contains the
 abbreviation in isolation.
 
-\msloc{Abstract l.~72; Figure~1 caption ll.~692--698.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~72; Figure~1 caption ll.~692--698.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-MTLD is introduced as ``a length-robust diversity estimate'' but the
+\begin{quote}
+\itshape MTLD is introduced as ``a length-robust diversity estimate'' but the
 acronym is not expanded.
-\end{rcomment}
+\end{quote}
+
 
 Corrected. The first occurrence now reads
-\revised{``Measure of Textual Lexical Diversity (MTLD)''} followed by the
+\textcolor{blue}{``Measure of Textual Lexical Diversity (MTLD)''} followed by the
 functional description.
 
-\msloc{l.~875.}
+
+\smallskip\noindent\textit{Location in revised manuscript: l.~875.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-KL, JS, and coverage appear in Figure~1 without definition.
-\end{rcomment}
+\begin{quote}
+\itshape KL, JS, and coverage appear in Figure~1 without definition.
+\end{quote}
+
 
 These three quantities were used as conceptual labels for
 distribution-comparison diagnostics that are not computed or reported anywhere
@@ -506,39 +419,48 @@ caption describes only quantities that are measured and reported: factual
 retention, effective rank, and distributional shift (response length, content
 efficiency, SDI-3).
 
-\msloc{Figure~1 caption, ll.~692--698.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Figure~1 caption, ll.~692--698.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded
+\begin{quote}
+\itshape bf16, SVD, TCE, QLoRA, and LoRA are used without consistently expanded
 forms.
-\end{rcomment}
+\end{quote}
+
 
 All four acronyms now have explicit parenthetical expansions at first use:
-\revised{``full fine-tuning (FFT)''} at l.~75;
-\revised{``singular value decomposition (SVD)''} at l.~332;
-\revised{``Quantized Low-Rank Adaptation (QLoRA)''} at l.~333.
+\textcolor{blue}{``full fine-tuning (FFT)''} at l.~75;
+\textcolor{blue}{``singular value decomposition (SVD)''} at l.~332;
+\textcolor{blue}{``Quantized Low-Rank Adaptation (QLoRA)''} at l.~333.
 The term \textit{bf16} (BFloat16) is glossed on first use. TCE does not
 appear in the revised manuscript. LoRA was already expanded in the Related
 Work section.
 
-\msloc{ll.~75, 332, 333.}
+
+\smallskip\noindent\textit{Location in revised manuscript: ll.~75, 332, 333.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-``Homeo.'' is used in Table~2 without definition.
-\end{rcomment}
+\begin{quote}
+\itshape ``Homeo.'' is used in Table~2 without definition.
+\end{quote}
 
-The abbreviation has been expanded to \revised{``Homeostatic''} in all four
+
+The abbreviation has been expanded to \textcolor{blue}{``Homeostatic''} in all four
 occurrences within the rank-sweep results table.
 
-\msloc{Table~2 (tab:rank\_sweep), regime column.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Table~2 (tab:rank\_sweep), regime column.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-$K_0$ is used both as a set of questions and as a retention metric.
+\begin{quote}
+\itshape $K_0$ is used both as a set of questions and as a retention metric.
 This dual use is not always clear.
-\end{rcomment}
+\end{quote}
+
 
 We have added a dedicated notation table (Table~1, ll.~438--445) that
 distinguishes the two uses explicitly: $K_0$ denotes the integer cardinality
@@ -547,13 +469,16 @@ K_t/K_0$ denotes the retention ratio at generation~$t$. The symbols $R(t)$,
 $d(t)$, and the efficiency numerator have been harmonised throughout
 Equations~1--6 and the surrounding prose.
 
-\msloc{Table~1 (tab:notation), ll.~438--445; Equations~1, 3, 5.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Table~1 (tab:notation), ll.~438--445; Equations~1, 3, 5.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-$T$, $D_{1,T}$, $D_{10}$, $\Delta I$, $\mathrm{Instability}(1)$,
+\begin{quote}
+\itshape $T$, $D_{1,T}$, $D_{10}$, $\Delta I$, $\mathrm{Instability}(1)$,
 $\mathrm{MeanLen}_T$, and related symbols in Eq.~6 are not fully defined.
-\end{rcomment}
+\end{quote}
+
 
 All symbols in Eq.~6 (SDI-3) and its supporting quantities are now defined in
 Table~1 (tab:notation) and in the inline text preceding the equations:
@@ -563,27 +488,33 @@ content efficiency over the evaluation horizon; $\mathrm{Instability}(1)$ =
 SDI-3 sub-score at the first generation; $\mathrm{MeanLen}_T$ = mean response
 length averaged over all $T$ generations.
 
-\msloc{Table~1 (tab:notation); prose preceding Eq.~6.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Table~1 (tab:notation); prose preceding Eq.~6.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-The effective-rank formula uses $\sigma_i$ as both singular values and
+\begin{quote}
+\itshape The effective-rank formula uses $\sigma_i$ as both singular values and
 normalised singular values. The normalisation condition is mathematically
 incorrect as written.
-\end{rcomment}
+\end{quote}
+
 
 Corrected. Eq.~2 now defines $p_i = \sigma_i / \sum_j \sigma_j$ explicitly,
 reserving $\sigma_i$ for the raw singular value throughout. The entropy is
 computed over the normalised distribution $\{p_i\}$, consistent with
 Table~1.
 
-\msloc{Eq.~2 (erank definition); Table~1 (tab:notation).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Eq.~2 (erank definition); Table~1 (tab:notation).}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-$\|BA\|_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in
+\begin{quote}
+\itshape $\|BA\|_F$, $\theta_i^{(t)}$, $\theta_i^{(0)}$, and related notation in
 the drift equation are not consistently defined.
-\end{rcomment}
+\end{quote}
+
 
 Both quantities are now defined in Table~1 and at first use: $\|BA\|_F$
 denotes the Frobenius norm of the LoRA reconstruction matrix, averaged across
@@ -591,13 +522,16 @@ adapted modules; $\theta_i^{(t)}$ and $\theta_i^{(0)}$ denote the $i$-th
 parameter at generation $t$ and at generation~0. The mean absolute drift $d(t)$
 in Eq.~3 is the mean over all $i$ of $|\theta_i^{(t)} - \theta_i^{(0)}|$.
 
-\msloc{Table~1 (tab:notation); Eqs.~3--4 and surrounding prose.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Table~1 (tab:notation); Eqs.~3--4 and surrounding prose.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-``$r \in \{4,10,12,14,16\}$'' and ``$r \approx \{10,12,14\}$'' are
+\begin{quote}
+\itshape ``$r \in \{4,10,12,14,16\}$'' and ``$r \approx \{10,12,14\}$'' are
 garbled in the PDF; they should use clear set notation.
-\end{rcomment}
+\end{quote}
+
 
 The garbled rendering was a font-encoding artefact in the PDF generated from
 the original submission. The revised manuscript uses the \texttt{lmodern}
@@ -605,15 +539,18 @@ package with T1 encoding throughout, which resolves all set-notation rendering.
 The expressions now compile correctly as $r \in \{4, 10, 12, 14, 16\}$ and
 $r \in \{10, 12, 14\}$.
 
-\msloc{Preamble (lmodern + T1); all set-notation instances throughout.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Preamble (lmodern + T1); all set-notation instances throughout.}
+
 
 \subsection{R2.2 --- Equations and tables}
 
-\begin{rcomment}
-Equations 1--6 are severely malformed in the provided PDF. Eq.~1 uses
+\begin{quote}
+\itshape Equations 1--6 are severely malformed in the provided PDF. Eq.~1 uses
 ``Retention.t /'' instead of a clear function notation and has a garbled
 summation over $K_0$.
-\end{rcomment}
+\end{quote}
+
 
 The malformed rendering was an artefact of the font encoding used in the
 original submission: Unicode characters in mathematical mode were not mapped
@@ -631,14 +568,17 @@ and the surrounding prose. The symbol $\mathrm{Retention}(t)$ that appeared in
 the original version has been replaced by $R(t)$ throughout Equations~1, 3,
 and 5 and the accompanying text.
 
-\msloc{Preamble (lmodern + T1); Eq.~1, l.~595.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Preamble (lmodern + T1); Eq.~1, l.~595.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-Eq.~2 for effective rank is missing the negative sign and summation.
+\begin{quote}
+\itshape Eq.~2 for effective rank is missing the negative sign and summation.
 It should be $\exp\!\bigl(-\sum_i p_i \log p_i\bigr)$,
 with $p_i = \sigma_i / \sum_j \sigma_j$.
-\end{rcomment}
+\end{quote}
+
 
 Corrected. Eq.~2 now reads
 \[
@@ -649,13 +589,16 @@ values of $BA$. The normalised symbol $\hat{\sigma}_i$ is distinct from the raw
 singular value $\sigma_i$, consistent with Table~1. The formula is the
 standard effective-rank definition of \citet{roy2007}.
 
-\msloc{Eq.~2, ll.~798--803.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Eq.~2, ll.~798--803.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-Eq.~6 for SDI-3 is unclear: signs, log ratios, and the $\Delta I$ term
+\begin{quote}
+\itshape Eq.~6 for SDI-3 is unclear: signs, log ratios, and the $\Delta I$ term
 are not consistently defined.
-\end{rcomment}
+\end{quote}
+
 
 Eq.~6 now reads
 \[
@@ -673,12 +616,15 @@ $\Delta I$ is the absolute drop in content efficiency from generation~1 to
 generation~$T$. A positive SDI-3 score therefore indicates cumulative
 distributional deterioration.
 
-\msloc{Eq.~6, ll.~881--886; Table~1 (tab:notation); prose ll.~870--890.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Eq.~6, ll.~881--886; Table~1 (tab:notation); prose ll.~870--890.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-What is ``$5 \times 10^6$'' in Table~7? Please check also elsewhere.
-\end{rcomment}
+\begin{quote}
+\itshape What is ``$5 \times 10^6$'' in Table~7? Please check also elsewhere.
+\end{quote}
+
 
 The garbled rendering was again a font-encoding artefact. The value in
 Table~7 (tab:ranklr) is the learning rate $5 \times 10^{-6}$, not
@@ -688,7 +634,9 @@ $5 \times 10^{-6}$ throughout (Table~7 header row, l.~1473, and all
 inline references). We have verified that no other table or equation
 contains a similar rendering failure in the revised submission.
 
-\msloc{Table~7 (tab:ranklr), l.~1473; preamble (lmodern + T1).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Table~7 (tab:ranklr), l.~1473; preamble (lmodern + T1).}
+
 
 \subsection{R2.3 --- Technical and data inconsistencies}
 
@@ -696,81 +644,94 @@ We thank the reviewer for this careful cross-checking of results against tables 
 prose. Each inconsistency has been corrected as described below.
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-\textbf{Qwen threshold inconsistency.} Abstract and Section~4.2.3 state
+\begin{quote}
+\itshape \textbf{Qwen threshold inconsistency.} Abstract and Section~4.2.3 state
 the Qwen boundary is between effective ranks 50--88. Section~5.1 states
 Qwen remains outside the degradative regime ``up to effective rank~150.''
 This contradicts Table~2, where $r=256$ has effective rank~87.57 and is
 classified as degradative.
-\end{rcomment}
+\end{quote}
+
 
 The phrase ``up to effective rank~150'' has been removed. All threshold
-language now uses the form \revised{``an abrupt, threshold-like transition
+language now uses the form \textcolor{blue}{``an abrupt, threshold-like transition
 within the tested grid''} (l.~72, l.~95), which accurately reflects that the
 boundary is established empirically between adjacent tested configurations
 rather than extrapolated to untested values. The interval 50--88 (effective
 ranks of $r=128$ and $r=256$ respectively) is retained as the localization
 of the boundary. No claim is made beyond the tested range.
 
-\msloc{Abstract l.~72; Contribution~\#1 l.~95; Section~5.1 (phrase removed).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~72; Contribution~\#1 l.~95; Section~5.1 (phrase removed).}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-\textbf{$r=128$ classification.} $r=128$ is classified as ``Bounded'' in
+\begin{quote}
+\itshape \textbf{$r=128$ classification.} $r=128$ is classified as ``Bounded'' in
 Table~2, but Section~4.4.3 calls $r=128$ and $r=256$
 ``above-threshold configurations.''
-\end{rcomment}
+\end{quote}
+
 
 The phrase ``above-threshold configurations'' in Section~4.4.3 now refers
 only to $r=256$, which Table~2 classifies as Degradative. The term
-\revised{``above-threshold''} is used exclusively for configurations in
+\textcolor{blue}{``above-threshold''} is used exclusively for configurations in
 the Degradative regime. $r=128$ (Bounded) is described as a
-\revised{``transition-zone configuration''} where distributional signatures
+\textcolor{blue}{``transition-zone configuration''} where distributional signatures
 begin to emerge without producing the full degradative trajectory.
 
-\msloc{Section~4.4.3, ll.~1061, 1570.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~4.4.3, ll.~1061, 1570.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-\textbf{$r=256$ boundary claim.} $r=256$ is repeatedly called a
+\begin{quote}
+\itshape \textbf{$r=256$ boundary claim.} $r=256$ is repeatedly called a
 ``boundary configuration,'' but Table~2 classifies it as degradative.
 The boundary lies between $r=128$ and $r=256$.
-\end{rcomment}
+\end{quote}
+
 
 Agreed. The five occurrences of ``boundary configuration'' referring to
 $r=256$ have been replaced throughout with
-\revised{``lowest-pressure degradative configuration tested''}, which
+\textcolor{blue}{``lowest-pressure degradative configuration tested''}, which
 correctly identifies $r=256$ as the degradative anchor while making
 explicit that the transition itself is localised between $r=128$ and
 $r=256$.
 
-\msloc{ll.~1737, 1915, 2063, 2069, 2159.}
+
+\smallskip\noindent\textit{Location in revised manuscript: ll.~1737, 1915, 2063, 2069, 2159.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-\textbf{Gemma~3 degradative range.} Section~5.2 states ``$r \geq 16$ on
+\begin{quote}
+\itshape \textbf{Gemma~3 degradative range.} Section~5.2 states ``$r \geq 16$ on
 Gemma~3,'' but Table~4 shows $r \in \{10,12,14\}$ already degradative at
 Gen~5. The boundary is below $r=10$.
-\end{rcomment}
+\end{quote}
+
 
 Corrected. Table~4 (tab:gemma3) reports retention of 78.3\,\%, 73.9\,\%,
 and 69.6\,\% for $r=10$, 12, and 14 respectively at Gen~5, all classified
 as Degradative. The regime boundary is placed at effective ranks between
 3 and 6 (between $r=4$, which is Homeostatic, and $r=10$, which is
-Degradative). The text now reads \revised{``the Gemma~3 regime boundary
+Degradative). The text now reads \textcolor{blue}{``the Gemma~3 regime boundary
 lies between effective ranks 3 and 6, below $r=10$''}, consistent with
 Table~4. The phrase ``$r \geq 16$'' has been removed.
 
-\msloc{Section~5.2; Table~4 (tab:gemma3), ll.~1265, 1277--1280.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~5.2; Table~4 (tab:gemma3), ll.~1265, 1277--1280.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-\textbf{Abstract overclaim.} ``Three to five independent seeds per
+\begin{quote}
+\itshape \textbf{Abstract overclaim.} ``Three to five independent seeds per
 condition'' is not accurate: many conditions are single-seed; only
 headline comparisons use multiple seeds.
-\end{rcomment}
+\end{quote}
 
-The abstract now reads \revised{``three to five independent seeds for
+
+The abstract now reads \textcolor{blue}{``three to five independent seeds for
 headline conditions (single seed for intermediate ablations)''} (l.~69),
 which accurately reflects the experimental design. Headline rank levels
 ($r \in \{16, 256\}$ on Qwen; $r \in \{4, 16\}$ on Gemma~3) use three to
@@ -778,32 +739,38 @@ five seeds; intermediate and ablation conditions use a single seed. This
 distinction is also stated in the Methods and reported per table via the
 added $N$ column.
 
-\msloc{Abstract l.~69.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~69.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-\textbf{FFT on Gemma~3: non-monotonic results.} Retention values of
+\begin{quote}
+\itshape \textbf{FFT on Gemma~3: non-monotonic results.} Retention values of
 78.3\,\%, 54.3\,\%, and 63.0\,\% for learning rates $10^{-6}$,
 $5\times10^{-6}$, and $10^{-5}$ are non-monotonic. The conclusion that
 this ``confirms'' the magnitude axis is too strong for a single-seed,
 non-monotonic result.
-\end{rcomment}
+\end{quote}
+
 
 Agreed. The text (l.~1147--1152) now notes explicitly that
-\revised{``no rank reversal or non-monotonicity is observed''} in the
+\textcolor{blue}{``no rank reversal or non-monotonicity is observed''} in the
 primary Qwen rank sweep; for the FFT on Gemma~3, the word ``confirms'' has
-been replaced with \revised{``is consistent with''} and the non-monotonic
+been replaced with \textcolor{blue}{``is consistent with''} and the non-monotonic
 pattern is acknowledged: the result is treated as supporting evidence at
 $n=1$ seed rather than confirmatory.
 
-\msloc{ll.~1147--1149 (Qwen rank sweep prose); FFT Gemma~3 paragraph.}
+
+\smallskip\noindent\textit{Location in revised manuscript: ll.~1147--1149 (Qwen rank sweep prose); FFT Gemma~3 paragraph.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-\textbf{C5 removal percentage.} Section~3.4 mentions ``15\% removal,''
+\begin{quote}
+\itshape \textbf{C5 removal percentage.} Section~3.4 mentions ``15\% removal,''
 while Section~4.5 reports approximately 5\,\% token reduction.
 This discrepancy must be clarified.
-\end{rcomment}
+\end{quote}
+
 
 The two figures refer to different quantities. The original C5 condition
 removed 15\,\% of training \emph{examples} (questions), which reduced the
@@ -817,7 +784,9 @@ $n=3$). The dose--response reported in Section~4.5 (Bloco~7) replaces
 those comparisons; the original C2--C5 results are preserved in
 Appendix~A for transparency.
 
-\msloc{Section~3.7 (definition of C5 doses); Section~4.5 l.~1708--1713.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.7 (definition of C5 doses); Section~4.5 l.~1708--1713.}
+
 
 \subsection{R2.4 --- Methodology}
 
@@ -825,11 +794,12 @@ We thank the reviewer for this detailed methodological critique. We address
 each concern in turn.
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-No formal statistical tests, confidence intervals, or $p$-values are
+\begin{quote}
+\itshape No formal statistical tests, confidence intervals, or $p$-values are
 reported. The paper relies on ranges and non-overlap, which is weak for
 inference.
-\end{rcomment}
+\end{quote}
+
 
 We agree. The revised manuscript adds seed-level exact permutation tests
 for the comparisons where independent training runs are available,
@@ -867,15 +837,18 @@ We do not treat the $K_0=78$ or $K_0=46$ evaluation items as
 independent binomial trials. Item-level analyses are presented as
 descriptive summaries of which individual facts were lost or recovered.
 
-\msloc{Section~4.2 (Qwen, G3 paired contrast $N=3$, descriptive gap
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~4.2 (Qwen, G3 paired contrast $N=3$, descriptive gap
 17.7~pp); Section~4.3.1 (Gemma~3, $\binom{10}{5}=252$, $p=0.0079$);
 Section~4.5 (dose--response, paired $t$-test).}
 
+
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-The effective training pressure framework is not quantified. It is a useful
+\begin{quote}
+\itshape The effective training pressure framework is not quantified. It is a useful
 organizing metaphor, but not a predictive model.
-\end{rcomment}
+\end{quote}
+
 
 We agree with this characterisation and have revised the manuscript
 accordingly. ETP is now presented as an \emph{operational experimental
@@ -887,13 +860,16 @@ diagnostics that track the pressure actually applied). The product
 $\mathrm{erank}\times\mathrm{LR}$ is reported as an exploratory index
 and labelled as such; it is not used as a prospectively validated predictor.
 
-\msloc{Section~3.5; Table~1 (tab:notation).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.5; Table~1 (tab:notation).}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-Cross-architecture normalisation failed, but no alternative calibration
+\begin{quote}
+\itshape Cross-architecture normalisation failed, but no alternative calibration
 method is proposed.
-\end{rcomment}
+\end{quote}
+
 
 We agree that the failed normalisations in Table~6 (tab:normalization) do
 not provide a universal scalar. In the revised manuscript we describe
@@ -903,14 +879,17 @@ out-of-sample validation. We do not propose a universal ETP constant. The
 table is retained as evidence of incommensurability rather than as a
 calibration tool.
 
-\msloc{Section~6 (Limitations); Table~6 (tab:normalization).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~6 (Limitations); Table~6 (tab:normalization).}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-``Effective training pressure'' is not a new quantitative measure; it is a
+\begin{quote}
+\itshape ``Effective training pressure'' is not a new quantitative measure; it is a
 conceptual label for three already-known axes. The paper does not derive a
 scalar predictor or formal theory.
-\end{rcomment}
+\end{quote}
+
 
 We accept this characterisation. The revised Introduction and
 Contribution~\#1 now describe ETP as a \emph{factorial organisational
@@ -921,13 +900,16 @@ evidence across three backbones, the pre-registered exposure result, and the
 identification of architecture-specific regime boundaries, not the label
 itself.
 
-\msloc{Section~1 (Introduction, revised Contribution \#1).}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~1 (Introduction, revised Contribution \#1).}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-The Gemma~4 E2B backbone lacks a citation, may be confused with Gemma~3n
+\begin{quote}
+\itshape The Gemma~4 E2B backbone lacks a citation, may be confused with Gemma~3n
 E2B, and its architecture is described without a source.
-\end{rcomment}
+\end{quote}
+
 
 Corrected. The backbone is now cited as \citet{gemma4_2026} (Gemma Team,
 2026, arXiv:2607.02770) at every introduction point. The architecture
@@ -937,16 +919,19 @@ from the released model configuration in the same technical report. The
 model is unambiguously distinct from Gemma~3n E2B as it uses a
 different parameter count, layer depth, and attention configuration.
 
-\msloc{Section~3.3 (Models and hardware), ll.~647--662.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.3 (Models and hardware), ll.~647--662.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-The ``sharp transition'' claim is weakened by sparse rank grids and wide
+\begin{quote}
+\itshape The ``sharp transition'' claim is weakened by sparse rank grids and wide
 threshold intervals.
-\end{rcomment}
+\end{quote}
+
 
 Agreed. The revised manuscript replaces ``sharp transition'' with
-\revised{``abrupt, threshold-like transition within the tested grid''},
+\textcolor{blue}{``abrupt, threshold-like transition within the tested grid''},
 acknowledging that the transition is characterised empirically by the
 interval between adjacent tested rank values rather than by a precisely
 identified point. We report threshold intervals rather than point estimates
@@ -954,7 +939,9 @@ and describe the intermediate rank sweep ($r\in\{10,12,14\}$ on Gemma~3)
 as a localisation of the transition region, not a sharp boundary
 identification.
 
-\msloc{Abstract l.~72; Contribution~\#1 l.~95; Section~4.2.3.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Abstract l.~72; Contribution~\#1 l.~95; Section~4.2.3.}
+
 
 \subsection{R2.5 --- Format and citations}
 
@@ -962,9 +949,10 @@ We thank the reviewer for auditing the reference list. Each issue has been
 corrected as described below.
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-References [12] and [33] share the same arXiv number: arXiv:2408.14572.
-\end{rcomment}
+\begin{quote}
+\itshape References [12] and [33] share the same arXiv number: arXiv:2408.14572.
+\end{quote}
+
 
 In the revised reference list the arXiv number 2408.14572 appears exactly
 once, assigned to \citet{fawi2024curlora} (\textit{CURLoRA}, Fawi, 2024).
@@ -972,13 +960,16 @@ The duplicate entry that appeared in the submitted version has been removed.
 The reference formerly numbered [33] in the submitted PDF was an artefact
 of a bibliography management error; it is no longer present.
 
-\msloc{References section (cas-refs.bib), entry \texttt{fawi2024curlora}.}
+
+\smallskip\noindent\textit{Location in revised manuscript: References section (cas-refs.bib), entry \texttt{fawi2024curlora}.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-Reference [32] lists arXiv:2512.15634 with year 2024, which is impossible
+\begin{quote}
+\itshape Reference [32] lists arXiv:2512.15634 with year 2024, which is impossible
 if the arXiv ID is from December 2025.
-\end{rcomment}
+\end{quote}
+
 
 Corrected. The entry \texttt{ding2024ranktrade} (Rathore et al.) now carries
 \texttt{year = \{2025\}}, consistent with the December~2025 arXiv submission
@@ -986,13 +977,16 @@ date. The paper appeared in the proceedings of AACL-IJCNLP 2025. The
 \texttt{year = \{2024\}} in the submitted version was a transcription error
 introduced when the preliminary arXiv preprint was first catalogued.
 
-\msloc{References section, entry \texttt{ding2024ranktrade}.}
+
+\smallskip\noindent\textit{Location in revised manuscript: References section, entry \texttt{ding2024ranktrade}.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-No citation is provided for Gemma~4 E2B IT, despite it being a central
+\begin{quote}
+\itshape No citation is provided for Gemma~4 E2B IT, despite it being a central
 backbone.
-\end{rcomment}
+\end{quote}
+
 
 A full citation has been added. The backbone is now cited as
 \citet{gemma4_2026} (Gemma Team, 2026, arXiv:2607.02770) at every point
@@ -1001,18 +995,21 @@ where it is introduced or described, including the experimental setup
 architecture details (hidden dimension, layers, LoRA target modules) are
 sourced from the same technical report.
 
-\msloc{Section~3.3; Section~4.3; References entry \texttt{gemma4\_2026}.}
+
+\smallskip\noindent\textit{Location in revised manuscript: Section~3.3; Section~4.3; References entry \texttt{gemma4\_2026}.}
+
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-Reference [7] ``Keisha et al.'' is used heavily but appears to be a
+\begin{quote}
+\itshape Reference [7] ``Keisha et al.'' is used heavily but appears to be a
 preprint with no venue. Its reliability should be clarified.
-\end{rcomment}
+\end{quote}
+
 
 The entry \texttt{keisha2025} (Keisha et al., 2025) is a non-peer-reviewed
 preprint (arXiv:2509.04796). This is now declared explicitly in the
 bibliography note and in the text at first citation:
-\revised{``\citet{keisha2025} (non-peer-reviewed preprint) report a
+\textcolor{blue}{``\citet{keisha2025} (non-peer-reviewed preprint) report a
 complementary observation...''}.
 The paper is used for contextual framing only; no quantitative claim in our
 manuscript depends exclusively on this source. We have added
@@ -1023,10 +1020,11 @@ for the model-collapse phenomenon wherever both sources were previously cited.
 \texttt{note = \{arXiv:2509.04796. Non-peer-reviewed preprint\}}.}
 
 % ─────────────────────────────────────────────────────────────────────────────
-\begin{rcomment}
-Reference formatting is inconsistent: some entries include conference
+\begin{quote}
+\itshape Reference formatting is inconsistent: some entries include conference
 proceedings, others only arXiv, some lack page numbers or venues.
-\end{rcomment}
+\end{quote}
+
 
 The reference list has been audited and harmonised. Published works include
 their full venue (journal or conference proceedings, volume, pages, DOI
@@ -1037,6 +1035,8 @@ that had previously been submitted with incomplete venue data -- including
 \texttt{zibakhsh2024} -- have been completed. The full revised bibliography
 is provided as \texttt{cas-refs.bib} in the submission package.
 
-\msloc{References section (cas-refs.bib), all entries.}
+
+\smallskip\noindent\textit{Location in revised manuscript: References section (cas-refs.bib), all entries.}
+
 
 \end{document}
