@@ -20,8 +20,10 @@ A Multi-Axis Dose-Response Study}
 \begin{abstract}
 This supplementary document provides the base-model checkpoint
 identifiers (Table~S1) for the three backbone models used in this study.
-Weights are publicly available on the Hugging Face Hub at the repository
-identifiers listed below.
+All three backbones were loaded without an explicit \texttt{revision=}
+argument; the SHA-1 hashes below are the snapshots present in the
+HuggingFace cache at the time of each experiment and are sufficient
+to retrieve the identical weights.
 \end{abstract}
 
 \maketitle
@@ -30,32 +32,55 @@ identifiers listed below.
 \renewcommand{\thetable}{S\arabic{table}}
 
 % ─────────────────────────────────────────────────────────────────────────────
-\section*{Table S1: Base-Model Repository Identifiers}
+\section*{Table S1: Base-Model Checkpoint Identifiers}
 % ─────────────────────────────────────────────────────────────────────────────
 
-All three backbones were retrieved from the Hugging Face Hub using
+All three backbones were loaded from the Hugging Face Hub using
 \texttt{AutoModelForCausalLM.from\_pretrained(repo\_id)} without an
-explicit \texttt{revision=} argument. Weights can be obtained from the
-identifiers below; the exact snapshot loaded is determined by the
-HuggingFace cache state at execution time.
+explicit \texttt{revision=} argument. The SHA-1 hashes below identify
+the snapshots present in the local cache at the time of each experiment
+and are sufficient to retrieve the identical weights via
+\texttt{from\_pretrained(repo\_id, revision=sha1)}.
+
+\textit{Provenance note for Gemma~4~E2B~IT.}
+Snapshot \texttt{70af34e} was downloaded on 2026-06-26; the Gemma~4
+experiments ran on 2026-06-27, when this was the only snapshot in
+cache. A second snapshot (\texttt{3e22461}) entered the cache on
+2026-09-30 and was not used in any reported experiment.
 
 \begin{table}[!t]
-\caption{HuggingFace Hub repository identifiers for the three
-base-model checkpoints used in this study.
-Weights are publicly available and can be obtained via
-\texttt{AutoModelForCausalLM.from\_pretrained(repo\_id)}.}
+\caption{HuggingFace Hub repository identifiers and cache-snapshot
+SHA-1 hashes for the three base-model checkpoints used in this study.
+Weights can be retrieved via
+\texttt{from\_pretrained(repo\_id, revision=sha1)}.
+\textsuperscript{$\dagger$}Loaded without \texttt{revision=};
+SHA-1 inferred from cache state at execution time (see provenance
+note above).}
 \label{tab:s1}
-\small
-\begin{tabularx}{\columnwidth}{@{}l X@{}}
+\footnotesize
+\begin{tabularx}{\columnwidth}{@{}l l X@{}}
 \toprule
-\textbf{Backbone} & \textbf{HuggingFace repository identifier} \\
+\textbf{Backbone} & \textbf{SHA-1 (40 chars)} & \textbf{Repository} \\
 \midrule
-Qwen~2.5-1.5B-Instruct & \texttt{Qwen/Qwen2.5-1.5B-Instruct} \\[4pt]
-Gemma~3~1B~IT           & \texttt{google/gemma-3-1b-it} \\[4pt]
-Gemma~4~E2B~IT          & \texttt{google/gemma-4-E2B-it} \\
+Qwen~2.5-1.5B-Instruct
+  & \texttt{989aa798...aa306}
+  & \texttt{Qwen/Qwen2.5-1.5B-Instruct} \\[4pt]
+Gemma~3~1B~IT
+  & \texttt{dcc83ea8...78752}
+  & \texttt{google/gemma-3-1b-it} \\[4pt]
+Gemma~4~E2B~IT\textsuperscript{$\dagger$}
+  & \texttt{70af34e2...22a03}
+  & \texttt{google/gemma-4-E2B-it} \\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\noindent Full 40-character SHA-1 strings:
+\begin{itemize}
+\item Qwen~2.5-1.5B-Instruct: \texttt{989aa7980e4cf806f80c7fef2b1adb7bc71aa306}
+\item Gemma~3~1B~IT: \texttt{dcc83ea841ab6100d6b47a070329e1ba4cf78752}
+\item Gemma~4~E2B~IT: \texttt{70af34e20bd4b7a91f0de6b22675850c43922a03}
+\end{itemize}
 
 \noindent These identifiers are also listed in
 \texttt{configs/checkpoints.yaml} of the replication package

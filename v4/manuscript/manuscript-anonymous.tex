@@ -2472,6 +2472,8 @@ their effects are additive or interactive.
 
 \rev{The replication package is archived at the links below (version v1.0.3). This snapshot contains the initial experimental scripts, raw outputs, aggregated per-seed per-generation results (G1--G5, 27 executed training runs, where one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon), and a draft manuscript. The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
 
+\rev{The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files. It does not include raw token-level predictions, trained adapter checkpoints, or base-model weights. Raw predictions and adapters are not included because they exceed practical size limits for data repositories; base-model weights are not redistributed and must be obtained from the original distributors. Repository identifiers for the base models are listed in supplementary Table~S1.}
+
 
 \begin{itemize}
   \item \textbf{Zenodo} (permanent, citable):
@@ -2486,8 +2488,8 @@ their effects are additive or interactive.
 Running \texttt{python figs/src/fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not
-redistributed; exact checkpoint identifiers are listed in
-Section~\ref{sec:models}.
+redistributed; repository identifiers are listed in supplementary
+Table~S1.
 
 % Fix: cas-common AtEndDocument captures \thepage before refs/appendix pages
 % Force correct lastpage count after all content is processed
