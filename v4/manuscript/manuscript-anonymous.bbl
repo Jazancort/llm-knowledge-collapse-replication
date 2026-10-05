@@ -1,4 +1,4 @@
-\begin{thebibliography}{47}
+\begin{thebibliography}{48}
 \expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
 \providecommand{\url}[1]{\texttt{#1}}
 \providecommand{\href}[2]{#2}
@@ -72,7 +72,7 @@
 \newblock \bibinfo{title}{Knowledge collapse in {LLMs}: When fluency survives
   but facts fail under recursive synthetic training},
 \newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2025}).
-  \bibinfo{note}{ArXiv:2509.04796}.
+  \bibinfo{note}{ArXiv:2509.04796. Non-peer-reviewed preprint}.
 %Type = Inproceedings
 \bibitem[{Dohmatob et~al.(2025)Dohmatob, Feng, Subramonian, and
   Kempe}]{dohmatob2025}
@@ -81,7 +81,7 @@
 \newblock \bibinfo{title}{Strong model collapse},
 \newblock in: \bibinfo{booktitle}{Proceedings of the International Conference
   on Learning Representations (ICLR)}, \bibinfo{year}{2025}.
-  \bibinfo{note}{ArXiv:2402.07712}.
+  \bibinfo{note}{ArXiv:2410.04840}.
 %Type = Inproceedings
 \bibitem[{Alemohammad et~al.(2024)Alemohammad, Casco-Rodriguez, Luzi, Humayun,
   Babaei, LeJeune, Siahkoohi, and Baraniuk}]{alemohammad2024}
@@ -109,21 +109,22 @@
 \newblock in: \bibinfo{booktitle}{First Conference on Language Modeling},
   \bibinfo{year}{2024}. \bibinfo{note}{ArXiv:2404.01413}.
 %Type = Article
-\bibitem[{Yi et~al.(2025)}]{yi2025}
-\bibinfo{author}{B.~Yi}, et~al.,
+\bibitem[{Yi et~al.(2025)Yi, Liu, Cheng, and Xu}]{yi2025}
+\bibinfo{author}{B.~Yi}, \bibinfo{author}{Q.~Liu}, \bibinfo{author}{Y.~Cheng},
+  \bibinfo{author}{H.~Xu},
 \newblock \bibinfo{title}{Escaping model collapse via synthetic data
   verification: Near-term improvements and long-term convergence},
 \newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2025}).
   \bibinfo{note}{ArXiv:2510.16657}.
 %Type = Article
-\bibitem[{Zibakhsh~Shabgahi et~al.(2024)Zibakhsh~Shabgahi, Aghazadeh,
-  Mirhoseini, and Koushanfar}]{zibakhsh2024}
-\bibinfo{author}{S.~Zibakhsh~Shabgahi}, \bibinfo{author}{P.~Aghazadeh},
+\bibitem[{Shabgahi et~al.(2025)Shabgahi, Aghazadeh, Mirhoseini, and
+  Koushanfar}]{zibakhsh2024}
+\bibinfo{author}{S.~Z. Shabgahi}, \bibinfo{author}{P.~Aghazadeh},
   \bibinfo{author}{A.~Mirhoseini}, \bibinfo{author}{F.~Koushanfar},
 \newblock \bibinfo{title}{{ForTIFAI}: Fending off recursive training induced
   failure for {AI} model collapse},
-\newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2024}).
-  \bibinfo{note}{ArXiv:2408.14572}.
+\newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2025}).
+  \bibinfo{note}{ArXiv:2509.08972}.
 %Type = Inproceedings
 \bibitem[{Hu et~al.(2022)Hu, Shen, Wallis, Allen-Zhu, Li, Wang, Wang, and
   Chen}]{hu2022}
@@ -157,12 +158,18 @@
   (\bibinfo{year}{2024}). \bibinfo{note}{Featured Certification.
   arXiv:2405.09673}.
 %Type = Article
-\bibitem[{Guo et~al.(2024)}]{guo2024collapse}
-\bibinfo{author}{T.~Guo}, et~al.,
-\newblock \bibinfo{title}{Collapse or thrive? perils and promises of synthetic
-  data in a self-generating world},
-\newblock \bibinfo{journal}{arXiv preprint arXiv:2410.16713}
-  (\bibinfo{year}{2024}).
+\bibitem[{Kazdan et~al.(2024)Kazdan, Schaeffer, Dey, Gerstgrasser, Rafailov,
+  Donoho, and Koyejo}]{guo2024collapse}
+\bibinfo{author}{J.~Kazdan}, \bibinfo{author}{R.~Schaeffer},
+  \bibinfo{author}{A.~Dey}, \bibinfo{author}{M.~Gerstgrasser},
+  \bibinfo{author}{R.~Rafailov}, \bibinfo{author}{D.~L. Donoho},
+  \bibinfo{author}{S.~Koyejo},
+\newblock \bibinfo{title}{Collapse or thrive? {P}erils and promises of
+  synthetic data in a self-generating world},
+\newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2024}).
+  \bibinfo{note}{ArXiv:2410.16713. Accepted at NeurIPS 2024 Workshops on
+  Mathematics of Modern Machine Learning (M3L) and Attributing Model Behavior
+  at Scale (ATTRIB)}.
 %Type = Article
 \bibitem[{Kaplan et~al.(2020)Kaplan, McCandlish, Henighan, Brown, Chess, Child,
   Gray, Radford, Wu, and Amodei}]{kaplan2020scaling}
@@ -174,13 +181,17 @@
 \newblock \bibinfo{title}{Scaling laws for neural language models},
 \newblock \bibinfo{journal}{arXiv preprint arXiv:2001.08361}
   (\bibinfo{year}{2020}).
-%Type = Article
-\bibitem[{Dohmatob et~al.(2024)Dohmatob, Feng, and Kempe}]{dohmatob2024scaling}
+%Type = Inproceedings
+\bibitem[{Dohmatob et~al.(2024)Dohmatob, Feng, Yang, Charton, and
+  Kempe}]{dohmatob2024scaling}
 \bibinfo{author}{E.~Dohmatob}, \bibinfo{author}{Y.~Feng},
+  \bibinfo{author}{P.~Yang}, \bibinfo{author}{F.~Charton},
   \bibinfo{author}{J.~Kempe},
-\newblock \bibinfo{title}{Model collapse as a change of scaling laws},
-\newblock \bibinfo{journal}{arXiv preprint arXiv:2402.07043}
-  (\bibinfo{year}{2024}).
+\newblock \bibinfo{title}{A tale of tails: Model collapse as a change of
+  scaling laws},
+\newblock in: \bibinfo{booktitle}{Proceedings of the 41st International
+  Conference on Machine Learning (ICML)}, \bibinfo{year}{2024}.
+  \bibinfo{note}{ArXiv:2402.07043}.
 %Type = Article
 \bibitem[{Seddik et~al.(2024)Seddik, Chen, Hayou, Youssef, and
   Debbah}]{seddik2024}
@@ -228,15 +239,15 @@
   \bibinfo{year}{2025}, pp. \bibinfo{pages}{32290--32309}.
   \bibinfo{note}{ArXiv:2504.03814}.
 %Type = Article
-\bibitem[{Feng et~al.(2025)Feng, Dohmatob, Yang, Charton, and
+\bibitem[{Feng et~al.(2024)Feng, Dohmatob, Yang, Charton, and
   Kempe}]{feng2025verification}
 \bibinfo{author}{Y.~Feng}, \bibinfo{author}{E.~Dohmatob},
   \bibinfo{author}{P.~Yang}, \bibinfo{author}{F.~Charton},
   \bibinfo{author}{J.~Kempe},
-\newblock \bibinfo{title}{Scaling up with synthesized data requires
-  verification},
-\newblock \bibinfo{journal}{arXiv preprint arXiv:2406.07515}
-  (\bibinfo{year}{2025}).
+\newblock \bibinfo{title}{Beyond model collapse: {S}caling up with synthesized
+  data requires verification},
+\newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2024}).
+  \bibinfo{note}{ArXiv:2406.07515}.
 %Type = Inproceedings
 \bibitem[{Bertrand et~al.(2024)Bertrand, Bose, Duplessis, Jiralerspong, and
   Gidel}]{bertrand2024stability}
@@ -245,8 +256,8 @@
   \bibinfo{author}{G.~Gidel},
 \newblock \bibinfo{title}{On the stability of iterative retraining of
   generative models on their own data},
-\newblock in: \bibinfo{booktitle}{International Conference on Learning
-  Representations (ICLR)}, \bibinfo{year}{2024}.
+\newblock in: \bibinfo{booktitle}{Proceedings of the International Conference
+  on Learning Representations (ICLR)}, \bibinfo{year}{2024}.
   \bibinfo{note}{ArXiv:2310.00429}.
 %Type = Inproceedings
 \bibitem[{Aghajanyan et~al.(2021)Aghajanyan, Gupta, and
@@ -295,28 +306,36 @@
   Intelligence} \bibinfo{volume}{44} (\bibinfo{year}{2022})
   \bibinfo{pages}{3366--3385}.
 %Type = Article
-\bibitem[{Shi et~al.(2024)Shi, Yang, Jin et~al.}]{shi2024continualllm}
-\bibinfo{author}{T.~Shi}, \bibinfo{author}{Z.~Yang}, \bibinfo{author}{L.~Jin},
-  et~al.,
+\bibitem[{Shi et~al.(2024)Shi, Xu, Wang, Qin, Wang, Wang, Wang, Ebrahimi, and
+  Wang}]{shi2024continualllm}
+\bibinfo{author}{H.~Shi}, \bibinfo{author}{Z.~Xu}, \bibinfo{author}{H.~Wang},
+  \bibinfo{author}{W.~Qin}, \bibinfo{author}{W.~Wang},
+  \bibinfo{author}{Y.~Wang}, \bibinfo{author}{Z.~Wang},
+  \bibinfo{author}{S.~Ebrahimi}, \bibinfo{author}{H.~Wang},
 \newblock \bibinfo{title}{Continual learning of large language models: A
   comprehensive survey},
 \newblock \bibinfo{journal}{arXiv preprint arXiv:2404.16789}
   (\bibinfo{year}{2024}).
 %Type = Article
-\bibitem[{Biderman et~al.(2024)Biderman, Portes
-  et~al.}]{biderman2024incremental}
-\bibinfo{author}{D.~Biderman}, \bibinfo{author}{J.~Portes}, et~al.,
+\bibitem[{Soutif-Cormerais et~al.(2024)Soutif-Cormerais, Magistri, van~de
+  Weijer, and Bagdanov}]{soutifcormerais2024forgetting}
+\bibinfo{author}{A.~Soutif-Cormerais}, \bibinfo{author}{S.~Magistri},
+  \bibinfo{author}{J.~van~de Weijer}, \bibinfo{author}{A.~D. Bagdanov},
 \newblock \bibinfo{title}{An empirical analysis of forgetting in pre-trained
   models with incremental low-rank updates},
-\newblock \bibinfo{journal}{arXiv preprint arXiv:2405.18069}
-  (\bibinfo{year}{2024}).
-%Type = Article
-\bibitem[{Ding et~al.(2024)Ding, Luo et~al.}]{ding2024ranktrade}
-\bibinfo{author}{H.~Ding}, \bibinfo{author}{A.~Luo}, et~al.,
+\newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2024}).
+  \bibinfo{note}{ArXiv:2405.18069}.
+%Type = Inproceedings
+\bibitem[{Rathore et~al.(2025)Rathore, Kumar, Bansal, and
+  Moitra}]{ding2024ranktrade}
+\bibinfo{author}{D.~Rathore}, \bibinfo{author}{V.~Kumar},
+  \bibinfo{author}{C.~Bansal}, \bibinfo{author}{A.~Moitra},
 \newblock \bibinfo{title}{How much is too much? exploring {LoRA} rank
   trade-offs for retaining knowledge and domain robustness},
-\newblock \bibinfo{journal}{arXiv preprint arXiv:2512.15634}
-  (\bibinfo{year}{2024}).
+\newblock in: \bibinfo{booktitle}{Proceedings of the 4th Conference of the
+  Asia-Pacific Chapter of the Association for Computational Linguistics and the
+  14th International Joint Conference on Natural Language Processing
+  (AACL-IJCNLP)}, \bibinfo{year}{2025}. \bibinfo{note}{ArXiv:2512.15634}.
 %Type = Article
 \bibitem[{Fawi(2024)}]{fawi2024curlora}
 \bibinfo{author}{M.~Fawi},
@@ -376,6 +395,12 @@
 \newblock \bibinfo{title}{Gemma 3 technical report},
 \newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2025}).
   \bibinfo{note}{ArXiv:2503.19786}.
+%Type = Article
+\bibitem[{{Gemma Team}(2026)}]{gemma4_2026}
+\bibinfo{author}{{Gemma Team}},
+\newblock \bibinfo{title}{Gemma 4 technical report},
+\newblock \bibinfo{journal}{arXiv preprint}  (\bibinfo{year}{2026}).
+  \bibinfo{note}{ArXiv:2607.02770}.
 %Type = Inproceedings
 \bibitem[{Holtzman et~al.(2020)Holtzman, Buys, Du, Forbes, and
   Choi}]{holtzman2020}

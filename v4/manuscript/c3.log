@@ -1,0 +1,536 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025) (preloaded format=pdflatex)
+ restricted \write18 enabled.
+entering extended mode
+(./manuscript-anonymous.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(c:/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-dc.cls
+Document Class: cas-dc 2024/05/04, 2.4: Formatting class for CAS double column 
+articles
+(c:/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(c:/texlive/2025/texmf-dist/tex/latex/base/fleqn.clo)
+(c:/texlive/2025/texmf-dist/tex/latex/base/size10.clo))
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-def/pdftex.def)))
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+(c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def))
+(c:/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/preprint/balance.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/makecell/makecell.sty
+(c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/color.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)))
+(c:/texlive/2025/texmf-dist/tex/latex/tools/dcolumn.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/sttools/stfloats.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/tools/xspace.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.sty
+(c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.tex))
+(c:/texlive/2025/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(c:/texlive/2025/texmf-dist/tex/latex/xcolor/svgnam.def)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/dvipsnam.def)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(c:/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(c:/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+(c:/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(c:/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(c:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(c:/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def)
+(c:/texlive/2025/texmf-dist/tex/latex/url/url.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+(c:/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hpdftex.def
+(c:/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-common.sty
+(c:/texlive/2025/texmf-dist/tex/latex/moreverb/moreverb.sty
+(c:/texlive/2025/texmf-dist/tex/latex/tools/verbatim.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/wrapfig/wrapfig.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/stix.sty
+(c:/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/inconsolata/inconsolata.sty
+`inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex))))
+(c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/cmap/cmap.sty
+
+Package cmap Warning: fontenc already loaded - some fonts may be unprocessed.
+
+) (c:/texlive/2025/texmf-dist/tex/latex/lm/lmodern.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty
+(c:/texlive/2025/texmf-dist/tex/latex/lm/t1lmr.fd)<<t1.cmap>>)
+(../docs/revision/resultados/make_all_outputs/numbers.tex)
+(c:/texlive/2025/texmf-dist/tex/latex/natbib/natbib.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/float/float.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype.sty
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype-pdftex.def)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype.cfg))
+(c:/texlive/2025/texmf-dist/tex/generic/pdftex/glyphtounicode.tex)
+(c:/texlive/2025/texmf-dist/tex/latex/pdfx/glyphtounicode-cmr.tex)
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/adjcalc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/trimclip.sty
+(c:/texlive/2025/texmf-dist/tex/latex/collectbox/collectbox.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/tc-pdftex.def))
+(c:/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/varwidth/varwidth.sty)
+==> First Aid for varwidth.sty applied!
+) (./manuscript-anonymous.aux)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls2stix.fd)
+(c:/texlive/2025/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (c:/texlive/2025/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+(c:/texlive/2025/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg))
+(./manuscript-anonymous.out) (./manuscript-anonymous.out)
+(c:/texlive/2025/texmf-dist/tex/latex/upquote/upquote.sty)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-cmr.cfg)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\corref' on input line 90.
+
+(c:/texlive/2025/texmf-dist/tex/latex/lm/ts1lmr.fd) [0{c:/texlive/2025/texmf-va
+r/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2025/texmf-dist/fonts/enc/dvip
+s/lm/lm-ec.enc}{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}]
+(c:/texlive/2025/texmf-dist/tex/latex/lm/ot1lmr.fd)<<ot1.cmap>>
+(c:/texlive/2025/texmf-dist/tex/latex/lm/omllmm.fd)<<oml.cmap>>
+(c:/texlive/2025/texmf-dist/tex/latex/lm/omslmsy.fd)<<oms.cmap>>
+(c:/texlive/2025/texmf-dist/tex/latex/lm/omxlmex.fd)<<omx.cmap>>
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-ptm.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stixfrak.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stixbb.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls2stixcal.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stixsf.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls2stixtt.fd)
+Overfull \hbox (123.62721pt too wide) detected at line 167
+[]
+(./manuscript-anonymous.abs)
+
+Package hyperref Warning: Ignoring empty anchor on input line 167.
+
+
+Package hyperref Warning: Ignoring empty anchor on input line 167.
+
+(c:/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd)
+
+Package hyperref Warning: Ignoring empty anchor on input line 167.
+
+
+Package natbib Warning: Citation `ouyang2022training' on page 1 undefined on in
+put line 176.
+
+
+Package natbib Warning: Citation `wang2023selfinstruct' on page 1 undefined on 
+input line 177.
+
+
+Package natbib Warning: Citation `taori2023alpaca' on page 1 undefined on input
+ line 177.
+
+
+Package natbib Warning: Citation `villalobos2024' on page 1 undefined on input 
+line 180.
+
+
+Package natbib Warning: Citation `liu2024bestpractices' on page 1 undefined on 
+input line 186.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 1 undefined on input l
+ine 195.
+
+
+Package natbib Warning: Citation `keisha2025' on page 1 undefined on input line
+ 196.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 1 undefined on input li
+ne 197.
+
+
+Package natbib Warning: Citation `alemohammad2024' on page 1 undefined on input
+ line 198.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 1 undefined on inpu
+t line 200.
+
+
+Package natbib Warning: Citation `yi2025' on page 1 undefined on input line 200
+.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 1 undefined on input li
+ne 201.
+
+(c:/texlive/2025/texmf-dist/tex/latex/lm/t1lmss.fd) [1{c:/texlive/2025/texmf-di
+st/fonts/enc/dvips/lm/lm-rm.enc}{c:/texlive/2025/texmf-dist/fonts/enc/dvips/lm/
+lm-mathit.enc} <c:/texlive/2025/texmf-dist/tex/latex/els-cas-templates/thumbnai
+ls/cas-email.jpeg>]
+
+Package natbib Warning: Citation `hu2022' on page 2 undefined on input line 206
+.
+
+
+Package natbib Warning: Citation `dettmers2023' on page 2 undefined on input li
+ne 207.
+
+
+Package natbib Warning: Citation `biderman2024' on page 2 undefined on input li
+ne 208.
+
+
+Package natbib Warning: Citation `villalobos2024' on page 2 undefined on input 
+line 275.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 2 undefined on input l
+ine 285.
+
+
+Package natbib Warning: Citation `alemohammad2024' on page 2 undefined on input
+ line 289.
+
+
+Package natbib Warning: Citation `guo2024collapse' on page 2 undefined on input
+ line 292.
+
+[2]
+
+Package natbib Warning: Citation `dohmatob2025' on page 3 undefined on input li
+ne 294.
+
+
+Package natbib Warning: Citation `kaplan2020scaling' on page 3 undefined on inp
+ut line 298.
+
+
+Package natbib Warning: Citation `dohmatob2024scaling' on page 3 undefined on i
+nput line 298.
+
+
+Package natbib Warning: Citation `seddik2024' on page 3 undefined on input line
+ 299.
+
+
+Package natbib Warning: Citation `xu2025' on page 3 undefined on input line 300
+.
+
+
+Package natbib Warning: Citation `dey2024' on page 3 undefined on input line 30
+2.
+
+
+Package natbib Warning: Citation `petroni2019' on page 3 undefined on input lin
+e 318.
+
+
+Package natbib Warning: Citation `keisha2025' on page 3 undefined on input line
+ 321.
+
+
+Package natbib Warning: Citation `kovac2025recursive' on page 3 undefined on in
+put line 325.
+
+
+Package natbib Warning: Citation `keisha2025' on page 3 undefined on input line
+ 331.
+
+
+Package natbib Warning: Citation `keisha2025' on page 3 undefined on input line
+ 333.
+
+
+Package natbib Warning: Citation `yi2025' on page 3 undefined on input line 346
+.
+
+
+Package natbib Warning: Citation `feng2025verification' on page 3 undefined on 
+input line 349.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 3 undefined on inpu
+t line 351.
+
+
+Package natbib Warning: Citation `bertrand2024stability' on page 3 undefined on
+ input line 354.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 3 undefined on inpu
+t line 356.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 3 undefined on input li
+ne 358.
+
+
+Package natbib Warning: Citation `hu2022' on page 3 undefined on input line 375
+.
+
+
+Package natbib Warning: Citation `aghajanyan2021' on page 3 undefined on input 
+line 380.
+
+
+Package natbib Warning: Citation `zhang2023adalora' on page 3 undefined on inpu
+t line 381.
+
+
+Package natbib Warning: Citation `dettmers2023' on page 3 undefined on input li
+ne 383.
+
+[3]
+
+Package natbib Warning: Citation `kirkpatrick2017' on page 4 undefined on input
+ line 390.
+
+
+Package natbib Warning: Citation `delange2022' on page 4 undefined on input lin
+e 390.
+
+
+Package natbib Warning: Citation `shi2024continualllm' on page 4 undefined on i
+nput line 390.
+
+
+Package natbib Warning: Citation `biderman2024' on page 4 undefined on input li
+ne 391.
+
+
+Package natbib Warning: Citation `soutifcormerais2024forgetting' on page 4 unde
+fined on input line 395.
+
+
+Package natbib Warning: Citation `ding2024ranktrade' on page 4 undefined on inp
+ut line 395.
+
+
+Package natbib Warning: Citation `fawi2024curlora' on page 4 undefined on input
+ line 398.
+
+
+Package natbib Warning: Citation `adapala2025' on page 4 undefined on input lin
+e 399.
+
+
+Package natbib Warning: Citation `geva2021' on page 4 undefined on input line 4
+02.
+
+
+Package natbib Warning: Citation `meng2022locating' on page 4 undefined on inpu
+t line 403.
+
+
+Package natbib Warning: Citation `biderman2024' on page 4 undefined on input li
+ne 408.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 4 undefined on input l
+ine 419.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 4 undefined on input li
+ne 419.
+
+
+Package natbib Warning: Citation `biderman2024' on page 4 undefined on input li
+ne 421.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 4 undefined on inpu
+t line 427.
+
+
+Package natbib Warning: Citation `yi2025' on page 4 undefined on input line 428
+.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 4 undefined on input li
+ne 428.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 4 undefined on input l
+ine 458.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 4 undefined on input li
+ne 458.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 4 undefined on inpu
+t line 458.
+
+
+Package natbib Warning: Citation `hu2022' on page 4 undefined on input line 462
+.
+
+
+Package natbib Warning: Citation `dettmers2023' on page 4 undefined on input li
+ne 463.
+
+
+Package natbib Warning: Citation `biderman2024' on page 4 undefined on input li
+ne 466.
+
+
+Package natbib Warning: Citation `aghajanyan2021' on page 4 undefined on input 
+line 469.
+
+
+Package natbib Warning: Citation `roy2007' on page 4 undefined on input line 47
+3.
+
+
+LaTeX Warning: Reference `fig:methodology' on page 4 undefined on input line 47
+5.
+
+[4]
+
+LaTeX Warning: Reference `tab:notation' on page 5 undefined on input line 532.
+
+Missing character: There is no ñ in font lmex10!
+Missing character: There is no ñ in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ³ in font lmex10!
+Missing character: There is no ³ in font lmex10!
+Missing character: There is no ³ in font lmex10!
+
+LaTeX Warning: Reference `eq:erank' on page 5 undefined on input line 532.
+
+Missing character: There is no ñ in font lmex10!
+Missing character: There is no ñ in font lmex10!
+
+Overfull \hbox (1.79446pt too wide) in alignment at lines 532--532
+[] [] 
+
+Package natbib Warning: Citation `joshi2017' on page 5 undefined on input line 
+571.
+
+
+LaTeX Warning: Reference `sec:axes' on page 5 undefined on input line 586.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 5 undefined on inpu
+t line 590.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 5 undefined on input li
+ne 592.
+
+
+LaTeX Warning: Reference `sec:intervention' on page 5 undefined on input line 5
+95.
+
+
+LaTeX Warning: Reference `sec:dissociation' on page 5 undefined on input line 6
+20.
+
+[5]
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+
+LaTeX Warning: Reference `sec:res_backbone' on page 6 undefined on input line 6
+58.
+
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+
+LaTeX Warning: Reference `sec:intervention' on page 6 undefined on input line 6
+58.
+
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+Missing character: There is no ð in font lmex10!
+
+Package natbib Warning: Citation `qwen2024' on page 6 undefined on input line 7
+01.
+
+
+Package natbib Warning: Citation `gemma2025' on page 6 undefined on input line 
+707.
+
+
+Package natbib Warning: Citation `gemma4_2026' on page 6 undefined on input lin
+e 717.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 717--717
+[][][]\T1/lmr/m/n/8 (+20) Available at [][]$\T1/lmtt/m/n/8 https : / / huggingf
+ace . co / google /
+[6]
+
+Package natbib Warning: Citation `dettmers2023' on page 7 undefined on input li
+ne 741.
+
+
+LaTeX Warning: Reference `app:repo' on page 7 undefined on input line 760.
+
+
+LaTeX Warning: Float too large for page by 18.14436pt on input line 776.
+
+
+LaTeX Warning: Reference `tab:axes' on page 7 undefined on input line 786.
+
+! Illegal unit of measure (pt inserted).
+<to be read again> 
+                   .
+l.794 \# & Axis & Variable & R
+                              ange \\
+!  ==> Fatal error occurred, no output PDF file produced!
+Transcript written on manuscript-anonymous.log.

@@ -842,7 +842,7 @@ update capacity. Single-seed; supportive evidence only.
 
 \item \textbf{Synthetic exposure (intervention).} We manipulate the synthetic
 training stream at Qwen $r=256$, the lowest-pressure degradative configuration tested. Interventions include
-length filtering, and paired dose--response downsampling (0\%, 10\%, 25\%, 50\%
+length filtering, paired dose--response downsampling (0\%, 10\%, 25\%, 50\%
 removal), and short-answer constraining. Design detailed in
 Section~\ref{sec:intervention}.
 \end{enumerate}
@@ -1293,7 +1293,7 @@ demonstrating clear empirical separation under the present experimental protocol
 As a supportive ablation, we compared attention-only and full-linear module
 targeting on Qwen at a single seed. Targeting all linear modules
 (\texttt{q,k,v,o,gate,up,down}) at $r=4$ produces 4.6M trainable parameters and
-96.2\% Gen5 retention, matching attention-only targeting at $r=16$ (2.2M
+97.4\% Gen5 retention, matching attention-only targeting at $r=16$ (2.2M
 parameters, same retention). The full-linear $r=4$ adapter has a mean effective
 rank of 3.43, compared to 11.08 for attention-only $r=16$. This preliminary
 observation is consistent with effective update capacity, rather than module
@@ -1458,7 +1458,7 @@ architectures.
   \includegraphics[width=0.95\textwidth]{figs/scratch/fig_combined_trajectories.png}
   \caption{$K_0$ retention trajectories over ten recursive generations across
   three backbones: (a)~Qwen~2.5~1.5B, (b)~Gemma~3~1B, and (c)~Gemma~4~E2B.
-  Shaded bands show the seed range for Gemma~3 ($N=5$) and Qwen ($N=3$); Gemma~4 is a single trajectory ($N=1$, no band);
+  Shaded bands show the seed range for Gemma~3 ($N=5$) and Qwen ($N=6$); Gemma~4 is a single trajectory ($N=1$, no band);
   solid lines show means. All three backbones exhibit consistent
   regime structure (homeostatic below threshold, degradative above), with the
   transition occurring at backbone-dependent effective-rank
@@ -1555,7 +1555,7 @@ nearly constant thereafter.
 
 Both methods are stable from Gen1 through Gen10, with no progressive degradation
 within the observed horizon. QLoRA retains a consistent advantage of
-approximately 5.6 percentage points (mean Gen10: QLoRA 97.4\% vs FFT 91.9\%).
+approximately 5.5 percentage points (mean Gen10: QLoRA 97.4\% vs FFT 91.9\%).
 This gap emerges entirely at Gen1 and does not widen over subsequent generations.
 This result is therefore interpreted as a difference in one-time adaptation cost rather than
 a differential degradation rate: FFT incurs a larger initial factual cost when
@@ -1787,6 +1787,7 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 50\% & 89.7\% & \rev{$+4.4$}\,pp & \rev{89.0\%} & \rev{$+9.2$}\,pp & 5 \\
 \bottomrule
 \end{tabular*}
+{\footnotesize $\Delta$ values are computed from unrounded per-arm means; displayed values are rounded independently.}
 \end{table}
 
 % [v4-revision: C1-C5 pilot archived in replication repository; not used in primary estimates]
@@ -2367,7 +2368,7 @@ for inter-regime comparison. The scoring leniency concern is therefore a
 genuine limitation: for configurations that produce verbose responses,
 particularly $r=128$ on Qwen ($\approx$7-word answers versus $\approx$2 at
 $r=16$), the reported retention may partially reflect format effects.
-This is stated as a limitation (Section~\ref{sec:limitations}) rather than
+This is stated as a limitation rather than
 controlled for.}
 
 \rev{The Gemma~4~E2B~IT backbone was evaluated with a single seed at $r \in \{4, 16, 64\}$
