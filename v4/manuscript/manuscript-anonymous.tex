@@ -81,16 +81,14 @@ transition differing by roughly an order of magnitude across architectures
 (2)~\rev{full fine-tuning (FFT) and} learning-rate sweeps on both backbones
 that are consistent with the same qualitative pattern, supporting the view
 that the transition is not unique to low-rank adaptation;
-(3)~a rank $\times$ learning-rate \rev{joint dependence} demonstrating that
-update capacity and perturbation magnitude jointly determine the operating
-regime rather than acting as independent axes;
+(3)~a rank $\times$ learning-rate \rev{joint-dependence pattern (single-seed, $3{\times}3$ grid) descriptively consistent with the two axes not operating independently, pending multi-seed replication};
 (4)~a retention/distribution dissociation at intermediate pressure, where
 output efficiency degrades threefold while factual retention remains near 90\%;
 and (5)~\rev{pre-registered dose--response experiments on two backbones:
-reducing synthetic exposure by 50\% arrests progressive degradation
+reducing synthetic exposure by 50\% \rev{arrested} progressive degradation
 (Qwen $r=256$: Gen~5$\to$10 slope $\BsevenSlopeFifty$\,pp/generation,
 $\Delta\!=\!\BsevenDeltatenFifty$\,pp at Gen10; Gemma~3 $r=10$:
-$\Delta\!=\!\GtwoDeltatenFifty$\,pp at Gen10) and, on Qwen, \rev{yielded a similar point estimate to halving the learning rate; formal equivalence was not established.}}
+$\Delta\!=\!\GtwoDeltatenFifty$\,pp at Gen10); on Qwen, the 50\% dose yielded a similar point estimate to halving the learning rate, but formal equivalence and mechanism were not established.}
 \rev{A three-cell, single-seed prospective probe showed retention ordered in the expected direction, but one pre-specified regime classification was not met; calibration of a scalar pressure threshold remains unresolved.}
 These findings characterize recursive degradation as a pressure-dependent
 phenomenon whose stability depends on a multidimensional control landscape,
@@ -204,10 +202,7 @@ The main contributions of this work are:
     Qwen and Gemma~3 reproduce the same dose-response pattern, confirming that
     the phenomenon responds to perturbation magnitude rather than being
     specific to low-rank adaptation.
-    \item \rev{We show through a rank $\times$ learning-rate joint-dependence experiment}
-    that update capacity and perturbation magnitude jointly determine the
-    operating regime, establishing that the pressure components are not
-    independent.
+    \item \rev{We present a single-seed rank $\times$ learning-rate pilot grid descriptively consistent with the two axes not operating independently; multi-seed replication is needed before formal interaction claims.}
     \item We show that output-distribution diagnostics reveal a
     retention/distribution dissociation at intermediate capacity, where output
     quality degrades substantially while factual retention remains bounded.
@@ -215,8 +210,7 @@ The main contributions of this work are:
     pre-registered dose--response (five paired seeds) demonstrates that any
     reduction of 10--50\% raises Gen~5 retention by \rev{3.6--4.4\,pp},
     with the Gen~10 benefit graded (\rev{$+9.2$}\,pp at 50\%; 95\%~CI $[6.9, 11.6]$).
-    A 50\% reduction matches halving the learning rate, consistent with
-    exposure acting through the per-generation update budget.
+    \rev{On Qwen, a 50\% reduction yielded a similar point estimate to halving the learning rate; formal equivalence and mechanism were not established.}
 \end{enumerate}
 
 The remainder of this paper reviews related work, formalizes the proposed
@@ -857,8 +851,10 @@ Here $\theta^{(0)}$ denotes the original model parameters and $\theta^{(t)}$
 the parameters after one generation of fine-tuning.
 % [v4] A6 RESOLVIDO: abs_drift = mean absolute por parâmetro, confirmado no código
 This scalar summarizes the
-average displacement of the model in weight space under FFT. For QLoRA, the
-\rev{lowest-learning-rate FFT reference for this comparison} is the Frobenius norm of the composed adapter update, $\|BA\|_F$. These two quantities measure different geometric properties (full-weight displacement vs.\ low-rank update magnitude); the FFT/QLoRA comparison in Axis~3 is therefore exploratory, not perturbation-matched.
+average displacement of the model in weight space under FFT. For QLoRA, we report the Frobenius norm of the composed adapter
+update, $\|BA\|_F$; for FFT, we report mean absolute parameter drift.
+These method-specific parameter-space measures are not directly
+comparable; the FFT/QLoRA comparison in Axis~3 is therefore exploratory, not perturbation-matched.
 
 \subsection{Output-distribution diagnostics}\label{sec:metrics}
 
@@ -1466,8 +1462,7 @@ FFT          & $2{\times}10^{-5}$ & 3.48               & 84.6\% \\
 
 \subsubsection{QLoRA versus FFT: exploratory method comparison without perturbation-magnitude matching}
 \rev{To compare the two update mechanisms (exploratory; perturbation magnitudes are not matched), we selected FFT at}
-LR$\,=10^{-6}$ (drift 0.39) as \rev{the closest available comparator to} QLoRA $r=16$
-($\|BA\|_F \approx 0.42$; \rev{the two measures differ in geometry and this comparison is exploratory}). Both were run for 10 generations with three seeds.
+LR$\,=10^{-6}$ (drift 0.39) as \rev{the lowest-tested-learning-rate FFT reference, not a magnitude-matched comparator} (QLoRA $\|BA\|_F \approx 0.42$; \rev{the two measures are method-specific and not directly comparable}). Both were run for 10 generations with three seeds.
 As illustrated in Figure~\ref{fig:fft_qlora}, the separation between the
 trajectories is established after the first recursive generation and remains
 nearly constant thereafter.
@@ -1727,7 +1722,7 @@ Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
 paired $t$-test \rev{$p = 0.009$, $0.003$, $p < 0.001$}). A 50\% reduction
 effectively arrests progressive loss: the Gen~5$\to$10 slope is
-$-0.14$\,pp/generation versus \rev{$-1.13$}\,pp/generation at 0\% (mean across five seeds, difference of Gen10$-$Gen5 divided by five generations), shifting the
+\rev{$-0.15$}\,pp/generation versus \rev{$-1.13$}\,pp/generation at 0\% (mean across five seeds, difference of Gen10$-$Gen5 divided by five generations), shifting the
 system from the degradative to the bounded regime by the criterion of
 Section~\ref{sec:res_capacity}.
 
@@ -1776,8 +1771,7 @@ Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
 ($p=\GtwoPtenTen$), $\GtwoDeltatenTfive$~pp ($p=\GtwoPtenTfive$), and
 $\GtwoDeltatenFifty$~pp (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
 $p=\GtwoPtenFifty$), respectively ($n=3$ paired seeds per dose).
-At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen, indicating
-near-arrest of progressive loss.}
+At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (equal to the 0\% arm within rounding), \rev{indicating that near-arrest of progressive loss was not observed for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
 \rev{The absolute gain at dose~$=50\%$ Gen10 is larger for Gemma~3 G2
 ($\GtwoDeltatenFifty$~pp, $|K_{0,\mathrm{G2}}|{=}44$) than for Qwen B7
 ($\BsevenDeltatenFifty$~pp, $|K_0|{=}78$). The two experiments used different
@@ -2135,8 +2129,7 @@ adapter rank is a directly controllable parameter with predictable effects on
 recursive stability. For applications where recursive synthetic data reuse is
 anticipated, selecting a rank that places the system well below the observed
 pressure threshold is a practical strategy for maintaining recursive stability.
-On Qwen~2.5~1.5B, ranks at or below 64 (effective rank $\leq 30$) remained
-\rev{stable through the evaluated horizon ($r=16$,$64$: Gen10, no sign of drift; $r=4$,$32$: Gen5 only, treated as single-seed, Gen-5-only ablations).} Although
+On Qwen~2.5~1.5B, $r=16$ and $r=64$ showed stable retention through Gen10 under the evaluated protocol; $r=4$ and $r=32$ were \rev{evaluated only at Gen5 (single seed, single-generation ablations)} and cannot be used as evidence of multi-generation stability. Although
 the numerical threshold is backbone-dependent, the underlying principle appears
 consistent across the evaluated models: lower effective training pressure is
 associated with greater recursive stability in the tested configurations. When
