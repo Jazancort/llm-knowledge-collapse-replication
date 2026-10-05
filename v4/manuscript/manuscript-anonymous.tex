@@ -669,6 +669,7 @@ different evidential role: Qwen~2.5-1.5B is the primary model for detailed
 dose-response analysis, Gemma~3~1B is used for cross-architecture threshold
 validation, and Gemma~4~E2B is included as an additional single-seed robustness
 check. Architectural metadata are taken from the released model configurations.
+\rev{Gemma~4~E2B~IT is a distinct model from Gemma~3n~E2B; the two share a naming convention but differ in architecture and release lineage.}
 
 \begin{itemize}
     \item \textbf{Qwen2.5-1.5B-Instruct}~\citep{qwen2024} is the primary
@@ -933,7 +934,8 @@ track mean response length and stopword ratio to distinguish verbosity increase
 from content-word diversity changes.
 
 Finally, we define the \textit{Synthetic Drift Index} (SDI-3) to summarize
-output-distribution change:
+output-distribution change across recursive generations;
+\rev{a positive SDI-3 score indicates cumulative distributional deterioration}. The index is defined as:
 \begin{equation}\label{eq:sdi}
     \mathrm{SDI\text{-}3} =
     \log\frac{\mathrm{MeanLen}_T}{\mathrm{MeanLen}_0}
