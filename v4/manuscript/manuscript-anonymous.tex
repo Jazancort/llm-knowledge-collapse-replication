@@ -21,7 +21,6 @@
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{amsmath}
-\usepackage{lastpage}
 \usepackage{caption}
 \usepackage{float}
 \captionsetup{font={small,sf}, labelfont={bf,small}}
@@ -53,6 +52,7 @@
 \setlength{\belowcaptionskip}{0pt}
 
 \shorttitle{Pressure-Gated Recursive Degradation in LLMs}
+\shortauthors{Azancort Neto et al.}
 
 \title[mode=title]{Effective Training Pressure Gates Recursive Knowledge
   Degradation in LLMs: A Multi-Axis Dose-Response Study}
@@ -771,7 +771,7 @@ components.}\label{tab:axes}
 2 & Magnitude & FFT learning rate & $10^{-6}$--$2{\times}10^{-5}$ \\
 3 & Method & QLoRA vs FFT & \rev{Exploratory method comparison (no perturbation-magnitude matching)}, $N{=}3$ \\
 4 & Topology & Target modules & Attention vs full-linear \\
-5 & Exposure & Training examples & \rev{0\%, 10\%, 25\%, 50\% removed (paired dose--response; B7/Qwen $r{=}256$, $n{=}5$; G2/Gemma~3 $r{=}10$, $n{=}3$)} \\
+5 & Exposure & Training examples & \rev{0\%--50\% removed (paired dose--response; Qwen $r{=}256$, $n{=}5$; Gemma~3 $r{=}10$, $n{=}3$)} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1126,7 +1126,7 @@ distributional signatures associated with above-threshold regimes
 (Section~\ref{sec:res_distribution}), and present evidence that \rev{graded
 reductions in synthetic exposure (50\% on \rev{Qwen~2.5~1.5B at $r=256$}) \rev{substantially} attenuate progressive
 loss; on 
-ev{Gemma~3~1B at $r=10$}, the 50\% dose improved Gen10 retention without reducing the observed rate of loss}
+\rev{Gemma~3~1B at $r=10$}, the 50\% dose improved Gen10 retention without reducing the observed rate of loss}
 (Section~\ref{sec:res_intervention}). Throughout this section, headline findings are
 supported by multi-seed experiments, whereas single-seed results are presented
 as supporting evidence.
@@ -2403,6 +2403,12 @@ their effects are additive or interactive.
 
 
 % ============================================================
+% REFERENCES
+% ============================================================
+\bibliographystyle{model1-num-names}
+\bibliography{cas-refs}
+
+% ============================================================
 % APPENDIX
 % ============================================================
 \appendix
@@ -2416,8 +2422,8 @@ their effects are additive or interactive.
   \item \textbf{Zenodo} (permanent, citable):
     \url{https://doi.org/10.5281/zenodo.23146342}
     (DOI: \texttt{10.5281/zenodo.23146342})
-  \item \textbf{GitHub} (version-controlled):
-    \url{https://github.com/Jazancort/llm-knowledge-collapse-replication}
+  \item \textbf{GitHub} (version-controlled):\\
+    {\sloppy\url{https://github.com/Jazancort/llm-knowledge-collapse-replication}\par}
     (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
@@ -2428,10 +2434,9 @@ Base-model weights are obtained from their original distributors and are not
 redistributed; exact checkpoint identifiers are listed in
 Section~\ref{sec:models}.
 
-% ============================================================
-% REFERENCES
-% ============================================================
-\bibliographystyle{model1-num-names}
-\bibliography{cas-refs}
+% Fix: cas-common AtEndDocument captures \thepage before refs/appendix pages
+% Force correct lastpage count after all content is processed
+\clearpage
+\def\lastpage{\pageref{LastPage}}
 
 \end{document}
