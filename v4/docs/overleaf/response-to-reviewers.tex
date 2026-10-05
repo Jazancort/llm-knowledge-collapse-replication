@@ -1724,6 +1724,76 @@ $r=256$ & 70/78 (89.7\%) & 66/78 (84.6\%) & 64/78 (82.1\%) \\
 
 \bigskip
 
+% --- Table 6 ------------------------------------------------
+\subsection*{Table~6 — Gemma~3 rank sweep (cited in R2-3.d, R2-4.a)}
+
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}llllll@{}}
+\toprule
+Rank & Gen & Retention & Eff.\ Rank & $N$ & Regime \\
+\midrule
+$r=4$  & 10 & 94.4\% & 3.07 & 5 & Homeostatic \\
+$r=10$ & 5  & 78.3\% & 6.37 & 1 & Degradative \\
+$r=12$ & 5  & 73.9\% & 7.35 & 1 & Degradative \\
+$r=14$ & 5  & 69.6\% & 8.37 & 1 & Degradative \\
+$r=16$ & 10 & 56.5\% & 9.17 & 5 & Degradative \\
+\bottomrule
+\end{tabular}
+
+{\footnotesize Gemma~3~1B~IT. Anchor ranks ($r=4$, $r=16$): 5 seeds, Gen10.
+  Intermediate ranks: single seed, Gen5 (boundary localisation only).
+  Regime boundary between effective ranks~3 and~6.}
+
+\bigskip
+
+% --- Table 11 -----------------------------------------------
+\subsection*{Table~11 — Evidence matrix (cited in R2-4.a, \S1, \S3.5, \S5.1)}
+
+\footnotesize
+\setlength{\tabcolsep}{5pt}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{@{}p{0.32\linewidth}p{0.62\linewidth}@{}}
+\toprule
+\textbf{Observation} & \textbf{Supporting evidence} \\
+\midrule
+Rank governs transition &
+  Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}1$ at other ranks; $N{=}3$ bf16 control (G3) \\
+\addlinespace
+Magnitude governs transition & FFT LR sweep, 4 values \\
+\addlinespace
+Exposure reduces pressure & Dose--response 0--50\%, $N{=}5$ seeds (pre-registered) \\
+\addlinespace
+Threshold is backbone-dependent & Qwen vs Gemma~3 (10$\times$ gap in effective rank) \\
+\addlinespace
+Drift accompanies degradation & 5 distribution metrics (SDI-3) \\
+\addlinespace
+Transition is threshold-like & Rank sweep across 6 levels; boundary bracketed, not resolved \\
+\addlinespace
+Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\times}3$, $N=1$; descriptive) \\
+\addlinespace
+Generalises cross-backbone & Gemma~3 ($N=5$) + E2B rank sweep ($N=1$, supportive) \\
+\bottomrule
+\end{tabular}
+
+\bigskip
+
+% --- Figure 9 -----------------------------------------------
+\subsection*{Figure~9 — Pilot interventions (cited in \S3.7, \S4.5)}
+
+\begin{center}
+\includegraphics[width=0.75\textwidth]{fig_interventions.png}
+\end{center}
+
+{\small \textbf{Figure~9.} Exploratory pilot (C1--C5) on Qwen $r=256$ at
+Gen5, included for transparency. These results use a different evaluation
+pipeline from the primary dose--response experiments (B7/G2) and are not
+used in the primary effect estimates. (a)~$K_0$ retention by condition.
+(b)~Retention improvement relative to the corresponding unmodified arm.}
+
+\bigskip
+
 % --- Table 13 -----------------------------------------------
 \subsection*{Table~13 — Normalization attempts (cited in R2-4.c)}
 
