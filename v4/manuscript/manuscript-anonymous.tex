@@ -3,8 +3,10 @@
 %% Template: CAS Double Column (cas-dc)
 
 \documentclass[a4paper,fleqn]{cas-dc}
+\usepackage{cmap}
 \usepackage{lmodern}
 \usepackage[T1]{fontenc}
+
 \usepackage[dvipsnames]{xcolor}
 % ── Revision highlighting ──────────────────────────────────────────────
 % Set \showchangestrue  to show yellow highlight in the tracked version.
@@ -24,6 +26,10 @@
 \usepackage{float}
 \captionsetup{font={small,sf}, labelfont={bf,small}}
 \usepackage{microtype}
+% ── Unicode CMap (pdflatex) ────────────────────────────────────
+\pdfgentounicode=1
+\input{glyphtounicode}
+\InputIfFileExists{glyphtounicode-cmr.tex}{}{}
 \usepackage{adjustbox}
 \renewcommand{\arraystretch}{1.8}
 
@@ -96,7 +102,7 @@ term effective training pressure. We find:
 (1)~\rev{a threshold-like transition within the tested grid} from homeostatic
 retention to progressive degradation as adapter rank increases, with the
 transition differing by roughly an order of magnitude across architectures
-(between effective ranks ${\sim}3$ and ${\sim}6$ on Gemma~3~1B versus 50--88 on Qwen);
+(between effective ranks ${\approx}3$ and ${\approx}6$ on Gemma~3~1B versus 50--88 on Qwen);
 (2)~\rev{full fine-tuning (FFT) and} learning-rate sweeps on both backbones
 that are consistent with the same qualitative pattern, supporting the view
 that the transition is not unique to low-rank adaptation;
@@ -122,7 +128,7 @@ pipelines.
 % ============================================================
 \begin{highlights}
 \item \rev{Rank-dependent threshold-like transition between homeostatic and degradative regimes}
-\item \rev{Regime boundaries differ ${\sim}10{\times}$ across backbones (erank ${\sim}3$--$6$ vs ${\sim}50$--$88$)}
+\item \rev{Regime boundaries differ tenfold across backbones (effective rank 3--6 on Gemma~3 vs 50--88 on Qwen)}
 \item \rev{Adapter rank and learning rate both shift the observed operating regime}
 \item Output drift accompanies degradative regimes while factual retention stays bounded
 \item \rev{A 50\% synthetic exposure cut improved retention on both backbones tested}
@@ -585,11 +591,11 @@ written number words to digits, and collapsing whitespace.
 The bidirectional criterion is permissive by design: a model response of several
 words is more likely to contain a short alias as a substring than a
 single-token response. Configurations that produce longer responses
-(notably $r=128$ on Qwen, which generates $\sim$7-word answers on average
-compared with $\sim$2 words at $r=16$) may therefore have their retention
+(notably $r=128$ on Qwen, which generates $\approx$7-word answers on average
+compared with $\approx$2 words at $r=16$) may therefore have their retention
 scores modestly inflated relative to a strict exact-match scorer. The
 distributional dissociation observed at $r=128$ (Section~\ref{sec:dissociation})
-is therefore interpreted cautiously: the factual-retention figure of $\sim$89\%
+is therefore interpreted cautiously: the factual-retention figure of $\approx$89\%
 at this rank may partially reflect scoring leniency rather than genuine
 knowledge preservation. % [v4] A9
 
@@ -1295,8 +1301,8 @@ Gemma~4~E2B, with a single seed across three ranks as additional validation.
 
 On Gemma~3, an analogous regime structure emerges, but at a substantially lower
 effective rank. Preliminary single-seed experiments identified the regime
-boundary between $r=4$ (effective rank ${\sim}$3) and $r=16$ (effective rank
-${\sim}$9); higher ranks were not evaluated with multiple seeds because $r=16$
+boundary between $r=4$ (effective rank ${\approx}$3) and $r=16$ (effective rank
+${\approx}$9); higher ranks were not evaluated with multiple seeds because $r=16$
 already produces clear progressive degradation, making additional high-rank
 conditions redundant for establishing the boundary location.
 Table~\ref{tab:gemma3} summarizes the results. At $r=4$ (mean
@@ -2163,7 +2169,7 @@ Regarding intervention design, the \rev{dose--response results indicate that the
 reduction strongly attenuated progressive loss on Qwen B7; on Gemma~3 G2,
 it improved Gen10 retention without reducing the observed rate of loss.
 Smaller doses (10--25\%) produced partial, dose-proportional retention benefits. An exploratory pilot at
-${\sim}5\%$ downsampling did not replicate under paired evaluation ($+1.9$\,pp,
+$\approx 5\%$ downsampling did not replicate under paired evaluation ($+1.9$\,pp,
 $n=3$), indicating that marginal reductions at this level are not robustly
 effective in the evaluated configurations.} When
 monitoring signals indicate regime departure, reducing the volume of the
@@ -2235,7 +2241,7 @@ Gemma~3 (Table~\ref{tab:normalization}).
 
 \begin{table}[tp]
 \caption{Cross-architecture threshold normalization attempts. Threshold erank
-values: Qwen ${\sim}$50--88, Gemma~3 ${\sim}$3--6, E2B ${\sim}$5--13. None of
+values: Qwen ${\approx}$50--88, Gemma~3 ${\approx}$3--6, E2B ${\approx}$5--13. None of
 the tested normalizations aligned thresholds across
 backbones.}\label{tab:normalization}
 \footnotesize
@@ -2370,7 +2376,7 @@ perturbation magnitude, or synthetic exposure \rev{can each shift} the system fr
 stabilize within the observed horizon. \rev{Pre-registered dose--response
 experiments on two backbones show that a 50\% reduction in synthetic exposure
 \rev{substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, it improved
-retention at Gen~10 without reducing the observed rate of loss. An exploratory ${\sim}5\%$ pilot, evaluated in a
+retention at Gen~10 without reducing the observed rate of loss. An exploratory ${\approx}5\%$ pilot, evaluated in a
 different pipeline, did not replicate under paired conditions ($+1.9$\,pp,
 $n=3$).} This sensitivity is backbone-dependent. Distributional diagnostics further reveal
 that output quality can degrade substantially before factual loss becomes
