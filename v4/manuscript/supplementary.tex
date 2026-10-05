@@ -11,9 +11,18 @@
 
 \begin{document}
 
-\title{Supplementary Material for:\\
-Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs:
+\title{Supplementary Material: Effective Training
+Pressure Gates Recursive Knowledge Degradation in LLMs:
 A Multi-Axis Dose-Response Study}
+
+\author[1]{Anonymous}
+
+\begin{abstract}
+This supplementary document provides the base-model checkpoint
+identifiers (Table~S1) for the three backbone models used in this study.
+Weights are publicly available on the Hugging Face Hub at the repository
+identifiers listed below.
+\end{abstract}
 
 \maketitle
 
@@ -21,60 +30,35 @@ A Multi-Axis Dose-Response Study}
 \renewcommand{\thetable}{S\arabic{table}}
 
 % ─────────────────────────────────────────────────────────────────────────────
-\section*{Table S1: Base-Model Checkpoint Identifiers}
+\section*{Table S1: Base-Model Repository Identifiers}
 % ─────────────────────────────────────────────────────────────────────────────
 
-All three backbones were retrieved from the Hugging Face Hub without an explicit
-\texttt{revision=} argument; the loaded revision is therefore determined by the
-snapshot present in the local cache at the time of each experiment.
-The cache snapshot identifiers (commit SHA-1 hashes of the model repository
-at download time) are listed below and are sufficient to retrieve the identical
-weights from the Hub.
-The identifier for Gemma~4~E2B~IT reflects the snapshot downloaded on
-2026-06-26 and present in cache when the Gemma~4 experiments were executed
-(2026-06-27); a second snapshot (\texttt{3e22461}) was downloaded to the same
-cache on 2026-09-30 but was not used in any reported experiment.
+All three backbones were retrieved from the Hugging Face Hub using
+\texttt{AutoModelForCausalLM.from\_pretrained(repo\_id)} without an
+explicit \texttt{revision=} argument. Weights can be obtained from the
+identifiers below; the exact snapshot loaded is determined by the
+HuggingFace cache state at execution time.
 
 \begin{table}[!t]
-\caption{HuggingFace Hub snapshot identifiers (SHA-1) for the three
-base-model checkpoints used in this study. The SHA-1 identifies the exact
-commit of the model repository that was loaded; weights can be obtained via
-\texttt{AutoModelForCausalLM.from\_pretrained(repo\_id,
-revision=\textit{sha})}.
-\textsuperscript{$\dagger$}Retrieved without \texttt{revision=} parameter;
-inferred from HuggingFace cache active at execution time
-(see supplementary text above).}
+\caption{HuggingFace Hub repository identifiers for the three
+base-model checkpoints used in this study.
+Weights are publicly available and can be obtained via
+\texttt{AutoModelForCausalLM.from\_pretrained(repo\_id)}.}
 \label{tab:s1}
 \small
-\begin{tabularx}{\columnwidth}{@{}l>{\ttfamily\footnotesize}Xl@{}}
+\begin{tabularx}{\columnwidth}{@{}l X@{}}
 \toprule
-\textbf{Backbone} & \multicolumn{1}{l}{\textbf{Repository identifier}} &
-                    \textbf{Snapshot SHA-1} \\
+\textbf{Backbone} & \textbf{HuggingFace repository identifier} \\
 \midrule
-Qwen 2.5-1.5B-Instruct
-  & Qwen/Qwen2.5-1.5B-Instruct
-  & \texttt{989aa798} \\
-  & & \texttt{0e4cf806f80c7fef2b1adb7bc71aa306} \\[4pt]
-Gemma 3 1B IT
-  & google/gemma-3-1b-it
-  & \texttt{dcc83ea8} \\
-  & & \texttt{41ab6100d6b47a070329e1ba4cf78752} \\[4pt]
-Gemma 4 E2B IT\textsuperscript{$\dagger$}
-  & google/gemma-4-E2B-it
-  & \texttt{70af34e2} \\
-  & & \texttt{0bd4b7a91f0de6b22675850c43922a03} \\
+Qwen~2.5-1.5B-Instruct & \texttt{Qwen/Qwen2.5-1.5B-Instruct} \\[4pt]
+Gemma~3~1B~IT           & \texttt{google/gemma-3-1b-it} \\[4pt]
+Gemma~4~E2B~IT          & \texttt{google/gemma-4-E2B-it} \\
 \bottomrule
 \end{tabularx}
 \end{table}
 
-The full 40-character SHA-1 strings are:
-\begin{itemize}
-\item Qwen~2.5-1.5B-Instruct: \texttt{989aa7980e4cf806f80c7fef2b1adb7bc71aa306}
-\item Gemma~3~1B~IT: \texttt{dcc83ea841ab6100d6b47a070329e1ba4cf78752}
-\item Gemma~4~E2B~IT: \texttt{70af34e20bd4b7a91f0de6b22675850c43922a03}
-\end{itemize}
-
-\noindent These identifiers are also listed in \texttt{configs/checkpoints.yaml}
-of the replication package (Zenodo DOI: \url{10.5281/zenodo.23146342}).
+\noindent These identifiers are also listed in
+\texttt{configs/checkpoints.yaml} of the replication package
+(Zenodo DOI: \url{10.5281/zenodo.23146342}).
 
 \end{document}

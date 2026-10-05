@@ -491,7 +491,7 @@ reported as the mean across adapted matrices.
 Table~\ref{tab:notation} summarises all symbols used in this section and in
 the results.  Symbols are listed in order of first appearance.
 
-\begin{table}[!htbp]
+\begin{table}[pos=htbp]
 \caption{\rev{Symbol definitions used throughout the methodology and results.
 All adapter-level quantities ($\mathrm{erank}$, $\|\cdot\|_F$) are averaged
 across adapted LoRA modules within a model.}}
@@ -731,8 +731,8 @@ check. Architectural metadata are taken from the released model configurations.
 \end{itemize}
 
 
-\rev{All three backbones were retrieved from the Hugging Face Hub at
-fixed revisions. The repository identifiers and commit hashes are listed
+\rev{All three backbones were retrieved from the Hugging Face Hub.
+The repository identifiers are listed
 in supplementary Table~S1 and in \texttt{configs/checkpoints.yaml} of
 the replication package, so that the identical weights can be
 obtained.}
@@ -1815,15 +1815,15 @@ archived in the replication repository (Section~\ref{app:repo}).}
 Figure~\ref{fig:interventions} visualizes the retention and effect-size
 comparison across conditions.
 
-\rev{\begin{figure}[!htbp]
+\begin{figure}
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/scratch/fig_interventions.png}
-  \caption{Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5, included for
+  \caption{\rev{Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5, included for
   transparency. These results use a different evaluation pipeline from the
   primary dose--response experiments (B7/G2) and are not used in the primary
   effect estimates. (a)~$K_0$ retention by condition. (b)~Retention improvement
-  relative to the corresponding unmodified arm; \rev{error bars reflect the range across the available pilot replicates (replicate type varies by panel; these exploratory results are not directly comparable with the main seeded experiments)}.}\label{fig:interventions}
-\end{figure}}
+  relative to the corresponding unmodified arm; error bars reflect the range across the available pilot replicates (replicate type varies by panel; these exploratory results are not directly comparable with the main seeded experiments)}.}\label{fig:interventions}
+\end{figure}
 
 \rev{These results demonstrate that the Qwen $r=256$ configuration responds to
 graded exposure reduction: a 50\% reduction \rev{reduces the rate of progressive loss and shifts the system to the bounded regime}, whereas a 10\% reduction does not. This
@@ -1851,10 +1851,10 @@ levels; effective rank is not portable across architectures
 protocol without inferring which backbone operated at higher relative
 pressure.}
 
-\rev{\begin{figure}[!htbp]
+\begin{figure}
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig9_dose_response.png}
-  \caption{Dose--response of synthetic exposure reduction on factual retention
+  \caption{\rev{Dose--response of synthetic exposure reduction on factual retention
   across two backbones (Gen10, $K_0$-conditioned). Each curve shows the mean
   improvement ($\Delta$pp) over the respective unmodified baseline as the
   fraction of synthetic training examples removed increases from 0\% to 50\%.
@@ -1865,8 +1865,8 @@ pressure.}
   than for Qwen B7 ($|K_0|{=}78$); effective rank is not portable across
   architectures, so the two curves are reported within their respective
   protocols rather than as a cross-backbone pressure comparison.
-  Dashed horizontal line: no change ($\Delta=0$~pp).}\label{fig:dose_response_crossbackbone}
-\end{figure}}
+  Dashed horizontal line: no change ($\Delta=0$~pp).}}\label{fig:dose_response_crossbackbone}
+\end{figure}
 
 Taken together, the intervention experiments show that the 
 \rev{degradative trajectory can be attenuated under the evaluated 

@@ -202,7 +202,7 @@ R1-2 & Confound separation &
        generation; design/observed split & \S3.9, Tab.~3, \S4.6 \\
 R1-3 & External validity \textsc{part} &
        Scoring sensitivity documented as limitation; scope stated
-       & \S3.2, \S7 \\
+       & \S3.2, \S6 \\
 R1-4 & Exposure: Qwen versus Gemma~3 &
        Pipeline inconsistency disclosed; two pre-registered
        dose--response experiments replace the pilot & \S3.7, \S4.5 \\
@@ -217,7 +217,7 @@ R1-5 & Reproducibility &
 R2-1.1 & ETP in Fig.~1 before definition & Fig.~1 carries full name; ETP introduced in \S1 & \S1, Fig.~1 \\
 R2-1.2 & MTLD without expansion & Expanded as ``Measure of Textual Lexical Diversity'' & \S3.6 \\
 R2-1.3 & KL, JS, coverage in Fig.~1 without definition & Removed from Fig.~1; replaced with Distinct-$n$, MTLD, stopword ratio & Fig.~1 \\
-R2-1.4 & bf16 without expanded form & Expanded as ``16-bit brain-float'' at first use & \S4.1 \\
+R2-1.4 & bf16 without expanded form & Expanded as ``16-bit brain-float'' at first use & \S3 \\
 R2-1.5 & SVD without expansion & Expanded as ``singular value decomposition'' & \S3.5.1 \\
 R2-1.6 & TCE without expansion & Expanded as ``Truncated Cross-Entropy'' & \S3.1 \\
 R2-1.7 & QLoRA/LoRA inconsistent expansion & Both expanded at first use in \S1 & \S1 \\
@@ -340,9 +340,13 @@ the term ``effective training pressure'' is written in full at
 first use and wherever a claim is made about it; the abbreviation
 ETP is introduced explicitly in Section~3.5 and used thereafter
 only in the compound labels ETP-design and ETP-observed),
-and all abbreviations are now expanded at first use. The manuscript has
-been edited by Elsevier's Author Services language editing programme;
-the certificate is included in the submission package. Every reviewer comment below is addressed by a dedicated
+and all abbreviations are now expanded at first use. The revision was
+carried out in-house, including a full pass for grammar, terminology
+consistency, and the removal of residual non-English constructions.
+Should the Editor or reviewers consider that a further round of
+professional language editing is required, we will commission
+Elsevier's Author Services before acceptance and supply the certificate.
+Every reviewer comment below is addressed by a dedicated
 revision, with the corresponding section and page cited.
 
 % ══════════════════════════════════════════════════════════════════════════════
@@ -1112,7 +1116,7 @@ Section~4.5 reports approximately 5\% token reduction.}
 \medskip\noindent\textbf{A note on sub-concern~(g).}
 The reviewer's text quotes ``$15^{\circ}$~removal'' with a degree symbol
 in place of a percent sign. That substitution is itself an instance of
-the C-6 glyph fault documented in the response to Concern~\#2: the
+the glyph fault documented in the response to Concern~\#2: the
 Editorial Manager's re-distillation step maps percent signs to the degree
 sign codepoint in the LM Math font. The reviewer's quotation therefore
 simultaneously identifies the inconsistency and provides independent
@@ -1141,7 +1145,7 @@ changes a claim rather than a word, say so.
   pattern; causal interpretation not supported) & \S4.3.1 \\[3pt]
 ``above-threshold configurations'' (for $r=128$) & ``transition-zone configuration'' & \S4.4.3 \\[3pt]
 ``$r=256$: boundary configuration'' & ``lowest-pressure degradative configuration tested'' & \S3.4, \S4.5, \S5.4 \\[3pt]
-``three to five independent seeds'' (Abstract) & ``three seeds'' (only $r{=}4$ and $r{=}16$ have five) & Abstract \\
+``three to five independent seeds'' (Abstract) & ``three or five independent seeds for most headline conditions (six for the pooled $r{=}256$ estimate; Gemma~3 conditions with five seeds identified explicitly)'' & Abstract \\
 \bottomrule
 \end{tabular}
 \renewcommand{\arraystretch}{1.15}
@@ -1242,8 +1246,10 @@ archived in the replication package.
       \newtext{$r \geq 10$ on Gemma~3} (was ``$r \geq 16$''),
       consistent with Table~4.
 \item \textbf{Seed count (e) corrected and $N$ column added.}
-      Abstract: \newtext{Most headline conditions use three to five
-      seeds.} $N$ column added to rank-sweep and dose--response tables;
+      Abstract: \newtext{three or five independent seeds for most
+      headline conditions (six for the pooled $r{=}256$ estimate);
+      Gemma~3 conditions with five seeds identified explicitly.}
+      $N$ column added to rank-sweep and dose--response tables;
       remaining tables state $N$ in a footnote.
 \item \textbf{``Confirms'' (f) replaced; non-monotonic values reported.}
       \newtext{is consistent with} in Contribution~2 and \S4.3.3;
@@ -1365,7 +1371,7 @@ size 1536, grouped-query attention with 8 attention heads and 1
 key--value head, and key--value projections shared across the final 20 of
 35 layers, which is why a LoRA adapter targeting \texttt{q\_proj} and
 \texttt{v\_proj} adapts 35 query and 15 value matrices. The repository
-identifier and revision hash are listed in supplementary Table~S1. We
+identifier is listed in supplementary Table~S1. We
 also constrain what the backbone is used for: it was evaluated with a
 single seed, so it is labeled supportive validation, excluded from every
 threshold estimate, and the limitation is stated in those terms ---
@@ -1416,7 +1422,7 @@ generalize to other settings}.
       supportive validation (single seed; excluded from multi-seed
       analyses).
 \item \textbf{``Sharp''/``abrupt'' replaced (f) (throughout).}
-      All nine occurrences of \textit{sharp} have been replaced with
+      All occurrences of \textit{sharp} have been replaced with
       \newtext{threshold-like transition within the tested grid};
       non-adjacent-dose argument withdrawn; grid spacing quoted.
 \end{enumerate}
