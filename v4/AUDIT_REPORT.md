@@ -838,3 +838,107 @@ Verificação retroactiva: com slope_rep=-0.14, diff=0.0100 > 0.005 → **FAIL**
 
 **14/14 checks PASS** após todas as correcções.
 
+
+
+---
+
+## Parte 4c — Table 6 Gemma 3 r=4: 94.4→94.3 (2026-10-06)
+
+### Identificação
+
+Encontrado pelo utilizador com check_14 (integer reachability), ao varrer o paper contra a grade de inteiros atingíveis.
+
+**Prova:** K₀=46, N=5 → total=230 itens. Contagens por seed: [43,43,43,44,44], soma=217.
+- 217/230 = 94.3478% → round(1dp) = **94.3%**
+- O valor 94.4% na carta resulta de arredondar 94.35% para cima (segunda passagem de arredondamento)
+- O texto do §4.2.1 já reportava 94.35% correctamente (2dp)
+
+### Localização
+
+| Ficheiro | Linha | Valor | Estado |
+|----------|-------|-------|--------|
+| Manuscrito L31 | `\GthreeMtenRfour{94.3}` | ✅ corrigido em e416ca6 |
+| Manuscrito L1427 | Table 6: `94.3\%` | ✅ corrigido em e416ca6 |
+| Carta L1371 | Table 6: `94.4\%` | ❌ não foi corrigida em e416ca6 → fixado em 95e8e06 |
+
+O manuscrito já estava correcto. Apenas a carta tinha o erro.
+
+### Padrão de erro
+
+Quarta ocorrência da mesma classe (arredondamento em cascata):
+1. G4 média 80.4→80.3 (e416ca6)
+2. B7 slope 50% -0.14→-0.15 (2b59960)
+3. B7 p dose 25% 0.001→0.0044 (e5c0659)
+4. **Table 6 Gemma 3 94.4→94.3 (95e8e06)**
+
+### check_14 expandido
+
+Adicionada entrada `("G3 r4 Gen10 1dp", 94.3, 46, 5)` ao _MEANS do check_14. Verificação retroactiva: com 94.4, diff=0.1pp > tolerância → FAIL.
+
+---
+
+## Parte 5 — Estado final pré-submissão (2026-10-06)
+
+### 5.1 Checks mecânicos
+
+**14/14 PASS** (commit 95e8e06)
+
+| # | Check | Estado |
+|---|-------|--------|
+| 01 | no bare K₀ = digit | ✅ |
+| 02 | retention % match integer counts | ✅ |
+| 03 | Tab.1 body manuscrito ↔ carta | ✅ |
+| 04 | verbatim passages exist | ✅ |
+| 05 | key section labels | ✅ |
+| 06 | erank() always has ΔW | ✅ |
+| 07 | N per condition consistent | ✅ |
+| 08 | Tab.10 delta Gen10 | ✅ |
+| 09 | refs [15] e [45] autores correctos | ✅ |
+| 10 | zero British spellings | ✅ |
+| 11 | App.A run counts (52) | ✅ |
+| 12 | glyph_audit.py exists | ✅ |
+| 13 | CI/p internal consistency (B7+G2, tol=0.01) | ✅ |
+| 14 | integer reachability (médias e slopes) | ✅ |
+
+### 5.2 Valores canónicos B7 — estado final
+
+| Macro | Valor correcto | Origem | Verificado |
+|-------|----------------|--------|------------|
+| `\BsevenPtenTen` | 0.160 | back-computed from CI [-1.10,4.70] | ✅ check_13 |
+| `\BsevenPtenTfive` | 0.0044 | p_exact=0.004427, 4dp | ✅ check_13 |
+| `\BsevenPtenFifty` | 0.001 | <0.001 via texto hardcoded | ✅ |
+| `\BsevenSlopeZero` | -1.13 | 311/390 exacto | ✅ check_14 |
+| `\BsevenSlopeFifty` | -0.15 | 347/390 - 350/390 exacto | ✅ check_14 |
+
+### 5.3 Regressões do commit 6192b9e — todas resolvidas
+
+| Regressão | Commit de introdução | Commit de fix | Verificação |
+|-----------|---------------------|---------------|-------------|
+| paired_ttest_manual lookup table grosseira (df≥3) | 6192b9e | e5c0659 | check_13 barria com diff=0.040 |
+| B7 p dose 10%: 0.160→0.200 | 6192b9e | e5c0659 + 2b59960 | check_13 PASS |
+| B7 p dose 25%: 0.005→0.001 | 6192b9e | e5c0659 + 2b59960 | check_13 PASS |
+| B7 slope 50%: -0.15→-0.14 (B7_GEN5[50]=89.7) | 6192b9e | 2b59960 | check_14 barria com diff=0.010 |
+| Table 6 carta: 94.4% (não sincronizada) | e416ca6 (manuscrito OK) | 95e8e06 | check_14 barria com 94.4 |
+
+### 5.4 Itens pendentes para submissão
+
+| Item | Prioridade | Acção |
+|------|-----------|-------|
+| Abstract: 254 → ≤250 palavras | 🔴 desk-reject | Cortar 4-13 palavras (utilizador tem os cortes sugeridos) |
+| Zenodo v1.0.4 com scripts | ⚠️ reprodutibilidade | Publicar antes de submeter |
+| Confirmar destinatário (Dr. Hang Yu vs Dr. Jie Lu) | ⚠️ antes de submeter | Verificar no EM |
+| Varredura de outros valores contra grade inteira | ℹ️ recomendado | check_14 pode ser expandido com Tables 4,7,8,9 |
+
+### 5.5 Scorecard final
+
+| Dimensão | Score |
+|----------|-------|
+| Consistência numérica | 9.5/10 |
+| Qualidade da resposta aos revisores | 8.5/10 |
+| Integridade dos dados (checks mecânicos) | 9.5/10 |
+| Formato Word / glifos (ED-2) | 9/10 |
+| Reprodutibilidade | 6/10 (Zenodo pendente) |
+| **Prontidão para submissão** | **9.0/10** |
+
+Bloqueadores activos: apenas o Abstract (254>250 palavras).
+
