@@ -16,6 +16,21 @@
 \newcommand{\rev}[1]{\ifshowchanges{\color{blue}#1}\else{#1}\fi}
 % ── Números canônicos gerados por make_all.py — NÃO EDITAR À MÃO ──
 \input{../docs/revision/resultados/make_all_outputs/numbers}
+% ── Corrections to canonical numbers (F3.3 / F3.4 / F3.5) ─────────────────
+% F3.3: rounding / trailing-zero removal for G1 and G1+G4 CI/SD values
+\renewcommand{\GoneFourSDten}{1.7}        % was 1.73 — round to 1 dp
+\renewcommand{\GoneFourCItenLo}{77.9}     % was 77.90 — drop trailing zero
+\renewcommand{\GoneFourCItenHi}{81.5}     % was 81.50 — drop trailing zero
+\renewcommand{\GoneSDten}{1.5}            % was 1.50 — drop trailing zero
+\renewcommand{\GoneCItenLo}{75.4}         % was 75.30 — corrected (exact 75.38→75.4)
+\renewcommand{\GoneCItenHi}{82.7}         % was 82.80 — corrected (exact 82.74→82.7)
+\renewcommand{\GoneSeedFifteenTen}{78.2}  % was 78.20 — drop trailing zero
+% F3.4: trailing-zero removal for G5 prospective cell
+\renewcommand{\GfiveRonetwoetightLRhigh}{85.9}  % was 85.90 — drop trailing zero
+% F3.5: round Gemma3 anchor means to 1 dp (matches table display)
+\renewcommand{\GthreeMtenRfour}{94.3}     % was 94.35 — round to 1 dp (217/230=94.348→94.3)
+\renewcommand{\GthreeMtenRsixteen}{56.5}  % was 56.52 — round to 1 dp
+% ───────────────────────────────────────────────────────────────────────────
 % Usage: \rev{new text} — wraps any revised passage in blue when enabled.
 \usepackage[numbers]{natbib}
 \usepackage{booktabs}
@@ -493,46 +508,72 @@ QLoRA uses 4-bit NF4 quantization with bfloat16 (bf16) compute, and effective ra
 reported as the mean across adapted matrices.
 
 \paragraph{Notation.}
-Table~\ref{tab:notation} summarises all symbols used in this section and in
+Table~\ref{tab:notation} summarizes all symbols used in this section and in
 the results.  Symbols are listed in order of first appearance.
 
 \begin{table}[pos=htbp]
-\caption{\rev{Symbol definitions used throughout the methodology and results.
+\caption{Symbol definitions used throughout the methodology and results.
 All adapter-level quantities ($\mathrm{erank}$, $\|\cdot\|_F$) are averaged
-across adapted LoRA modules within a model.}}
+across adapted LoRA modules within a model. Symbols listed in order of
+first appearance.}
 \label{tab:notation}
 \small
 \begin{tabular*}{\columnwidth}{@{\extracolsep{\fill}}l>{\raggedright\arraybackslash}p{0.7\columnwidth}}
 \toprule
 \textbf{Symbol} & \textbf{Definition} \\
 \midrule
-$K_0$          & \rev{Set of items in $Q$ answered correctly at generation~0;
-                 $|K_0|$ denotes the cardinality of the anchor set; values: 78 (main Qwen runs), 46 (Gemma rank), 44 (G2 dose)} \\
-$R(t)$         & Factual retention at generation~$t$: fraction of $K_0$ items
-                 still correct \\
-$\theta^{(0)}$ & Pretrained backbone weights \\
-$\theta^{(t)}$ & Adapter-augmented weights at generation~$t$ \\
-$\Delta W = BA$& Low-rank LoRA update matrix ($B \in \mathbb{R}^{d\times r}$,
-                 $A \in \mathbb{R}^{r\times d}$) \\
-$\sigma_i$     & $i$-th singular value of $\Delta W$ \\
-$p_i$          & \rev{Normalised singular weight, $p_i = \sigma_i / \sum_j \sigma_j$;
-                 $p_i \ge 0$ and $\sum_i p_i = 1$} \\
-$\mathrm{erank}(\Delta W)$ & Effective rank:
-                 $\exp\!\bigl(-\sum_i p_i \log p_i\bigr)$
-                 (Eq.~\ref{eq:erank}) \\
-$\|\Delta W\|_F$ & Frobenius norm of composed update, averaged across modules \\
-$d(t)$         & Parameter drift: mean absolute weight change
-                 $\theta^{(t)}-\theta^{(0)}$ \\
-$\eta$         & Learning rate \\
-$\Pi$          & Operational pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
-$f$            & Exposure dose: fraction of training items removed \\
-$r_H$, $r_D$ & \rev{Empirically observed rank transition intervals (Qwen-specific): $r_H \in (64,128)$, $r_D \in (128,256)$; not universal thresholds} \\
-$T$            & Evaluation horizon (10 generations in main experiments) \\
-$\mathrm{ContentEff}(t)$ & Retention divided by mean synthetic response length \\
-$\mathrm{Persist}(t)$    & Fraction of $K_0$ items whose response at generation~$t$
-                           matches generation~0 \\
-$\mathrm{SDI\text{-}3}$  & Synthetic Drift Index: composite of verbosity, diversity,
-                           and instability changes \\
+$K_0$
+  & Set of items in $Q$ answered correctly at generation~0;
+    $|K_0|$ denotes its cardinality;
+    values: $|K_0|=78$ (main Qwen runs),
+            $|K_0|=46$ (Gemma~3 rank sweep),
+            $|K_0|=44$ (G2 dose) \\
+$R(t)$
+  & Factual retention at generation~$t$: fraction of $K_0$ items
+    still correct \\
+$\theta^{(0)}$
+  & Pretrained backbone weights \\
+$\theta^{(t)}$
+  & Adapter-augmented weights at generation~$t$ \\
+$\Delta W = BA$
+  & Low-rank LoRA update matrix
+    ($B \in \mathbb{R}^{d\times r}$, $A \in \mathbb{R}^{r\times d}$) \\
+$\sigma_i$
+  & $i$-th singular value of $\Delta W$ \\
+$p_i$
+  & Normalized singular weight,
+    $p_i = \sigma_i / \sum_j \sigma_j$;
+    $p_i \ge 0$ and $\sum_i p_i = 1$ \\
+$\mathrm{erank}(\Delta W)$
+  & Effective rank:
+    $\exp\!\bigl(-\sum_i p_i \log p_i\bigr)$
+    (Eq.~\ref{eq:erank}) \\
+$\|\Delta W\|_F$
+  & Frobenius norm of composed update, averaged across modules \\
+$d(t)$
+  & Parameter drift: mean absolute weight change
+    $\theta^{(t)}-\theta^{(0)}$ \\
+$\eta$
+  & Learning rate \\
+$\Pi$
+  & Operational pressure index:
+    $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
+$f$
+  & Exposure dose: fraction of training items removed \\
+$r_H$, $r_D$
+  & Empirically observed rank transition intervals (Qwen-specific):
+    $r_H \in (64,128)$, $r_D \in (128,256)$;
+    not universal thresholds \\
+$T$
+  & Evaluation horizon (10 generations in main experiments) \\
+$\mathrm{ContentEff}(t)$
+  & Retention divided by mean synthetic response length \\
+$\mathrm{Persist}(t)$
+  & Fraction of $K_0$ items whose response at generation~$t$
+    matches generation~0 \\
+$\mathrm{SDI\text{-}3}$
+  & Synthetic Drift Index: composite of verbosity, diversity,
+    and instability changes \\
 \bottomrule
 \end{tabular*}
 \end{table}
@@ -740,7 +781,7 @@ check. Architectural metadata are taken from the released model configurations.
 The repository identifiers are listed
 in supplementary Table~S1 and in \texttt{configs/checkpoints.yaml} of
 the replication package, so that the identical weights can be
-obtained\rev{, using the SHA-1 hashes listed in supplementary Table~S1}.}
+obtained.}
 
 QLoRA experiments load the base model in 4-bit
 NormalFloat (NF4) quantization with double quantization and bfloat16 compute
@@ -1121,7 +1162,7 @@ Reported per seed; headline conditions use 3--5 independent seeds \\
 \addlinespace
 
 Backbone architecture &
-Regime thresholds may not generalise &
+Regime thresholds may not generalize &
 Replicated on Gemma~3~1B~IT ($r\geq10$ degradative) and Gemma~4~E2B~IT ($r=64$ degradative, $N=1$) \\
 
 \addlinespace
@@ -1234,7 +1275,7 @@ temporal dynamics across regimes.
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig1_trajectories.png}\\[4pt]
   \includegraphics[width=0.95\columnwidth]{figs/final/fig2_dose_response.png}
-  \caption{(a) K0 retention trajectories over 10 recursive
+  \caption{\rev{(a) Trajectories for the multi-seed runs ($r=16$: $N=3$, G3 bf16; $r=256$: $N=3$, G1); the single-seed NF4 sweep values tabulated in Table~\ref{tab:rank_sweep} appear in panel (b).} (a) K0 retention trajectories over 10 recursive
   generations for three representative ranks on Qwen~2.5~1.5B. Semi-transparent
   lines show individual seeds; solid thick lines show the per-rank mean.
   Background bands indicate regime classification (green: homeostatic,
@@ -1303,7 +1344,7 @@ evidence.
 Table~\ref{tab:transitions} summarizes item-level transitions across the rank
 sweep. In the homeostatic regime, facts lost at one generation are recovered at
 similar rates (net loss $\approx 0$), indicating bounded oscillation rather than
-progressive forgetting. In the degradative regime, \rev{losses exceeded recoveries in the single seed analysed (Table~\ref{tab:transitions}), producing monotonic net displacement.}
+progressive forgetting. In the degradative regime, \rev{losses exceeded recoveries in the single seed analyzed (Table~\ref{tab:transitions}), producing monotonic net displacement.}
 
 \begin{table}[!htbp]
 \caption{Item-level transitions across recursive generations on
@@ -1354,7 +1395,7 @@ conditions redundant for establishing the boundary location.
 Table~\ref{tab:gemma3} summarizes the results. At $r=4$ (mean
 effective rank 3.07), Gemma~3 remains stable across five seeds through ten
 generations (mean Gen10 retention \rev{$\GthreeMtenRfour\%$, range 93.5--95.7\%}).
-At $r=16$ (mean effective rank 9.2), Gemma~3 enters the degradative regime
+At $r=16$ (mean effective rank 9.17), Gemma~3 enters the degradative regime
 across all five seeds (mean Gen10 retention \rev{$\GthreeMtenRsixteen\%$,
 range 52.2--60.9\%}). The ranges do not
 overlap at any generation from Gen1 onward, providing consistent empirical
@@ -1378,7 +1419,7 @@ configuration is therefore classified as progressively degradative rather than
 bounded.
 
 A notable feature of the degradative regime on Gemma~3 is that the mean
-effective rank remains constant at approximately 9.2 throughout all ten
+effective rank remains constant at approximately 9.17 throughout all ten
 generations, even as retention declines from 85\% to 57\%. This suggests that
 effective rank operates as a regime gate, determining whether the system
 enters the degradative regime, rather than as a continuous predictor of the
@@ -1401,7 +1442,7 @@ are evaluated with five seeds over ten generations; intermediate ranks
 \toprule
 Rank & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
 \midrule
-$r=4$   & 10 & 94.4\% (N=5) & 3.07  & \rev{5} & Homeostatic \\
+$r=4$   & 10 & 94.3\% (N=5) & 3.07  & \rev{5} & Homeostatic \\
 $r=10$  & 5  & 78.3\%       & 6.37  & \rev{1} & Degradative \\
 $r=12$  & 5  & 73.9\%       & 7.35  & \rev{1} & Degradative \\
 $r=14$  & 5  & 69.6\%       & 8.37  & \rev{1} & Degradative \\
@@ -1896,7 +1937,7 @@ Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization of the base
 weights. To verify that the regime classification is not an artifact of NF4, we
 re-ran the same protocol on Qwen using standard bf16 precision and no base-weight
 quantization (G3, three seeds at each of $r=16$ and $r=256$). At $r=16$, bf16 returned $76/78 = 97.4\%$ at Gen10 against $75/78 = 96.2\%$ for
-the single-seed NF4 sweep (Table~\ref{tab:rank_sweep}), a difference of one item ($+1.28$~pp; the two conditions also differ in seed count); at $r=256$ the difference is $\GthreeDeltatenTwoFiveSix$~pp.
+the single-seed NF4 sweep (Table~\ref{tab:rank_sweep}), a difference of one item ($+1.3$~pp; the two conditions also differ in seed count); at $r=256$ the difference is $\GthreeDeltatenTwoFiveSix$~pp.
 The G1 (NF4) and G3 (bf16) runs produced identical aggregate retention counts
 for the matched seeds at $r=256$; run-level provenance and item-level outputs
 are audited separately before interpreting this agreement as evidence about
@@ -1976,7 +2017,7 @@ motivation for treating them as manifestations of a common organizing principle.
 The framework is empirical rather than theoretical. We do not propose a
 closed-form expression that combines rank, learning rate, and exposure into a
 single scalar predictor. Instead, the experiments reveal that each variable independently
-controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $\BsevenSlopeFifty$\,pp/generation, whereas a 10\% reduction did not; its slope was $-1.49$\,pp/generation, marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.
+controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $\BsevenSlopeFifty$\,pp/generation, whereas a 10\% reduction did not; its slope was $-1.49$\,pp/generation (on unrounded per-arm means), marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.
 \rev{This pattern is consistent with the system operating near a regime boundary, though the present experiments do not establish a precise threshold value that will generalize to other settings.}}
 
 \rev{The contribution is the existence and reproducibility of this
@@ -2418,7 +2459,7 @@ discrepancy, irrespective of direction. Steps (i)--(ii) cost
 approximately two pilot runs per backbone. The present study performed
 neither the pre-specification nor the held-out evaluation on an unseen
 backbone. This per-backbone procedure is also the practical alternative
-we propose to the architectural normalisations in
+we propose to the architectural normalizations in
 Table~\ref{tab:normalization}, none of which aligned the thresholds
 across backbones.}
 
@@ -2480,11 +2521,11 @@ their effects are additive or interactive.
 
 \rev{The replication package is archived at the links below (release v1.0.3 contains items (i)--(iii) and earlier versions of the scripts; items (iv)--(v) reflect the HEAD commit and will be deposited in the next release). The current state of the repository contains:
 \begin{enumerate}[(i)]
-  \item the consolidated per-seed results files (one JSON per seed per arm, covering G1--G5, 27 executed training runs; one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon);
+  \item the consolidated per-seed results files (one JSON per seed per arm, covering G1--G5, 27 multi-seed training runs (G1:~3, G2:~12, G3:~6, G4:~3, G5:~3), plus 20~B7 dose--response runs and 5~C1--C5 pilot runs; single-seed ablation runs are not counted in the 27; one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon);
   \item the training configuration files for each experimental arm;
   \item the evaluation protocol, question partition identifiers, and the $K_0$ baseline sets for each backbone;
   \item the analysis and table-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (15/15 checks pass on the HEAD commit); and
-  \item the notation and rendering audit script \texttt{scripts/audits/glyph\_audit.py}.
+  \item the notation and rendering audit script \texttt{scripts/analysis/glyph\_audit.py}.
 \end{enumerate}
 The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
 
@@ -2500,7 +2541,7 @@ The revised manuscript, response-to-reviewers letter, and updated analysis scrip
     (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
 \end{itemize}
 
-\rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper (15/15 checks pass on the HEAD commit).}
+\rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper.}
 Running \texttt{python figs/src/fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not

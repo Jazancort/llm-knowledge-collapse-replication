@@ -55,6 +55,9 @@
 \newcommand{\arhead}[1]{\medskip\noindent\textbf{#1}\par\smallskip}
 
 \newcommand{\newtext}[1]{\textcolor{chgcolor}{``#1''}}
+% \rev{} is used in shared/ content files (manuscript change-tracking macro).
+% In the response letter it is a no-op (content is accepted).
+\newcommand{\rev}[1]{#1}
 
 \newcommand{\renum}[2]{#1 of the original submission (now #2)}
 
@@ -131,6 +134,8 @@ Corresponding Author
       Where a passage from the revised manuscript is reproduced in this
       letter, it is paraphrased or summarized; the relevant section is
       cited so that the exact wording can be located in the revision.
+\item Quoted manuscript passages are indicative wording unless marked
+      {[verbatim]}; section references locate the exact text.
 \item Locations are given as section and page of the revised manuscript.
       Where the revision renumbered a table or section, both numbers are
       given at first mention, e.g.\ \renum{Table~7}{Table~9}.
@@ -276,7 +281,7 @@ R2-4.a & No formal tests, CI, or $p$-values & Paired $t$-tests with 95\,\% CI ad
 R2-4.b & ETP framework not quantified & No scalar predictor derived; ETP labeled exploratory post-training summary & \S3.5, \S6 \\
 R2-4.c & Normalization failed; no alternative proposed & Five normalizations reported as negative result; per-backbone calibration protocol specified & \S4.2.3, \S6, Tab.~13 \\
 R2-4.d & ``ETP is just a conceptual label'' & Conceded; contribution restated as factorial design, pre-registered evidence, and empirical finding & \S1 \\
-R2-4.e & Gemma~4 E2B: no citation, confusion with Gemma~3n, architecture unsourced & Ref.~[41] added; model distinguished from Gemma~3n~E2B in text and Tab.~2 & \S3.3, Tab.~2 \\
+R2-4.e & Gemma~4 E2B: no citation, confusion with Gemma~3n, architecture unsourced & Ref.~[41] added; model distinguished from Gemma~3n~E2B in text & \S3.3 \\
 R2-4.f & ``Sharp transition'' weakened by sparse grid / wide intervals & ``sharp'' withdrawn throughout; claim restated as threshold-like pattern on a tested grid & \S1, \S5 \\
 \addlinespace[2pt]
 R2-5.a & Duplicate arXiv ID in references & Resolved; correct arXiv ID assigned & \texttt{cas-refs.bib} \\
@@ -409,7 +414,7 @@ ETP is now described as an operational experimental framework, not a
 validated predictor. \newtext{The ETP index $\Pi$ is an exploratory
 post-training summary; it is not available prospectively and has not been
 validated as a transferable quantitative predictor across architectures or
-datasets.} This sentence appears in Section~3.5, the Abstract, and~\S7.
+datasets.} This sentence appears in \S3.5, \S6, \S7, and the Abstract.
 
 \textbf{Reservation~2: The main metric uses one short-answer dataset.}
 A strict exact-match sensitivity analysis was investigated and is reported
@@ -426,14 +431,15 @@ a cross-condition sensitivity check. The scoring leniency concern is stated
 as a genuine limitation in Section~6: for configurations that produce verbose
 responses (notably $r=128$), the reported retention may partially reflect
 format effects. This is now documented rather than controlled for, and the
-evaluation scope is bounded explicitly: \newtext{The evaluation is conducted
-on short-answer factual questions (TriviaQA); results for longer answers,
-multi-hop questions, or other domains constitute an open empirical question.}
+evaluation scope is bounded explicitly: \newtext{The evaluation is restricted
+to short-answer factual questions (TriviaQA); results for longer-form
+generation, multi-hop reasoning, code, or other domains constitute an open
+empirical question and are outside the scope of this study (\S6).}
 
 \textbf{Reservation~3: Several analyses are single-seed.}
 The seed policy is now explicit at the level of individual claims
 (Section~3.8). Headline conditions use three or five independent seeds
-for most headline conditions (six for the pooled $r=256$ estimate);
+(six for the pooled $r=256$ estimate);
 intermediate ablations use one seed and are labeled descriptive; the two
 categories are never pooled.
 
@@ -514,13 +520,15 @@ of regimes, not as a confirmatory prospective test.
       validated as a transferable quantitative predictor across
       architectures or datasets.}
 \item \textbf{Abstract and conclusion qualified (Abstract;
-      Section~6).}
-      The abstract now bounds the ETP claim: \newtext{We identify
-      effective training pressure as an organizing principle for the
-      observed regime structure; this framework is not yet a transferable
-      quantitative predictor, as cross-architecture normalization did not
-      align the observed boundaries.} The conclusion repeats this
-      qualification.
+      Section~7).}
+      The Abstract now qualifies the ETP claim with the following sentence
+      (Section~\ref{sec:pressure} in the revised manuscript):
+      \newtext{The index $\Pi$ introduced in Section~\ref{sec:pressure}
+      is an exploratory post-training summary of the manipulated
+      variables; it is not available prospectively and has not been
+      validated as a transferable quantitative predictor across
+      architectures or datasets.} Section~7 (the conclusion) repeats
+      this qualification.
 \item \textbf{Prospective calibration protocol added (Section~6).}
       A five-step protocol specifying the requirements for a genuine
       prospective test on an unseen backbone was added to Section~6 as
@@ -593,8 +601,8 @@ the two tests bracket the inferential uncertainty without overclaiming
 in either direction.
 
 \textbf{Summary of what remains confounded.}
-The revision includes a dedicated paragraph in Section~4.2.1 that
-summarizes which contrasts isolate individual axes, which remain
+The revision includes a dedicated summary in \S3.9 and \S4.6 that
+documents which contrasts isolate individual axes, which remain
 partially confounded, and what additional experiments (e.g., a design
 that varies rank alone while holding quantization, optimizer, data order,
 and seed fixed simultaneously) would be required to draw fully causal
@@ -621,7 +629,7 @@ conclusions. The controls and remaining confounds are summarized in
 \end{enumerate}
 
 \msloc{Sections~3.5 and~3.9 (variables and controls); Section~4.1 (rank
-sweep); Section~4.2.1 (Qwen comparisons); Section~4.3.3 (Gemma~3);
+sweep); Section~4.1 (Qwen comparisons); Section~4.3.3 (Gemma~3);
 Section~4.6 (G3 and G4).}
 
 \rconcern{Reviewer \#1, Concern \#3}{External validity of the evaluation}{Do the conclusions hold for longer answers, multi-hop questions, other domains, and larger factual evaluation sets?}
@@ -710,7 +718,7 @@ C1 and C5 followed different evaluation pipelines, including differences in $K_0
 \medskip\noindent\textbf{The Qwen dose--response evidence (B7).}The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=0.160$), $+4.9$\,pp at 25\% ($p=0.005$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $-0.15$\,pp/generation, compared with $-1.13$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{At 50\% removal (B7, five paired seeds), Generation~10 retention increased by $+9.2$\,pp (95\%~CI $[6.9,11.6]$, $p{<}0.001$) and the Generation~5--10 slope was attenuated from $-1.13$ to $-0.15$\,pp/generation.}
 Tab.~10 in the revised manuscript reports the full dose--response results for B7.
 
-\begin{inlineref}{Table~10 from the revised manuscript --- Dose-response interventions (B7 and G2)}
+\begin{inlineref}{Table~10 from the revised manuscript --- Dose-response interventions (B7)}
 \footnotesize\renewcommand{\arraystretch}{1.2}
 \begin{tabular}{@{}llrrrl@{}}
 \toprule
@@ -722,7 +730,7 @@ Tab.~10 in the revised manuscript reports the full dose--response results for B7
 50\% & 89.7\% & $+4.4$\,pp & 89.0\% & $+9.2$\,pp & 5 \\
 \bottomrule
 \end{tabular}\\[2pt]
-{\scriptsize Qwen 2.5 1.5B, $r{=}256$, $|K_0|{=}78$, $n{=}5$ paired seeds per dose (B7). $\Delta$ values are computed from unrounded per-arm means; displayed values are rounded independently. The 50\% dose $\Delta$ Gen5 ($+4.4$\,pp) differs by $0.1$\,pp from simple column subtraction due to this rounding.}
+{\scriptsize Qwen 2.5 1.5B, $r{=}256$, $|K_0|{=}78$, $n{=}5$ paired seeds per dose (B7). $\Delta$ values are computed from unrounded per-arm means; displayed values are rounded independently. The 50\% dose $\Delta$ Gen5 ($+4.4$\,pp) differs by $0.1$\,pp from simple column subtraction due to this rounding. The 50\% dose $\Delta$ Gen10 ($+9.2$\,pp predicted from unrounded means) differs by $0.1$\,pp from simple column subtraction ($89.0\%{-}79.7\%=+9.3$\,pp) due to the same rounding convention.}
 \end{inlineref}
 
 \medskip\noindent\textbf{The Gemma~3 dose--response evidence (G2).}The Gemma~3 response was different in kind. In Experiment~G2, 50\% removal at $r=10$ raised Generation~10 retention by $\GtwoDeltatenFifty$\,pp across three paired seeds (95\%~CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$), with the 10\% and 25\% doses giving $\GtwoDeltatenTen$ and $\GtwoDeltatenTfive$\,pp, respectively. The Generation~5--10 slope was $\GtwoSlopeFifty$\,pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, equal within rounding. The intervention improved endpoint retention without demonstrably slowing later loss. The revised manuscript adds: \newtext{On Gemma~3~1B at $r=10$, 50\% removal improved Generation~10 retention by $\GtwoDeltatenFifty$\,pp but did not reduce the observed rate of loss ($\GtwoSlopeFifty$ versus $\GtwoSlopeZero$\,pp/generation).}
@@ -751,8 +759,8 @@ at other ranks or with more seeds is an open empirical question.
       Section~4.5. Endpoint retention improved at 50\% removal; the
       Generation~5--10 slope was equal within rounding, indicating
       endpoint benefit without demonstrable slope attenuation.
-\item \textbf{Mechanistic caveat added in Section~4.6.}
-      Section~4.6 notes that the backbone difference may reflect rank or
+\item \textbf{Mechanistic caveat added in Sections~5.4 and~6.}
+      Sections~5.4 and~6 note that the backbone difference may reflect rank or
       seed-count specifics, and that a causal interpretation across backbones
       is not supported by the current evidence.
 \end{enumerate}
@@ -763,7 +771,7 @@ The dose--response results for both backbones are visualised in Figure~10.
 {\scriptsize Red circles: Gemma~3~1B $r=10$ ($n=3$ paired seeds, $|K_0|=44$); orange squares: Qwen~2.5~1.5B $r=256$ ($n=5$ paired seeds, $|K_0|=78$). Dashed line: no change ($\Delta=0$\,pp). Shaded bands: 95\,\% confidence intervals from paired $t$-tests.}
 \end{inlineref}
 
-\msloc{Section~4.5 (Qwen B7 dose--response; Gemma~3 G2 dose--response); Section~4.6 (mechanistic caveat); Section~3.5 (ETP framework); Section~3.7 (pilot exclusion).}
+\msloc{Section~4.5 (Qwen B7 dose--response; Gemma~3 G2 dose--response); Sections~5.4 and~6 (mechanistic caveat); Section~3.5 (ETP framework); Section~3.7 (pilot exclusion).}
 
 \rconcern{Reviewer \#1, Concern \#5}{Scope of the reproducibility package}{What complete code, checkpoints, prompts, seeds, and raw outputs will support independent reproduction?}
 
@@ -778,15 +786,16 @@ in Appendix~A.
 \textbf{What the archive contains.}
 The Zenodo archive (DOI: \url{https://doi.org/10.5281/zenodo.23146342},
 release~v1.0.3) contains: (i)~consolidated per-seed results files
-(one JSON per experimental arm) from which all reported statistics were
-derived; (ii)~the \texttt{make\_all.py} script that regenerates all
-tables and numbers in \texttt{numbers.tex} from those files; (iii)~the
-figure-generation scripts (including \texttt{fig9\_dose\_response.py})
-that produce all reported figures at 300\,dpi; (iv)~the evaluation
-protocol, question partition identifiers, and the $K_0$ baseline sets
-for all three backbones; (v)~the training configuration files specifying
-adapter rank, learning rate, batch size, number of steps, seed, and
-synthetic data fraction for every reported experimental condition.
+(one JSON per seed per arm) from which all reported statistics were
+derived; (ii)~the figure-generation scripts (including
+\texttt{fig9\_dose\_response.py}) that produce all reported figures at
+300\,dpi; (iii)~the evaluation protocol, question partition identifiers,
+and the $K_0$ baseline sets for all three backbones; (iv)~the
+\texttt{make\_all.py} script that regenerates all tables and summary
+statistics (not in v1.0.3; added for this revision); (v)~the training
+configuration files specifying adapter rank, learning rate, batch size,
+number of steps, seed, and synthetic data fraction for every reported
+experimental condition (not in v1.0.3; added for this revision).
 
 \textbf{What the archive does not contain, and why.}
 Raw token-level predictions and trained adapter checkpoints are not
@@ -798,8 +807,8 @@ pre-computed per-seed results, but not a byte-for-byte reconstruction
 of every training run. The revised Appendix~A states explicitly:
 \newtext{The archive permits reproduction of all reported statistics
 and figures from the consolidated per-seed results files. It does not
-include raw predictions, trained adapter checkpoints, or base-model
-weights, which must be obtained separately.}
+include raw token-level predictions, trained adapter checkpoints, or base-model
+weights.}
 
 \textbf{Version discipline.}
 Scripts introduced or revised after the initial release must be
@@ -980,7 +989,7 @@ These three metrics appeared in the original Figure~1 but are not
 computed in the reported experiments. They have been removed from
 Figure~1 entirely and replaced with the metrics that are actually
 computed: Distinct-$n$, MTLD, and stopword ratio. The revised
-Figure~1 caption now lists: \newtext{Stage 4: Per-generation
+Figure~1 caption now lists: \newtext{Stage (4): Per-generation
 evaluation of factual retention ($K_0$), effective rank, response
 length, Distinct-$n$, MTLD, and stopword ratio.}
 
@@ -1190,31 +1199,63 @@ $r=256$ & 70/78 (89.7\%) & 66/78 (84.6\%) & 64/78 (82.1\%) \\
 \toprule
 \textbf{Symbol} & \textbf{Definition} \\
 \midrule
-$K_0$      & Set of items answered correctly at generation~0; $|K_0|$ = cardinality \\
-$R(t)$     & Factual retention: $|\{q\in K_0: q\text{ correct at gen.\ }t\}|/|K_0|$ \\
-$\theta^{(0)}$ & Pretrained backbone weights \\
-$\theta^{(t)}$ & Adapter-augmented weights at generation~$t$ \\
-$\Delta W = BA$ & Low-rank LoRA update matrix \\
-$\sigma_i$ & $i$-th singular value of $\Delta W$ \\
-$p_i$      & Normalised singular weight: $\sigma_i/\sum_j\sigma_j$; $\sum_i p_i=1$ \\
-$\mathrm{erank}(\Delta W)$ & Effective rank: $\exp(-\sum_i p_i\log p_i)$ \\
-$\|\Delta W\|_F$ & Frobenius norm of composed update, averaged across modules \\
-$d(t)$     & Mean absolute weight drift \\
-$\eta$     & Learning rate \\
-$\Pi$      & Pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
-$f$ & Exposure dose: fraction of training items removed \\
-$r_H$, $r_D$ & Empirically observed rank transition intervals (Qwen-specific): $r_H \in (64,128)$, $r_D \in (128,256)$; not universal thresholds \\
-$T$ & Evaluation horizon (10 generations in main experiments) \\
-$\mathrm{ContentEff}(t)$ & Retention divided by mean synthetic response length \\
-$\mathrm{Persist}(t)$ & Fraction of $K_0$ items whose response at generation~$t$ matches generation~0 \\
-$\mathrm{SDI\text{-}3}$ & Synthetic Drift Index: composite of verbosity, diversity, and instability changes \\
+$K_0$
+  & Set of items in $Q$ answered correctly at generation~0;
+    $|K_0|$ denotes its cardinality;
+    values: $|K_0|=78$ (main Qwen runs),
+            $|K_0|=46$ (Gemma~3 rank sweep),
+            $|K_0|=44$ (G2 dose) \\
+$R(t)$
+  & Factual retention at generation~$t$: fraction of $K_0$ items
+    still correct \\
+$\theta^{(0)}$
+  & Pretrained backbone weights \\
+$\theta^{(t)}$
+  & Adapter-augmented weights at generation~$t$ \\
+$\Delta W = BA$
+  & Low-rank LoRA update matrix
+    ($B \in \mathbb{R}^{d\times r}$, $A \in \mathbb{R}^{r\times d}$) \\
+$\sigma_i$
+  & $i$-th singular value of $\Delta W$ \\
+$p_i$
+  & Normalized singular weight,
+    $p_i = \sigma_i / \sum_j \sigma_j$;
+    $p_i \ge 0$ and $\sum_i p_i = 1$ \\
+$\mathrm{erank}(\Delta W)$
+  & Effective rank:
+    $\exp\!\bigl(-\sum_i p_i \log p_i\bigr)$ \\
+$\|\Delta W\|_F$
+  & Frobenius norm of composed update, averaged across modules \\
+$d(t)$
+  & Parameter drift: mean absolute weight change
+    $\theta^{(t)}-\theta^{(0)}$ \\
+$\eta$
+  & Learning rate \\
+$\Pi$
+  & Operational pressure index:
+    $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
+$f$
+  & Exposure dose: fraction of training items removed \\
+$r_H$, $r_D$
+  & Empirically observed rank transition intervals (Qwen-specific):
+    $r_H \in (64,128)$, $r_D \in (128,256)$;
+    not universal thresholds \\
+$T$
+  & Evaluation horizon (10 generations in main experiments) \\
+$\mathrm{ContentEff}(t)$
+  & Retention divided by mean synthetic response length \\
+$\mathrm{Persist}(t)$
+  & Fraction of $K_0$ items whose response at generation~$t$
+    matches generation~0 \\
+$\mathrm{SDI\text{-}3}$
+  & Synthetic Drift Index: composite of verbosity, diversity,
+    and instability changes \\
 \bottomrule
 \end{tabular}
 \par\smallskip
 {\footnotesize\textit{Symbols listed in order of first appearance.
 Adapter-level quantities (\textnormal{erank}, $\|\cdot\|_F$) are averaged across adapted LoRA modules within a model.}}
 \end{inlineref}
-      Eq.~1: \newtext{$R(t)=|K_0 \cap A(t)|/|K_0|$}.
       Eq.~2: \newtext{$\mathrm{erank}(\Delta W)=\exp(-\sum_i p_i \log
       p_i)$, $p_i=\sigma_i/\sum_j\sigma_j$}.
       Eq.~3 now shows absolute value and summation explicitly.
@@ -1581,8 +1622,6 @@ as one.
 \midrule
 Rank governs transition & Rank sweep 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}3$ bf16 (G3) \\
 \addlinespace
-Single-seed at $r{=}16$, $32$, $64$, $128$ (rank sweep); $N{=}3$--$5$ at anchor ranks ($r{=}4$, $r{=}16$/$r{=}10$) & Reported per seed; regime classification not based on single-seed evidence alone \\
-\addlinespace
 Magnitude governs transition & FFT LR sweep, 4 values \\
 \addlinespace
 Exposure reduces pressure & Dose-response 0--50\%, $N{=}5$ seeds (pre-registered) \\
@@ -1598,6 +1637,11 @@ Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\time
 Generalizes cross-backbone & Gemma~3 ($N=5$) + E2B rank sweep ($N=1$, supportive) \\
 \bottomrule
 \end{tabular}
+\par\smallskip
+{\scriptsize \textit{Seed policy note:} Rank sweep intermediate conditions
+($r{=}16$, $32$, $64$, $128$) are single-seed; anchor ranks ($r{=}4$ and
+$r{=}16$/$r{=}10$) use $N{=}3$--$5$ seeds. Regime classification is not
+based on single-seed evidence alone; see \S3.8.}
 \end{inlineref}
 
 \rsub{(e)}{Gemma~4 E2B: citation, possible confusion with Gemma~3n E2B,
