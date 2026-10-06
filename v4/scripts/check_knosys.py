@@ -268,7 +268,7 @@ except ImportError:
 PAIRS = [
     # label          Δ      CI_lo    CI_hi   p_reported   n
     ("B7 dose 10%",  1.8,  -1.10,   4.70,   0.160,       5),
-    ("B7 dose 25%",  4.9,   2.50,   7.20,   0.005,       5),
+    ("B7 dose 25%",  4.9,   2.50,   7.20,   0.0044,      5),   # 4dp: p_exact=0.004427
     ("B7 dose 50%",  9.2,   6.90,  11.60,   0.001,       5),   # p<0.001 stored as 0.001
     ("G2 dose 10%",  9.8,   6.70,  13.00,   0.006,       3),
     ("G2 dose 25%", 11.4,   5.80,  17.00,   0.013,       3),
@@ -308,10 +308,65 @@ check(13, "CI/p internal consistency for all B7+G2 reported pairs (|p_calc-p_rep
       len(incoherent) == 0 or not _scipy_ok,
       _check13_detail if incoherent else "")
 
+# ---------------------------------------------------------------------------
+# check_14: integer reachability — reported means and slopes derive from integer counts
+# For each (mean%, K0, N) tuple: verify that m = round(mean/100 * K0 * N) is an integer
+# and that round(m / (K0*N) * 100, 1) == mean (round-trips to same 1dp value).
+# For slopes: verify slope == round((mean_gen10_exact - mean_gen5_exact) / n_gens, 2)
+# where exact means are m/total without rounding.
+# This check caught: G4 mean 80.4→80.3 (wrong m), B7 slope50 -0.14→-0.15 (1dp Gen5 data).
+# ---------------------------------------------------------------------------
 
-# ---------------------------------------------------------------------------
-# Summary
-# ---------------------------------------------------------------------------
+# Reported (mean%, K0, N) tuples from manuscript
+_MEANS = [
+    # label               mean   K0   N
+    ("B7 Gen10 0%",       79.7,  78,  5),
+    ("B7 Gen5  0%",       85.4,  78,  5),
+    ("B7 Gen10 50%",      89.0,  78,  5),
+    ("B7 Gen5  50%",      89.7,  78,  5),
+    ("G4 mean Gen10",     80.3,  78,  3),
+    ("G3 r4  Gen10",      94.35, 46,  5),
+    ("G3 r16 Gen10",      56.52, 46,  5),
+    ("G1+G4 Gen10",       79.7,  78,  6),
+]
+_unreachable = []
+for label, mean_pct, K0, N in _MEANS:
+    total_items = K0 * N
+    m_exact = mean_pct / 100 * total_items
+    m_int = round(m_exact)
+    m_back = round(m_int / total_items * 100, 2)
+    m_back_1dp = round(m_int / total_items * 100, 1)
+    # Check: m must be a near-integer (within 0.01 of an integer)
+    if abs(m_exact - m_int) > 0.5:
+        _unreachable.append(f"{label}: mean={mean_pct}% gives m={m_exact:.2f} (no integer match for K0={K0},N={N})")
+    # Check: m/total round-trips to the reported value at 1dp or 2dp
+    elif abs(m_back_1dp - round(mean_pct, 1)) > 0.05 and abs(m_back - mean_pct) > 0.05:
+        _unreachable.append(
+            f"{label}: m={m_int} → {m_back_1dp}% (1dp) but reported {mean_pct}%"
+        )
+
+# Reported slopes: verify on exact integer-derived means
+_SLOPES = [
+    # label          m5   m10   K0   N  n_gens  slope_rep
+    ("B7 slope 0%",  333,  311,  78,  5,  5,   -1.13),
+    ("B7 slope 50%", 350,  347,  78,  5,  5,   -0.15),
+]
+for label, m5, m10, K0, N, n_gens, slope_rep in _SLOPES:
+    total = K0 * N
+    mean5  = m5  / total * 100
+    mean10 = m10 / total * 100
+    slope_exact = round((mean10 - mean5) / n_gens, 2)
+    if abs(slope_exact - slope_rep) > 0.005:
+        _unreachable.append(
+            f"{label}: slope_exact={slope_exact} but reported {slope_rep} "
+            f"(m5={m5}, m10={m10}, K0={K0}, N={N})"
+        )
+
+check(14, "integer reachability: reported means and slopes derive from integer counts",
+      len(_unreachable) == 0,
+      "; ".join(_unreachable) if _unreachable else "")
+
+
 print()
 passed = sum(1 for _,s,_,_ in results if s == "PASS")
 total  = len(results)
@@ -329,5 +384,6 @@ else:
                 print(f"           {detail}")
 print(f"{'='*60}")
 sys.exit(0 if failed == 0 else 1)
+
 
 

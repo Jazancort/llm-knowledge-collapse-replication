@@ -751,3 +751,90 @@ Sugestão opcional: adicionar `[deliberate]` em nota de rodapé ou parênteses, 
 
 O utilizador contou 254 palavras. O abstract precisa de 3–13 cortes. Aguarda o utilizador para redação.
 
+
+
+---
+
+## Parte 4b — Segunda Regressão B7: slope 50% -0.14→-0.15 (2026-10-06)
+
+### 4b.1 Identificação
+
+O utilizador identificou que -0.14 é matematicamente inalcançável a partir dos dados inteiros.
+
+Com K₀=78 e N=5: total = 390 itens. Cada média deve ser m/390 para m inteiro.
+
+| Geração | Exibido | m único | Exacto |
+|---------|---------|---------|--------|
+| Gen5    | 89.7%   | 350     | 89.74359% |
+| Gen10   | 89.0%   | 347     | 88.97436% |
+
+Slope correcto: (88.97436 - 89.74359)/5 = -0.15385 → **-0.15**
+
+O valor -0.14 resulta de (89.0 - 89.7)/5 = -0.14 — calculado sobre valores arredondados a 1dp, violando a convenção declarada no manuscrito.
+
+### 4b.2 Causa raiz
+
+`B7_GEN5[50]` tinha todos os 5 seeds com valor 89.7 (1dp em vez de 2dp):
+```python
+# ANTES (incorrecto)
+50: {15: 89.7, 42: 89.7, 77: 89.7, 137: 89.7, 256: 89.7},
+
+# DEPOIS (correcto)
+50: {15: 89.74, 42: 89.74, 77: 89.74, 137: 89.74, 256: 89.74},
+#    70/78 = 89.74359%
+```
+
+O commit 6192b9e introduziu esta entrada (ou confirmou o valor arredondado). Para os braços 0% e 10%, os Gen5 values têm precisão de 2dp (e.g., 84.62, 85.90), permitindo slopes correctos. Para 50%, a precisão de 1dp introduz o erro.
+
+Incoerência interna detectada pelo utilizador: se a regra fosse arredondar antes, o braço 0% daria (79.7-85.4)/5 = -1.14, não -1.13. Isto confirmava que o pipeline aplica a regra correcta em dois braços e a errada no terceiro.
+
+### 4b.3 Verificação dos 3 braços
+
+| Braço | m Gen5 | m Gen10 | slope exacto | slope correcto | slope publicado actual |
+|-------|--------|---------|-------------|----------------|----------------------|
+| 0%    | 333    | 311     | -1.12821    | **-1.13** ✅   | -1.13 ✅ |
+| 10%   | 347    | 318     | -1.48718    | **-1.49** ✅   | -1.49 ✅ (hardcoded) |
+| 50%   | 350    | 347     | -0.15385    | **-0.15** ✅   | -0.14 → **-0.15** ✅ |
+
+### 4b.4 Fix aplicado
+
+1. **make_all.py:** B7_GEN5[50] corrigido de 89.7 para 89.74 (70/78 arredondado a 2dp)
+2. **numbers.tex:** `\BsevenSlopeFifty` = -0.15 (era -0.14)
+3. **O slope aparece via macro** em 3 locais (MAN L1825, MAN L2000, CARTA L913) — todos actualizam automaticamente com a recompilação
+
+Efeito secundário: `BsevenLRdelta` passou de +0.43 para +0.39 (porque dose50 Gen5 mudou de 89.7 para 89.74). O macro `\BsevenLRdelta` não é usado em nenhum ficheiro de submissão.
+
+### 4b.5 p dose 25%: 0.005 → 0.0044 (4 casas decimais)
+
+O valor exacto é 0.004425. Arredondado a 3dp: 0.004. Arredondado a 4dp: 0.0044.
+
+O utilizador recomenda 0.0044 (4dp) para eliminar ambiguidade de fronteira de arredondamento. Actualizado em:
+- numbers.tex: `\BsevenPtenTfive{0.0044}`
+- manuscrito L1821: `$p = 0.0044$`
+- carta L739: `$p=0.0044$`
+
+### 4b.6 p dose 10%: Opção B confirmada
+
+O utilizador demonstrou que NENHUM SD produz simultaneamente p=0.154 e CI exibindo [-1.1, 4.7]. Todo SD que gera esse IC força p ∈ [0.155, 0.165] → arredonda para 0.160. Portanto 0.160 é o único valor coerente, não uma tolerância.
+
+Opção B (mantida): p=0.160, CI=[-1.10, 4.70]. Par internamente consistente.
+
+### 4b.7 check_14 adicionado
+
+Novo check de atingibilidade inteira:
+- Para cada (média%, K₀, N): verificar que m = round(mean/100 × K₀ × N) é inteiro e round-trips ao valor exibido
+- Para slopes: verificar slope_exact = round((mean10_exact - mean5_exact)/n_gens, 2) == slope_rep
+
+Verificação retroactiva: com slope_rep=-0.14, diff=0.0100 > 0.005 → **FAIL** (teria detectado a segunda regressão).
+
+### 4b.8 Estado final dos B7 canónicos
+
+| Variável | Valor errado (6192b9e) | Valor correcto |
+|----------|----------------------|----------------|
+| BsevenPtenTen | 0.200 | **0.160** ✅ |
+| BsevenPtenTfive | 0.001 | **0.0044** ✅ |
+| BsevenPtenFifty | 0.001 | 0.001 (=<0.001) ✅ |
+| BsevenSlopeFifty | -0.14 | **-0.15** ✅ |
+
+**14/14 checks PASS** após todas as correcções.
+
