@@ -1059,3 +1059,59 @@ Das 68 grandezas varridas, 66 estão correctas (97%). Os 5 erros encontrados na 
 | check_14 com 68 entradas (v2) | ℹ️ | integrar script do utilizador |
 | Concern #2 da carta (Reviewer 2) | ℹ️ | utilizador ainda não leu o texto novo |
 
+
+
+---
+
+## Parte 4f — 4 contradições internas da carta + 2 graves (2026-10-06, sessão 3)
+
+Identificadas por revisão completa do utilizador após regeneração da carta.
+
+### Origem sistémica
+
+Cada correcção foi aplicada no local onde o problema foi detectado, não em todos os locais. Resolvido com: (a) macros em vez de valores hardcoded, (b) check_16 (externo, escrito pelo utilizador).
+
+### 🔴1+🔴2: prosa p.13 dessincronizada de p.14 (B7 p-valores e slope)
+
+| Local | Valor antigo | Valor correcto |
+|-------|-------------|----------------|
+| Carta p.13 (prosa R1-4) | `p=0.200`, `p=0.001`, slope `-0.14` ×2 | `\BsevenPtenTen`, `\BsevenPtenTfive`, `\BsevenSlopeFifty` ×2 |
+| Carta p.14 (action item 2) | `p=0.160`, `p=0.0044`, `-0.15` | já correcto |
+
+Fix: carta L701 — substituir hardcoded por macros + `[verbatim]` no `\newtext{}`.
+check_16 detectaria: 4 FAIL (0.200, 0.001, -0.14 ×2).
+
+### 🔴3: ação 1 da p.21 contradizia parágrafo honesto da p.20
+
+- p.20: admite 131 substituições, propõe .docx como solução estrutural
+- p.21 (action 1): "Font pipeline changed. No embedded subset..." — texto antigo
+
+Fix: carta L1158-1164 — "Font pipeline changed" substituído por "Document format changed (ED-2)" alinhado com p.20.
+
+### 🔴4: Fig. 10 com p=0.001 para Gemma 3 (G2)
+
+Figura não foi regenerada quando os p-valores G2 foram corrigidos.
+
+| Curva | Rótulo antigo | Correcto |
+|-------|--------------|---------|
+| Gemma 3 dose 10% | p = 0.001 | **p = 0.006** |
+| Gemma 3 dose 25% | sem rótulo | **p = 0.013** (adicionado) |
+| Gemma 3 dose 50% | p = 0.001 | **p = 0.003** |
+| Qwen dose 50% | p < 0.001 | ✅ mantido |
+
+Fix: fig9_dose_response.py actualizado + regenerado (229 KB, 2360×1460px 300dpi). Copiado para manuscrito/figs/ e docs/overleaf/.
+
+### 🟠5: Abstract p.10 — citação longa vs. Abstract de 246 palavras
+
+A carta cita a versão longa de Section 3.5 ("The index Π introduced in Section 3.5 is an exploratory post-training summary..."). O Abstract de 246 palavras entregue pelo utilizador tem versão mais curta. Como a carta refere Section 3.5 (não o Abstract), a dependência é resolvida se a Section 3.5 do manuscrito tiver a versão longa. Verificar antes de submeter.
+
+### 🟠6: R2-4.a subdeclarava IC da G2
+
+Tabela p.5 e texto p.27 diziam "CIs for all Gen10 B7 doses and the Gen10 G2 50% dose". Corpo (p.13) já reportava IC para as três doses da G2. Fix: L280 e L1497-1498 → "confidence intervals for every Gen10 dose in both experiments".
+
+### D: macro \PersistRoneTwoEight (manuscrito)
+
+Criada em numbers.tex: `\newcommand{\PersistRoneTwoEight}{5.1}` (4/78=5.1282%).
+Manuscrito §4.4.2 L1691 e §5.3 L2175: `\rev{$\PersistRoneTwoEight$\% (4~of~78~items)}`.
+A fracção explícita "(4 of 78 items)" elimina a ambiguidade de denominador.
+

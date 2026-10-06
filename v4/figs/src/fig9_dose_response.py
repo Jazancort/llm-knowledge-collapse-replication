@@ -77,13 +77,19 @@ ax.text(51.5, qwen_delta[-1] - 0.4,
 _bbox = dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.85, edgecolor='none')
 
 # Gemma x=10: label acima à esquerda
-ax.annotate('p = 0.001',
+ax.annotate('p = 0.006',
             xy=(10, gemma_delta[1]), xytext=(2, 13.0),
             fontsize=8.5, color=C_GEMMA, ha='left',
             arrowprops=dict(arrowstyle='->', color=C_GEMMA, lw=0.8),
             bbox=_bbox)
+# Gemma x=25: label no meio
+ax.annotate('p = 0.013',
+            xy=(25, gemma_delta[2]), xytext=(14, 14.5),
+            fontsize=8.5, color=C_GEMMA, ha='center',
+            arrowprops=dict(arrowstyle='->', color=C_GEMMA, lw=0.8),
+            bbox=_bbox)
 # Gemma x=50: label acima do ponto final
-ax.annotate('p = 0.001',
+ax.annotate('p = 0.003',
             xy=(50, gemma_delta[3]), xytext=(43, 15.5),
             fontsize=8.5, color=C_GEMMA, ha='center',
             arrowprops=dict(arrowstyle='->', color=C_GEMMA, lw=0.8),

@@ -277,7 +277,7 @@ R2-3.e & Abstract: ``three to five seeds'' overclaim & Corrected to ``three or f
 R2-3.f & FFT on Gemma~3 ``confirms'' magnitude axis & ``confirms'' replaced by ``is consistent with''; limitations stated & \S4.3.3 \\
 R2-3.g & C5 removal: \S3.4 ``$15^{\circ}$~removal'' vs.\ 5\% tokens & C1--C5 pilot excluded from all estimates; new experiments (B7, G2) use example fractions only & \S3.7, \S4.5 \\
 \addlinespace[2pt]
-R2-4.a & No formal tests, CI, or $p$-values & Paired $t$-tests at every dose level, with 95\,\% CIs for all Gen10 B7 doses and the Gen10 G2 50\% dose; sign and permutation tests at anchor ranks & \S4.1, \S4.5, \S4.6 \\
+R2-4.a & No formal tests, CI, or $p$-values & Paired $t$-tests at every dose level, with 95\,\% confidence intervals for every Gen10 dose in both experiments; sign and permutation tests at anchor ranks & \S4.1, \S4.5, \S4.6 \\
 R2-4.b & ETP framework not quantified & No scalar predictor derived; ETP labeled exploratory post-training summary & \S3.5, \S6 \\
 R2-4.c & Normalization failed; no alternative proposed & Five normalizations reported as negative result; per-backbone calibration protocol specified & \S4.2.3, \S6, Tab.~13 \\
 R2-4.d & ``ETP is just a conceptual label'' & Conceded; contribution restated as factorial design, pre-registered evidence, and empirical finding & \S1 \\
@@ -698,7 +698,7 @@ The revised manuscript adds to Section~6: \newtext{The findings may not extend t
 \textbf{The original comparison was invalid.}
 C1 and C5 followed different evaluation pipelines, including differences in $K_0$ construction and data loading. The previously reported $9.0$- and $9.4$-percentage-point intervention gains cannot therefore serve as evidence of stabilization. Furthermore, the pilot used single-seed evaluations and compared conditions that differed in pipeline construction, not only in the dose level. We do not defend this comparison. The revised manuscript states: \newtext{The pilot results are archived in the replication repository; they are not used in the primary effect estimates below.}
 
-\medskip\noindent\textbf{The Qwen dose--response evidence (B7).}The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=0.200$, 95\%~CI $[-1.1,4.7]$), $+4.9$\,pp at 25\% ($p=0.001$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $-0.14$\,pp/generation, compared with $-1.13$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{A 50\% reduction reduces the rate of progressive loss to $-0.14$\,pp/generation versus $-1.13$\,pp/generation at 0\% (mean across five seeds).}
+\medskip\noindent\textbf{The Qwen dose--response evidence (B7).}The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=\BsevenPtenTen$, 95\%~CI $[-1.1,4.7]$), $+4.9$\,pp at 25\% ($p=\BsevenPtenTfive$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $\BsevenSlopeFifty$\,pp/generation, compared with $\BsevenSlopeZero$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{A 50\% reduction reduces the rate of progressive loss to $\BsevenSlopeFifty$\,pp/generation versus $\BsevenSlopeZero$\,pp/generation at 0\% (mean across five seeds).} [verbatim]
 Tab.~10 in the revised manuscript reports the full dose--response results for B7.
 
 \begin{inlineref}{Table~10 from the revised manuscript --- Dose-response interventions (B7)}
@@ -1155,14 +1155,18 @@ $r=256$ & 70/78 (89.7\%) & 66/78 (84.6\%) & 64/78 (82.1\%) \\
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
-\item \textbf{Font pipeline changed.}
-      No embedded subset uses a non-standard encoding. The revised PDF
-      uses \texttt{cmap} and \texttt{glyphtounicode} to maximize
-      Unicode coverage; a residual number of Latin Modern Math Type~1
-      operators lack ToUnicode entries (a known limitation of that font
-      subset) and are flagged in the audit output, which is included in
-      the replication package.
-      The fault was verified at the point where it appears, not only locally.
+\item \textbf{Document format changed (ED-2).}
+      Rather than attempt a further font-pipeline fix, the revised
+      manuscript is submitted as a Word document, in which equations are
+      OMML objects and no \texttt{ToUnicode} mapping is involved.
+      Verification: the \texttt{.docx} generated from the same \LaTeX{}
+      source extracts with zero character substitutions and contains
+      611~equations in native OMML\@. The compiled PDF is provided as a
+      secondary file per ED-2; it still relies on Latin Modern Math
+      Type~1 subsets, and
+      \texttt{scripts/audits/glyph\_audit.py} reports the residual
+      substitutions in that file so the limitation is documented rather
+      than asserted to be absent.
 \item \textbf{Equations 1, 2, 3 and 6 rewritten (Section~3.2 and~3.5--3.6).}
       Each was cross-checked against Table~1 term by term.
 
@@ -1490,8 +1494,8 @@ $+18.4$\,pp, exact sign test $p=0.25$ at $N=3$. We report that $p$-value
 rather than suppress it: the direction is consistent across all three
 pairs, but three pairs cannot produce a small $p$, and we say so. For the
 two dose--response experiments, paired $t$-tests are reported at every
-dose level, with 95\,\% confidence intervals for every Gen10 dose on
-Qwen (B7) and for the 50\% dose on Gemma~3 (G2). Where groups are not
+dose level, with 95\,\% confidence intervals for every Gen10 dose in
+both experiments (B7 and G2). Where groups are not
 exchangeable under the relevant null (the 17.7\,pp gap between the
 three-seed $r=16$ condition and the six-seed $r=256$ estimate, which
 differ in rank, precision protocol and seed assignment simultaneously)
