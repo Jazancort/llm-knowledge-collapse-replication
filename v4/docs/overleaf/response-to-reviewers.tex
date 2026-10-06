@@ -75,7 +75,7 @@ Degradation in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
 Journal: \textit{Knowledge-Based Systems} (Elsevier)\\[2pt]
 To: Dr.\ Hang Yu, Senior Editor\\[2pt]
 Re: Response to Reviewers --- Revision Round~1\\[2pt]
-Date: 5 October 2026
+Date: 6 October 2026
 
 \bigskip
 \medskip\noindent\rule{\linewidth}{0.4pt}\medskip
@@ -159,7 +159,7 @@ to the sources of variation they address.
 \textbf{Source} & \textbf{Potential confound} & \textbf{Control} \\
 \midrule
 Quantization (NF4 vs bf16) & Numerical noise & G3: QLoRA bf16 vs NF4, matched seeds \\
-Training data order & Shuffling artefacts & G4: 3 shuffle seeds at $r=256$ \\
+Training data order & Shuffling artifacts & G4: 3 shuffle seeds at $r=256$ \\
 Optimizer state & Accumulated momentum & Held constant: fresh optimizer every generation \\
 Synthetic data seed & Stochastic variability & Reported per seed; headline 3--5 seeds \\
 Backbone architecture & Thresholds may not generalize & Replicated on Gemma~3 ($N=5$) and Gemma~4 E2B ($N=1$) \\
@@ -224,7 +224,9 @@ The table maps every point to the revision made and its location.
 ED-1 & Language editing & Complete language revision; terminology
        standardized throughout & Throughout \\
 ED-2 & Submission format & Seven documents in Word; figures at 300\,dpi
-       (non-PDF); \texttt{.bib} included & Submission package \\
+       (non-PDF); \texttt{.bib} included. The \texttt{.docx} is the
+       submission copy; the \texttt{.tex} source and compiled PDF are
+       secondary per ED-2's ``source file alone'' provision & Submission package \\
 ED-3 & List of changes & This table plus an individual response to each
        point & This document \\
 \addlinespace
@@ -245,9 +247,8 @@ R1-4 & Exposure: Qwen versus Gemma~3 &
        dose--response experiments replace the pilot & \S3.7, \S4.5 \\
 R1-5 & Reproducibility &
        Per-seed results, configs, evaluation protocol, K0 identifiers
-       and question partition deposited (Zenodo v1.0.3); analysis and
-       audit scripts on the GitHub HEAD, to be deposited in the next
-       release; \ldots & \S3.3, App.~A \\
+       and question partition deposited (Zenodo v1.0.4, including analysis
+       and audit scripts introduced in this revision) & \S3.3, App.~A \\
 \addlinespace
 
 \multicolumn{4}{@{}l}{\textbf{Reviewer 2} \textit{(general assessment — outside the 40 counted points)}}\\
@@ -281,12 +282,12 @@ R2-4.a & No formal tests, CI, or $p$-values & Paired $t$-tests at every dose lev
 R2-4.b & ETP framework not quantified & No scalar predictor derived; ETP labeled exploratory post-training summary & \S3.5, \S6 \\
 R2-4.c & Normalization failed; no alternative proposed & Five normalizations reported as negative result; per-backbone calibration protocol specified & \S4.2.3, \S6, Tab.~13 \\
 R2-4.d & ``ETP is just a conceptual label'' & Conceded; contribution restated as factorial design, pre-registered evidence, and empirical finding & \S1 \\
-R2-4.e & Gemma~4 E2B: no citation, confusion with Gemma~3n, architecture unsourced & Ref.~[41] added; model distinguished from Gemma~3n~E2B in text & \S3.3 \\
+R2-4.e & Gemma~4 E2B: no citation, confusion with Gemma~3n, architecture unsourced & Ref.~[42] (originally [41]) added; model distinguished from Gemma~3n~E2B in text & \S3.3 \\
 R2-4.f & ``Sharp transition'' weakened by sparse grid / wide intervals & ``sharp'' withdrawn throughout; claim restated as threshold-like pattern on a tested grid & \S1, \S5 \\
 \addlinespace[2pt]
 R2-5.a & Duplicate arXiv ID in references & Resolved; correct arXiv ID assigned & \texttt{cas-refs.bib} \\
 R2-5.b & Publication year incorrect for one entry & Year corrected & \texttt{cas-refs.bib} \\
-R2-5.c & Gemma~4 E2B lacks a citation & Ref.~[41] (arXiv:2607.02770) added & \texttt{cas-refs.bib} \\
+R2-5.c & Gemma~4 E2B lacks a citation & Ref.~[42] (arXiv:2607.02770) added & \texttt{cas-refs.bib} \\
 R2-5.d & Ref.~[7] preprint status not declared & Labeled ``Non-peer-reviewed preprint (arXiv)'' in the list & \texttt{cas-refs.bib} \\
 R2-5.e & Reference list not harmonized & Harmonized: journal/conference format consistent; Soutif-Cormerais attribution corrected & \texttt{cas-refs.bib} \\
 \end{longtable}
@@ -354,7 +355,7 @@ submitted in PDF. \\
 \item \textbf{Figures regenerated at 300\,dpi in PNG.}
       All figures re-exported at 300\,dpi in PNG; PDF pipeline replaced.
 \item \textbf{Bibliography audited.}
-      Duplicate arXiv ID resolved; two missing IDs added; Ref.~[31]
+      Duplicate arXiv ID resolved; two missing IDs added; Ref.~[32] (originally [31])
       attribution corrected.
 \item \textbf{Language revision.}
       American English throughout; terminology standardized (regime labels,
@@ -799,9 +800,8 @@ weights.}
 \textbf{Version discipline.}
 Scripts introduced or revised after the initial release must be
 identified by the version in which they are actually deposited.
-Appendix~A now states which scripts are present in release~v1.0.3 and
-which were added for this revision, with the corresponding archive
-version for each.
+Appendix~A now enumerates what release~v1.0.4 contains and what it does
+not contain, with the reason for each omission.
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
@@ -816,8 +816,8 @@ version for each.
       results files} was added to Appendix~A.
 \item \textbf{Version discipline documented (Appendix~A).}
       Each script in the archive is now identified by the release
-      version in which it first appears, distinguishing v1.0.3
-      (initial release) from the current revision.
+      version in which it first appears; all five items are present in
+      the current archive (v1.0.4).
 \end{enumerate}
 
 \msloc{Appendix~A (reproducibility and data availability).}
@@ -866,7 +866,7 @@ a transferable quantitative predictor. The text now states explicitly that effec
 \textbf{On the cross-architecture claims and Gemma~4 E2B.}
 The reviewer correctly identifies that Gemma~4~E2B~IT lacks a citation
 and may be confused with Gemma~3n~E2B. This has been corrected.
-Reference~[41] (Gemma~Team, arXiv:2607.02770, 2026) is now included
+Reference~[42] (Gemma~Team, arXiv:2607.02770, 2026) is now included
 for Gemma~4~E2B~IT, and the model is explicitly distinguished from
 Gemma~3n~E2B in Section~3.3.
 
@@ -1024,7 +1024,7 @@ $\theta_i^{(t)}$ the $i$-th parameter of the model at generation~$t$
 with $\theta_i^{(0)}$ denoting the frozen base-model value.
 
 \textbf{$r \in \{4,10,12,14,16\}$ garbling.}
-This was a rendering artefact of the original PDF (see the response to
+This was a rendering artifact of the original PDF (see the response to
 Concern~\#2 below). The set notation is now correct in the revised PDF.
 
 \arhead{Author action:}
@@ -1424,7 +1424,7 @@ figure anywhere. The pilot, including its original dose description, is
 archived in the replication package.
 \newtext{(\S3.7; \S4.5; Figure~9)}
 
-\begin{inlineref}{Figure~9 from the revised manuscript --- Exploratory pilot C1--C5}
+\begin{inlineref}{Figure~9 from the revised manuscript --- Cross-backbone dose-response [abridged caption]} from the revised manuscript --- Exploratory pilot C1--C5}
 \centering\includegraphics[width=0.72\textwidth]{fig_interventions.png}\\[2pt]
 {\scriptsize Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5. Different evaluation pipeline from primary B7/G2 experiments; not used in primary estimates. (a)~$K_0$ retention. (b)~Retention improvement relative to unmodified arm.}
 \end{inlineref}
@@ -1600,7 +1600,7 @@ as one.
 \toprule
 \textbf{Observation} & \textbf{Supporting evidence} \\
 \midrule
-Rank governs transition & Rank sweep 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}3$ bf16 (G3) \\
+Rank governs transition & \rev{Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}1$ at $r{=}16,32,64,128$ (single-seed); $N{=}3$ bf16 control (G3)} \\
 \addlinespace
 Magnitude governs transition & FFT LR sweep, 4 values \\
 \addlinespace
@@ -1627,7 +1627,7 @@ based on single-seed evidence alone; see \S3.8.}
 \rsub{(e)}{Gemma~4 E2B: citation, possible confusion with Gemma~3n E2B,
 unsourced architecture.}
 All three parts are addressed. The backbone is now cited as
-Gemma~Team~[41] at every point of introduction and description. On the
+Gemma~Team~[42] at every point of introduction and description. On the
 possible confusion, which we should have pre-empted: the model is
 Gemma~4~E2B~IT, a distinct release from Gemma~3n~E2B, and the revision
 states this explicitly rather than relying on the reader to infer it from
@@ -1695,7 +1695,7 @@ generalize to other settings}.
 \item \textbf{Contribution statement rewritten (Section~1 and~5.1).}
       Claims the factorial design and the evidence, not a measure.
 \item \textbf{Gemma~4 cited (e) (Section~3.3).}
-      Cited as Ref.~[41], distinguished from Gemma~3n~E2B, labeled
+      Cited as Ref.~[42], distinguished from Gemma~3n~E2B, labeled
       supportive validation (single seed; excluded from multi-seed
       analyses).
 \item \textbf{``Sharp''/``abrupt'' replaced (f) (throughout).}
@@ -1733,7 +1733,7 @@ the text; the fifth required an audit of the whole list.
 
 (a) & [12] and [33] share arXiv:2408.14572 &
 Two distinct works had been conflated. The identifier belongs to
-\textbf{[33]} Fawi, \emph{CURLoRA: Stable LLM Continual Fine-Tuning and
+\textbf{[34]} (originally [33]) Fawi, \emph{CURLoRA: Stable LLM Continual Fine-Tuning and
 Catastrophic Forgetting Mitigation}, arXiv:2408.14572 (2024), which is
 cited in \S2.4 for structural matrix constraints. \textbf{[12]} is
 Shabgahi et al., \emph{ForTIFAI: Fending off Recursive Training Induced
@@ -1749,7 +1749,7 @@ alongside the preprint identifier, which resolves the inconsistency the
 reviewer detected rather than merely changing the digit. \\
 
 (c) & No citation for Gemma~4 E2B IT &
-Added as \textbf{[41]} Gemma~Team, \emph{Gemma~4 Technical Report},
+Added as \textbf{[42]} Gemma~Team, \emph{Gemma~4 Technical Report},
 arXiv:2607.02770 (2026), cited at every point where the backbone is
 introduced or described. The model is also explicitly distinguished from
 Gemma~3n~E2B in \S3.3, and its architectural description is attributed to
@@ -1773,28 +1773,33 @@ omitting it would misrepresent the literature. \\
 The full list was audited and harmonized to one convention: works
 published at a venue carry the venue, year and, where applicable, volume
 and pages; preprints carry the arXiv identifier and year; works that are
-both carry the venue with the identifier appended, as for [32]. Entries
+both carry the venue with the identifier appended, as for [33] (originally [32]). Entries
 that were previously incomplete were completed against the published
 records. Three entries not mentioned by the reviewer were also corrected:
-[31] Soutif-Cormerais et al.\ (not Biderman et al.), \emph{An Empirical
+[32] (originally [31]) Soutif-Cormerais et al.\ (not Biderman et al.), \emph{An Empirical
 Analysis of Forgetting in Pre-trained Models with Incremental Low-Rank
 Updates}, arXiv:2405.18069 (2024); [20] Xu et al., \emph{A Probabilistic
 Perspective on Model Collapse}, arXiv:2410.12952 (2025), was missing its
 arXiv identifier inline; and one further entry had an incomplete venue
-field. \texttt{cas-refs.bib} is included in the submission package. \\
+field. \texttt{cas-refs.bib} is included in the submission package.
+On the authors' own initiative, a fourth bibliographic correction was
+made: the term \emph{knowledge collapse} was attributed to~[7] in the
+original submission, but it was introduced by Peterson (now [23],
+arXiv:2404.03502). Section~2.2 now credits Peterson for the term
+and~[7] for its application to recursive synthetic training. \\\
 \end{longtable}
 
 \arhead{Author action:}
 \begin{enumerate}[leftmargin=1.4em,itemsep=0.3em]
 \item \textbf{Duplicate identifier corrected (a).}
-      arXiv:2408.14572 $\to$ Ref.~[33]=Fawi (CURLoRA, 2024);
+      arXiv:2408.14572 $\to$ Ref.~[34] (originally [33]) = Fawi (CURLoRA, 2024);
       Ref.~[12]=Shabgahi et al.\ (ForTIFAI, arXiv:2509.08972, 2025).
       All identifiers checked programmatically for uniqueness.
-\item \textbf{Reference~[32] corrected (b).}
+\item \textbf{Reference~[33] (originally [32]) corrected (b).}
       Year 2024$\to$2025; venue AACL-IJCNLP~2025 added:
       \newtext{Rathore et al., arXiv:2512.15634, AACL-IJCNLP~2025.}
 \item \textbf{Gemma~4~E2B~IT cited (c).}
-      Added as Ref.~[41]: \newtext{Gemma~Team, Gemma~4 Technical
+      Added as Ref.~[42]: \newtext{Gemma~Team, Gemma~4 Technical
       Report, arXiv:2607.02770, 2026.}
 \item \textbf{Reference~[7] qualified (d).}
       Preprint status declared in the bibliography entry and at first
@@ -1802,11 +1807,15 @@ field. \texttt{cas-refs.bib} is included in the submission package. \\
 \item \textbf{Bibliography audited (e).}
       Every entry checked against published record for venue, year,
       volume, pages, and identifier. Three additional corrections found
-      and applied: Refs~[20] and~[31] gained arXiv IDs; Ref.~[31]
+      and applied: Refs~[20] and~[32] (originally [31]) gained arXiv IDs; Ref.~[32]
       attribution corrected to Soutif-Cormerais et al., arXiv:2405.18069.
+\item \textbf{Peterson attribution added (author initiative).}
+      The term \emph{knowledge collapse} was attributed to~[7] in the
+      original submission. Section~2.2 now credits Peterson~[23]
+      (arXiv:2404.03502) for introducing the term and~[7] for its
+      application to recursive synthetic training.
 \end{enumerate}
 
-\msloc{\texttt{cas-refs.bib} (full list); entries [6], [7], [12], [20], [31],
-[32], [33], [41]; \S5.2; \S2.3--2.4; \S3.3; Table~S1.}
+\msloc{\texttt{cas-refs.bib} (full list); entries [6], [7], [12], [20], [32], [33], [34], [42]; \S5.2; \S2.3--2.4; \S3.3; Table~S1.}
 
 \end{document}

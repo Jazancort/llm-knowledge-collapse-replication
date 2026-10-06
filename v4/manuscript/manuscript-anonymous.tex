@@ -2509,7 +2509,7 @@ their effects are additive or interactive.
 
 \section{Project repository and data access}\label{app:repo}
 
-\rev{The replication package is archived at the links below (release v1.0.3 contains items (i)--(iii) and earlier versions of the scripts; items (iv)--(v) reflect the HEAD commit and will be deposited in the next release). The current state of the repository contains:
+\rev{The replication package is archived at the links below. Release~v1.0.4 contains all five items listed below. The repository contains:
 \begin{enumerate}[(i)]
   \item the consolidated per-seed results files (one JSON per seed per arm, covering G1--G5, 27 multi-seed training runs (G1:~3, G2:~12, G3:~6, G4:~3, G5:~3), plus 20~B7 dose--response runs and 5~C1--C5 pilot runs; single-seed ablation runs are not counted in the 27; one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon);
   \item the training configuration files for each experimental arm;
@@ -2517,7 +2517,7 @@ their effects are additive or interactive.
   \item the analysis and table-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (\rev{all reported values verified against the per-seed results on the HEAD commit}); and
   \item the notation and rendering audit script \texttt{scripts/audits/glyph\_audit.py}.
 \end{enumerate}
-The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
+The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files.
 
 \rev{The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files. It does not include raw token-level predictions, trained adapter checkpoints, or base-model weights. Raw token-level predictions and adapters are not included because they exceed practical size limits for data repositories; base-model weights are not redistributed and must be obtained from the original distributors. Repository identifiers and revision hashes for the base models are listed in supplementary Table~S1.}
 
