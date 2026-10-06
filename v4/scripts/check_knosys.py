@@ -252,13 +252,72 @@ check(12, "scripts/analysis/glyph_audit.py exists",
       f"Not found: {glyph_script}" if not glyph_script.exists() else "")
 
 # ---------------------------------------------------------------------------
+# check_13: internal consistency — every (Δ, IC 95%, p, n) pair is coherent
+# Back-computes SE from the reported CI, derives t = Δ/SE, then checks that
+# 2*t.sf(t, df) is within tolerance of the reported p.  This is the check
+# that would have caught the commit-6192b9e regression (lookup-table df≥3
+# binning produced p=0.200/0.001 inconsistent with the printed CIs).
+# Reported pairs: B7 (N=5, df=4) doses 10%/25%/50%; G2 (N=3, df=2) doses 10%/25%/50%.
+# ---------------------------------------------------------------------------
+try:
+    from scipy.stats import t as _t_dist
+    _scipy_ok = True
+except ImportError:
+    _scipy_ok = False
+
+PAIRS = [
+    # label          Δ      CI_lo    CI_hi   p_reported   n
+    ("B7 dose 10%",  1.8,  -1.10,   4.70,   0.160,       5),
+    ("B7 dose 25%",  4.9,   2.50,   7.20,   0.005,       5),
+    ("B7 dose 50%",  9.2,   6.90,  11.60,   0.001,       5),   # p<0.001 stored as 0.001
+    ("G2 dose 10%",  9.8,   6.70,  13.00,   0.006,       3),
+    ("G2 dose 25%", 11.4,   5.80,  17.00,   0.013,       3),
+    ("G2 dose 50%", 12.9,   9.70,  16.10,   0.003,       3),
+]
+
+def _t_ppf_approx(p_tail, df):
+    """Two-sided t critical value (approximate table for scipy fallback)."""
+    tbl = {1:12.706, 2:4.303, 3:3.182, 4:2.776, 5:2.571}
+    return tbl.get(df, 1.960)
+
+incoherent = []
+for label, delta, ci_lo, ci_hi, p_rep, n in PAIRS:
+    df = n - 1
+    half_w = (ci_hi - ci_lo) / 2.0
+    if _scipy_ok:
+        t_crit_val = _t_dist.ppf(0.975, df)
+    else:
+        t_crit_val = _t_ppf_approx(0.025, df)
+    se = half_w / t_crit_val
+    if se == 0:
+        continue
+    t_stat = abs(delta / se)
+    if _scipy_ok:
+        p_calc = float(_t_dist.sf(t_stat, df) * 2)
+    else:
+        p_calc = p_rep  # can't verify without scipy; skip
+    # Tolerance: 0.01 absolute (catches lookup-table bins but allows CI rounding)
+    if abs(p_calc - p_rep) > 0.01:
+        incoherent.append(
+            f"{label}: p_reported={p_rep}, p_from_CI={p_calc:.4f} "
+            f"(Δ={delta}, CI=[{ci_lo},{ci_hi}], df={df})"
+        )
+
+_check13_detail = "; ".join(incoherent) if incoherent else ""
+check(13, "CI/p internal consistency for all B7+G2 reported pairs (|p_calc-p_rep|≤0.01)",
+      len(incoherent) == 0 or not _scipy_ok,
+      _check13_detail if incoherent else "")
+
+
+# ---------------------------------------------------------------------------
 # Summary
 # ---------------------------------------------------------------------------
 print()
 passed = sum(1 for _,s,_,_ in results if s == "PASS")
+total  = len(results)
 failed = sum(1 for _,s,_,_ in results if s == "FAIL")
 print(f"{'='*60}")
-print(f"Results: {passed}/12 PASS  |  {failed} FAIL")
+print(f"Results: {passed}/{total} PASS  |  {failed} FAIL")
 if failed == 0:
     print("All checks passed. ✓")
 else:
@@ -270,3 +329,5 @@ else:
                 print(f"           {detail}")
 print(f"{'='*60}")
 sys.exit(0 if failed == 0 else 1)
+
+

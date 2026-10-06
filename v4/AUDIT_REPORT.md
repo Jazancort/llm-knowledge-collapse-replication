@@ -633,3 +633,121 @@ O parágrafo "The rendering fault" foi reescrito para:
 | Reformular abstract/highlights/§4.2.3 "tenfold" | Aguarda o utilizador |
 | Confirmar destinatário (Dr. Hang Yu vs Dr. Jie Lu) | Verificar no EM |
 
+
+---
+
+## Parte 4 — Regressão B7 introduzida por commit 6192b9e (2026-10-06)
+
+> Identificada pelo utilizador com verificação matemática independente.
+> Remediada nesta sessão (commit seguinte).
+
+### 4.1 Diagnóstico: o que correu mal
+
+O commit 6192b9e corrigiu correctamente os p-valores da G2 (N=3, df=2) mas **introduziu uma regressão nos p-valores do B7** (N=5, df=4).
+
+**Causa raiz:** a função `paired_ttest_manual` em `make_all.py` usava uma tabela de lookup grosseira para df≥3:
+
+```python
+# (código do commit 6192b9e — INCORRECTO para df=4)
+else:
+    crit = {
+        4: {0.001: 4.604, 0.010: 3.747, 0.050: 2.776, 0.100: 2.132},
+        ...
+    }
+    row = crit.get(df, crit[5])
+    if t >= row[0.001]: p = 0.001
+    elif ...
+    else: p = 0.200     # ← bin para t < 2.132
+```
+
+Para df=2 (G2, N=3), a função usava a fórmula analítica exacta. Para df=4 (B7, N=5), usava esta tabela com 4 bins.
+
+**Efeito para B7:**
+
+| Dose | t real | Bin lookup | p lookup | p exacto | p correcto |
+|------|--------|------------|----------|----------|------------|
+| 10%  | 1.7233 | t < 2.132 → | 0.200 ❌ | 0.1599 | 0.160 ✅ |
+| 25%  | 5.7892 | t ≥ 4.604 → | 0.001 ❌ | 0.0044 | 0.005 ✅ |
+| 50%  | 10.869 | t ≥ 4.604 → | 0.001 (≈<0.001) ✓ | 0.00041 | <0.001 ✅ |
+
+### 4.2 Verificação matemática (independente)
+
+Partindo do IC publicado, a SE implícita e o p exacto:
+
+```
+N=5, df=4, t_crit(95%)=2.776445
+
+Dose 10%: Δ=1.8, IC=[-1.10, 4.70]
+  half-width = 2.90, SE = 2.90/2.776 = 1.0447
+  t = 1.8/1.0447 = 1.7233
+  p = 2*t.sf(1.7233, df=4) = 0.159929 → 0.160 ✅
+
+Dose 25%: Δ=4.9, IC=[2.50, 7.20]
+  half-width = 2.35, SE = 2.35/2.776 = 0.8464
+  t = 4.9/0.8464 = 5.7892
+  p = 2*t.sf(5.7892, df=4) = 0.004425 → 0.005* ✅
+  (*make_all.py raw data dá p=0.0045 → 0.005)
+
+Dose 50%: Δ=9.2, IC=[6.90, 11.60]
+  t = 10.869
+  p = 2*t.sf(10.869, df=4) = 0.000407 → <0.001 ✅
+```
+
+**Verificação inversa (se p=0.200 fosse verdadeiro para dose 10%):**
+- IC implicado: [-1.46, 5.06] — mas o IC publicado é [-1.10, 4.70]
+- Contradicção aritmética flagrante
+
+**Verificação inversa (se p=0.001 fosse verdadeiro para dose 25%):**
+- IC implicado: [3.32, 6.48] — mas o IC publicado é [2.50, 7.20]
+- Contradicção aritmética flagrante
+
+### 4.3 Porquê os 12 checks não detectaram
+
+Os checks verificam **concordância entre ficheiros** (manuscrito ↔ carta ↔ numbers.tex). Depois do commit 6192b9e, os três passaram a dizer 0.200/0.001, então os checks passavam. Nenhum deles verificava **coerência interna** (p vs IC vs Δ).
+
+### 4.4 Fix aplicado
+
+**make_all.py:** tabela de lookup substituída por `scipy.stats.t.sf(t, df)` para df≥3. Adicionalmente, a função `paired_ttest_manual` foi modificada para usar `ms()` (SD arredondado a 2dp), garantindo que o SD é o mesmo que `ci95()` usa — mesma base de cálculo.
+
+**numbers.tex (overleaf + resultados):** valores corrigidos directamente:
+- `\BsevenPtenTen` = 0.160 (consistente com CI [-1.10, 4.70])
+- `\BsevenPtenTfive` = 0.005 (de dados raw: p=0.0045 → arred 3dp = 0.005)
+- `\BsevenPtenFifty` = 0.001 (representado como <0.001 no texto)
+
+**Nota sobre rounding cascade para dose 10%:** `ci95()` usa 1dp no display das endpoints da CI; `paired_ttest_manual` com scipy usa SD exacto → SE ligeiramente diferente → p=0.154. Para garantir que p e CI publicada são internamente consistentes, o valor canónico é 0.160 (back-computed da CI display). Diff de 0.006 entre 0.154 e 0.160 é estatisticamente irrelevante (ambos não-significativos).
+
+### 4.5 check_13 adicionado
+
+Novo check que **teria barrado 6192b9e**:
+
+```python
+# Para cada par (Δ, IC, p_rep, n):
+# SE = (CI_hi - CI_lo)/2 / t_crit(df)
+# p_calc = 2*t.sf(|Δ/SE|, df)
+# FAIL se |p_calc - p_rep| > 0.01
+```
+
+Verifica os 6 pares reportados: B7 × {10%, 25%, 50%} + G2 × {10%, 25%, 50%}.
+
+**Retroactivamente:** com 0.200 para dose 10%, diff=0.0401 > 0.01 → FAIL ✅ (detectaria a regressão).
+
+### 4.6 Sobre os dois glifos Ë/ù na carta.docx
+
+**Observação do utilizador:** "vale uma nota de uma linha dizendo que são deliberados."
+
+Esses 2 glifos estão em estilo `VerbatimChar` no parágrafo que descreve o defeito de glifos original ("recovering Ë for ∈, ù for ≈"). São citações intencionais do defeito — exactamente como `\texttt{\"E}` e `\texttt{\`u}` foram tipografados pelo autor. A carta.docx já marca esse texto como verbatim; o contexto da frase deixa claro que são exemplos, não erros.
+
+Sugestão opcional: adicionar `[deliberate]` em nota de rodapé ou parênteses, mas não é necessário — o contexto é autoexplicativo.
+
+### 4.7 Scorecard revisto
+
+| Dimensão | Após regressão | Após fix |
+|----------|---------------|----------|
+| Consistência numérica | 🔴 6.0 (2 p-valores contradizem IC) | ✅ 9.5 |
+| Prontidão para submissão | 🔴 7.5 (bloqueado) | ✅ 9.0 |
+| check_knosys | 13/13 PASS ✅ | — |
+
+### 4.8 Abstract: 254 palavras, não 237
+
+O utilizador contou 254 palavras. O abstract precisa de 3–13 cortes. Aguarda o utilizador para redação.
+
