@@ -146,13 +146,15 @@
 \newblock in: \bibinfo{booktitle}{Advances in Neural Information Processing
   Systems (NeurIPS)}, \bibinfo{year}{2023}. \bibinfo{note}{ArXiv:2305.14314}.
 %Type = Article
-\bibitem[{Biderman et~al.(2024)Biderman, Portes, Ortiz, Paul, Greengard,
-  Jernite, Kolber, Teng, Schenck et~al.}]{biderman2024}
+\bibitem[{Biderman et~al.(2024)Biderman, Portes, Gonzalez~Ortiz, Paul,
+  Greengard, Jennings, King, Havens, Chiley, Frankle, Blakeney, and
+  Cunningham}]{biderman2024}
 \bibinfo{author}{D.~Biderman}, \bibinfo{author}{J.~Portes},
-  \bibinfo{author}{J.~J.~G. Ortiz}, \bibinfo{author}{M.~Paul},
-  \bibinfo{author}{P.~Greengard}, \bibinfo{author}{Y.~Jernite},
-  \bibinfo{author}{C.~Kolber}, \bibinfo{author}{B.~L. Teng},
-  \bibinfo{author}{T.~Schenck}, et~al.,
+  \bibinfo{author}{J.~J. Gonzalez~Ortiz}, \bibinfo{author}{M.~Paul},
+  \bibinfo{author}{P.~Greengard}, \bibinfo{author}{C.~Jennings},
+  \bibinfo{author}{D.~King}, \bibinfo{author}{S.~Havens},
+  \bibinfo{author}{V.~Chiley}, \bibinfo{author}{J.~Frankle},
+  \bibinfo{author}{C.~Blakeney}, \bibinfo{author}{J.~P. Cunningham},
 \newblock \bibinfo{title}{{LoRA} learns less and forgets less},
 \newblock \bibinfo{journal}{Transactions on Machine Learning Research (TMLR)}
   (\bibinfo{year}{2024}). \bibinfo{note}{Featured Certification.
@@ -428,9 +430,10 @@
 \newblock \bibinfo{journal}{Behavior Research Methods} \bibinfo{volume}{42}
   (\bibinfo{year}{2010}) \bibinfo{pages}{381--392}.
 %Type = Article
-\bibitem[{Shuttleworth et~al.(2024)Shuttleworth, Stein
-  et~al.}]{shuttleworth2024illusion}
-\bibinfo{author}{R.~Shuttleworth}, \bibinfo{author}{G.~Stein}, et~al.,
+\bibitem[{Shuttleworth et~al.(2024)Shuttleworth, Andreas, Torralba, and
+  Sharma}]{shuttleworth2024illusion}
+\bibinfo{author}{R.~Shuttleworth}, \bibinfo{author}{J.~Andreas},
+  \bibinfo{author}{A.~Torralba}, \bibinfo{author}{P.~Sharma},
 \newblock \bibinfo{title}{{LoRA} and full fine-tuning: An illusion of
   equivalence},
 \newblock \bibinfo{journal}{arXiv preprint arXiv:2410.21228}

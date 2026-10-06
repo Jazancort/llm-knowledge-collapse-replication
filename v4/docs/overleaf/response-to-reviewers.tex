@@ -176,7 +176,7 @@ G1 & QLoRA rank sweep, NF4 & Qwen 2.5 1.5B & 3 at $r{=}256$ &
      Primary dose--response \\
 G2 & Pre-registered exposure dose--response, $r{=}10$ &
      Gemma 3 1B IT & 3 per dose & Cross-backbone replication \\
-G2b & Steps-matched control on Gemma~3 $r=10$ & Gemma~3~1B~IT & 1 & Paired control for G2; inconclusive \\
+G2b & Steps-matched control on Gemma~3 $r=10$ & Gemma~3~1B~IT & 3 & Paired control for G2; inconclusive \\
 G3 & Precision control: bf16 & Qwen 2.5 1.5B & 3 at $r{=}16$; 3 at $r{=}256$ &
      Rules out quantization artefact \\
 G4 & Data-order control: three new shuffle seeds &
@@ -760,7 +760,7 @@ at other ranks or with more seeds is an open empirical question.
 The dose--response results for both backbones are visualised in Figure~10.
 \begin{inlineref}{Figure~10 from the revised manuscript --- Dose-response on both backbones (B7 and G2)}
 \centering\includegraphics[width=0.85\textwidth]{fig9_dose_response.png}\\[2pt]
-{\scriptsize Blue circles: Qwen~2.5~1.5B $r=256$ ($n=5$ paired seeds, $|K_0|=78$); red squares: Gemma~3~1B $r=10$ ($n=3$ paired seeds, $|K_0|=44$). Dashed line: no change ($\Delta=0$\,pp). Error bars: range across seeds.}
+{\scriptsize Red circles: Gemma~3~1B $r=10$ ($n=3$ paired seeds, $|K_0|=44$); orange squares: Qwen~2.5~1.5B $r=256$ ($n=5$ paired seeds, $|K_0|=78$). Dashed line: no change ($\Delta=0$\,pp). Shaded bands: 95\,\% confidence intervals from paired $t$-tests.}
 \end{inlineref}
 
 \msloc{Section~4.5 (Qwen B7 dose--response; Gemma~3 G2 dose--response); Section~4.6 (mechanistic caveat); Section~3.5 (ETP framework); Section~3.7 (pilot exclusion).}
@@ -893,7 +893,7 @@ Gemma~3n~E2B in both the text and the conditions table (Table~2).
 5 & Exposure  & Examples removed     & 0\%, 10\%, 25\%, 50\%; B7: Qwen $r{=}256$ $n{=}5$; G2: Gemma~3 $r{=}10$ $n{=}3$ \\
 \bottomrule
 \end{tabular}\\[2pt]
-{\scriptsize Note: Gemma~4~E2B~IT (Axis 5, G2 backbone) is distinct from Gemma~3n~E2B; see Tab.~2 in the revised manuscript for the full conditions table with model labels.}
+{\scriptsize Note: Gemma~3~1B~IT (Axis 5, G2 backbone) is distinct from Gemma~3n~E2B; see Tab.~2 in the revised manuscript for the full conditions table with model labels.}
 \end{inlineref}
 Because Gemma~4~E2B~IT was evaluated with a single seed, its results
 are labeled supportive validation and excluded from every threshold
@@ -1190,14 +1190,15 @@ $r=256$ & 70/78 (89.7\%) & 66/78 (84.6\%) & 64/78 (82.1\%) \\
 \toprule
 \textbf{Symbol} & \textbf{Definition} \\
 \midrule
-$\theta^{(0)}$ & Pretrained backbone weights \\
-$\theta^{(t)}$ & Adapter-augmented weights at generation~$t$ \\
 $K_0$      & Set of items answered correctly at generation~0; $|K_0|$ = cardinality \\
 $R(t)$     & Factual retention: $|\{q\in K_0: q\text{ correct at gen.\ }t\}|/|K_0|$ \\
+$\theta^{(0)}$ & Pretrained backbone weights \\
+$\theta^{(t)}$ & Adapter-augmented weights at generation~$t$ \\
 $\Delta W = BA$ & Low-rank LoRA update matrix \\
 $\sigma_i$ & $i$-th singular value of $\Delta W$ \\
 $p_i$      & Normalised singular weight: $\sigma_i/\sum_j\sigma_j$; $\sum_i p_i=1$ \\
 $\mathrm{erank}(\Delta W)$ & Effective rank: $\exp(-\sum_i p_i\log p_i)$ \\
+$\|\Delta W\|_F$ & Frobenius norm of composed update, averaged across modules \\
 $d(t)$     & Mean absolute weight drift \\
 $\eta$     & Learning rate \\
 $\Pi$      & Pressure index: $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
@@ -1209,6 +1210,9 @@ $\mathrm{Persist}(t)$ & Fraction of $K_0$ items whose response at generation~$t$
 $\mathrm{SDI\text{-}3}$ & Synthetic Drift Index: composite of verbosity, diversity, and instability changes \\
 \bottomrule
 \end{tabular}
+\par\smallskip
+{\footnotesize\textit{Symbols listed in order of first appearance.
+Adapter-level quantities (\textnormal{erank}, $\|\cdot\|_F$) are averaged across adapted LoRA modules within a model.}}
 \end{inlineref}
       Eq.~1: \newtext{$R(t)=|K_0 \cap A(t)|/|K_0|$}.
       Eq.~2: \newtext{$\mathrm{erank}(\Delta W)=\exp(-\sum_i p_i \log
