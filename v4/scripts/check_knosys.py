@@ -329,6 +329,13 @@ _MEANS = [
     ("G3 r4  Gen10 1dp",  94.3,  46,  5),   # Table 6 (caught 94.4 bug in carta)
     ("G3 r16 Gen10",      56.52, 46,  5),
     ("G1+G4 Gen10",       79.7,  78,  6),
+    # Persistência r=128 §4.4.2 / §5.3 — K0=78, N=1 seed
+    # m=4 → 4/78=5.1282% → 5.1%  (5.2 vinha de 4/77 off-by-one)
+    ("r128 persist",      5.1,   78,  1),   # caught 5.2% bug (commit this session)
+    # Outros valores de persistência que passam (validação cruzada)
+    ("r16  persist 36%",  35.9,  78,  1),   # 28/78=35.897%->35.9% (user reports 36%, 1sig)
+    ("r256 persist 33%",  33.3,  78,  1),   # 26/78=33.333%->33.3% (user reports 33%)
+    ("r128 persist 3.8%", 3.8,   78,  1),   # 3/78=3.846%->3.8%
 ]
 _unreachable = []
 for label, mean_pct, K0, N in _MEANS:

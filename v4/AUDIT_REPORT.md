@@ -942,3 +942,120 @@ Adicionada entrada `("G3 r4 Gen10 1dp", 94.3, 46, 5)` ao _MEANS do check_14. Ver
 
 Bloqueadores activos: apenas o Abstract (254>250 palavras).
 
+
+
+---
+
+## Parte 4d — Persistência r=128: 5.2%→5.1% (2026-10-06)
+
+### Identificação
+
+Encontrado pelo utilizador com check_14 v2 (68 verificações, 66 PASS, 2 FAIL). Quinto erro da mesma classe (arredondamento em cascata / off-by-one de denominador).
+
+**Prova:** Eq.~\ref{eq:persistence} define explicitamente Persist(t) = m / |K₀|, com |K₀|=78.
+
+| m | Denominador | Exacto | Round(1dp) | Resultado |
+|---|-------------|--------|-----------|-----------|
+| 4 | 78 | 5.1282% | **5.1%** ✅ | correcto |
+| 4 | 77 | 5.1948% | **5.2%** ❌ | off-by-one |
+
+5.2% vem de 4/77. O denominador correcto é 78 (declarado na fórmula). O valor foi provavelmente computado manualmente com K₀=77 (omitindo um item).
+
+Outros valores de persistência verificados pelo utilizador e que passam:
+- r=16: 36% (m=28/78, reportado com arredondamento a 2 sig-fig — 35.9%)
+- r=256: 33% (m=26/78=33.333%→33.3%)
+- r=128 final: 3.8% (m=3/78=3.846%→3.8%)
+
+Zero ambíguos em 68 grandezas varridas — todos os valores têm m único. Paper numericamente sólido; apenas 5 erros da mesma classe de arredondamento em cascata.
+
+### Localização
+
+Valor hardcoded no manuscrito. Sem código correspondente nos scripts de análise.
+
+| Ficheiro | Linha | Contexto |
+|----------|-------|---------|
+| Manuscrito L1691 | `falls to 5.2%` | §4.4.2 r=128 filler verbosity |
+| Manuscrito L2175 | `falls to 5.2%` | §5.3 síntese dos fenótipos |
+| Carta | não cita o valor | — |
+
+### Fix aplicado
+
+```latex
+% ANTES:
+baseline persistence falls to 5.2\%.
+
+% DEPOIS:
+baseline persistence falls to \rev{5.1}\%.
+```
+
+Ambas as ocorrências corrigidas. Carta não requer alteração.
+
+### check_14 expandido
+
+4 entradas de persistência adicionadas ao `_MEANS`:
+```python
+("r128 persist",      5.1,   78,  1),   # 4/78=5.1%  (detecta 5.2%)
+("r16  persist 36%",  35.9,  78,  1),   # 28/78=35.9% (validação cruzada)
+("r256 persist 33%",  33.3,  78,  1),   # 26/78=33.3% (validação cruzada)
+("r128 persist 3.8%", 3.8,   78,  1),   # 3/78=3.8%   (validação cruzada)
+```
+
+---
+
+## Parte 4e — check_14 v2: resultado da varredura completa (2026-10-06)
+
+### Cobertura: 68 grandezas
+
+O utilizador varreu Tables 4, 5, 6, 7, 8, 9 e os valores de corpo de §4.2.1, §4.3.1, §4.3.3, §4.4, §4.5 e §4.6.
+
+**Resultado: 66 PASS, 2 FAIL**
+
+| # | FAIL | Diagnóstico | Status |
+|---|------|------------|--------|
+| 1 | B7 slope 50% −0.14 vs −0.15 | matches rounded-input arithmetic | ✅ fixado 2b59960 |
+| 2 | G4 média 80.4 vs 80.3 | registro do PDF antigo; repositório já tem 80.3 | ✅ e416ca6 |
+
+Zero ambíguos: todos os 68 valores têm m único.
+
+### Table 9 exemplar
+
+As 9 células reportam fracção explícita e todas as 9 conferem contra K₀×N.
+
+### Table 5 × Table 4
+
+Table 5 fecha via (78 − final_incorrect)/78, incluindo r=256 single-seed (78.2%).
+
+### Tables 7 e 8 (Gemma 4, K₀=76)
+
+Passam inteiras.
+
+### Conclusão
+
+Das 68 grandezas varridas, 66 estão correctas (97%). Os 5 erros encontrados na sessão 2026-10-06 são todos da mesma classe (arredondamento em cascata ou off-by-one de denominador).
+
+---
+
+## Parte 5 — Estado final actualizado (2026-10-06 02:00)
+
+### 5.1 Erros corrigidos nesta sessão
+
+| # | Erro | Commits |
+|---|------|---------|
+| 1 | B7 slope 50% -0.14→-0.15 | 2b59960 |
+| 2 | B7 p dose 25% 0.001→0.0044 | e5c0659 + 2b59960 |
+| 3 | B7 p dose 10% 0.200→0.160 | e5c0659 + 2b59960 |
+| 4 | Table 6 carta Gemma3 94.4→94.3 | 95e8e06 |
+| 5 | Persistência r=128 5.2→5.1 | commit desta entrada |
+
+### 5.2 Checks mecânicos — 14/14 PASS
+
+### 5.3 Itens pendentes para submissão
+
+| Item | Prioridade | Estado |
+|------|-----------|--------|
+| Abstract ≤250 palavras | 🔴 bloqueador | utilizador diz 246 palavras — confirmar |
+| Zenodo v1.0.4 | ⚠️ | portal Zenodo — fora do alcance do agente |
+| Confirmar destinatário EM | ⚠️ | Dr. Hang Yu vs Dr. Jie Lu |
+| check_14 com 68 entradas (v2) | ℹ️ | integrar script do utilizador |
+| Concern #2 da carta (Reviewer 2) | ℹ️ | utilizador ainda não leu o texto novo |
+
