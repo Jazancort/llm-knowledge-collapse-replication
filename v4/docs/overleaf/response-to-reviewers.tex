@@ -1047,25 +1047,26 @@ in the rendering, and we treat them separately because they have
 different causes.
 
 \medskip\noindent\emph{The rendering fault.}
-Rather than re-render the document and hope for a different outcome, we
-traced it. Two audits establish where it does \emph{not} originate.
-First, an automated scan of the complete \LaTeX{} source returns a single
-non-ASCII character, inside a comment: no mathematical symbol is encoded
-as raw Unicode, and the source is syntactically correct as submitted.
-Second, \texttt{pdffonts} confirms that every font in our locally
-compiled PDF is embedded with a complete \texttt{ToUnicode} mapping, and
-text extraction from that file reproduces the equations correctly. The
-corruption is introduced when the uploaded file is re-processed: the
-embedded fonts use a custom encoding, and the re-distillation step does
-not preserve their Unicode mappings, so that minus signs, multiplication
-signs, set-membership symbols and percent signs are drawn correctly on
-the page but map to unrelated code points on extraction. This accounts
-for the specific form of the corruption the reviewer observed
-(``\texttt{Retention.t /}'', ``\texttt{5\i10\^{}6}'',
-``\texttt{r E 4,10,12,14,16}'', and the variant
-``\texttt{r $\dot{\mathtt{E}}$ $\sim$ 10,12,14}'') rather than missing or blank glyphs. For
-this revision the font pipeline no longer relies on custom-encoded
-subsets. Following the reviewer's instruction to check elsewhere, we
+We traced the rendering fault to the ToUnicode mapping of Type~1 fonts
+in pdf\LaTeX{}. Text extraction from our locally compiled PDF confirms
+the defect is not limited to Editorial Manager re-processing:
+\texttt{pdftotext} extracts 131 character substitutions from the file,
+recovering \texttt{\"E} for $\in$, \texttt{\DJ} for $\times$, \texttt{\`u}
+for $\approx$, and \texttt{\~{}} for $\%$. The root cause is that Latin
+Modern Math glyphs are drawn from a Type~1 subset whose \texttt{ToUnicode}
+table is incomplete, so the PDF displays correctly on screen but maps
+these symbols to unrelated code points on extraction.
+
+The structural fix is to comply with the format requirement in ED-2: the
+revised manuscript is submitted as a Word document (\texttt{.docx}). In a
+Word document, mathematical expressions are encoded as OMML (Office Math
+Markup Language), which is font-independent and requires no
+\texttt{ToUnicode} mapping. We verified this directly: the \texttt{.docx}
+produced from the same \LaTeX{} source extracts with zero character
+substitutions and contains 611 equations in native OMML format. The
+\LaTeX{} source and its compiled PDF are provided as secondary files per
+ED-2's provision that \emph{``source file alone can be in word or Latex
+file''}. Following the reviewer's instruction to check elsewhere, we
 also wrote an audit that compares the extracted text of every equation,
 table cell, figure label and caption against the \LaTeX{} source; its
 script and output are included in the replication package.

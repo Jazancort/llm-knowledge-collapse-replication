@@ -537,3 +537,85 @@ CONTROLS:
 ---
 
 *Gerado por: Kiro CLI, auditoria automática + leitura dos ficheiros fonte. Commit HEAD: f286b58.*
+
+
+---
+
+## Parte 3 — Defeito de Glifos e Estratégia Word (2026-10-06)
+
+### 3.1 Resultado do teste pdftotext
+
+```
+pdftotext -layout manuscript-anonymous.pdf | grep Ë|İ|ù|˜|\.0/|*0.|˙|erank.
+TOTAL HITS: 131 (ROTA B)
+```
+
+| Padrão | Hits | Significado correcto |
+|--------|------|---------------------|
+| Ë (U+00CB) | 13 | ∈ |
+| İ (U+0130) | 37 | × |
+| ù (U+00F9) | 21 | ≈ |
+| ˜ (U+02DC) | 32 | % |
+| .0/ | 4 | θ⁽⁰⁾ |
+| *0. | 10 | −0. |
+| ˙ (U+02D9) | 8 | ∑ / divisão |
+| erank. | 6 | erank( |
+
+**Causa:** Latin Modern Math Type 1 subsets com ToUnicode incompleto; os glifos renderizam correctamente em ecrã mas mapeiam para code points errados na extracção.
+
+### 3.2 Solução: submissão em Word (.docx)
+
+ED-2 do editor: *"The revised cover letter, response to reviewers, highlights, revised manuscript... should all be in word format. Source file alone can be in word or Latex file."*
+
+Estratégia: converter LaTeX → .docx via pandoc. Em Word, as equações ficam como OMML (Office Math Markup Language) — font-independent, sem ToUnicode.
+
+**Resultado da conversão:**
+
+```
+pandoc manuscript-expanded.tex --from latex+raw_tex --to docx --mathml
+→ manuscript-anonymous.docx: 1.58 MB
+  Glifos corrompidos no XML: 0
+  Equações OMML nativas:     611
+```
+
+### 3.3 Ficheiros gerados
+
+| Ficheiro | Localização | Estado |
+|----------|-------------|--------|
+| `manuscript-anonymous.docx` | `v4/manuscript/` | ✅ 0 glifos, 611 OMML |
+| `manuscript-expanded.tex` | `v4/manuscript/` | Fonte pre-expandida (pandoc input) |
+| `expand_macros.py` | `v4/scripts/` | Script de pré-expansão de macros |
+
+### 3.4 Carta: Concern #2 reescrito
+
+O parágrafo "The rendering fault" foi reescrito para:
+1. Admitir que pdftotext local extrai 131 substituições (a carta anterior afirmava que o PDF local estava limpo)
+2. Anunciar a solução: submissão em .docx (cumpre ED-2 e fecha R2-2 simultaneamente)
+3. Citar a verificação: "the .docx produced from the same LaTeX source extracts with zero character substitutions and contains 611 equations in native OMML format"
+
+### 3.5 Estado do ranking do utilizador (items 2-11)
+
+| # | Item | Estado |
+|---|------|--------|
+| 2 | Refs [15] e [45] autores | ✅ check_09 PASS — correcto desde commit 56ee6ce |
+| 3 | Fig 2(c) Tom Jones/1958 | ✅ Corrigido (Ronnie Carroll/1959) — commit e416ca6 |
+| 4 | Abstract 405→250 palavras | ✅ 237 palavras — commit e416ca6 |
+| 5 | Zenodo: carta vs manuscrito | ✅ Reconciliado (scripts no GitHub HEAD) — commit f286b58 |
+| 6 | G2 p-valores vs IC | ✅ 0.006/0.013/0.003 via macros — commit d590970 |
+| 7 | "American English throughout" | ✅ check_10 PASS — zero British spellings |
+| 8 | Citação Abstract inexistente | ✅ Removida da carta — commit f286b58 |
+| 9 | G2b n=1 vs n=3 | ✅ n=3 na carta — confirmado nesta sessão |
+| 10 | Legenda Fig.10 trocada | ✅ Red circles Gemma 3, orange squares Qwen — confirmado |
+| 11 | Gemma 4 vs Gemma 3 nota | ✅ "Axis 5" não mencionado junto a Gemma 4 — confirmado |
+
+**Todos os items 2-11 do ranking estão resolvidos.**
+
+### 3.6 O que fica pendente de decisão do autor
+
+| Item | Natureza |
+|------|----------|
+| Publicar Zenodo v1.0.4 com os scripts | Recomendado antes da submissão |
+| Redigir régua de classificação de regime (§3) | Aguarda o utilizador |
+| Reformular abstract/highlights/§4.2.3 "tenfold" | Aguarda o utilizador |
+| Confirmar destinatário (Dr. Hang Yu vs Dr. Jie Lu) | Verificar no EM |
+
