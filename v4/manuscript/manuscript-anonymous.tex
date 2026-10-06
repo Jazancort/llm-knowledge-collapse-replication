@@ -134,8 +134,7 @@ we map adapter rank, learning rate, and synthetic exposure onto a regime
 structure with three zones: homeostatic, bounded, and degradative. Increasing
 rank produces a threshold-like transition within the tested grid; the boundary
 falls between effective ranks~50 and~88 for Qwen and between 3 and~6 for
-Gemma~3, a tenfold difference between architectures (these are not the same
-transition type). Learning-rate sweeps under full fine-tuning reproduce the
+Gemma~3, a tenfold difference between architectures. Learning-rate sweeps under full fine-tuning reproduce the
 same qualitative pattern, consistent with perturbation magnitude as the
 operative variable rather than low-rank adaptation specifically. At
 intermediate capacity ($r=128$, Qwen), factual retention remains near 90\%
@@ -145,7 +144,7 @@ dose-response experiments show that reducing synthetic exposure by 50\%
 shifts the Qwen system toward the bounded regime ($+9.2$\,pp at Gen~10,
 95\%~CI $[6.9, 11.6]$, $p < 0.001$) and improves endpoint retention on
 Gemma~3 ($+12.9$\,pp, $p = 0.003$) without reducing the rate of loss.
-Single-seed ablations are labeled descriptive throughout. The
+The
 effective-training-pressure index is an exploratory post-training summary
 and has not been validated as a prospective predictor across architectures
 or datasets. Experiments use 1--2 billion parameter models; generalization
@@ -2512,12 +2511,14 @@ The revised manuscript, response-to-reviewers letter, and updated analysis scrip
 
 
 \begin{itemize}
-  \item \textbf{Zenodo} (permanent, citable):
-    \url{https://doi.org/10.5281/zenodo.23146342}
-    (DOI: \url{10.5281/zenodo.23146342})
+  \item \textbf{Zenodo} (permanent, citable):\\
+    Concept DOI (all versions, resolves to the latest):
+    \url{https://doi.org/10.5281/zenodo.[CONCEPT-DOI]}\\
+    Version~v1.0.4 DOI (this paper):
+    \url{https://doi.org/10.5281/zenodo.[VERSION-DOI-v1.0.4]}
   \item \textbf{GitHub} (version-controlled):\\
     {\sloppy\url{https://github.com/Jazancort/llm-knowledge-collapse-replication}\par}
-    (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
+    (release \texttt{v1.0.4}; includes consolidated results, analysis scripts, figure scripts, and audit checks)
 \end{itemize}
 
 \rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper.}

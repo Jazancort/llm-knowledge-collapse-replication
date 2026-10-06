@@ -1,0 +1,49 @@
+{
+  "title": "Replication package: Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs",
+  "version": "v1.0.4",
+  "upload_type": "software",
+  "publication_date": "2026-10-06",
+  "license": "cc-by-4.0",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Azancort Neto, Julio Leite",
+      "orcid": "0000-0003-2866-5445",
+      "affiliation": "Instituto de Tecnologia, Universidade Federal do Pará (UFPA), Belém, PA, Brazil"
+    },
+    {
+      "name": "Teixeira, Carlos André de Mattos",
+      "orcid": "0000-0003-1902-4347",
+      "affiliation": "Instituto de Tecnologia, Universidade Federal do Pará (UFPA), Belém, PA, Brazil; Amazon Sustainability Institute with Science and Innovation (iSACI), Belém, Brazil"
+    },
+    {
+      "name": "de Carvalho, André Carlos Ponce de Leon Ferreira",
+      "orcid": "0000-0002-1907-5913",
+      "affiliation": "Instituto de Ciências Matemáticas e de Computação (ICMC), Universidade de São Paulo (USP), São Carlos, SP, Brazil"
+    },
+    {
+      "name": "Francês, Carlos Renato Lisboa",
+      "orcid": "0000-0003-0305-7662",
+      "affiliation": "Instituto de Tecnologia, Universidade Federal do Pará (UFPA), Belém, PA, Brazil"
+    }
+  ],
+  "keywords": [
+    "large language models",
+    "recursive fine-tuning",
+    "model collapse",
+    "knowledge retention",
+    "LoRA",
+    "QLoRA",
+    "dose-response",
+    "synthetic data feedback loop",
+    "reproducibility"
+  ],
+  "related_identifiers": [
+    {
+      "relation": "isSupplementedBy",
+      "identifier": "https://github.com/Jazancort/llm-knowledge-collapse-replication",
+      "scheme": "url"
+    }
+  ],
+  "description": "<p>Replication package for <em>Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs: A Multi-Axis Dose-Response Study</em>.</p><p>Contents: (i) consolidated per-seed results files, one JSON per seed per arm, covering experiments G1 to G5, B7 and G2; (ii) training configuration files for every reported condition; (iii) the evaluation protocol, question partition identifiers, and the K0 baseline sets for all three backbones; and (iv) new in v1.0.4, the analysis and table-generation script, the figure-generation scripts, and the audit scripts.</p><p>Raw token-level predictions, trained adapter checkpoints and base-model weights are not included: the first two exceed practical size limits for data repositories, and base-model weights are not redistributed under their respective licenses. Base-model checkpoint SHA-1 hashes sufficient to retrieve identical weights are listed in supplementary Table S1 of the article.</p>"
+}

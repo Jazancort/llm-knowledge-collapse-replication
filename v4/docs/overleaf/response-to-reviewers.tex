@@ -140,8 +140,8 @@ Corresponding Author
       Where the revision renumbered a table or section, both numbers are
       given at first mention, e.g.\ \renum{Table~7}{Table~9}.
 \item All numerical values quoted here are generated from the per-seed
-      results by \texttt{scripts/analysis/make\_all.py} (repository HEAD;
-      to be included in the next Zenodo release) and are
+      results by \texttt{scripts/analysis/make\_all.py} (Zenodo v1.0.4,
+      \url{https://doi.org/10.5281/zenodo.[VERSION-DOI-v1.0.4]}) and are
       reproduced verbatim from its output.
 \end{itemize}
 
@@ -771,16 +771,17 @@ be stated precisely and honestly. The revision provides this description
 in Appendix~A.
 
 \textbf{What the archive contains.}
-Release~v1.0.3 of the Zenodo archive (DOI: \url{10.5281/zenodo.23146342})
+Release~v1.0.4 of the Zenodo archive (Concept DOI:
+\url{https://doi.org/10.5281/zenodo.[CONCEPT-DOI]};
+Version DOI: \url{https://doi.org/10.5281/zenodo.[VERSION-DOI-v1.0.4]})
 contains: (i)~consolidated per-seed results files (one JSON per seed per
 arm) from which all reported statistics were derived;
-(ii)~the training configuration files for every reported condition; and
+(ii)~the training configuration files for every reported condition;
 (iii)~the evaluation protocol, question partition identifiers, and the
-$K_0$ baseline sets for all three backbones. The analysis and
-table-generation script \texttt{make\_all.py}, the figure-generation
-scripts (including \texttt{fig9\_dose\_response.py}) and the glyph audit
-script are on the HEAD of the GitHub repository and will be deposited in
-the next Zenodo release, as stated in Appendix~A.
+$K_0$ baseline sets for all three backbones; and
+(iv)~the analysis and table-generation script \texttt{make\_all.py},
+the figure-generation scripts (including \texttt{fig9\_dose\_response.py}),
+and the glyph audit script.
 
 \textbf{What the archive does not contain, and why.}
 Raw token-level predictions and trained adapter checkpoints are not
