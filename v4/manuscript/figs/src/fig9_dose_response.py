@@ -73,19 +73,27 @@ ax.text(51.5, qwen_delta[-1] - 0.4,
         'Qwen (r\u2009=\u2009256)',
         fontsize=10, color=C_QWEN, va='top', ha='left', fontweight='bold')
 
-# Anotações dos p-valores
+# Anotações dos p-valores — bbox branco garante legibilidade sobre as bandas
+_bbox = dict(boxstyle='round,pad=0.2', facecolor='white', alpha=0.85, edgecolor='none')
+
+# Gemma x=10: label acima à esquerda
 ax.annotate('p = 0.001',
-            xy=(10, gemma_delta[1]), xytext=(10 - 4, gemma_delta[1] + 2.0),
-            fontsize=8.5, color=C_GEMMA, ha='center',
-            arrowprops=dict(arrowstyle='->', color=C_GEMMA, lw=0.8))
+            xy=(10, gemma_delta[1]), xytext=(2, 13.0),
+            fontsize=8.5, color=C_GEMMA, ha='left',
+            arrowprops=dict(arrowstyle='->', color=C_GEMMA, lw=0.8),
+            bbox=_bbox)
+# Gemma x=50: label acima do ponto final
 ax.annotate('p = 0.001',
-            xy=(50, gemma_delta[3]), xytext=(50 - 5, gemma_delta[3] + 1.8),
+            xy=(50, gemma_delta[3]), xytext=(43, 15.5),
             fontsize=8.5, color=C_GEMMA, ha='center',
-            arrowprops=dict(arrowstyle='->', color=C_GEMMA, lw=0.8))
+            arrowprops=dict(arrowstyle='->', color=C_GEMMA, lw=0.8),
+            bbox=_bbox)
+# Qwen x=50: label no meio da lacuna entre as duas linhas
 ax.annotate('p < 0.001',
-            xy=(50, qwen_delta[3]), xytext=(38, qwen_delta[3] + 2.8),
+            xy=(50, qwen_delta[3]), xytext=(30, 6.8),
             fontsize=8.5, color=C_QWEN, ha='center',
-            arrowprops=dict(arrowstyle='->', color=C_QWEN, lw=0.8))
+            arrowprops=dict(arrowstyle='->', color=C_QWEN, lw=0.8),
+            bbox=_bbox)
 
 # Eixos
 ax.set_xlabel('Synthetic exposure reduction (%)', fontweight='bold')
