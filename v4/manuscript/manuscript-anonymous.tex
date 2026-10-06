@@ -30,6 +30,18 @@
 % F3.5: round Gemma3 anchor means to 1 dp (matches table display)
 \renewcommand{\GthreeMtenRfour}{94.3}     % was 94.35 — round to 1 dp (217/230=94.348→94.3)
 \renewcommand{\GthreeMtenRsixteen}{56.5}  % was 56.52 — round to 1 dp
+% F3.6: PersistRoneTwoEight — not emitted by make\_all.py; defined here
+\newcommand{\PersistRoneTwoEight}{5.1}    % 4/78 = 5.1282\% → 5.1 at 1 dp
+% F3.7: revert 8 display values from 2 dp back to 1 dp
+% (2 dp was computed from rounded 1 dp intermediates, not from raw m/K0)
+\renewcommand{\GoneFourMten}{79.7}             % was 79.72 — mean of rounded seeds
+\renewcommand{\GoneMten}{79.1}                 % was 79.07 — idem (exact 79.06 → 79.1)
+\renewcommand{\RsixteenMten}{97.4}             % was 97.40 — 76/78=97.44 → 97.4 (trailing zero false)
+\renewcommand{\DeltaRanks}{17.7}               % was 17.70 — derived from rounded inputs
+\renewcommand{\GthreeDeltaRanks}{37.8}         % was 37.80 — 94.3−56.5=37.8 (trailing zero)
+\renewcommand{\GfiveRonetwoetightLRlow}{96.2}  % was 96.20 — 75/78=96.15 → 96.2 at 1 dp
+\renewcommand{\GfiveRthreytwoLRhigh}{89.7}     % was 89.70 — 70/78=89.74 → 89.7 at 1 dp
+\renewcommand{\GtwoMtenZero}{78.8}             % was 78.77 — exact mean 78.79 → 78.8 at 1 dp
 % ───────────────────────────────────────────────────────────────────────────
 % Usage: \rev{new text} — wraps any revised passage in blue when enabled.
 \usepackage[numbers]{natbib}
@@ -134,7 +146,7 @@ we map adapter rank, learning rate, and synthetic exposure onto a regime
 structure with three zones: homeostatic, bounded, and degradative. Increasing
 rank produces a threshold-like transition within the tested grid; the boundary
 falls between effective ranks~50 and~88 for Qwen and between 3 and~6 for
-Gemma~3, a tenfold difference between architectures. Learning-rate sweeps under full fine-tuning reproduce the
+Gemma~3, a tenfold difference between architectures, and not the same transition type. Learning-rate sweeps under full fine-tuning reproduce the
 same qualitative pattern, consistent with perturbation magnitude as the
 operative variable rather than low-rank adaptation specifically. At
 intermediate capacity ($r=128$, Qwen), factual retention remains near 90\%
@@ -764,7 +776,7 @@ check. Architectural metadata are taken from the released model configurations.
 The repository identifiers are listed
 in supplementary Table~S1 and in \texttt{configs/checkpoints.yaml} of
 the replication package, so that the identical weights can be
-obtained.}
+obtained using the SHA-1 hashes listed in supplementary Table~S1.}
 
 QLoRA experiments load the base model in 4-bit
 NormalFloat (NF4) quantization with double quantization and bfloat16 compute
@@ -1866,7 +1878,7 @@ Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
 ($p=\GtwoPtenTen$, 95\,\%~CI $[\GtwoCItenLoTen, \GtwoCItenHiTen]$), $\GtwoDeltatenTfive$~pp ($p=\GtwoPtenTfive$, 95\,\%~CI $[\GtwoCItenLoTfive, \GtwoCItenHiTfive]$), and
 $\GtwoDeltatenFifty$~pp (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
 $p=\GtwoPtenFifty$), respectively ($n=3$ paired seeds per dose).
-At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (identical to the precision reported ($-0.91$\,pp/generation in both arms)), \rev{indicating that {no reduction in the rate of progressive loss was observed} for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
+At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (identical across both arms at this precision), \rev{indicating that no reduction in the rate of progressive loss was observed for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
 \rev{The absolute gain at dose~$=50\%$ Gen10 is larger for Gemma~3 G2
 ($\GtwoDeltatenFifty$~pp, $|K_{0,\mathrm{G2}}|{=}44$) than for Qwen B7
 ($\BsevenDeltatenFifty$~pp, $|K_0|{=}78$). The two experiments used different
@@ -1927,7 +1939,7 @@ provenance audit.}
 \rev{\textbf{Data-order control (G4).}
 To isolate seed variance from data-order variance, G4 replicates the Qwen
 $r=256$ protocol with three new shuffle seeds (42/101/202). Gen10 retention
-values are $82.1\%$, $78.2\%$, and $80.8\%$, yielding a G4 mean of \rev{$80.3\%$}$\pm2.0$~pp.
+values are $82.1\%$, $78.2\%$, and $80.8\%$, yielding a G4 mean of $\rev{80.3}\%\pm2.0$~pp.
 A bilateral permutation test comparing G1 and G4 gives $p=\GfourPorder$, indicating
 no detectable signal beyond seed-to-seed variance. Because G4 varies both data
 order and random seed simultaneously, $p=\GfourPorder$ does not isolate the
@@ -1984,7 +1996,7 @@ training pipelines (Section~\ref{sec:disc_practical}).
   magnitude across architectures.}\label{fig:etp}
 \end{figure*}
 
-The results presented in Section~\ref{sec:results} converge on a consistent
+The results presented in Section~\ref{sec:results} (summarized in Figure~\ref{fig:etp}) converge on a consistent
 empirical pattern: recursive factual degradation is not observed uniformly
 across recursive synthetic fine-tuning, but instead emerges only when the
 training process operates above a backbone-dependent pressure threshold. Three
@@ -2503,7 +2515,7 @@ their effects are additive or interactive.
   \item the training configuration files for each experimental arm;
   \item the evaluation protocol, question partition identifiers, and the $K_0$ baseline sets for each backbone;
   \item the analysis and table-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (\rev{all reported values verified against the per-seed results on the HEAD commit}); and
-  \item the notation and rendering audit script \texttt{scripts/analysis/glyph\_audit.py}.
+  \item the notation and rendering audit script \texttt{scripts/audits/glyph\_audit.py}.
 \end{enumerate}
 The revised manuscript, response-to-reviewers letter, and updated analysis scripts from the current submission are not yet included in that release and will be deposited in a subsequent version.}
 

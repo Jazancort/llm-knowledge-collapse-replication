@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-check_knosys.py — 12 mechanical checks for KNOSYS manuscript and letter.
+check_knosys.py — 15 mechanical checks for KNOSYS manuscript and letter.
 Run from the v4/ directory:  uv run python scripts/check_knosys.py
 
 Exit code 0 = all PASS; non-zero = at least one FAIL.
@@ -246,8 +246,8 @@ check(11, "Appendix A run counts present (27 G1-G5, 20 B7, 5 pilot = 52)",
 # ---------------------------------------------------------------------------
 # check_12: glyph_audit.py script exists at declared path
 # ---------------------------------------------------------------------------
-glyph_script = ROOT / "scripts" / "analysis" / "glyph_audit.py"
-check(12, "scripts/analysis/glyph_audit.py exists",
+glyph_script = ROOT / "scripts" / "audits" / "glyph_audit.py"
+check(12, "scripts/audits/glyph_audit.py exists",
       glyph_script.exists(),
       f"Not found: {glyph_script}" if not glyph_script.exists() else "")
 
@@ -336,6 +336,12 @@ _MEANS = [
     ("r16  persist 36%",  35.9,  78,  1),   # 28/78=35.897%->35.9% (user reports 36%, 1sig)
     ("r256 persist 33%",  33.3,  78,  1),   # 26/78=33.333%->33.3% (user reports 33%)
     ("r128 persist 3.8%", 3.8,   78,  1),   # 3/78=3.846%->3.8%
+    # F3.7 corrected values — verify these pass at 1 dp
+    ("G1 Gen10 N=3",      79.1,  78,  3),   # 185/234=79.06%->79.1 (was 79.07 wrong 2dp)
+    ("r16 Gen10 N=1",     97.4,  78,  1),   # 76/78=97.44%->97.4 (was 97.40 trailing zero)
+    ("G5 low-press Gen5", 96.2,  78,  1),   # 75/78=96.15%->96.2 (was 96.20 trailing zero)
+    ("G5 interm Gen5",    89.7,  78,  1),   # 70/78=89.74%->89.7 (was 89.70 trailing zero)
+    ("G2 base Gen10",     78.8,  44,  3),   # 104/132=78.79%->78.8 (was 78.77 wrong 2dp)
 ]
 _unreachable = []
 for label, mean_pct, K0, N in _MEANS:
@@ -373,6 +379,25 @@ for label, m5, m10, K0, N, n_gens, slope_rep in _SLOPES:
 check(14, "integer reachability: reported means and slopes derive from integer counts",
       len(_unreachable) == 0,
       "; ".join(_unreachable) if _unreachable else "")
+
+
+# ---------------------------------------------------------------------------
+# check_15: no wrong 2dp variants in body text
+# Eight values that were incorrectly computed at 2dp from rounded 1dp inputs.
+# These must not appear in the manuscript body (renewcommand lines are excluded).
+# ---------------------------------------------------------------------------
+_PROHIBITED_2DP = ["79.72", "79.07", "97.40", "17.70", "37.80", "96.20", "89.70", "78.77"]
+_body_lines = [
+    l for l in man_text.splitlines()
+    if not l.strip().startswith("%")
+    and "renewcommand" not in l.lower()
+    and "newcommand" not in l.lower()
+]
+_body_clean = "\n".join(_body_lines)
+_found_2dp = [v for v in _PROHIBITED_2DP if v in _body_clean]
+check(15, "no wrong 2dp variants in body (2dp computed from rounded 1dp inputs)",
+      len(_found_2dp) == 0,
+      "Found: " + ", ".join(_found_2dp) if _found_2dp else "")
 
 
 print()
