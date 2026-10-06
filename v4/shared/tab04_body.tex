@@ -1,14 +1,16 @@
 % shared/tab04_body.tex — SINGLE SOURCE: Table 4 data rows (Qwen 2.5 1.5B rank sweep)
 % Callers provide \toprule, column header row, \midrule, and \bottomrule.
 % Columns: Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & $N$ & Regime
-% Included by:
-%   manuscript/manuscript-anonymous.tex        via \input{../shared/tab04_body.tex}
-%   docs/overleaf/response-to-reviewers.tex   via \input{../../shared/tab04_body.tex}
 %
-% \rev{} renders as blue in the manuscript (change-tracking) and
-% as plain text in the response letter (\rev defined as passthrough there).
-% r=256 Retention uses \GoneFourMten from shared/numbers.tex.
-% EDIT ONLY THIS FILE.
+% NOTE ON USAGE:
+%   docs/overleaf/response-to-reviewers.tex  — \input{../../shared/tab04_body} (works)
+%   manuscript/manuscript-anonymous.tex      — rows are INLINE (CAS tabular* is
+%                                              incompatible with \input inside alignment).
+%                                              Manuscript rows carry "% Rows synced with
+%                                              shared/tab04_body.tex" comment.
+%
+% When updating: edit this file AND mirror the rows in the manuscript table.
+% \rev{} renders as blue in the manuscript and as plain text in the response letter.
 4   & 545K  & 5  & 97.4\%  & 3.34  & \rev{1} & \rev{Homeostatic} \\
 16  & 2.2M  & 10 & 96.2\%  & 11.08 & \rev{1} & \rev{Homeostatic} \\
 32  & 4.4M  & 5  & 96.2\%  & 17.85 & \rev{1} & \rev{Homeostatic} \\

@@ -1224,7 +1224,13 @@ reported at Gen5; all other configurations at Gen10.}}\label{tab:rank_sweep}
 \toprule
 Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
 \midrule
-\input{../shared/tab04_body}
+% Rows synced with shared/tab04_body.tex — edit shared file, then mirror here
+4   & 545K  & 5  & 97.4\%  & 3.34  & \rev{1} & \rev{Homeostatic} \\
+16  & 2.2M  & 10 & 96.2\%  & 11.08 & \rev{1} & \rev{Homeostatic} \\
+32  & 4.4M  & 5  & 96.2\%  & 17.85 & \rev{1} & \rev{Homeostatic} \\
+64  & 8.7M  & 10 & 92.3\%  & 29.52 & \rev{1} & \rev{Homeostatic} \\
+128 & 17.4M & 10 & 89.7\%  & 50.16 & \rev{1} & Bounded \\
+256\textsuperscript{*} & 34.9M & 10 & \rev{\GoneFourMten\%}  & 87.57 & \rev{6} & \rev{Degradative} \\
 \bottomrule
 \end{tabular*}
 {\footnotesize \textsuperscript{*}Mean across \rev{six independent seeds (G1: seeds 15/137/256; G4: seeds 42/101/202); the three-seed G1 subset alone gives $\GoneMten\%$. See \S4.6.}}
@@ -2010,7 +2016,22 @@ experiments.}\label{tab:evidence}
 \toprule
 \textbf{Observation} & \textbf{Supporting evidence} \\
 \midrule
-\input{../shared/tab11_body}
+% Rows synced with shared/tab11_body.tex — edit shared file, then mirror here
+Rank governs transition & Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}1$ at $r{=}16$,$32$,$64$,$128$ (single-seed); $N{=}3$ bf16 control (G3) \\
+\addlinespace
+Magnitude governs transition & FFT LR sweep, 4 values \\
+\addlinespace
+Exposure reduces pressure & Dose--response 0--50\%, $N{=}5$ seeds (pre-registered) \\
+\addlinespace
+Threshold is backbone-dependent & Qwen vs Gemma~3 ($10{\times}$ gap in effective rank) \\
+\addlinespace
+Drift accompanies degradation & 5 distribution metrics (SDI-3) \\
+\addlinespace
+Transition is threshold-like & Rank sweep 6 levels; boundary bracketed, not resolved \\
+\addlinespace
+Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\times}3$, $N{=}1$; descriptive) \\
+\addlinespace
+Generalizes cross-backbone & Gemma~3 ($N{=}5$) + E2B rank sweep ($N{=}1$, supportive) \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -2472,7 +2493,7 @@ their effects are additive or interactive.
   \item the analysis and table-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (\rev{all reported values verified against the per-seed results on the HEAD commit}); and
   \item the notation and rendering audit script \texttt{scripts/audits/glyph\_audit.py}.
 \end{enumerate}
-The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files.
+}
 
 \rev{The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files. It does not include raw token-level predictions, trained adapter checkpoints, or base-model weights. Raw token-level predictions and adapters are not included because they exceed practical size limits for data repositories; base-model weights are not redistributed and must be obtained from the original distributors. Repository identifiers and revision hashes for the base models are listed in supplementary Table~S1.}
 

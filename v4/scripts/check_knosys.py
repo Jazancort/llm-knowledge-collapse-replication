@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-check_knosys.py — 17 mechanical checks for KNOSYS manuscript and letter.
+check_knosys.py — 18 mechanical checks for KNOSYS manuscript and letter.
 Run from the v4/ directory:  uv run python scripts/check_knosys.py
 
 Exit code 0 = all PASS; non-zero = at least one FAIL.
@@ -417,6 +417,18 @@ check(17, "both docs import shared/numbers (single source of truth for values)",
       _ms_imports_shared and _res_imports_shared,
       ("manuscript: " + ("OK" if _ms_imports_shared else "MISSING import")) +
       "; carta: " + ("OK" if _res_imports_shared else "MISSING import"))
+
+# ---------------------------------------------------------------------------
+# check_18: carta uses shared table bodies (tab04 + tab11) via \input
+# Note: manuscript uses inline rows (CAS tabular* incompatible with \input);
+# shared files are carta-side only.
+# ---------------------------------------------------------------------------
+_res_uses_tab04 = "shared/tab04_body" in res_text
+_res_uses_tab11 = "shared/tab11_body" in res_text
+check(18, "carta imports shared/tab04_body and shared/tab11_body",
+      _res_uses_tab04 and _res_uses_tab11,
+      ("tab04: " + ("OK" if _res_uses_tab04 else "MISSING")) +
+      "; tab11: " + ("OK" if _res_uses_tab11 else "MISSING"))
 
 
 print()
