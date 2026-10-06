@@ -230,9 +230,8 @@
   \bibinfo{year}{2019}.
 %Type = Article
 \bibitem[{Peterson(2025)}]{peterson2024}
-\bibinfo{author}{D.~Peterson},
-\newblock \bibinfo{title}{Knowledge collapse in large language models: Patterns
-  and mechanisms},
+\bibinfo{author}{A.~J. Peterson},
+\newblock \bibinfo{title}{{AI} and the problem of knowledge collapse},
 \newblock \bibinfo{journal}{AI \& Society}  (\bibinfo{year}{2025}).
   \bibinfo{note}{ArXiv:2404.03502}.
 %Type = Inproceedings
