@@ -121,11 +121,11 @@ conditions (six for the pooled $r=256$ estimate), with single-seed
 supporting ablations, we investigate how factual retention changes as
 adapter capacity, perturbation magnitude, and synthetic exposure vary.}
 These experiments reveal a common empirical organizing principle, which we
-term effective training pressure. The index $\Pi$ introduced in
+term effective training pressure. \rev{The index $\Pi$ introduced in
 Section~\ref{sec:pressure} is an exploratory post-training summary of the
 manipulated variables; it is not available prospectively and has not been
 validated as a transferable quantitative predictor across architectures or
-datasets. We find:
+datasets.} We find:
 (1)~\rev{a threshold-like transition within the tested grid} from homeostatic
 retention to progressive degradation as adapter rank increases, with the
 transition differing by roughly an order of magnitude across architectures
@@ -740,7 +740,7 @@ check. Architectural metadata are taken from the released model configurations.
 The repository identifiers are listed
 in supplementary Table~S1 and in \texttt{configs/checkpoints.yaml} of
 the replication package, so that the identical weights can be
-obtained.}
+obtained\rev{, using the SHA-1 hashes listed in supplementary Table~S1}.}
 
 QLoRA experiments load the base model in 4-bit
 NormalFloat (NF4) quantization with double quantization and bfloat16 compute
@@ -842,9 +842,10 @@ update capacity. Single-seed; supportive evidence only.
 
 \item \textbf{Synthetic exposure (intervention).} We manipulate the synthetic
 training stream at Qwen $r=256$, the lowest-pressure degradative configuration tested. Interventions include
-length filtering, paired dose--response downsampling (0\%, 10\%, 25\%, 50\%
-removal), and short-answer constraining. Design detailed in
-Section~\ref{sec:intervention}.
+paired dose--response downsampling (0\%, 10\%, 25\%, 50\%
+removal) \rev{as the primary pre-registered experiment; length filtering and short-answer
+constraining were tested in a prior exploratory pilot (C1--C5; archived, not used in primary estimates).}
+Design detailed in Section~\ref{sec:intervention}.
 \end{enumerate}
 
 \subsection{Effective training pressure}\label{sec:pressure}
@@ -1209,8 +1210,7 @@ protocols differ in quantization and seed assignment.}
 
 \begin{table}[width=.95\linewidth,cols=7,pos=htbp]
 \caption{QLoRA rank sweep on Qwen~2.5~1.5B-Instruct. The degradative endpoint
-($r=256$) is replicated with three seeds to confirm
-reproducibility.\textsuperscript{*} \rev{Retention for $r=4$ and $r=32$ is
+($r=256$) is \rev{replicated across six seeds (G1 + G4) to confirm reproducibility.}\textsuperscript{*} \rev{Retention for $r=4$ and $r=32$ is
 reported at Gen5; all other configurations at Gen10.}}\label{tab:rank_sweep}
 \begin{tabular*}{\tblwidth}{@{}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{}}
 \toprule
@@ -2327,7 +2327,7 @@ its predictive utility for new architectures.
 \rev{The exploratory QLoRA--FFT comparison} relies on approximate
 proxies ($\|BA\|_F$ for QLoRA versus mean absolute weight drift for FFT). These
 \rev{quantities measure different geometric properties; this comparison between methods is exploratory and not perturbation-magnitude matched.} Additionally,
-\rev{Most QLoRA experiments use 4-bit NormalFloat (NF4) quantization. The G3 ablation re-ran the same protocol in bf16 (no base-weight quantization) and produced identical regime classifications, though a full causal conclusion awaits per-item audit. Although}
+\rev{most QLoRA experiments use 4-bit NormalFloat (NF4) quantization. The G3 ablation re-ran the same protocol in bf16 (no base-weight quantization) and produced identical regime classifications, though a full causal conclusion awaits per-item audit. Although}
 the quantized base remains static across generations and adapters are trained in
 higher precision, the interaction between quantization error and high-rank
 adapter updates has not been isolated. \rev{The G3 ablation provides a bf16 comparison at $r=16$ and $r=256$, though its scope is limited to Qwen and its provenance audit is ongoing; a systematic comparison across all ranks and backbones was not conducted.}
@@ -2430,10 +2430,10 @@ across backbones.}
 Through systematic dose-response experiments across three backbones, ten
 recursive generations, and multiple seeds, we identified effective training
 pressure as an organizing framework for recursive stability under
-parameter-efficient fine-tuning. The index $\Pi$ quantifying this pressure is an
+parameter-efficient fine-tuning. \rev{The index $\Pi$ quantifying this pressure is an
 exploratory post-training summary; it is not available prospectively and has
 not been validated as a transferable quantitative predictor across
-architectures or datasets. The central finding is that recursive
+architectures or datasets.} The central finding is that recursive
 degradation is a pressure-gated phenomenon: increasing update capacity,
 perturbation magnitude, or synthetic exposure \rev{can each shift} the system from homeostatic to degradative behavior, with the transition being
 \rev{threshold-like within the tested grid}, backbone-dependent, and reproducible across the seeds evaluated. Cross-backbone replication \rev{further indicates} that degradation in the above-threshold regime is progressive and does not
