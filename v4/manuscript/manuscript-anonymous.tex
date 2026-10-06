@@ -10,7 +10,7 @@
 \usepackage[dvipsnames]{xcolor}
 % ── Revision highlighting ──────────────────────────────────────────────
 % Set \showchangestrue  to show yellow highlight in the tracked version.
-% Set \showchangesfalse to produce a clean submission copy.
+% Set \showchangestrue to produce a clean submission copy.
 \newif\ifshowchanges
 \showchangestrue  % ← toggle here: \showchangestrue | \showchangesfalse
 \newcommand{\rev}[1]{\ifshowchanges{\color{blue}#1}\else{#1}\fi}
