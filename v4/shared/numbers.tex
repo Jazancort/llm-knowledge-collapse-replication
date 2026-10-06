@@ -1,0 +1,119 @@
+% ============================================================
+% shared/numbers.tex — gerado por make_all.py em 2026-10-05 23:17
+% NÃO EDITAR À MÃO — source of truth para manuscrito e carta
+% Regenerar com: python scripts/analysis/make_all.py; depois aplicar F3.x corrections
+% ============================================================
+
+% G1 — Qwen r=256 dose=0% N=3
+\newcommand{\GoneKzero}{78}
+\newcommand{\GoneMfive}{85.47}
+\newcommand{\GoneSDfive}{0.75}
+\newcommand{\GoneCIfiveLo}{83.60}
+\newcommand{\GoneCIfiveHi}{87.30}
+\newcommand{\GoneMten}{79.1}
+\newcommand{\GoneSDten}{1.5}
+\newcommand{\GoneCItenLo}{75.4}
+\newcommand{\GoneCItenHi}{82.7}
+\newcommand{\GoneSlope}{-1.28}
+\newcommand{\GoneFourteenSlope}{-1.19}
+\newcommand{\GoneSeedFifteenFive}{84.60}
+\newcommand{\GoneSeedFifteenTen}{78.2}
+\newcommand{\GoneSeedOneThreeSevenFive}{85.90}
+\newcommand{\GoneSeedOneThreeSevenTen}{80.80}
+\newcommand{\GoneSeedTwoFiveSixFive}{85.90}
+\newcommand{\GoneSeedTwoFiveSixTen}{78.20}
+% G1+G4 combinados N=6
+\newcommand{\GoneFourMten}{79.7}
+\newcommand{\GoneFourSDten}{1.7}
+\newcommand{\GoneFourCItenLo}{77.9}
+\newcommand{\GoneFourCItenHi}{81.5}
+\newcommand{\GoneFourMfive}{85.68}
+\newcommand{\GoneFourSDfive}{0.98}
+% Testes seed-level Qwen r=16 vs r=256
+\newcommand{\RsixteenMten}{97.4}
+\newcommand{\RsixteenSDten}{0.00}
+\newcommand{\DeltaRanks}{17.7}
+\newcommand{\PermRanks}{0.0119}
+\newcommand{\PermRanksBi}{0.0119}
+\newcommand{\PermRanksCon}{0.0238}
+\newcommand{\PermRanksNaloc}{84}
+\newcommand{\HedgesGRanks}{10.94}
+% G2 — Gemma3 r=10 dose-response N=3
+\newcommand{\GtwoKzero}{44}
+\newcommand{\GtwoMfiveZero}{83.33}
+\newcommand{\GtwoMtenZero}{78.8}
+\newcommand{\GtwoSDfiveZero}{1.33}
+\newcommand{\GtwoSDtenZero}{1.27}
+\newcommand{\GtwoMfiveTen}{89.37}
+\newcommand{\GtwoMtenTen}{88.60}
+\newcommand{\GtwoSDfiveTen}{1.33}
+\newcommand{\GtwoSDtenTen}{0.00}
+\newcommand{\GtwoDeltatenTen}{+9.8}
+\newcommand{\GtwoCItenLoTen}{6.70}
+\newcommand{\GtwoCItenHiTen}{13.00}
+\newcommand{\GtwoPtenTen}{0.006}
+\newcommand{\GtwoMfiveTfive}{90.90}
+\newcommand{\GtwoMtenTfive}{90.13}
+\newcommand{\GtwoSDfiveTfive}{0.00}
+\newcommand{\GtwoSDtenTfive}{1.33}
+\newcommand{\GtwoDeltatenTfive}{+11.4}
+\newcommand{\GtwoCItenLoTfive}{5.80}
+\newcommand{\GtwoCItenHiTfive}{17.00}
+\newcommand{\GtwoPtenTfive}{0.013}
+\newcommand{\GtwoMfiveFifty}{96.23}
+\newcommand{\GtwoMtenFifty}{91.67}
+\newcommand{\GtwoSDfiveFifty}{1.27}
+\newcommand{\GtwoSDtenFifty}{1.33}
+\newcommand{\GtwoDeltatenFifty}{+12.9}
+\newcommand{\GtwoCItenLoFifty}{9.70}
+\newcommand{\GtwoCItenHiFifty}{16.10}
+\newcommand{\GtwoPtenFifty}{0.003}
+\newcommand{\GtwoSlopeZero}{-0.91}
+\newcommand{\GtwoSlopeFifty}{-0.91}
+% G3 — NF4 vs bf16 confound
+\newcommand{\GthreeDeltafiveSixteen}{+0.00}
+\newcommand{\GthreeDeltatenSixteen}{+0.00}
+\newcommand{\GthreeDeltafiveTwoFiveSix}{-0.20}
+\newcommand{\GthreeDeltatenTwoFiveSix}{+0.00}
+% G4 — variância de ordem
+\newcommand{\GfourPorder}{0.700}
+% Bloco 7 — dose-response Qwen N=5
+\newcommand{\BsevenKzero}{78}
+\newcommand{\BsevenMtenTen}{81.56}
+\newcommand{\BsevenSDtenTen}{1.93}
+\newcommand{\BsevenDeltatenTen}{+1.8}
+\newcommand{\BsevenCItenLoTen}{-1.10}
+\newcommand{\BsevenCItenHiTen}{4.70}
+\newcommand{\BsevenPtenTen}{0.160}
+\newcommand{\BsevenMtenTfive}{84.62}
+\newcommand{\BsevenSDtenTfive}{2.21}
+\newcommand{\BsevenDeltatenTfive}{+4.9}
+\newcommand{\BsevenCItenLoTfive}{2.50}
+\newcommand{\BsevenCItenHiTfive}{7.20}
+\newcommand{\BsevenPtenTfive}{0.0044}
+\newcommand{\BsevenMtenFifty}{88.98}
+\newcommand{\BsevenSDtenFifty}{1.43}
+\newcommand{\BsevenDeltatenFifty}{+9.2}
+\newcommand{\BsevenCItenLoFifty}{6.90}
+\newcommand{\BsevenCItenHiFifty}{11.60}
+\newcommand{\BsevenPtenFifty}{0.001}
+\newcommand{\BsevenSlopeZero}{-1.13}
+\newcommand{\BsevenSlopeFifty}{-0.15}
+\newcommand{\BsevenLRdelta}{+0.39}
+% Gemma3 seed-level N=5+5
+\newcommand{\GthreeKzero}{46}
+\newcommand{\GthreeMtenRfour}{94.3}
+\newcommand{\GthreeSDtenRfour}{1.19}
+\newcommand{\GthreeMtenRsixteen}{56.5}
+\newcommand{\GthreeSDtenRsixteen}{3.44}
+\newcommand{\GthreeDeltaRanks}{37.8}
+\newcommand{\GthreePermRanks}{0.0079}
+\newcommand{\GthreeHedgesG}{13.29}
+% G5 — Pi prospectivo
+\newcommand{\GfiveRonetwoetightLRlow}{96.2}
+\newcommand{\GfiveRonetwoetightLRhigh}{85.9}
+\newcommand{\GfiveRthreytwoLRhigh}{89.7}
+
+% Distribuição r=128 — persistência (§4.4.2, §5.3)
+% 4/78 = 5.1282% → 5.1%  (5.2 vinha de 4/77 off-by-one)
+\newcommand{\PersistRoneTwoEight}{5.1}

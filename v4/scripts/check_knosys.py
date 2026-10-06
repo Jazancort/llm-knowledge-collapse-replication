@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-check_knosys.py — 15 mechanical checks for KNOSYS manuscript and letter.
+check_knosys.py — 17 mechanical checks for KNOSYS manuscript and letter.
 Run from the v4/ directory:  uv run python scripts/check_knosys.py
 
 Exit code 0 = all PASS; non-zero = at least one FAIL.
@@ -398,6 +398,25 @@ _found_2dp = [v for v in _PROHIBITED_2DP if v in _body_clean]
 check(15, "no wrong 2dp variants in body (2dp computed from rounded 1dp inputs)",
       len(_found_2dp) == 0,
       "Found: " + ", ".join(_found_2dp) if _found_2dp else "")
+
+
+# ---------------------------------------------------------------------------
+# check_16: shared files exist and are imported by both docs
+# ---------------------------------------------------------------------------
+_shared = ROOT / "shared"
+_shared_files = ["numbers.tex", "tab01_body.tex", "tab04_body.tex", "tab11_body.tex"]
+_missing_shared = [f for f in _shared_files if not (_shared / f).exists()]
+check(16, "shared/ files present (numbers, tab01, tab04, tab11)",
+      len(_missing_shared) == 0,
+      "Missing: " + ", ".join(_missing_shared) if _missing_shared else "")
+
+# Both docs import shared/numbers
+_ms_imports_shared  = "shared/numbers"  in man_text or r"../shared/numbers" in man_text
+_res_imports_shared = "shared/numbers" in res_text or "../../shared/numbers" in res_text
+check(17, "both docs import shared/numbers (single source of truth for values)",
+      _ms_imports_shared and _res_imports_shared,
+      ("manuscript: " + ("OK" if _ms_imports_shared else "MISSING import")) +
+      "; carta: " + ("OK" if _res_imports_shared else "MISSING import"))
 
 
 print()

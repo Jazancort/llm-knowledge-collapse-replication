@@ -14,34 +14,8 @@
 \newif\ifshowchanges
 \showchangestrue  % ← toggle here: \showchangestrue | \showchangesfalse
 \newcommand{\rev}[1]{\ifshowchanges{\color{blue}#1}\else{#1}\fi}
-% ── Números canônicos gerados por make_all.py — NÃO EDITAR À MÃO ──
-\input{../docs/revision/resultados/make_all_outputs/numbers}
-% ── Corrections to canonical numbers (F3.3 / F3.4 / F3.5) ─────────────────
-% F3.3: rounding / trailing-zero removal for G1 and G1+G4 CI/SD values
-\renewcommand{\GoneFourSDten}{1.7}        % was 1.73 — round to 1 dp
-\renewcommand{\GoneFourCItenLo}{77.9}     % was 77.90 — drop trailing zero
-\renewcommand{\GoneFourCItenHi}{81.5}     % was 81.50 — drop trailing zero
-\renewcommand{\GoneSDten}{1.5}            % was 1.50 — drop trailing zero
-\renewcommand{\GoneCItenLo}{75.4}         % was 75.30 — corrected (exact 75.38→75.4)
-\renewcommand{\GoneCItenHi}{82.7}         % was 82.80 — corrected (exact 82.74→82.7)
-\renewcommand{\GoneSeedFifteenTen}{78.2}  % was 78.20 — drop trailing zero
-% F3.4: trailing-zero removal for G5 prospective cell
-\renewcommand{\GfiveRonetwoetightLRhigh}{85.9}  % was 85.90 — drop trailing zero
-% F3.5: round Gemma3 anchor means to 1 dp (matches table display)
-\renewcommand{\GthreeMtenRfour}{94.3}     % was 94.35 — round to 1 dp (217/230=94.348→94.3)
-\renewcommand{\GthreeMtenRsixteen}{56.5}  % was 56.52 — round to 1 dp
-% F3.6: PersistRoneTwoEight — not emitted by make\_all.py; defined here
-\newcommand{\PersistRoneTwoEight}{5.1}    % 4/78 = 5.1282\% → 5.1 at 1 dp
-% F3.7: revert 8 display values from 2 dp back to 1 dp
-% (2 dp was computed from rounded 1 dp intermediates, not from raw m/K0)
-\renewcommand{\GoneFourMten}{79.7}             % was 79.72 — mean of rounded seeds
-\renewcommand{\GoneMten}{79.1}                 % was 79.07 — idem (exact 79.06 → 79.1)
-\renewcommand{\RsixteenMten}{97.4}             % was 97.40 — 76/78=97.44 → 97.4 (trailing zero false)
-\renewcommand{\DeltaRanks}{17.7}               % was 17.70 — derived from rounded inputs
-\renewcommand{\GthreeDeltaRanks}{37.8}         % was 37.80 — 94.3−56.5=37.8 (trailing zero)
-\renewcommand{\GfiveRonetwoetightLRlow}{96.2}  % was 96.20 — 75/78=96.15 → 96.2 at 1 dp
-\renewcommand{\GfiveRthreytwoLRhigh}{89.7}     % was 89.70 — 70/78=89.74 → 89.7 at 1 dp
-\renewcommand{\GtwoMtenZero}{78.8}             % was 78.77 — exact mean 78.79 → 78.8 at 1 dp
+% ── Números canônicos — SINGLE SOURCE in shared/numbers.tex ──────────────
+\input{../shared/numbers}
 % ───────────────────────────────────────────────────────────────────────────
 % Usage: \rev{new text} — wraps any revised passage in blue when enabled.
 \usepackage[numbers]{natbib}
@@ -1250,12 +1224,7 @@ reported at Gen5; all other configurations at Gen10.}}\label{tab:rank_sweep}
 \toprule
 Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
 \midrule
-4   & 545K  & 5  & 97.4\%  & 3.34  & \rev{1} & \rev{Homeostatic} \\
-16  & 2.2M  & 10 & 96.2\%  & 11.08 & \rev{1} & \rev{Homeostatic} \\
-32  & 4.4M  & 5  & 96.2\%  & 17.85 & \rev{1} & \rev{Homeostatic} \\
-64  & 8.7M  & 10 & 92.3\%  & 29.52 & \rev{1} & \rev{Homeostatic} \\
-128 & 17.4M & 10 & 89.7\%  & 50.16 & \rev{1} & Bounded \\
-256\textsuperscript{*} & 34.9M & 10 & \rev{\GoneFourMten\%}  & 87.57 & \rev{6} & \rev{Degradative} \\
+\input{../shared/tab04_body}
 \bottomrule
 \end{tabular*}
 {\footnotesize \textsuperscript{*}Mean across \rev{six independent seeds (G1: seeds 15/137/256; G4: seeds 42/101/202); the three-seed G1 subset alone gives $\GoneMten\%$. See \S4.6.}}
@@ -2041,21 +2010,7 @@ experiments.}\label{tab:evidence}
 \toprule
 \textbf{Observation} & \textbf{Supporting evidence} \\
 \midrule
-Rank governs transition & \rev{Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}1$ at $r{=}16$,$32$,$64$,$128$ (single-seed); $N{=}3$ bf16 control (G3) at $r{=}16$,$r{=}256$} \\
-\addlinespace
-Magnitude governs transition & FFT LR sweep, 4 values \\
-\addlinespace
-\rev{Exposure reduces pressure} & \rev{Dose--response 0--50\%, $N{=}5$ seeds (pre-registered)} \\
-\addlinespace
-Threshold is backbone-dependent & Qwen vs Gemma~3 ($10{\times}$ gap) \\
-\addlinespace
-Drift accompanies degradation & 5 distribution metrics \\
-\addlinespace
-\rev{Transition is threshold-like within tested grid} & \rev{Rank sweep across six levels; adjacent tested ranks differ by a factor of two, so the boundary is bracketed rather than resolved} \\
-\addlinespace
-Capacity $\times$ magnitude \rev{joint dependence} & \rev{Rank $\times$ LR matrix ($3{\times}3$, $N=1$ per cell; descriptive)} \\
-\addlinespace
-Generalizes cross-backbone & Gemma~3 ($N=5$) + \rev{E2B rank sweep ($N=1$)} \\
+\input{../shared/tab11_body}
 \bottomrule
 \end{tabularx}
 \end{table}

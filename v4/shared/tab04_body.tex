@@ -1,0 +1,17 @@
+% shared/tab04_body.tex — SINGLE SOURCE: Table 4 data rows (Qwen 2.5 1.5B rank sweep)
+% Callers provide \toprule, column header row, \midrule, and \bottomrule.
+% Columns: Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & $N$ & Regime
+% Included by:
+%   manuscript/manuscript-anonymous.tex        via \input{../shared/tab04_body.tex}
+%   docs/overleaf/response-to-reviewers.tex   via \input{../../shared/tab04_body.tex}
+%
+% \rev{} renders as blue in the manuscript (change-tracking) and
+% as plain text in the response letter (\rev defined as passthrough there).
+% r=256 Retention uses \GoneFourMten from shared/numbers.tex.
+% EDIT ONLY THIS FILE.
+4   & 545K  & 5  & 97.4\%  & 3.34  & \rev{1} & \rev{Homeostatic} \\
+16  & 2.2M  & 10 & 96.2\%  & 11.08 & \rev{1} & \rev{Homeostatic} \\
+32  & 4.4M  & 5  & 96.2\%  & 17.85 & \rev{1} & \rev{Homeostatic} \\
+64  & 8.7M  & 10 & 92.3\%  & 29.52 & \rev{1} & \rev{Homeostatic} \\
+128 & 17.4M & 10 & 89.7\%  & 50.16 & \rev{1} & Bounded \\
+256\textsuperscript{*} & 34.9M & 10 & \rev{\GoneFourMten\%} & 87.57 & \rev{6} & \rev{Degradative} \\

@@ -26,7 +26,12 @@
 \usepackage{titlesec}
 \hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
 
-\input{numbers}
+\input{../../shared/numbers}
+
+% Pass-through macros: shared table files use \rev{} and \newtext{} for
+% manuscript change-tracking; in the response letter they render as plain text.
+\newcommand{\rev}[1]{#1}
+\newcommand{\newtext}[1]{#1}
 
 \definecolor{chgcolor}{RGB}{0,80,180}
 \definecolor{rccolor}{RGB}{0,110,40}
@@ -1279,12 +1284,7 @@ Section~4.5 reports approximately 5\% token reduction.}
 \toprule
 Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & $N$ & Regime \\
 \midrule
-4   & 545K  & 5  & 97.4\% & 3.34  & 1 & Homeostatic \\
-16  & 2.2M  & 10 & 96.2\% & 11.08 & 1 & Homeostatic \\
-32  & 4.4M  & 5  & 96.2\% & 17.85 & 1 & Homeostatic \\
-64  & 8.7M  & 10 & 92.3\% & 29.52 & 1 & Homeostatic \\
-128 & 17.4M & 10 & 89.7\% & 50.16 & 1 & Bounded \\
-256 & 34.9M & 10 & 79.7\% & 87.57 & 6 & Degradative \\
+\input{../../shared/tab04_body}
 \bottomrule
 \end{tabular}\\[2pt]
 {\scriptsize $r=256$: 6 seeds (G1: 15/137/256; G4: 42/101/202). $r=4$, $r=32$ at Gen5.}
@@ -1600,21 +1600,7 @@ as one.
 \toprule
 \textbf{Observation} & \textbf{Supporting evidence} \\
 \midrule
-Rank governs transition & \rev{Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1); $N{=}1$ at $r{=}16,32,64,128$ (single-seed); $N{=}3$ bf16 control (G3)} \\
-\addlinespace
-Magnitude governs transition & FFT LR sweep, 4 values \\
-\addlinespace
-Exposure reduces pressure & Dose-response 0--50\%, $N{=}5$ seeds (pre-registered) \\
-\addlinespace
-Threshold is backbone-dependent & Qwen vs Gemma~3 (10$\times$ gap in effective rank) \\
-\addlinespace
-Drift accompanies degradation & 5 distribution metrics (SDI-3) \\
-\addlinespace
-Transition is threshold-like & Rank sweep 6 levels; boundary bracketed, not resolved \\
-\addlinespace
-Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\times}3$, $N=1$; descriptive) \\
-\addlinespace
-Generalizes cross-backbone & Gemma~3 ($N=5$) + E2B rank sweep ($N=1$, supportive) \\
+\input{../../shared/tab11_body}
 \bottomrule
 \end{tabular}
 \par\smallskip

@@ -1,0 +1,24 @@
+% shared/tab11_body.tex — SINGLE SOURCE: Table 11 data rows (Evidence matrix)
+% Callers provide \toprule, column header row, \midrule, and \bottomrule.
+% Columns: \textbf{Observation} & \textbf{Supporting evidence}
+% Included by:
+%   manuscript/manuscript-anonymous.tex        via \input{../shared/tab11_body.tex}
+%   docs/overleaf/response-to-reviewers.tex   via \input{../../shared/tab11_body.tex}
+%
+% No numeric macros; purely structural/logical table. EDIT ONLY THIS FILE.
+Rank governs transition & Rank sweep, 6 values; $N{=}3$ at $r{=}256$ (G1);
+    $N{=}1$ at $r{=}16,32,64,128$ (single-seed); $N{=}3$ bf16 control (G3) \\
+\addlinespace
+Magnitude governs transition & FFT LR sweep, 4 values \\
+\addlinespace
+Exposure reduces pressure & Dose--response 0--50\%, $N{=}5$ seeds (pre-registered) \\
+\addlinespace
+Threshold is backbone-dependent & Qwen vs Gemma~3 ($10{\times}$ gap in effective rank) \\
+\addlinespace
+Drift accompanies degradation & 5 distribution metrics (SDI-3) \\
+\addlinespace
+Transition is threshold-like & Rank sweep 6 levels; boundary bracketed, not resolved \\
+\addlinespace
+Capacity $\times$ magnitude joint dependence & Rank $\times$ LR matrix ($3{\times}3$, $N{=}1$; descriptive) \\
+\addlinespace
+Generalizes cross-backbone & Gemma~3 ($N{=}5$) + E2B rank sweep ($N{=}1$, supportive) \\
