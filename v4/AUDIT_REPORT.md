@@ -1115,3 +1115,23 @@ Criada em numbers.tex: `\newcommand{\PersistRoneTwoEight}{5.1}` (4/78=5.1282%).
 Manuscrito §4.4.2 L1691 e §5.3 L2175: `\rev{$\PersistRoneTwoEight$\% (4~of~78~items)}`.
 A fracção explícita "(4 of 78 items)" elimina a ambiguidade de denominador.
 
+
+
+---
+
+## Parte 4g — 11 menores da carta (m1-m10) + MANIFEST (2026-10-06, sessão 3)
+
+| # | Minor | Fix | Localização |
+|---|-------|-----|------------|
+| m1 | "normalised" (British) | `normalised` → `normalized` | carta L989 |
+| m2 | "fifteen" (p.17) vs "Three" (p.27) — categorias distintas | Adicionado "of overstatement" ao fifteen; "of a different category" ao three | carta L906, L1453 |
+| m3 | supplementary.pdf não listado no ED-2 | Adicionado como nota na lista de 7 Word docs | carta L350 |
+| m4 | "PNG/TIFF" vs "PNG" | L340: PNG/TIFF → PNG (unifcado com L352 e L318) | carta L340 |
+| m5 | "exact substrings" confunde exact-match com substring | `rarely form exact substrings` → `rarely appear verbatim` (×2) | carta L424, L652 |
+| m6 | "Excerpt: all 7 rows" — autorreferência contraditória | `Excerpt: all 7 rows shown` → `All 7 rows shown` | carta L172 |
+| m7 | R2-1.10 promete n-gram em superscript, Eq.6 usa dígito no nome | R2-1.10 actualizado para descrever notação real ($\mathrm{D1}_t$) | carta L265 |
+| m8 | Aspas duplas `""...""` em p.30 | Removidas aspas LaTeX `''...''` dentro de `\newtext{}` | carta L1687 |
+| m9 | "rules out shuffle-order artifact" contradiz "does not isolate" (p.11) | Substituído por "tests data-order dependence (non-significant; neither variable isolated)" | carta L189 |
+| m10 | Passagens literais não marcadas com [verbatim] | optimizer state + effective rank portability marcados `[verbatim]` | carta L572, L750 |
+| m11 | Destinatário "Dr. Hang Yu" | ⚠️ confirmar no EM antes de submeter | — |
+

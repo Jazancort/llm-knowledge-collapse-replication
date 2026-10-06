@@ -169,7 +169,7 @@ Pipeline version & Different code paths could introduce discrepancies & Each exp
 Evaluation scoring leniency & Bidirectional substring criterion may inflate retention at high verbosity & Noted per condition \\
 \bottomrule
 \end{tabular}
-\\[2pt]{\scriptsize Excerpt: all 7 rows shown. Full table in the revised manuscript (Section~3.9).}
+\\[2pt]{\scriptsize All 7 rows shown; complete formatted table in the revised manuscript (Section~3.9).}
 \end{inlineref}
 
 \renewcommand{\arraystretch}{1.15}
@@ -186,7 +186,7 @@ G2b & Steps-matched control on Gemma~3 $r=10$ & Gemma~3~1B~IT & 3 & Paired contr
 G3 & Precision control: bf16 & Qwen 2.5 1.5B & 3 at $r{=}16$; 3 at $r{=}256$ &
      Identical regime classifications under bf16; full causal conclusion pending per-item audit \\
 G4 & Data-order control: three new shuffle seeds &
-     Qwen 2.5 1.5B & 3 at $r{=}256$ & Directionally consistent with rank effect; rules out shuffle-order artifact \\
+     Qwen 2.5 1.5B & 3 at $r{=}256$ & Directionally consistent with rank effect; tests data-order dependence (non-significant; seed and data order change simultaneously, neither variable isolated) \\
 G5 & Pre-registered prospective rank$\times$LR probe &
      Qwen 2.5 1.5B & 1 per cell & Exploratory ordering test \\
 B7 & Pre-registered exposure dose--response, $r{=}256$ &
@@ -262,7 +262,7 @@ R2-1.6 & TCE without expansion & Expanded as ``Truncated Cross-Entropy'' & \S2.3
 R2-1.7 & QLoRA/LoRA inconsistent expansion & Both expanded at first use in \S1 & \S1; \S2.4 \\
 R2-1.8 & ``Homeo.'' in Table~2 undefined & ``Homeostatic'' written in full throughout & Tabs.~4, 6, 7, Fig.~5, body text \\
 R2-1.9 & $K_0$ dual use (set and metric) & $K_0$ = set; $|K_0|$ = cardinality; $R(t)$ = retention ratio & \S3.2, Eq.~1 \\
-R2-1.10 & $T$, $D1\_T$, $D10$, $\Delta I$, Instability SDI notation & SDI-3 rewritten; generation index in subscript; $n$-gram order in superscript & \S3.6, Eq.~6 \\
+R2-1.10 & $T$, $D1\_T$, $D10$, $\Delta I$, Instability SDI notation & SDI-3 rewritten; generation index in subscript; $n$-gram order as digit in identifier ($\mathrm{D1}_t$) & \S3.6, Eq.~6 \\
 \addlinespace[2pt]
 R2-2.1 & Eq.~1 garbled (``Retention.t~/'') & Rendering fault traced to re-distillation; Eq.~1 rewritten & Eq.~1 \\
 R2-2.2 & Eq.~2 missing negative sign (math error) & $-\sum p_i\log p_i$ restored; $p_i$ defined separately & Eq.~2 \\
@@ -337,7 +337,7 @@ A single final \LaTeX{} source is submitted with its compiled PDF. \\
 Tables are native \texttt{tabular} environments; equations are
 \texttt{amsmath} environments; no table or equation is an image. \\
 (e) & Figures at 300\,dpi, not PDF &
-All figures are submitted at 300\,dpi as PNG/TIFF. No figure is
+All figures are submitted at 300\,dpi as PNG. No figure is
 submitted in PDF. \\
 (f) & Supporting \texttt{.bib} &
 \texttt{cas-refs.bib} is included in the \LaTeX{} submission package. \\
@@ -349,8 +349,10 @@ submitted in PDF. \\
 \item \textbf{Seven Word documents produced.}
       All seven files (cover letter, response, highlights, manuscript,
       CRediT, agreement, declaration) produced in \texttt{.docx}.
+      The supplementary material (Table~S1) is submitted as a separate
+      PDF file, as it contains only a reference table with SHA-1 hashes.
 \item \textbf{Figures regenerated at 300\,dpi in PNG.}
-      All figures re-exported at 300\,dpi; PDF pipeline replaced.
+      All figures re-exported at 300\,dpi in PNG; PDF pipeline replaced.
 \item \textbf{Bibliography audited.}
       Duplicate arXiv ID resolved; two missing IDs added; Ref.~[31]
       attribution corrected.
@@ -421,7 +423,7 @@ A strict exact-match sensitivity analysis was investigated and is reported
 here as a methodological finding rather than a confirmatory table.
 $K_0$ was defined by the bidirectional substring criterion; under strict
 exact-match the generation-0 baseline performance is very low, because
-TriviaQA aliases rarely form exact substrings of the generated output. More
+TriviaQA aliases rarely appear verbatim in the generated output. More
 critically, strict EM scores vary with response length in the opposite
 direction to retention: as training progresses, configurations that produce
 shorter outputs show higher EM while those that produce longer outputs show
@@ -567,7 +569,7 @@ isolating the rank effect from quantization.
 Under the reported protocol, a fresh optimizer is instantiated for each
 recursive generation; optimizer state is therefore not carried across
 generations. We have made this explicit in Section~3.1 with the sentence:
-\newtext{The trained update and optimizer state are not carried forward.}
+\newtext{The trained update and optimizer state are not carried forward.} [verbatim]
 
 \textbf{Data order.}
 In Group~G4, both the random seed and the data order changed relative
@@ -649,7 +651,7 @@ investigated; the finding is reported here because it is informative about
 the measurement instrument rather than about regime membership. $K_0$
 was defined by the bidirectional criterion. Under strict exact-match,
 the generation-0 baseline performance is very low on TriviaQA aliases
-(which are rarely exact substrings of generated responses), so the
+(which rarely appear verbatim in generated responses), so the
 effective $K_0$ under strict EM is too small to support regime
 classification. More critically, strict EM scores covary with response
 length in directions opposite to retention: configurations producing shorter
@@ -747,7 +749,7 @@ at other ranks or with more seeds is an open empirical question.
       evaluation-set sizes and baseline retention levels, and that
       \newtext{effective rank is not portable across architectures
       (Section~4.2), so we report the gains within each protocol without
-      inferring which backbone operated at higher relative pressure.}
+      inferring which backbone operated at higher relative pressure.} [verbatim]
 \end{enumerate}
 
 The dose--response results for both backbones are visualised in Figure~10.
@@ -904,7 +906,7 @@ Beyond the points listed below, the reviewer's objection to the word
 ``confirms'' in one place prompted us to apply the same standard
 everywhere. We re-read the Results and Discussion for claims whose
 strength exceeded the design supporting them, and corrected fifteen
-further instances: a single-seed grid described as \emph{demonstrating}
+further instances of overstatement: a single-seed grid described as \emph{demonstrating}
 joint dependence, now reported as descriptively consistent with it; a
 degradative regime described as \emph{reversible}, now described as
 attenuated to the bounded regime on one backbone and as a retention gain
@@ -986,7 +988,7 @@ $\mathrm{D1}_0$ the baseline value at generation~0. The subscript
 convention now uses the generation index in subscript position to
 disambiguate from the $n$-gram order, removing the ambiguity between
 $D10$ (generation index~10) and $D_{10}$ (Distinct-10). The
-$\Delta I$ term is defined inline with Eq.~6 as the difference in item-level response instability between the final and first evaluated generations: $\Delta I = \mathrm{Instability}(T) - \mathrm{Instability}(1)$, where $\mathrm{Instability}(t)$ is the fraction of training items whose normalised response changed between generation $t{-}1$ and generation $t$.
+$\Delta I$ term is defined inline with Eq.~6 as the difference in item-level response instability between the final and first evaluated generations: $\Delta I = \mathrm{Instability}(T) - \mathrm{Instability}(1)$, where $\mathrm{Instability}(t)$ is the fraction of training items whose normalized response changed between generation $t{-}1$ and generation $t$.
 
 \begin{inlineref}{Equation~6 from the revised manuscript --- SDI-3}
 \[
@@ -1453,7 +1455,8 @@ archived in the replication package.
 \item \textbf{Three further instances corrected.}
       A systematic re-reading found three additional instances where a
       horizon (Gen~5 vs.\ Gen~10) or seed count was implied but not
-      stated; all corrected.
+      stated (a different category from the fifteen overstatement
+      instances above); all corrected.
 \end{enumerate}
 
 \msloc{Abstract; \S1; \S3.4; \S3.7; \S3.8;
@@ -1684,7 +1687,7 @@ generalize to other settings}.
       direction is fully consistent across all seeds.
 \item \textbf{ETP reframed (b) (Section~3.5).}
       Restructured around the design/observed distinction.
-      Section~3.5 now states that effective training pressure is used \newtext{``as a conceptual framework for interpreting recursive fine-tuning stability, rather than as a single fitted equation.''}
+      Section~3.5 now states that effective training pressure is used \newtext{as a conceptual framework for interpreting recursive fine-tuning stability, rather than as a single fitted equation.}
 \item \textbf{Calibration procedure added (b) (Section~6).}
       Five-step per-backbone calibration proposed as the alternative
       to universal normalization, with cost stated.
