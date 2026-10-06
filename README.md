@@ -25,7 +25,7 @@
 We study *recursive fine-tuning* — the feedback loop where a model generates synthetic training data, retrains on it, and repeats — under controlled experimental conditions across three model families, ten recursive generations, and over 50 experimental runs.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/fig1_overview.png" width="700" alt="Study overview: three degradation regimes">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/scratch/fig1_overview.png" width="700" alt="Study overview: three degradation regimes">
   <br><sub>Fig. 1 — Three degradation regimes emerge as a function of effective training pressure. Homeostatic (>80%): factual retention stable across generations. Bounded (60–80%): moderate, stable loss. Degradative (<60%): progressive collapse.</sub>
 </p>
 
@@ -36,7 +36,7 @@ The key finding: **stability is not a fixed property of a model — it is a func
 ## The three-regime structure
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/fig1_trajectories.png" width="700" alt="Factual retention trajectories by regime">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/figures/fig1_trajectories.png" width="700" alt="Factual retention trajectories by regime">
   <br><sub>Fig. 2 — Factual retention (% of K₀ items answered correctly) across 10 recursive generations for representative conditions. Green band: homeostatic (>80%). Yellow: bounded. Red: degradative.</sub>
 </p>
 
@@ -53,7 +53,7 @@ The transition between regimes is **threshold-like**: a small increase in rank o
 ## Dose-response experiments
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/fig9_dose_response.png" width="720" alt="Dose-response cross-backbone">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/figures/fig9_dose_response.png" width="720" alt="Dose-response cross-backbone">
   <br><sub>Fig. 9 — Cross-backbone dose-response. Reducing synthetic exposure (% of training examples replaced by synthetic outputs) improves Gen-10 retention. Qwen (orange): graded, statistically significant response across all doses. Gemma 3 (red): endpoint improvement without rate reduction. Error bands: 95% CI. n = 3–5 paired seeds per dose.</sub>
 </p>
 
@@ -73,7 +73,7 @@ All paired t-tests. The effect generalizes across both backbones, ranks, and see
 ## Gemma 3 trajectories
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/fig_gemma3_trajectories.png" width="700" alt="Gemma 3 trajectories across rank conditions">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/figures/fig_gemma3_trajectories.png" width="700" alt="Gemma 3 trajectories across rank conditions">
   <br><sub>Gemma 3 1B factual retention across 10 recursive generations for multiple rank conditions. The transition from homeostatic to degradative occurs between effective ranks 3 and 6 — approximately 10× lower than the equivalent transition in Qwen.</sub>
 </p>
 
@@ -82,7 +82,7 @@ All paired t-tests. The effect generalizes across both backbones, ranks, and see
 ## Distributional degradation
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/fig5_distributional.png" width="700" alt="Distributional quality metrics">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/figures/fig5_distributional.png" width="700" alt="Distributional quality metrics">
   <br><sub>At r=128 (Qwen), factual retention remains near 90% — but output-distribution quality collapses. Content efficiency drops 3×, baseline persistence falls to 5.1% (4/78 items), and MTLD drops from 2673 to 745. This dissociation is invisible to scalar retention metrics alone.</sub>
 </p>
 
@@ -93,7 +93,7 @@ All paired t-tests. The effect generalizes across both backbones, ranks, and see
 ## Intervention effects
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/fig6_interventions.png" width="700" alt="Intervention effects">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/figures/fig6_interventions.png" width="700" alt="Intervention effects">
   <br><sub>Fig. 6 — Comparison of intervention strategies. Reducing synthetic exposure (dose-response, pre-registered) produces the largest and most consistent improvements. Quantization and data-order controls show negligible effects.</sub>
 </p>
 
@@ -102,7 +102,7 @@ All paired t-tests. The effect generalizes across both backbones, ranks, and see
 ## Study design
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/fig7_methodology.png" width="750" alt="Study design and experimental protocol">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/figures/fig7_methodology.png" width="750" alt="Study design and experimental protocol">
   <br><sub>Fig. 7 — Experimental protocol. Each run: (1) sample K₀ from TriviaQA, (2) generate synthetic answers, (3) fine-tune, (4) evaluate retention. Repeat for 10 generations. Three backbones × multiple rank and dose conditions × 3–6 seeds per headline condition.</sub>
 </p>
 
