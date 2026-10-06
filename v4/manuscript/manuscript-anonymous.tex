@@ -269,9 +269,7 @@ The main contributions of this work are:
     and replicating the same qualitative structure on Gemma~3 at a
     substantially lower threshold (effective rank 3--6 versus 50--88),
     \rev{confirmed across three or five independent seeds (six for the pooled $r=256$ estimate) for headline conditions; intermediate ablations use a single seed and are labeled descriptive}.
-    \item We demonstrate that full fine-tuning learning-rate sweeps on both
-    Qwen and Gemma~3 reproduce the same dose-response pattern, \rev{providing evidence consistent with the phenomenon responding} to perturbation magnitude rather than being
-    specific to low-rank adaptation.
+    \item We report full fine-tuning learning-rate sweeps on Qwen and Gemma~3 (single seed) in which retention is lower at higher learning rates, consistent with the phenomenon responding to perturbation magnitude rather than being specific to low-rank adaptation; the Gemma~3 sweep is not monotonic.
     \item \rev{We present a single-seed rank $\times$ learning-rate pilot grid descriptively consistent with the two axes not operating independently; multi-seed replication is needed before formal interaction claims.}
     \item We show that output-distribution diagnostics reveal a
     retention/distribution dissociation at intermediate capacity, where output
@@ -341,7 +339,7 @@ the retention of factual knowledge. Although not concerned with recursive
 training, \citet{petroni2019} established that pretrained language models encode
 factual associations accessible via probing, providing the conceptual basis for
 knowledge-retention evaluations. Building on this foundation,
-\citet{keisha2025} introduced the term \textit{knowledge collapse} to describe a
+\citet{keisha2025}, a non-peer-reviewed preprint, introduced the term \textit{knowledge collapse} to describe a
 three-stage process in which factual accuracy deteriorates while surface fluency
 persists. Their experiments on Gemma~3~1B under full fine-tuning identified a
 critical Stage~B where the model retains linguistic competence but loses factual
@@ -856,9 +854,7 @@ The experimental design manipulates effective training pressure along five axes:
 \begin{enumerate}
 \item \textbf{Adapter rank (update capacity).} We vary QLoRA rank across six
 values ($r=4,16,32,64,128,256$) on Qwen, producing adapters from 545K to 34.9M
-trainable parameters. The headline ranks ($r=16$ and $r=256$) are evaluated with
-three seeds; intermediate ranks trace the dose-response curve with a single
-seed. On Gemma~3, we test $r \in \{4,10,12,14,16\}$ with five seeds at the
+trainable parameters. The headline ranks are evaluated with multiple seeds: $r=256$ with six (G1 and G4) and $r=16$ with three under the bf16 protocol (G3); the $r=16$ value in Table~\ref{tab:rank_sweep} is the single-seed sweep run. Intermediate ranks trace the dose-response curve with a single seed. On Gemma~3, we test $r \in \{4,10,12,14,16\}$ with five seeds at the
 anchor ranks ($r=4$, homeostatic, and $r=16$, degradative) and a single seed at intermediate ranks.
 
 \item \textbf{Learning rate (perturbation magnitude).} For full fine-tuning, we
@@ -1064,7 +1060,7 @@ experimental design: five discrete intervention strategies (baseline, prompt
 constraint, length filtering, canonical extraction, and random downsampling)
 evaluated on a single seed with a different evaluation pipeline. When C1 and C5
 from that pilot are re-run under an identical pipeline and paired seeds, the
-approximate $5\%$ downsampling effect is $+1.9$\,pp ($n=3$), which is not
+the effect of the archived C5 downsampling arm is $+1.9$\,pp ($n=3$), which is not
 statistically distinguishable from zero. The pilot results are archived in the
 replication repository; they are not used in the primary effect estimates below.}
 
@@ -1251,7 +1247,7 @@ protocols differ in quantization and seed assignment.}
 
 \begin{table}[width=.95\linewidth,cols=7,pos=htbp]
 \caption{QLoRA rank sweep on Qwen~2.5~1.5B-Instruct. The degradative endpoint
-($r=256$) is \rev{replicated across six seeds (G1 + G4) to confirm reproducibility.}\textsuperscript{*} \rev{Retention for $r=4$ and $r=32$ is
+($r=256$) is \rev{replicated across six seeds (G1 + G4) to assess reproducibility.}\textsuperscript{*} \rev{Retention for $r=4$ and $r=32$ is
 reported at Gen5; all other configurations at Gen10.}}\label{tab:rank_sweep}
 \begin{tabular*}{\tblwidth}{@{}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{\hskip 4pt}l@{}}
 \toprule
@@ -1853,7 +1849,7 @@ inconclusive at $n = 3$.
 
 The original C1--C5 pilot compared non-identical evaluation pipelines;
 when C1 and C5 are re-run under an identical pipeline and paired seeds,
-the approximate $5\%$ downsampling effect is $+1.9$\,pp ($n=3$, not
+the effect of the archived C5 downsampling arm is $+1.9$\,pp ($n=3$, not
 statistically distinguishable from zero). We therefore exclude the
 original pilot from the primary effect estimate; those results are
 archived in the replication repository (Section~\ref{app:repo}).}
@@ -1872,15 +1868,13 @@ comparison across conditions.
 \end{figure}
 
 \rev{These results demonstrate that the Qwen $r=256$ configuration responds to
-graded exposure reduction: a 50\% reduction \rev{reduces the rate of progressive loss and shifts the system to the bounded regime}, whereas a 10\% reduction does not. This
-graded dose--response is confirmed on a second backbone (Gemma~3 G2, see below).
+graded exposure reduction: a 50\% reduction \rev{reduces the rate of progressive loss and shifts the system to the bounded regime}, whereas a 10\% reduction does not. A graded retention response is also observed on a second backbone (Gemma~3 G2, see below), in a different form.
 The sensitivity is tested only at the configurations evaluated here and should
 not be interpreted as a universal property of recursive fine-tuning.}
 
 \rev{\textbf{Dose--response replication on Gemma~3.}
 A parallel pre-registered dose--response experiment on Gemma~3 at $r=10$
-(G2, three seeds, four doses) confirms that the exposure effect generalizes
-to a second backbone. At the unmodified baseline (dose~$=0\%$), Gemma~3 at
+(G2, three seeds, four doses) shows that exposure reduction also improves retention on a second backbone. At the unmodified baseline (dose~$=0\%$), Gemma~3 at
 $r=10$ shows progressive degradation ($\GtwoMtenZero\%\pm\GtwoSDtenZero$~pp
 Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
 50\% raises Gen10 retention by $\GtwoDeltatenTen$~pp
@@ -2264,8 +2258,7 @@ quality assessment.
 Regarding intervention design, the \rev{dose--response results indicate that the lowest-pressure degradative configurations tested} are sensitive to graded changes in synthetic exposure. \rev{A 50\%
 reduction strongly attenuated progressive loss on Qwen B7; on Gemma~3 G2,
 it improved Gen10 retention without reducing the observed rate of loss.
-Smaller doses (10--25\%) produced partial, dose-proportional retention benefits. An exploratory pilot at
-$\approx 5\%$ downsampling did not replicate under paired evaluation ($+1.9$\,pp,
+Smaller doses (10--25\%) produced partial, dose-proportional retention benefits. The archived C5 downsampling arm did not replicate under paired evaluation ($+1.9$\,pp,
 $n=3$), indicating that marginal reductions at this level are not robustly
 effective in the evaluated configurations.} When
 monitoring signals indicate regime departure, reducing the volume of the
@@ -2481,7 +2474,7 @@ perturbation magnitude, or synthetic exposure \rev{can each shift} the system fr
 stabilize within the observed horizon. \rev{Pre-registered dose--response
 experiments on two backbones show that a 50\% reduction in synthetic exposure
 \rev{substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, it improved
-retention at Gen~10 without reducing the observed rate of loss. An exploratory ${\approx}5\%$ pilot, evaluated in a
+retention at Gen~10 without reducing the observed rate of loss. The archived C5 pilot arm, evaluated in a
 different pipeline, did not replicate under paired conditions ($+1.9$\,pp,
 $n=3$).} This sensitivity is backbone-dependent. Distributional diagnostics further reveal
 that output quality can degrade substantially before factual loss becomes
