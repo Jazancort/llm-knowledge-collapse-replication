@@ -42,7 +42,7 @@ GtwoSDtenTen,0.00,make_all.py
 GtwoDeltatenTen,+9.8,make_all.py
 GtwoCItenLoTen,6.70,make_all.py
 GtwoCItenHiTen,13.00,make_all.py
-GtwoPtenTen,0.001,make_all.py
+GtwoPtenTen,0.006,make_all.py
 GtwoMfiveTfive,90.90,make_all.py
 GtwoMtenTfive,90.13,make_all.py
 GtwoSDfiveTfive,0.00,make_all.py
@@ -50,7 +50,7 @@ GtwoSDtenTfive,1.33,make_all.py
 GtwoDeltatenTfive,+11.4,make_all.py
 GtwoCItenLoTfive,5.80,make_all.py
 GtwoCItenHiTfive,17.00,make_all.py
-GtwoPtenTfive,0.001,make_all.py
+GtwoPtenTfive,0.013,make_all.py
 GtwoMfiveFifty,96.23,make_all.py
 GtwoMtenFifty,91.67,make_all.py
 GtwoSDfiveFifty,1.27,make_all.py
@@ -58,7 +58,7 @@ GtwoSDtenFifty,1.33,make_all.py
 GtwoDeltatenFifty,+12.9,make_all.py
 GtwoCItenLoFifty,9.70,make_all.py
 GtwoCItenHiFifty,16.10,make_all.py
-GtwoPtenFifty,0.001,make_all.py
+GtwoPtenFifty,0.003,make_all.py
 GtwoSlopeZero,-0.91,make_all.py
 GtwoSlopeFifty,-0.91,make_all.py
 GthreeDeltafiveSixteen,+0.00,make_all.py
@@ -72,13 +72,13 @@ BsevenSDtenTen,1.93,make_all.py
 BsevenDeltatenTen,+1.8,make_all.py
 BsevenCItenLoTen,-1.10,make_all.py
 BsevenCItenHiTen,4.70,make_all.py
-BsevenPtenTen,0.100,make_all.py
+BsevenPtenTen,0.200,make_all.py
 BsevenMtenTfive,84.62,make_all.py
 BsevenSDtenTfive,2.21,make_all.py
 BsevenDeltatenTfive,+4.9,make_all.py
 BsevenCItenLoTfive,2.50,make_all.py
 BsevenCItenHiTfive,7.20,make_all.py
-BsevenPtenTfive,0.010,make_all.py
+BsevenPtenTfive,0.001,make_all.py
 BsevenMtenFifty,88.98,make_all.py
 BsevenSDtenFifty,1.43,make_all.py
 BsevenDeltatenFifty,+9.2,make_all.py

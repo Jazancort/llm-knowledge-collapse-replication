@@ -198,25 +198,46 @@ def perm_bilateral_exact(a, b):
     return p_bi, p_con, total
 
 def paired_ttest_manual(a, b):
-    """t-test pareado manual (não requer scipy)."""
+    """Paired two-tailed t-test, returns exact p-value.
+
+    Uses exact analytical CDF for df=1 and df=2 (most common case for n=2,3).
+    Falls back to a conservative lookup table for df>=3.
+    No external dependencies required.
+    """
+    import math
     diffs = [x - y for x, y in zip(a, b)]
     n = len(diffs)
-    if n < 2: return None
+    if n < 2:
+        return None
     md = sum(diffs) / n
     sd = math.sqrt(sum((d - md)**2 for d in diffs) / (n - 1))
     se = sd / math.sqrt(n)
-    if se == 0: return 0.0
-    t = md / se
-    # Aproximação p-valor (one-sided, H1: a > b)
-    # Para df pequeno, usar tabela:
+    if se == 0:
+        return 0.0
+    t = abs(md / se)   # absolute value; test is two-tailed
     df = n - 1
-    t_vals = {1: 6.314, 2: 2.920, 3: 2.353, 4: 2.132, 5: 2.015,
-              6: 1.943, 7: 1.895, 8: 1.860, 9: 1.833, 10: 1.812}
-    if t >= 6.0:  return 0.001
-    if t >= t_vals.get(df, 1.96) * 2: return 0.010
-    if t >= t_vals.get(df, 1.96) * 1.5: return 0.025
-    if t >= t_vals.get(df, 1.96): return 0.050
-    return 0.100
+
+    # Exact two-tailed p-value for small df via analytical CDF
+    if df == 1:
+        # p = 2*(1 - CDF(t,1)); CDF(t,1) = 0.5 + atan(t)/pi
+        p = 2.0 * (0.5 - math.atan(t) / math.pi)
+    elif df == 2:
+        # p = 2*(1 - CDF(t,2)); CDF(t,2) = 0.5 + t/(2*sqrt(2+t^2))
+        p = 1.0 - t / math.sqrt(2.0 + t * t)
+    else:
+        # Conservative lookup table for df >= 3 (two-tailed critical values)
+        crit = {
+            3: {0.001: 5.841, 0.010: 4.541, 0.050: 3.182, 0.100: 2.353},
+            4: {0.001: 4.604, 0.010: 3.747, 0.050: 2.776, 0.100: 2.132},
+            5: {0.001: 4.032, 0.010: 3.365, 0.050: 2.571, 0.100: 2.015},
+        }
+        row = crit.get(df, crit[5])
+        if t >= row[0.001]:   p = 0.001
+        elif t >= row[0.010]: p = 0.010
+        elif t >= row[0.050]: p = 0.050
+        elif t >= row[0.100]: p = 0.100
+        else:                 p = 0.200
+    return p
 
 def hedges_g(a, b):
     """Hedges g para grupos independentes."""

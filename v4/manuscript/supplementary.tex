@@ -1,39 +1,56 @@
 %% Supplementary Material — KNOSYS-D-26-21490
 %% Knowledge-Based Systems, Elsevier
-%% Template: CAS Double Column (cas-dc)
 
-\documentclass[a4paper,fleqn]{cas-dc}
+\documentclass[a4paper,11pt]{article}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{url}
 \usepackage{microtype}
+\usepackage{authblk}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue}
 
-\begin{document}
+\title{\textbf{Supplementary Material}\\[4pt]
+\large Effective Training Pressure Gates Recursive Knowledge\\
+Degradation in LLMs: A Multi-Axis Dose-Response Study}
 
-\title{Supplementary Material: Effective Training
-Pressure Gates Recursive Knowledge Degradation in LLMs:
-A Multi-Axis Dose-Response Study}
+\author[1,2]{Julio Leite Azancort Neto%
+  \thanks{Corresponding author. E-mail: \href{mailto:jneto@ufpa.br}{jneto@ufpa.br}.
+  ORCID: 0000-0003-2866-5445}}
+\author[1,2]{Carlos Andr\'{e} de Mattos Teixeira%
+  \thanks{ORCID: 0000-0003-1902-4347}}
+\author[3]{Andr\'{e} Carlos Ponce de Leon Ferreira de Carvalho%
+  \thanks{ORCID: 0000-0002-1907-5913}}
+\author[1,2]{Carlos Renato Lisboa Franc\^{e}s%
+  \thanks{ORCID: 0000-0003-0305-7662}}
 
-\author[1]{Julio Leite Azancort Neto\fnmark[1]}
-\author[2]{Carlos Andr\'{e} de Mattos Teixeira\fnmark[2]}
-\author[3]{Andr\'{e} Carlos Ponce de Leon Ferreira de Carvalho\fnmark[3]}
-\author[4]{Carlos Renato Lisboa Franc\^{e}s\fnmark[4]}
+\affil[1]{Amazon Sustainability Institute with Science and Innovation
+  (iSACI), Bel\'{e}m, Par\'{a}, Brazil}
+\affil[2]{Programa de P\'{o}s-Gradua\c{c}\~{a}o em Engenharia
+  El\'{e}trica e de Computa\c{c}\~{a}o (PPGEE), Universidade Federal
+  do Par\'{a} (UFPA), Bel\'{e}m, Par\'{a}, Brazil}
+\affil[3]{Instituto de Ci\^{e}ncias Matem\'{a}ticas e de
+  Computa\c{c}\~{a}o (ICMC), Universidade de S\~{a}o Paulo (USP),
+  S\~{a}o Carlos, SP, Brazil}
 
-\fntext[1]{ORCID: 0000-0003-2866-5445}
-\fntext[2]{ORCID: 0000-0003-1902-4347}
-\fntext[3]{ORCID: 0000-0002-1907-5913}
-\fntext[4]{ORCID: 0000-0003-0305-7662}
-
-\begin{abstract}
-This supplementary document provides the base-model checkpoint
-identifiers (Table~S1) for the three backbone models used in this study.
-\end{abstract}
-
-\maketitle
+\date{}
 
 \setcounter{table}{0}
 \renewcommand{\thetable}{S\arabic{table}}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent This supplementary document provides the base-model checkpoint
+identifiers (Table~S1) used in the experiments reported in the main
+manuscript.
+\end{abstract}
 
 % ─────────────────────────────────────────────────────────────────────────────
 \section*{Base-Model Checkpoint Identifiers}
@@ -43,20 +60,19 @@ All three backbones were loaded from the Hugging Face Hub using
 \texttt{AutoModelForCausalLM.from\_pretrained(repo\_id)} without an
 explicit \texttt{revision=} argument. The SHA-1 hashes in Table~S1
 identify the snapshots present in the local cache at the time of each
-experiment.
+experiment; weights can be retrieved via
+\texttt{from\_pretrained(repo\_id, revision=sha1)}.
 
-\textit{Provenance note for Gemma~4~E2B~IT.}
+\textit{Provenance note for Gemma~4~E2B~IT.}\;
 Snapshot \texttt{70af34e} was downloaded on 2026-06-26; the Gemma~4
-experiments ran on 2026-06-27, when this was the only snapshot in
-cache. A second snapshot (\texttt{3e22461}) entered the cache on
+experiments ran on 2026-06-27, when this was the only snapshot in the
+local cache. A second snapshot (\texttt{3e22461}) entered the cache on
 2026-09-30 and was not used in any reported experiment.
 
-\begin{table*}[!t]
+\begin{table}[ht]
 \caption{HuggingFace Hub repository identifiers and cache-snapshot
 SHA-1 hashes for the three base-model checkpoints used in this study.
-Weights can be retrieved via
-\texttt{from\_pretrained(repo\_id, revision=sha1)}.
-\textsuperscript{$\dagger$}See provenance note below.}
+$^{\dagger}$See provenance note above.}
 \label{tab:s1}
 \footnotesize
 \begin{tabularx}{\textwidth}{@{}l l X@{}}
@@ -69,12 +85,12 @@ Qwen~2.5-1.5B-Instruct
 Gemma~3~1B~IT
   & \texttt{dcc83ea841ab6100d6b47a070329e1ba4cf78752}
   & \texttt{google/gemma-3-1b-it} \\[4pt]
-Gemma~4~E2B~IT\textsuperscript{$\dagger$}
+Gemma~4~E2B~IT\,$^{\dagger}$
   & \texttt{70af34e20bd4b7a91f0de6b22675850c43922a03}
   & \texttt{google/gemma-4-e2b-it} \\
 \bottomrule
 \end{tabularx}
-\end{table*}
+\end{table}
 
 \noindent These identifiers are also listed in
 \texttt{configs/checkpoints.yaml} of the replication package

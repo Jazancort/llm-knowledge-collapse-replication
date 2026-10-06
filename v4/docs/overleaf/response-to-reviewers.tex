@@ -183,9 +183,9 @@ G2 & Pre-registered exposure dose--response, $r{=}10$ &
      Gemma 3 1B IT & 3 per dose & Cross-backbone replication \\
 G2b & Steps-matched control on Gemma~3 $r=10$ & Gemma~3~1B~IT & 3 & Paired control for G2; inconclusive \\
 G3 & Precision control: bf16 & Qwen 2.5 1.5B & 3 at $r{=}16$; 3 at $r{=}256$ &
-     Rules out quantization artefact \\
+     Identical regime classifications under bf16; full causal conclusion pending per-item audit \\
 G4 & Data-order control: three new shuffle seeds &
-     Qwen 2.5 1.5B & 3 at $r{=}256$ & Rules out ordering artefact \\
+     Qwen 2.5 1.5B & 3 at $r{=}256$ & Directionally consistent with rank effect; rules out shuffle-order artifact \\
 G5 & Pre-registered prospective rank$\times$LR probe &
      Qwen 2.5 1.5B & 1 per cell & Exploratory ordering test \\
 B7 & Pre-registered exposure dose--response, $r{=}256$ &
