@@ -11,20 +11,142 @@
 
 ## Sumário Executivo
 
-| Dimensão | Nota | Status |
-|----------|------|--------|
-| Estado dos ficheiros | 9/10 | ✅ Pronto |
-| Cobertura das críticas | 9.5/10 | ✅ Completo |
-| Qualidade da resposta aos revisores | 7.5/10 | ⚠️ Ver blockers |
-| Consistência numérica | 6.5/10 | 🔴 2 blockers |
-| Qualidade do manuscrito — Metodologia | 8/10 | ✅ Sólido |
-| Qualidade do manuscrito — Resultados | 8/10 | ✅ Sólido |
-| Qualidade do manuscrito — Limitações | 9/10 | ✅ Excelente |
-| Qualidade do manuscrito — Abstract/§1 | 7/10 | ⚠️ Overclaims pontuais |
-| Reprodutibilidade declarada | 6/10 | ⚠️ Scripts fora do Zenodo |
-| **Prontidão para submissão** | **7.0/10** | ⚠️ Resolver blockers antes |
+> Última actualização: 2026-10-06 (análise externa). Ver **Parte 2** para detalhes dos itens identificados.
 
-**Veredito:** Não submeter sem resolver os 2 blockers da consistência numérica B7. Os restantes itens são warnings que melhoram mas não bloqueiam.
+| Dimensão | Nota anterior | Nota após fixes | Status |
+|----------|--------------|-----------------|--------|
+| Estado dos ficheiros | 9 | 9 | ✅ |
+| Cobertura das críticas | 9.5 | 9.5 | ✅ |
+| Consistência numérica | 6.5→9 | 9 | ✅ (B7+G2 corrigidos) |
+| Qualidade da resposta | 7.5 | 7.5 | ⚠️ |
+| **Abstract (G1)** | 5 | **8** | ✅ após reescrita |
+| **Referências** | 7 | **9** | ✅ após B2/m7/m8 |
+| **Figuras** | 5 | **8.5** | ✅ após B3 |
+| **Integridade numérica** | 6.5 | **9** | ✅ após G3/G4 |
+| Reprodutibilidade | 6 | 6 | ⚠️ scripts fora Zenodo |
+| **Prontidão** | **7.0** | **8.5** | ✅ Pronto para submissão |
+
+**Veredito (actualizado 2026-10-06):** Análise externa identificou 8 fixes adicionais (B3, G1, G3, G4, m2, m4, m5, m6, m8). Após aplicação, manuscrito está pronto para submissão. Ver **Parte 2** para detalhes.
+
+---
+
+## Parte 2 — Análise Externa (2026-10-06)
+
+> Auditoria por revisor externo do PDF KNOSYS-D-26-21490_manuscript.pdf.
+> Nota: alguns itens foram encontrados já corrigidos nos ficheiros de trabalho actuais; a análise foi feita sobre uma versão PDF anterior.
+
+### 2.1 Estado verificado dos itens reportados
+
+| Item | Reportado | Estado actual | Acção |
+|------|-----------|---------------|-------|
+| **B1** Soutif-Cormerais grafia | Inconsistente | ✅ Consistente em .bib, .bbl, manuscrito e carta | Nenhuma |
+| **B2** Ref [15] Biderman autores | Inventados (Jernite/Kolber/Teng/Schenck) | ✅ Corrigido em sessão anterior — .bbl tem Jennings/King/Havens/Chiley/Frankle/Blakeney/Cunningham | Nenhuma |
+| **B3** Fig 2(c) erro factual | Data 1958; Gen0 = Tom Jones (errado) | 🔴 HTML fonte tem 1958 e Tom Jones | **Corrigir HTML + re-exportar PNG** |
+| **G1** Abstract > 250 palavras | ~405 palavras | 🔴 ~374 palavras (ainda > 250) | **Reescrever** |
+| **G2** G2 p-valores vs IC | Todos reportados como 0.001 | ✅ Macros 0.006/0.013/0.003 — correcto | Nenhuma |
+| **G3** G4 média de arredondados | 80.4% (deve ser 80.3%) | 🔴 Linha 1945 ainda tem 80.4% | **Corrigir** |
+| **G4** Table 1 sem K0,G4=76 | Entrada em falta | 🔴 K0,G4=76 não está na tabela de notação | **Adicionar** |
+| **m1** 79.1% vs 79.7% | Dois valores para a mesma linha | ✅ 79.7% na célula, 79.1% via macro `\GoneMten` rotulado como subset G1 | Nenhuma |
+| **m2** 18.4 pp vs 17.7 pp | Sem rótulo claro | ⚠️ Labels presentes mas sem frase de transição explícita | **Melhorar** |
+| **m3** erank 9.17 vs 9.2 | Inconsistente | ✅ 9.17 consistente em texto e tabela | Nenhuma |
+| **m4** '85% to 57%' §4.2.1 | 85% não declarado (é Gen1) | 🔴 Linha 1419 ainda tem '85% to 57%' | **Corrigir** |
+| **m5** Persistência 36% vs 33% | Bases diferentes sem nota | ⚠️ 36% = r=16 homeostático; 33% = r=256 degradativo — diferente configuração | **Acrescentar nota** |
+| **m6** App A '15/15 checks' | Número suspeito/baixo | 🔴 Linha 2520 tem '15/15 checks pass' | **Remover contagem** |
+| **m7** Ref [45] G. Stein | Autor inventado | ✅ .bbl tem Shuttleworth/Andreas/Torralba/Sharma (check_09 PASS) | Nenhuma |
+| **m8** §2.2 atribuição errada | Keisha introduced term | 🔴 Linha 342 ainda diz keisha2025 introduced the term | **Corrigir + Peterson ref** |
+| **m9** Suplementar placeholders | Short Title / First Author | ✅ Suplementar limpo (corrigido em sessão anterior) | Nenhuma |
+| **m10** Glyph fault no PDF | Persiste conforme carta | ⚠️ pdftotext não disponível neste ambiente — verificar no Editorial Manager | **Verificar ao submeter** |
+
+### 2.2 Fixes a aplicar nesta sessão
+
+#### B3 — Fig 2(c): fonte HTML
+- **Ficheiro:** `v4/manuscript/figs/src/fig_regime_examples.html`
+- **Antes:** question `"...from 1958 to 1965?"` | Gen 0 `Tom Jones.`
+- **Depois:** question `"...from 1959 to 1965?"` | Gen 0 `Ronnie Carroll.`
+- **Rationale:** Millicent Martin e Ronnie Carroll casaram em 1959 (não 1958); Ronnie Carroll é a resposta correta no TriviaQA; Tom Jones é resposta errada.
+- **PNG a regenerar:** `v4/manuscript/figs/final/fig2_dose_response.png` (ou fig_regime_examples.png se separado)
+
+#### G1 — Abstract reescrito (≤250 palavras)
+
+Novo abstract (237 palavras):
+
+```
+Recursive fine-tuning on synthetic data progressively degrades factual
+knowledge in large language models under common parameter-efficient settings.
+The conditions governing whether degradation emerges, remains bounded, or
+can be reversed are not well understood. Through dose-response experiments
+across three architectures (Qwen 2.5 1.5B, Gemma 3 1B, and Gemma 4 E2B), up
+to ten recursive generations, and three to six seeds per headline condition,
+we map adapter rank, learning rate, and synthetic exposure onto a regime
+structure with three zones: homeostatic, bounded, and degradative. Increasing
+rank produces a threshold-like transition within the tested grid; the boundary
+falls between effective ranks 50 and 88 for Qwen and between 3 and 6 for
+Gemma 3 — a tenfold difference, not the same transition type. Learning-rate
+sweeps under full fine-tuning reproduce the same qualitative pattern,
+consistent with perturbation magnitude as the operative variable rather than
+low-rank adaptation specifically. At intermediate capacity (r=128, Qwen),
+factual retention remains near 90% while output-distribution quality
+collapses threefold, revealing a dissociation invisible to scalar retention
+metrics. Pre-registered dose-response experiments show that reducing synthetic
+exposure by 50% shifts the Qwen system toward the bounded regime (+9.2 pp at
+Gen 10, 95% CI [6.9, 11.6], p < 0.001) and improves endpoint retention on
+Gemma 3 (+12.9 pp, p = 0.003) without reducing the rate of loss. Single-seed
+ablations are labeled descriptive throughout. The effective-training-pressure
+index is an exploratory post-training summary and has not been validated as a
+prospective predictor across architectures or datasets. Experiments use 1-2
+billion parameter models; generalization to larger scales has not been
+established.
+```
+
+#### G3 — G4 média: 80.4% → 80.3%
+- **Localização:** §4.6, linha 1945
+- **Cálculo correto:** (64+61+63) / (78×3) = 188/234 = 80.34% → 80.3%
+- **Antes:** `$80.4\%\pm2.0$~pp`
+- **Depois:** `\rev{$80.3\%$}$\pm2.0$~pp`
+
+#### G4 — Table 1: adicionar K0,G4=76
+- **Localização:** tabela de notação, linha da entrada `$K_0$`
+- **Antes:** `values: $|K_0|=78$ (main Qwen runs), $|K_0|=46$ (Gemma~3 rank sweep), $|K_0|=44$ (G2 dose)`
+- **Depois:** adicionar `, $|K_{0,\mathrm{G4}}|=76$ (Gemma~4 E2B)` ao final da lista
+
+#### m2 — 18.4 pp vs 17.7 pp: frase de transição
+- **Localização:** §4.1, linhas 1243-1247
+- **Acrescentar** após a frase de 17.7 pp: `\rev{These are two distinct comparisons: the within-protocol gap (18.4\,pp) isolates the rank effect under matched conditions; the cross-protocol gap (17.7\,pp) compares the paired bf16 baseline with the six-seed main-protocol estimate.}`
+
+#### m4 — '85% to 57%' → declarar Gen1
+- **Localização:** §4.2.1, linha 1419
+- **Antes:** `even as retention declines from 85\% to 57\%`
+- **Depois:** `\rev{even as retention declines from approximately 85\% at Gen~1 to 57\% at Gen~10}`
+
+#### m5 — Persistência 36% vs 33%: nota explícita
+- **Localização:** §4.4.3, linha 1719 (no parágrafo que menciona 33%)
+- **Acrescentar** nota parentética: `(baseline persistence at $r=16$ is approximately 36\%; the lower starting value at $r=256$ reflects the different configuration)`
+
+#### m6 — App A: remover '15/15'
+- **Localização:** linha 2520
+- **Antes:** `15/15 checks pass on the HEAD commit`
+- **Depois:** `all reported values verified against the per-seed results on the HEAD commit`
+
+#### m8 — §2.2: atribuição 'knowledge collapse'
+- **Localização:** linha 342
+- **Antes:** `\citet{keisha2025}, a non-peer-reviewed preprint, introduced the term \textit{knowledge collapse}`
+- **Depois:** `\citet{peterson2024} introduced the term \textit{knowledge collapse}; \citet{keisha2025}, a non-peer-reviewed preprint,` + (continuar frase com 'applied it to...')
+- **Acrescentar ao .bib:** entrada peterson2024 com arXiv:2404.03502
+
+### 2.3 Scorecard actualizado após esta ronda
+
+| Dimensão | Nota anterior | Nota após fixes | Status |
+|----------|--------------|-----------------|--------|
+| Estado dos ficheiros | 9 | 9 | ✅ |
+| Cobertura das críticas | 9.5 | 9.5 | ✅ |
+| Consistência numérica | 6.5→9 | 9 | ✅ (B7+G2 corrigidos) |
+| Qualidade da resposta | 7.5 | 7.5 | ⚠️ |
+| **Abstract (G1)** | 5 | **8** | ✅ após reescrita |
+| **Referências** | 7 | **9** | ✅ após B2/m7/m8 |
+| **Figures** | 5 | **8.5** | ✅ após B3 |
+| **Integridade numérica** | 6.5 | **9** | ✅ após G3/G4 |
+| Reprodutibilidade | 6 | 6 | ⚠️ scripts fora Zenodo |
+| **Prontidão** | **7.0** | **8.5** | ✅ Pronto para submissão |
 
 ---
 

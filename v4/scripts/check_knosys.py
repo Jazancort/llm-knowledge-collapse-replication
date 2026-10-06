@@ -98,6 +98,23 @@ if carta_tab1:
 if man_tab1 and carta_tab1:
     # Remove the eq:erank reference for comparison
     man_tab1_cmp = man_tab1.replace(r'(Eq.~\ref{eq:erank})', '').strip()
+    # strip \rev{...} — handles arbitrary nesting depth
+    def strip_rev(s):
+        out, i = [], 0
+        while i < len(s):
+            if s[i:i+5] == r'\rev{':
+                # find the matching closing brace
+                depth, j = 1, i + 5
+                while j < len(s) and depth > 0:
+                    if s[j] == '{': depth += 1
+                    elif s[j] == '}': depth -= 1
+                    j += 1
+                out.append(s[i+5:j-1])  # content without \rev{ and }
+                i = j
+            else:
+                out.append(s[i]); i += 1
+        return ''.join(out)
+    man_tab1_cmp = strip_rev(man_tab1_cmp)
     man_tab1_cmp = re.sub(r'\s+', ' ', man_tab1_cmp)
     carta_tab1_cmp = carta_tab1
     same = (man_tab1_cmp == carta_tab1_cmp)
