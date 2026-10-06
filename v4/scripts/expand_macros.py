@@ -33,9 +33,24 @@ def expand(text, macros):
     # Ordenar por comprimento decrescente para evitar substituicao parcial
     for name in sorted(macros, key=len, reverse=True):
         val = macros[name]
-        # Usar lambda para evitar interpretacao do val como regex replacement
-        pat = re.compile(r'\\' + re.escape(name) + r'(?![A-Za-z])')
-        text = pat.sub(lambda m, v=val: v, text)
+        pattern = re.compile(r'\\' + re.escape(name) + r'(?![A-Za-z])')
+
+        # Substituicao manual: salta ocorrencias que sao o nome-argumento
+        # de \newcommand{...} ou \renewcommand{...}
+        result = []
+        pos = 0
+        for m in pattern.finditer(text):
+            start = m.start()
+            # Olhar os ~15 caracteres antes do match
+            lookback = text[max(0, start - 16):start]
+            result.append(text[pos:start])
+            if re.search(r'\\(?:new|renew)command\{$', lookback):
+                result.append(m.group(0))   # manter como esta (contexto de definicao)
+            else:
+                result.append(val)          # expandir normalmente
+            pos = m.end()
+        result.append(text[pos:])
+        text = ''.join(result)
     return text
 
 
