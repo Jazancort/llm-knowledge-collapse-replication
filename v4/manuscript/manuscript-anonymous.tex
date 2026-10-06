@@ -1831,8 +1831,8 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \rev{\textbf{Qwen dose--response (B7).}
 A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
 protocol registered as \texttt{a916ebf} before any run) shows that the
-Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
-\rev{$+4.9$}\,pp at 25\% ($p = 0.005$, 95\%~CI $[2.5, 7.2]$), and
+Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.200$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
+\rev{$+4.9$}\,pp at 25\% ($p = 0.001$, 95\%~CI $[2.5, 7.2]$), and
 \rev{$+9.2$}\,pp at 50\% ($p < 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
 paired $t$-test \rev{$p = 0.009$, $0.003$, $p < 0.001$}). A 50\% reduction
@@ -1878,10 +1878,10 @@ A parallel pre-registered dose--response experiment on Gemma~3 at $r=10$
 $r=10$ shows progressive degradation ($\GtwoMtenZero\%\pm\GtwoSDtenZero$~pp
 Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
 50\% raises Gen10 retention by $\GtwoDeltatenTen$~pp
-($p=\GtwoPtenTen$), $\GtwoDeltatenTfive$~pp ($p=\GtwoPtenTfive$), and
+($p=\GtwoPtenTen$, 95\,\%~CI $[\GtwoCItenLoTen, \GtwoCItenHiTen]$), $\GtwoDeltatenTfive$~pp ($p=\GtwoPtenTfive$, 95\,\%~CI $[\GtwoCItenLoTfive, \GtwoCItenHiTfive]$), and
 $\GtwoDeltatenFifty$~pp (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
 $p=\GtwoPtenFifty$), respectively ($n=3$ paired seeds per dose).
-At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (equal to the 0\% arm within rounding), \rev{indicating that {no reduction in the rate of progressive loss was observed} for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
+At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (identical to the precision reported ($-0.91$\,pp/generation in both arms)), \rev{indicating that {no reduction in the rate of progressive loss was observed} for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
 \rev{The absolute gain at dose~$=50\%$ Gen10 is larger for Gemma~3 G2
 ($\GtwoDeltatenFifty$~pp, $|K_{0,\mathrm{G2}}|{=}44$) than for Qwen B7
 ($\BsevenDeltatenFifty$~pp, $|K_0|{=}78$). The two experiments used different
