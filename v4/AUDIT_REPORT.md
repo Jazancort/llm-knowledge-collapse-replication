@@ -415,87 +415,101 @@ Alinhada com evidências. "Recursive degradation é pressure-gated, não inevit�
 
 ---
 
-## 7. Itens Pendentes (Investigações em Aberto)
+## 7. Itens Pendentes — Estado Actualizado (2026-10-06)
 
-| Item | Estado | Impacto | Ação necessária |
-|------|--------|---------|-----------------|
-| B7 p-valores: 0.160 vs 0.200 | 🔴 BLOQUEADOR | Alto — divergência carta vs numbers.tex | Verificar make_all.py; decidir valor correto; atualizar manuscrito + carta |
-| B7 25% p-valor: 0.005 vs 0.001 | 🔴 BLOQUEADOR | Alto | Idem acima |
-| B7 slope: -0.15 vs -0.14 | ⚠️ WARNING | Baixo | Uniformizar |
-| B7 10% CI ausente na carta | ⚠️ WARNING | Médio — claim "all doses" inconsistente | Adicionar CI [-1.10, 4.70] ou corrigir claim |
-| make_all.py no Zenodo | ⚠️ WARNING | Médio — reprodutibilidade | Publicar Zenodo v1.0.4 antes de submeter OU adicionar nota na carta |
-| Fig.2(c) exemplos (Tom Jones/Millicent) | ❓ Não verificado | Baixo | Grep não encontrou — verificar se foi corrigido |
-| FFT units (0.39–3.48 no script) | ❓ Não verificado | Baixo | Confirmar fator de escala nos logs |
-| G3 bf16 Δ = +0.00 pp | ℹ️ Curious | Baixo | Não é problema — diferença nula é resultado válido |
-| Abstract: régua de classificação de regime | ⚠️ Pendente de redação | Médio | Utilizador ofereceu redigir |
-| Abstract/highlights: reformulação | ⚠️ Pendente de redação | Médio | Utilizador ofereceu redigir |
-| §4.2.3 "tenfold" | ⚠️ Pendente de redação | Baixo | Utilizador ofereceu redigir |
-| G2 10%/25% sem CI | ⚠️ WARNING | Médio | Assimetria de reporting; adicionar CIs via macros ou justificar |
-| G2 slopes: "within rounding" vs "idênticos" | ⚠️ WARNING | Baixo | Frasear "identical to the precision reported" |
-| Glifos no PDF (R.t/, erank.ΔW/) | ⚠️ Não testado no EM | Médio | Testar pdftotext no servidor do Editorial Manager |
+> Última actualização após sessões de 2026-10-06. Itens anteriormente bloqueadores marcados como ✅ foram verificados nos ficheiros de trabalho.
+
+### 7.1 Resolvidos (era pendente, agora ✅)
+
+| Item | Commit | Verificação |
+|------|--------|-------------|
+| B7 p-valores: 0.160→0.200, 0.005→0.001 | 6192b9e | `manuscrito.tex:1820` — "p = 0.200" e "p = 0.001" |
+| B7 slope: -0.15→-0.14 | 6192b9e | Macro `\BsevenSlopeFifty` = -0.14 em numbers.tex |
+| B7 CI [-1.10, 4.70] adicionado na carta | 6192b9e | "CI [-1.1, 4.7]" confirmado na carta |
+| G2 10%/25% CIs adicionados (carta e manuscrito) | 6192b9e | Todos os CIs B7+G2 presentes |
+| G2 slopes: "identical to precision reported" | e416ca6 | Confirmado grep em manuscrito e carta |
+| G4 média: 80.4%→80.3% | e416ca6 | linha 1945 manuscrito; 188/234=80.34% |
+| K₀,G4=76 na Table 1 | e416ca6 | tab01_body.tex |
+| Fig 2(c): 1958→1959, Tom Jones→Ronnie Carroll | e416ca6 | HTML corrigido, PNG regenerado |
+| peterson2024 no .bib; keisha2025 reposicionado | e416ca6 | cas-refs.bib |
+| App A: "15/15 checks"→"all reported values verified" | e416ca6 | linha 2520 manuscrito |
+| "85% to 57%"→"≈85% at Gen 1 to 57% at Gen 10" | e416ca6 | §4.2.1 |
+| Persistência 33% vs 36%: nota de config diferente | e416ca6 | §4.4.3 |
+| 18.4 pp vs 17.7 pp: frase de transição | e416ca6 | §4.1 |
+| Glifos no PDF (131 hits ROTA B) → .docx | f7e0a87 | 0 glifos, 611 OMML em manuscript.docx |
+| Carta Concern #2: versão honesta + anúncio .docx | f7e0a87 | response-to-reviewers.tex:1053-1066 |
+| Abstract: 405→237 palavras (≤250) | e416ca6 | abstract Word count confirmado |
+| check_09: refs [15] e [45] correctos | 56ee6ce | BBL confirmado |
+| check_10: zero British spellings | e416ca6 | check PASS |
+| 12/12 checks PASS | ce537e2 | Última execução: 12/12 ✅ |
+
+### 7.2 Ainda pendentes (requerem acção)
+
+| Item | Prioridade | Natureza | Acção |
+|------|-----------|----------|-------|
+| **response-to-reviewers.docx** | 🔴 ED-2 bloqueador | Carta ainda não convertida para Word | `pandoc response-to-reviewers.tex --to docx` |
+| **Highlights: usar versão correcta** | 🔴 ED-2 bloqueador | highlights.docx tem "5%" (deve ser 50%) e "sharp" removido; highlights-revised.docx está correcto | Usar highlights-revised.docx |
+| make_all.py no Zenodo v1.0.4 | ⚠️ Reprodutibilidade | Scripts de análise sem DOI estável; carta cita make_all.py | Publicar v1.0.4 no Zenodo antes de submeter |
+| Abstract: régua de regime + §4.2.3 "tenfold" | ⚠️ Redação | Texto não redigido; aguarda o utilizador | Utilizador redigirá |
+| Confirmar destinatário no EM | ⚠️ Antes de submeter | Dr. Hang Yu vs Dr. Jie Lu — incerto | Verificar no portal EM |
 
 ---
 
-## 8. Notas por Dimensão — Scorecard Final
+## 8. Notas por Dimensão — Scorecard Final (actualizado 2026-10-06)
 
 ```
 ┌─────────────────────────────────────────────────────┬──────┬────────────────┐
 │ DIMENSÃO                                            │ NOTA │ STATUS         │
 ├─────────────────────────────────────────────────────┼──────┼────────────────┤
-│ Estado dos ficheiros (compilação, checks)           │  9   │ ✅ Pronto      │
+│ Estado dos ficheiros (compilação, checks)           │  9.5 │ ✅ 12/12 PASS  │
 │ Cobertura das críticas (todos os pontos têm resp.)  │ 9.5  │ ✅ Completo    │
 │ Qualidade da resposta — ED1-3                       │  9   │ ✅ Completo    │
 │ Qualidade da resposta — R1 (5 pontos)               │  7.5 │ ⚠️ R1-1 parcial│
 │ Qualidade da resposta — R2 (5 grupos)               │  8.5 │ ✅ Sólido      │
-│ Consistência numérica carta ↔ manuscrito ↔ numbers  │  6.5 │ 🔴 2 blockers  │
+│ Consistência numérica carta ↔ manuscrito ↔ numbers  │  9   │ ✅ B7+G2 ok    │
 │ Tom e registro da carta                             │  8.5 │ ✅ Bom         │
-│ Manuscrito — Abstract                               │  7   │ ⚠️ Overclaims  │
+│ Manuscrito — Abstract (237 palavras, ≤250)          │  8   │ ✅ após reesc. │
 │ Manuscrito — Contribuições                          │  7.5 │ ⚠️ Contr.5     │
 │ Manuscrito — Metodologia                            │  8   │ ✅ Sólido      │
 │ Manuscrito — Resultados                             │  8   │ ✅ Sólido      │
 │ Manuscrito — Limitações                             │  9   │ ✅ Excelente   │
 │ Manuscrito — Conclusão                              │  8.5 │ ✅ Bom         │
 │ Reprodutibilidade (Zenodo + GitHub)                 │  6   │ ⚠️ Scripts fora│
+│ Glifos / formato Word (ED-2)                        │  8   │ ✅ DOCX limpo  │
 ├─────────────────────────────────────────────────────┼──────┼────────────────┤
-│ PRONTIDÃO PARA SUBMISSÃO                            │  7.0 │ ⚠️ Ver blockers│
+│ PRONTIDÃO PARA SUBMISSÃO                            │  8.5 │ ⚠️ Falta DOCX  │
+│                                                     │      │ da carta       │
 └─────────────────────────────────────────────────────┴──────┴────────────────┘
 ```
 
 **Escala:** 10 = publicável sem mudanças, 8-9 = menor revisão, 6-7 = revisão necessária, <6 = revisão maior.
 
+**Comparação com submissão original:** 7.0 → 8.5 (após todas as correções das sessões de 2026-10-05/06).
+
 ---
 
-## 9. Ações por Prioridade
+## 9. Ações por Prioridade — Estado Actual (2026-10-06)
 
-### 🔴 Blockers (não submeter sem resolver)
+### ✅ Resolvidos (eram blockers/warnings, agora fechados)
 
-1. **Verificar p-valores B7 com make_all.py e decidir os valores corretos.**
-   - Rodar: `uv run python scripts/analysis/make_all.py` e conferir output.
-   - Se 0.200/0.001 são corretos: atualizar manuscrito (linhas com p=0.160 e p=0.005) e carta.
-   - Se 0.160/0.005 são corretos: corrigir numbers.tex (improvável — numbers.tex é gerado pelo script).
-   - Causa provável: a correção do `paired_ttest_manual` para df=2 em 2026-10-05 alterou os p-valores G2 correctamente mas também alterou B7 (df=4) sem que os valores hardcoded fossem atualizados.
+Todos os blockers da Secção 7.1 foram resolvidos nos commits 6192b9e, e416ca6, ce537e2, f7e0a87.
+Ver Secção 7.1 para lista completa com commit e verificação.
 
-2. **Após decisão acima: recompilar e verificar 12/12 PASS.**
+### ✅ Blockers resolvidos nesta sessão
 
-### ⚠️ Warnings (corrigir antes de submeter, se possível)
+1. **response-to-reviewers.docx** ✅ GERADO — 454 KB, 370 equações OMML, 2 glifos intencionais (Ë/ù em VerbatimChar a título de exemplo, não são erros).
 
-3. **B7 slope na carta: -0.15 → usar `\BsevenSlopeFifty` (macro) ou corrigir para -0.14.**
+2. **Highlights: usar highlights-revised.docx** ✅ DECIDIDO — highlights.docx original tem "5%" (deve ser 50%) e "sharp" (foi removido do manuscrito a pedido do R2); highlights-revised.docx tem as versões correctas: "50%", "threshold-like", "on two backbones".
 
-4. **CI B7 10% ausente na carta:** ou adicionar "95% CI [-1.10, 4.70]" na frase do B7 10% na carta, ou alterar claim de "for every Gen10 B7 dose" para "for the 25% and 50% doses."
+### ⚠️ Warnings (resolver antes de submeter, se possível)
 
-5. **G2 10%/25% CIs:** adicionar CIs [6.70, 13.00] e [5.80, 17.00] na carta e manuscrito via macros existentes (`\GtwoCItenLoTen` etc.) para simetria com a dose de 50%.
+3. **make_all.py no Zenodo v1.0.4** — a carta menciona make_all.py como fonte dos valores, mas o Zenodo v1.0.3 só tem os dados primários, não os scripts. Publicar v1.0.4 com scripts de análise ou adicionar nota na carta com commit hash.
 
-6. **G2 slopes:** alterar "equal within rounding" para "identical to the precision reported (−0.91 pp/generation in both arms)."
-
-7. **make_all.py no Zenodo:** publicar v1.0.4 com os scripts antes da submissão. Ou adicionar nota explícita na carta que a reprodutibilidade completa requer o GitHub HEAD em `github.com/Jazancort/llm-knowledge-collapse-replication` (commit `f286b58`).
+4. **Confirmar destinatário** — verificar no portal do Editorial Manager se o editor handling é Dr. Hang Yu ou Dr. Jie Lu antes de submeter.
 
 ### ℹ️ Pendentes de decisão do autor
 
-8. **Abstract régua de classificação de regime** — redigir. O abstract atual menciona "50–88 on Qwen vs 3–6 on Gemma 3" sem clarificar que são tipos de transição diferentes.
-
-9. **Reformulação highlights e §4.2.3 "tenfold"** — utilizador ofereceu redigir; aguardando.
-
-10. **Fig.2(c) exemplos** — verificar manualmente se Tom Jones/Millicent Martin ainda estão como exemplos de TriviaQA no manuscrito.
+5. **Abstract + §4.2.3 "tenfold"** — o abstract actual menciona "a tenfold difference" entre os thresholds Qwen vs Gemma 3, mas as transições são de tipos diferentes (homeostatic→degradative em Gemma 3 vs bounded→degradative em Qwen). Texto de clarificação aguarda o utilizador.
 
 ---
 
