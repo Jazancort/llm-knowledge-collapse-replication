@@ -1,0 +1,61 @@
+% shared/tab01_body.tex — SINGLE SOURCE: notation table DATA ROWS ONLY
+% Callers provide \toprule, column header row, \midrule, and \bottomrule.
+% Included by:
+%   manuscript/manuscript-anonymous.tex   via \input{../shared/tab01_body.tex}
+%   docs/overleaf/response-to-reviewers.tex  via \input{../../shared/tab01_body.tex}
+%
+% EDIT ONLY THIS FILE.  Symbols listed in order of first appearance.
+% Adapter-level quantities (erank, ||.||_F) are averaged across adapted
+% LoRA modules within a model.
+$K_0$
+  & Set of items in $Q$ answered correctly at generation~0;
+    $|K_0|$ denotes its cardinality;
+    values: $|K_0|=78$ (main Qwen runs),
+            $|K_0|=46$ (Gemma~3 rank sweep),
+            $|K_0|=44$ (G2 dose) \\
+$R(t)$
+  & Factual retention at generation~$t$: fraction of $K_0$ items
+    still correct \\
+$\theta^{(0)}$
+  & Pretrained backbone weights \\
+$\theta^{(t)}$
+  & Adapter-augmented weights at generation~$t$ \\
+$\Delta W = BA$
+  & Low-rank LoRA update matrix
+    ($B \in \mathbb{R}^{d\times r}$, $A \in \mathbb{R}^{r\times d}$) \\
+$\sigma_i$
+  & $i$-th singular value of $\Delta W$ \\
+$p_i$
+  & Normalized singular weight,
+    $p_i = \sigma_i / \sum_j \sigma_j$;
+    $p_i \ge 0$ and $\sum_i p_i = 1$ \\
+$\mathrm{erank}(\Delta W)$
+  & Effective rank:
+    $\exp\!\bigl(-\sum_i p_i \log p_i\bigr)$
+    (Eq.~\ref{eq:erank}) \\
+$\|\Delta W\|_F$
+  & Frobenius norm of composed update, averaged across modules \\
+$d(t)$
+  & Parameter drift: mean absolute weight change
+    $\theta^{(t)}-\theta^{(0)}$ \\
+$\eta$
+  & Learning rate \\
+$\Pi$
+  & Operational pressure index:
+    $\mathrm{erank}(\Delta W)\cdot(\eta/10^{-5})$ \\
+$f$
+  & Exposure dose: fraction of training items removed \\
+$r_H$, $r_D$
+  & Empirically observed rank transition intervals (Qwen-specific):
+    $r_H \in (64,128)$, $r_D \in (128,256)$;
+    not universal thresholds \\
+$T$
+  & Evaluation horizon (10 generations in main experiments) \\
+$\mathrm{ContentEff}(t)$
+  & Retention divided by mean synthetic response length \\
+$\mathrm{Persist}(t)$
+  & Fraction of $K_0$ items whose response at generation~$t$
+    matches generation~0 \\
+$\mathrm{SDI\text{-}3}$
+  & Synthetic Drift Index: composite of verbosity, diversity,
+    and instability changes \\

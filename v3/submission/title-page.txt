@@ -1,0 +1,30 @@
+TITLE PAGE
+
+Title: Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs: A Multi-Axis Dose-Response Study
+
+Authors:
+
+1. Julio Leite Azancort Neto (Corresponding Author)
+   Affiliation: Universidade Federal do Pará (UFPA), Belém, PA, Brazil
+   ORCID: 0000-0003-2866-5445
+   Email: julio.azancort.neto@itec.ufpa.br
+   CRediT: Conceptualization, Methodology, Software, Investigation, Writing - Original Draft, Visualization
+
+2. Carlos André de Mattos Teixeira
+   Affiliation: Universidade Federal do Pará (UFPA), Belém, PA, Brazil
+   CRediT: Writing - Review & Editing, Validation
+
+3. André Carlos Ponce de Leon Ferreira de Carvalho
+   Affiliation: Institute of Mathematics and Computer Sciences (ICMC), University of São Paulo (USP), São Carlos, SP, Brazil
+   CRediT: Supervision, Writing - Review & Editing
+
+4. Carlos Renato Lisboa Francês
+   Affiliation: Universidade Federal do Pará (UFPA), Belém, PA, Brazil
+   CRediT: Supervision, Writing - Review & Editing, Funding acquisition
+
+Corresponding author: Julio Leite Azancort Neto
+Email: julio.azancort.neto@itec.ufpa.br
+
+Acknowledgments:
+
+The authors acknowledge the High-Performance Computing and Artificial Intelligence Center (CCAD/UFPA, www.ccad.ufpa.br) for institutional support. This work was supported in part by the Coordenação de Aperfeiçoamento de Pessoal de Nível Superior (CAPES), Brazil, under Grant 001; and in part by the National Institute of Science and Technology in Artificial Intelligence Applied to Smart and Sustainable Cities in Brazilian Amazon (INCT IAmazônia, inctiamazonia.org.br) funded by the Brazilian National Council for Scientific and Technological Development (CNPq) under Grant 409001/2024-4.

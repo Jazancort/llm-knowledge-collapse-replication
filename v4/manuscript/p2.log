@@ -1,0 +1,491 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex.fmt)
+ restricted \write18 enabled.
+entering extended mode
+(manuscript-anonymous.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-06-18>
+
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/els-cas-templates\cas-d
+c.cls
+Document Class: cas-dc 2024/05/04, 2.4: Formatting class for CAS double column 
+articles
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/base\article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/base\fleqn.clo)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/base\size10.clo))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\graphics.c
+fg)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\pdftex.def
+))) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsmath.sty
+For additional information on amsmath, use the `?' option.
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amstext.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsgen.sty))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsbsy.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsmath\amsopn.sty))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amsfonts.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\amssymb.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/l3kernel\expl3.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-pdf
+tex.def))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/l3packages/xparse\xpars
+e.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/etoolbox\etoolbox.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/preprint\balance.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/booktabs\booktabs.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/makecell\makecell.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/tools\array.sty))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/multirow\multirow.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/colortbl\colortbl.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\color.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+)
+new hooks used!!
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/tools\dcolumn.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/sttools\stfloats.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/tools\xspace.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/xstring\xstring.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/xstring\xstring.tex))
+ (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/footmisc\footmisc.sty)
+ (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\xcolor.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics-cfg\color.cfg)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\mathcolor.ltx)
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/xcolor\svgnam.def)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/graphics\dvipsnam.def)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hyperref.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/iftex\iftex.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/kvsetkeys\kvsetkeys.sty
+)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/kvdefinekeys\kvdefine
+keys.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/pdfescape\pdfescape.s
+ty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/ltxcmds\ltxcmds.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/pdftexcmds\pdftexcmds
+.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/infwarerr\infwarerr.s
+ty)))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/hycolor\hycolor.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/gettitlestring\gettit
+lestring.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/kvoptions\kvoptions.sty
+)))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/stringenc\stringenc.s
+ty) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\pd1enc.def
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/intcalc\intcalc.sty
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\puenc.def)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/url\url.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/bitset\bitset.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/bigintcalc\bigintcalc
+.sty)))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\hpdftex.def
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/rerunfilecheck\rerunfil
+echeck.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/uniquecounter\uniquec
+ounter.sty)))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/els-cas-templates\cas-c
+ommon.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/moreverb\moreverb.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/tools\verbatim.sty))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/wrapfig\wrapfig.sty))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\stix.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/base\textcomp.sty))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/inconsolata\inconsolata
+.sty `inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/xkeyval\xkeyval.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkeyval.tex
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/xkeyval\xkvutils.tex)
+)))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/iftex\ifvtex.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/geometry\geometry.cfg))
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/cmap\cmap.sty
+
+Package cmap Warning: fontenc already loaded - some fonts may be unprocessed.
+
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\lmodern.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/base\fontenc.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmr.fd)<<t1.cmap>>
+) (../docs/revision/resultados/make_all_outputs/numbers.tex)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/natbib\natbib.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/tools\tabularx.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/caption\caption3.sty))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/float\float.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.sty
+
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype-pdf
+tex.def)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/microtype\microtype.cfg
+))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/generic/pdftex\glyphtounicode
+.tex)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/pdfx\glyphtounicode-cmr
+.tex)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjustbox.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\adjcalc.sty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\trimclip.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/collectbox\collectbox.s
+ty)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/adjustbox\tc-pdftex.def
+))
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/ifoddpage\ifoddpage.sty
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/varwidth\varwidth.sty
+)
+==> First Aid for varwidth.sty applied!
+) (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/placeins\placeins.sty
+) (manuscript-anonymous.aux)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\ls1stix.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\ls2stix.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/context/base/mkii\supp-pdf.mk
+ii
+[Loading MPS to PDF converter (version 2006.09.02).]
+)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/epstopdf-pkg\epstopdf-b
+ase.sty
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/00miktex\epstopdf-sys.c
+fg)) (manuscript-anonymous.out) (manuscript-anonymous.out)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/upquote\upquote.sty)
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-cmr.cfg)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\corref' on input line 91.
+
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd) [0{C:/Use
+rs/julio/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}{C:/Users/julio/AppDa
+ta/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Users/julio/AppData/L
+ocal/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ts1.enc}]
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\ot1lmr.fd)<<ot1.cmap
+>> (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\omllmm.fd)<<oml.c
+map>> (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\omslmsy.fd)<<o
+ms.cmap>> (C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\omxlmex.fd
+)<<omx.cmap>>
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsa.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msa.cfg)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-msb.cfg)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/microtype\mt-ptm.cfg)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\ls1stixfrak.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\ls1stixbb.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\ls2stixcal.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\ls1stixsf.fd)
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/stix\ls2stixtt.fd)
+Overfull \hbox (123.62721pt too wide) detected at line 175
+[]
+(manuscript-anonymous.abs)
+
+Package hyperref Warning: Ignoring empty anchor on input line 175.
+
+
+Package hyperref Warning: Ignoring empty anchor on input line 175.
+
+
+LaTeX Warning: File `thumbnails/cas-email.jpeg' not found on input line 175.
+
+
+! Package pdftex.def Error: File `thumbnails/cas-email.jpeg' not found: using d
+raft setting.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.175 \maketitle
+                
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd)
+
+Package hyperref Warning: Ignoring empty anchor on input line 175.
+
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd) [1{C:/Use
+rs/julio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/j
+ulio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}] [2]
+[3] [4]
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no │ in font lmex10!
+Missing character: There is no │ in font lmex10!
+Missing character: There is no │ in font lmex10!
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+
+Overfull \hbox (1.79446pt too wide) in alignment at lines 505--537
+[] [] 
+[5{C:/Users/julio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.en
+c}{C:/Users/julio/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathex.en
+c}]
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 723--723
+[][][]\T1/lmr/m/n/8 (+20) Available at [][]$\T1/lmtt/m/n/8 https : / / huggingf
+ace . co / google /
+
+Underfull \hbox (badness 1478) in paragraph at lines 723--723
+\T1/lmtt/m/n/8 gemma-[]4-[]e2b-[]it$[][]\T1/lmr/m/n/8 (+20) ; []see Gemma Team 
+[][][] for the tech-ni-cal
+[7]
+Overfull \hbox (36.35063pt too wide) in paragraph at lines 799--811
+ [][] 
+
+Overfull \hbox (24.15358pt too wide) in paragraph at lines 816--822
+\T1/lmr/m/n/10 (-20) QLoRA rank across six val-ues ($\OML/lmm/m/it/10 r \OT1/lm
+r/m/n/10 (-20) = 4\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 (-20) 16\OML/lmm/m/it/10 ;
+ \OT1/lmr/m/n/10 (-20) 32\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 (-20) 64\OML/lmm/m/
+it/10 ; \OT1/lmr/m/n/10 (-20) 128\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 (-20) 256$\
+T1/lmr/m/n/10 (-20) )
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+[8 <./figs/scratch/fig1_overview.pdf>]
+Underfull \hbox (badness 1067) in paragraph at lines 838--842
+[]\T1/lmr/bx/n/10 (+20) Module topol-ogy (sup-port-ive ab-la-tion).
+
+LaTeX Font Warning: Font shape `T1/lmr/b/it' in size <10.5> not available
+(Font)              Font shape `T1/lmr/b/sl' tried instead on input line 887.
+
+Missing character: There is no │ in font lmex10!
+Missing character: There is no │ in font lmex10!
+Missing character: There is no │ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no │ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+[9]
+Overfull \hbox (5.34131pt too wide) in paragraph at lines 936--943
+[]\T1/lmr/m/n/10 (-20) Beyond fac-tual re-ten-tion, we track output-distributio
+n
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+[10] [11]
+Overfull \hbox (5.73326pt too wide) in alignment at lines 1215--1226
+[][][][][][][] 
+
+Underfull \hbox (badness 6927) in paragraph at lines 1260--1260
+[][][][]\T1/lmr/m/n/8 (+20) Three Gen5$\LS1/stixsf/m/n/8 Ö$\T1/lmr/m/n/8 (+20) 
+Gen10 slopes for Qwen $\OML/lmm/m/it/8 r \OT1/lmr/m/n/8 (+20) = 256$\T1/lmr/m/n
+/8 (+20) :
+[12 <./figs/final/fig_regime_examples.pdf>]
+Overfull \hbox (15.67824pt too wide) in paragraph at lines 1292--1302
+\T1/lmr/m/n/10 (-20) seed. Tar-get-ing all lin-ear mod-ules (\T1/lmtt/m/n/10 q,
+k,v,o,gate,up,down\T1/lmr/m/n/10 (-20) )
+
+Underfull \hbox (badness 1033) in paragraph at lines 1292--1302
+\T1/lmr/m/n/10 (+20) Gen5 re-ten-tion, match-ing attention-only tar-get-ing
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+(C:\Users\julio\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmss.fd)
+Underfull \hbox (badness 6961) in paragraph at lines 1311--1311
+[]\T1/lmss/m/n/9 (+20) Item-level tran-si-tions across re-cur-sive gen-er-a-tio
+ns on
+[13 <./figs/final/fig1_trajectories.png> <./figs/final/fig2_dose_response.png>]
+
+Underfull \hbox (badness 1178) in paragraph at lines 1348--1362
+[]\T1/lmr/m/n/10 (+20) On Gemma 3, an anal-o-gous regime struc-ture
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+
+Overfull \hbox (20.46559pt too wide) in alignment at lines 1400--1410
+[][][][][][] 
+
+Overfull \hbox (2.77953pt too wide) in paragraph at lines 1419--1427
+[]\T1/lmr/m/n/10 (-20) The same mono-tonic dose-response struc-ture emerges:
+[14]
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+
+Underfull \hbox (badness 10000) in alignment at lines 1437--1445
+[][][][][] 
+[15 <./figs/scratch/fig_combined_trajectories.png> <./figs/final/fig5_cross_bac
+kbone.png>]
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+
+Underfull \hbox (badness 10000) in alignment at lines 1526--1536
+[][][][] 
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+
+Underfull \hbox (badness 1478) in paragraph at lines 1541--1546
+[]\T1/lmr/m/n/10 (+20) To com-pare the two up-date mech-a-nisms (ex-
+[16 <./figs/final/fig4_fft_vs_qlora.png>]
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+
+Underfull \hbox (badness 6364) in paragraph at lines 1594--1594
+[]\T1/lmss/m/n/9 (+20) Rank $\OT1/lmr/m/n/9 (+20) Ø$ \T1/lmss/m/n/9 (+20) learn
+-ing rate joint-dependence ma-trix on
+
+Overfull \hbox (12.96228pt too wide) in alignment at lines 1595--1603
+[][][][] 
+[17 <./figs/final/fig_rank_lr_heatmap.png>]
+Overfull \hbox (5.09386pt too wide) in paragraph at lines 1698--1705
+[]\T1/lmr/bx/n/10 (-20) Distributionally de-graded, fac-tu-ally bounded
+[18 <./figs/final/fig5_distributional.png>]
+Underfull \hbox (badness 1168) in paragraph at lines 1748--1756
+[]\T1/lmr/m/n/10 (+20) Output drift is there-fore in-ter-preted as a co-
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+
+Overfull \hbox (39.1245pt too wide) in alignment at lines 1779--1788
+[][][][][][] 
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+Missing character: There is no ­ in font lmex10!
+[19] [20 <./figs/scratch/fig_interventions.png> <./figs/final/fig9_dose_respons
+e.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 2028--2028
+[]|\T1/lmss/bx/n/8 (+20) Supporting
+
+Underfull \hbox (badness 10000) in paragraph at lines 2028--2028
+[]|\T1/lmss/m/n/8 (+20) Rank sweep, 6
+
+Underfull \hbox (badness 7649) in paragraph at lines 2028--2028
+\T1/lmss/m/n/8 (+20) val-ues; $\OML/lmm/m/it/8 N[]\OT1/lmr/m/n/8 (+20) 3$ \T1/l
+mss/m/n/8 (+20) at
+
+Underfull \hbox (badness 2326) in paragraph at lines 2028--2028
+[]|\T1/lmss/m/n/8 (+20) Dose--response 0--
+
+Underfull \hbox (badness 1097) in paragraph at lines 2028--2028
+\T1/lmss/m/n/8 (+20) 50%, $\OML/lmm/m/it/8 N[]\OT1/lmr/m/n/8 (+20) 5$ \T1/lmss/
+m/n/8 (+20) seeds
+
+Underfull \hbox (badness 4001) in paragraph at lines 2028--2028
+\T1/lmss/m/n/8 (+20) so the bound-ary
+[21] [22 <./figs/scratch/fig_etp_framework.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 2130--2130
+[]|\T1/lmss/m/n/8 (+20) Configuration-dependent
+
+Underfull \hbox (badness 1917) in paragraph at lines 2136--2137
+\T1/lmss/m/n/8 (+20) B7/Qwen $\OML/lmm/m/it/8 r \OT1/lmr/m/n/8 (+20) = 256$ \T1
+/lmss/m/n/8 (+20) and
+
+Underfull \hbox (badness 10000) in paragraph at lines 2138--2138
+[]|\T1/lmss/m/n/8 (+20) Magnitude axis cross-
+[23] [24]
+Underfull \hbox (badness 1038) in paragraph at lines 2243--2245
+[]\T1/lmr/m/n/10 (+20) Monitoring dis-tri-bu-tional di-ag-nos-tics (out-put
+
+Underfull \hbox (badness 1231) in paragraph at lines 2323--2326
+\T1/lmr/m/n/10 (+20) The raw effective-rank thresh-old is there-fore not
+Missing character: There is no ± in font lmex10!
+Missing character: There is no ± in font lmex10!
+[25] [26]
+Underfull \hbox (badness 2027) in paragraph at lines 2430--2448
+[]\T1/lmr/m/n/10 (+20) Through sys-tem-atic dose-response ex-per-i-ments
+
+Underfull \hbox (badness 1048) in paragraph at lines 2430--2448
+\T1/lmr/m/n/10 (+20) across three back-bones, ten re-cur-sive gen-er-a-tions,
+(manuscript-anonymous.bbl
+Underfull \hbox (badness 1009) in paragraph at lines 165--177
+\T1/lmr/m/n/8 (+20) 2024 Work-shops on Math-e-mat-ics of Mod-ern Ma-chine
+[27]) [28]
+Overfull \hbox (103.75832pt too wide) in paragraph at lines 2489--2489
+[]\T1/lmr/m/n/10 (-20) the no-ta-tion and ren-der-ing au-dit script \T1/lmtt/m/
+n/10 scripts/audits/glyph_audit.py\T1/lmr/m/n/10 (-20) . 
+
+Overfull \hbox (11.93279pt too wide) in paragraph at lines 2495--2498
+\T1/lmtt/m/n/10 10 . 5281 / zenodo . 23146342$[][] \T1/lmr/m/n/10 (-20) (DOI: [
+][]$\T1/lmtt/m/n/10 10 . 5281 / zenodo .
+
+Underfull \hbox (badness 10000) in paragraph at lines 2498--2499
+[][]$\T1/lmtt/m/n/10 https : / / github . com / Jazancort /
+[29] (manuscript-anonymous.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+) )
+(see the transcript file for additional information)<C:/Users/julio/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmbo10.pfb><C:/Users/julio/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmbx10.pfb><C:/Users/julio/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/julio/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/julio/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/julio/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/lm/lmmi10.pfb><C:/Users/julio/AppData/Lo
+cal/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/julio/AppData/Loc
+al/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/julio/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/lm/lmmi9.pfb><C:/Users/julio/AppData/Local
+/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/julio/AppData/Local/
+Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/julio/AppData/Local/P
+rograms/MiKTeX/fonts/type1/public/lm/lmr17.pfb><C:/Users/julio/AppData/Local/Pr
+ograms/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/julio/AppData/Local/Prog
+rams/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/julio/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/lm/lmr9.pfb><C:/Users/julio/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmri10.pfb><C:/Users/julio/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/julio/AppData/Local/Programs
+/MiKTeX/fonts/type1/public/lm/lmri7.pfb><C:/Users/julio/AppData/Local/Programs/
+MiKTeX/fonts/type1/public/lm/lmri8.pfb><C:/Users/julio/AppData/Local/Programs/M
+iKTeX/fonts/type1/public/lm/lmri9.pfb><C:/Users/julio/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/lm/lmss8.pfb><C:/Users/julio/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/lm/lmss9.pfb><C:/Users/julio/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/julio/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/lm/lmsso8.pfb><C:/Users/julio/AppData/Local/Programs/Mi
+KTeX/fonts/type1/public/lm/lmsy9.pfb><C:/Users/julio/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/lm/lmtt10.pfb><C:/Users/julio/AppData/Local/Programs/MiK
+TeX/fonts/type1/public/lm/lmtt8.pfb><C:/Users/julio/AppData/Local/Programs/MiKT
+eX/fonts/type1/public/stix/stix-mathbb.pfb><C:/Users/julio/AppData/Local/Progra
+ms/MiKTeX/fonts/type1/public/stix/stix-mathcal.pfb><C:/Users/julio/AppData/Loca
+l/Programs/MiKTeX/fonts/type1/public/stix/stix-mathsf.pfb>
+Output written on manuscript-anonymous.pdf (30 pages, 2152081 bytes).
+Transcript written on manuscript-anonymous.log.

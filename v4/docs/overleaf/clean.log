@@ -1,0 +1,871 @@
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./manuscript-anonymous-clean.tex
+LaTeX2e <2025-11-01>
+L3 programming layer <2026-01-19>
+(c:/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-dc.cls
+Document Class: cas-dc 2024/05/04, 2.4: Formatting class for CAS double column 
+articles
+(c:/texlive/2025/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
+(c:/texlive/2025/texmf-dist/tex/latex/base/fleqn.clo)
+(c:/texlive/2025/texmf-dist/tex/latex/base/size10.clo))
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-def/xetex.def)))
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amstext.sty
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/amssymb.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/l3kernel/expl3.sty
+(c:/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-xetex.def))
+(c:/texlive/2025/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/preprint/balance.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/makecell/makecell.sty
+(c:/texlive/2025/texmf-dist/tex/latex/tools/array.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/multirow/multirow.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/colortbl/colortbl.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/color.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx)))
+(c:/texlive/2025/texmf-dist/tex/latex/tools/dcolumn.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/sttools/stfloats.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/tools/xspace.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.sty
+(c:/texlive/2025/texmf-dist/tex/generic/xstring/xstring.tex))
+(c:/texlive/2025/texmf-dist/tex/latex/footmisc/footmisc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/xcolor/xcolor.sty
+(c:/texlive/2025/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(c:/texlive/2025/texmf-dist/tex/latex/xcolor/svgnam.def)
+(c:/texlive/2025/texmf-dist/tex/latex/graphics/dvipsnam.def)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hyperref.sty
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(c:/texlive/2025/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+(c:/texlive/2025/texmf-dist/tex/generic/infwarerr/infwarerr.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/nameref.sty
+(c:/texlive/2025/texmf-dist/tex/latex/refcount/refcount.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+(c:/texlive/2025/texmf-dist/tex/latex/kvoptions/kvoptions.sty)))
+(c:/texlive/2025/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(c:/texlive/2025/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/puenc.def)
+(c:/texlive/2025/texmf-dist/tex/latex/url/url.sty)
+(c:/texlive/2025/texmf-dist/tex/generic/bitset/bitset.sty
+(c:/texlive/2025/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/hyperref/hxetex.def
+(c:/texlive/2025/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+(c:/texlive/2025/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/els-cas-templates/cas-common.sty
+(c:/texlive/2025/texmf-dist/tex/latex/moreverb/moreverb.sty
+(c:/texlive/2025/texmf-dist/tex/latex/tools/verbatim.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/wrapfig/wrapfig.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty
+(c:/texlive/2025/texmf-dist/tex/latex/lm/t1lmr.fd))
+(c:/texlive/2025/texmf-dist/tex/latex/stix/stix.sty
+(c:/texlive/2025/texmf-dist/tex/latex/base/textcomp.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/inconsolata/inconsolata.sty
+`inconsolata-zi4' v1.12, 2019/05/17 Text macros for Inconsolata (msharpe)
+(c:/texlive/2025/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(c:/texlive/2025/texmf-dist/tex/generic/xkeyval/xkvutils.tex))))
+(c:/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+(c:/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty)))
+(c:/texlive/2025/texmf-dist/tex/latex/lm/lmodern.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/base/fontenc.sty) (./numbers.tex)
+(c:/texlive/2025/texmf-dist/tex/latex/natbib/natbib.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/tools/tabularx.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption.sty
+(c:/texlive/2025/texmf-dist/tex/latex/caption/caption3.sty))
+(c:/texlive/2025/texmf-dist/tex/latex/float/float.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype.sty
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype-xetex.def)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/microtype.cfg))
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/adjustbox.sty
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/adjcalc.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/trimclip.sty
+(c:/texlive/2025/texmf-dist/tex/latex/collectbox/collectbox.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/adjustbox/tc-xetex.def))
+(c:/texlive/2025/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty)
+(c:/texlive/2025/texmf-dist/tex/latex/varwidth/varwidth.sty)
+==> First Aid for varwidth.sty applied!
+) (./manuscript-anonymous-clean.aux)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stix.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls2stix.fd)
+(./manuscript-anonymous-clean.out) (./manuscript-anonymous-clean.out)
+(c:/texlive/2025/texmf-dist/tex/latex/upquote/upquote.sty)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-cmr.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/lm/ot1lmr.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/lm/omllmm.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/lm/omslmsy.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/lm/omxlmex.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-msa.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/amsfonts/umsb.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-msb.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/microtype/mt-ptm.cfg)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stixfrak.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stixbb.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls2stixcal.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls1stixsf.fd)
+(c:/texlive/2025/texmf-dist/tex/latex/stix/ls2stixtt.fd) [0]
+Overfull \hbox (123.62721pt too wide) detected at line 121
+[]
+(./manuscript-anonymous-clean.abs)
+
+Package hyperref Warning: Ignoring empty anchor on input line 121.
+
+
+Package natbib Warning: Citation `ouyang2022training' on page 1 undefined on in
+put line 130.
+
+
+Package natbib Warning: Citation `wang2023selfinstruct' on page 1 undefined on 
+input line 131.
+
+
+Package natbib Warning: Citation `taori2023alpaca' on page 1 undefined on input
+ line 131.
+
+
+Package natbib Warning: Citation `villalobos2024' on page 1 undefined on input 
+line 134.
+
+
+Package natbib Warning: Citation `liu2024bestpractices' on page 1 undefined on 
+input line 140.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 1 undefined on input l
+ine 149.
+
+
+Package natbib Warning: Citation `keisha2025' on page 1 undefined on input line
+ 150.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 1 undefined on input li
+ne 151.
+
+
+Package natbib Warning: Citation `alemohammad2024' on page 1 undefined on input
+ line 152.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 1 undefined on inpu
+t line 154.
+
+
+Package natbib Warning: Citation `yi2025' on page 1 undefined on input line 154
+.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 1 undefined on input li
+ne 155.
+
+
+Package natbib Warning: Citation `hu2022' on page 1 undefined on input line 160
+.
+
+
+Package natbib Warning: Citation `dettmers2023' on page 1 undefined on input li
+ne 161.
+
+
+Package natbib Warning: Citation `biderman2024' on page 1 undefined on input li
+ne 162.
+
+
+Underfull \hbox (badness 1418) in paragraph at lines 159--170
+\T1/lmr/m/n/10 rely pre-dom-i-nantly on parameter-efficient meth-ods
+(c:/texlive/2025/texmf-dist/tex/latex/lm/t1lmss.fd) [1]
+Overfull \hbox (3.90877pt too wide) in paragraph at lines 171--180
+\T1/lmr/m/n/10 dependent tran-si-tions be-tween home-o-static and degrada-
+
+Underfull \hbox (badness 1810) in paragraph at lines 171--180
+\T1/lmr/m/n/10 can be con-trolled through mul-ti-ple in-de-pen-dently
+
+Package natbib Warning: Citation `villalobos2024' on page 2 undefined on input 
+line 230.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 2 undefined on input l
+ine 240.
+
+
+Package natbib Warning: Citation `alemohammad2024' on page 2 undefined on input
+ line 244.
+
+
+Package natbib Warning: Citation `guo2024collapse' on page 2 undefined on input
+ line 247.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 2 undefined on input li
+ne 249.
+
+
+Package natbib Warning: Citation `kaplan2020scaling' on page 2 undefined on inp
+ut line 253.
+
+
+Package natbib Warning: Citation `dohmatob2024scaling' on page 2 undefined on i
+nput line 253.
+
+
+Package natbib Warning: Citation `seddik2024' on page 2 undefined on input line
+ 254.
+
+
+Package natbib Warning: Citation `xu2025' on page 2 undefined on input line 255
+.
+
+
+Package natbib Warning: Citation `dey2024' on page 2 undefined on input line 25
+7.
+
+[2]
+
+Package natbib Warning: Citation `petroni2019' on page 3 undefined on input lin
+e 273.
+
+
+Package natbib Warning: Citation `keisha2025' on page 3 undefined on input line
+ 276.
+
+
+Package natbib Warning: Citation `kovac2025recursive' on page 3 undefined on in
+put line 280.
+
+
+Package natbib Warning: Citation `keisha2025' on page 3 undefined on input line
+ 286.
+
+
+Package natbib Warning: Citation `keisha2025' on page 3 undefined on input line
+ 288.
+
+
+Package natbib Warning: Citation `yi2025' on page 3 undefined on input line 301
+.
+
+
+Package natbib Warning: Citation `feng2025verification' on page 3 undefined on 
+input line 304.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 3 undefined on inpu
+t line 306.
+
+
+Package natbib Warning: Citation `bertrand2024stability' on page 3 undefined on
+ input line 309.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 3 undefined on inpu
+t line 311.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 3 undefined on input li
+ne 313.
+
+
+Package natbib Warning: Citation `hu2022' on page 3 undefined on input line 330
+.
+
+
+Package natbib Warning: Citation `aghajanyan2021' on page 3 undefined on input 
+line 335.
+
+
+Package natbib Warning: Citation `zhang2023adalora' on page 3 undefined on inpu
+t line 336.
+
+
+Package natbib Warning: Citation `dettmers2023' on page 3 undefined on input li
+ne 338.
+
+
+Package natbib Warning: Citation `kirkpatrick2017' on page 3 undefined on input
+ line 345.
+
+
+Package natbib Warning: Citation `delange2022' on page 3 undefined on input lin
+e 345.
+
+
+Package natbib Warning: Citation `shi2024continualllm' on page 3 undefined on i
+nput line 345.
+
+
+Package natbib Warning: Citation `biderman2024' on page 3 undefined on input li
+ne 346.
+
+
+Package natbib Warning: Citation `biderman2024incremental' on page 3 undefined 
+on input line 350.
+
+
+Package natbib Warning: Citation `ding2024ranktrade' on page 3 undefined on inp
+ut line 350.
+
+
+Package natbib Warning: Citation `fawi2024curlora' on page 3 undefined on input
+ line 353.
+
+
+Package natbib Warning: Citation `adapala2025' on page 3 undefined on input lin
+e 354.
+
+
+Package natbib Warning: Citation `geva2021' on page 3 undefined on input line 3
+57.
+
+
+Package natbib Warning: Citation `meng2022locating' on page 3 undefined on inpu
+t line 358.
+
+[3]
+
+Package natbib Warning: Citation `biderman2024' on page 4 undefined on input li
+ne 363.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 4 undefined on input l
+ine 374.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 4 undefined on input li
+ne 374.
+
+
+Package natbib Warning: Citation `biderman2024' on page 4 undefined on input li
+ne 376.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 4 undefined on inpu
+t line 382.
+
+
+Package natbib Warning: Citation `yi2025' on page 4 undefined on input line 383
+.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 4 undefined on input li
+ne 383.
+
+
+Underfull \hbox (badness 1117) in paragraph at lines 373--385
+[]\T1/lmr/m/n/10 The present study does not re-fute the model-
+
+Package natbib Warning: Citation `shumailov2024' on page 4 undefined on input l
+ine 413.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 4 undefined on input li
+ne 413.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 4 undefined on inpu
+t line 413.
+
+
+Underfull \hbox (badness 1292) in paragraph at lines 407--415
+[]\T1/lmr/m/n/10 Our ex-per-i-ments fol-low a dose-response de-sign
+
+Package natbib Warning: Citation `hu2022' on page 4 undefined on input line 417
+.
+
+
+Package natbib Warning: Citation `dettmers2023' on page 4 undefined on input li
+ne 418.
+
+
+Package natbib Warning: Citation `biderman2024' on page 4 undefined on input li
+ne 421.
+
+
+Package natbib Warning: Citation `aghajanyan2021' on page 4 undefined on input 
+line 424.
+
+
+Package natbib Warning: Citation `roy2007' on page 4 undefined on input line 42
+8.
+
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ^^82 ("82) in font lmmi9!
+Missing character: There is no ┬│ ("B3) in font lmex10!
+Missing character: There is no ┬│ ("B3) in font lmex10!
+Missing character: There is no ^^82 ("82) in font lmmi9!
+Missing character: There is no ^^82 ("82) in font lmmi9!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+
+Overfull \hbox (1.79446pt too wide) in alignment at lines 485--485
+[] [] 
+[4]
+Underfull \hbox (badness 1242) in paragraph at lines 518--521
+[]\T1/lmr/m/n/10 The trained up-date and op-ti-mizer state are
+
+Package natbib Warning: Citation `joshi2017' on page 5 undefined on input line 
+524.
+
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 5 undefined on inpu
+t line 543.
+
+
+Package natbib Warning: Citation `zibakhsh2024' on page 5 undefined on input li
+ne 545.
+
+
+Underfull \hbox (badness 1259) in paragraph at lines 558--577
+[]\T1/lmr/m/n/10 At gen-er-a-tion 0, the base model with-out any
+
+Underfull \hbox (badness 1122) in paragraph at lines 558--577
+\T1/lmr/m/n/10 factual-retention fig-ure of $\OT1/lmr/m/n/10 ├¡$\T1/lmr/m/n/10 8
+9% at this rank may
+(c:/texlive/2025/texmf-dist/tex/latex/lm/t1lmtt.fd)
+Underfull \hbox (badness 1609) in paragraph at lines 579--587
+\T1/lmr/m/n/10 uses greedy de-cod-ing (\T1/lmtt/m/n/10 do_sample=False\T1/lmr/m
+/n/10 , tem-per-a-
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+[5]
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+
+Package natbib Warning: Citation `qwen2024' on page 6 undefined on input line 6
+50.
+
+
+Overfull \hbox (4.68715pt too wide) in paragraph at lines 650--655
+\T1/lmr/m/n/10 fine-tuning com-par-i-son, distributional-output anal-
+
+Underfull \hbox (badness 1152) in paragraph at lines 650--655
+\T1/lmr/m/n/10 model has 1.54B pa-ram-e-ters, 28 trans-former
+
+Package natbib Warning: Citation `gemma2025' on page 6 undefined on input line 
+656.
+
+
+Package natbib Warning: Citation `gemma4_2026' on page 6 undefined on input lin
+e 666.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 666--666
+[][][]\T1/lmr/m/n/8 Available at [][]$\T1/lmtt/m/n/8 https : / / huggingface . 
+co / google /
+
+Package natbib Warning: Citation `dettmers2023' on page 6 undefined on input li
+ne 683.
+
+[6]
+Underfull \hbox (badness 1939) in paragraph at lines 719--727
+[]\T1/lmr/m/n/10 Our dose-response de-sign ma-nip-u-lates ef-fec-tive
+
+Overfull \hbox (72.7312pt too wide) in paragraph at lines 731--742
+ [][] 
+
+Overfull \hbox (28.14256pt too wide) in paragraph at lines 747--753
+\T1/lmr/m/n/10 QLoRA rank across six val-ues ($\OML/lmm/m/it/10 r \OT1/lmr/m/n/
+10 = 4\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 16\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 3
+2\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 64\OML/lmm/m/it/10 ; \OT1/lmr/m/n/10 128\OM
+L/lmm/m/it/10 ; \OT1/lmr/m/n/10 256$\T1/lmr/m/n/10 )
+
+Underfull \hbox (badness 1102) in paragraph at lines 747--753
+\T1/lmr/m/n/10 on Qwen, pro-duc-ing adapters from 545K to
+
+Package natbib Warning: Citation `hu2022' on page 7 undefined on input line 758
+.
+
+
+Package natbib Warning: Citation `dettmers2023' on page 7 undefined on input li
+ne 758.
+
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+
+Underfull \hbox (badness 1715) in paragraph at lines 764--768
+[]\T1/lmr/bx/n/10 Method com-par-i-son (QLoRA vs FFT).
+
+Underfull \hbox (badness 1389) in paragraph at lines 764--768
+\T1/lmr/m/n/10 We com-pare QLoRA $\OML/lmm/m/it/10 r \OT1/lmr/m/n/10 = 16$ \T1/
+lmr/m/n/10 against FFT
+
+Underfull \hbox (badness 2318) in paragraph at lines 769--773
+[]\T1/lmr/bx/n/10 Module topol-ogy (sup-port-ive ab-la-tion).
+[7]
+
+LaTeX Font Warning: Font shape `T1/lmr/b/it' in size <10.5> not available
+(Font)              Font shape `T1/lmr/b/sl' tried instead on input line 819.
+
+
+Package natbib Warning: Citation `roy2007' on page 8 undefined on input line 82
+2.
+
+Missing character: There is no ┬│ ("B3) in font lmex10!
+Missing character: There is no ^^82 ("82) in font lmmi10!
+Missing character: There is no ^^82 ("82) in font lmmi10!
+Missing character: There is no ^^82 ("82) in font lmmi10!
+Missing character: There is no ┬│ ("B3) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ┬│ ("B3) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+
+Overfull \hbox (9.80246pt too wide) in paragraph at lines 863--870
+[]\T1/lmr/m/n/10 Beyond fac-tual re-ten-tion, we track output-distribution
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+[8]
+
+Package natbib Warning: Citation `holtzman2020' on page 9 undefined on input li
+ne 894.
+
+
+Package natbib Warning: Citation `li2016' on page 9 undefined on input line 894
+.
+
+
+Package natbib Warning: Citation `mccarthy2010' on page 9 undefined on input li
+ne 898.
+
+
+Underfull \hbox (badness 1466) in paragraph at lines 946--946
+[]\T1/lmr/m/n/10 The in-ter-ven-tions in Axis 5 test whether the
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+[9]
+Underfull \hbox (badness 1248) in paragraph at lines 1140--1140
+[]\T1/lmss/m/n/9 QLoRA rank sweep on Qwen 2.5 1.5B-Instruct. The
+
+Overfull \hbox (5.73326pt too wide) in alignment at lines 1141--1152
+[][][][][][][] 
+
+Underfull \hbox (badness 1527) in paragraph at lines 1172--1172
+\T1/lmss/m/n/9 Semi-transparent lines show in-di-vid-ual seeds; solid thick
+[10]
+Overfull \hbox (32.9705pt too wide) in paragraph at lines 1221--1231
+\T1/lmr/m/n/10 gle seed. Tar-get-ing all lin-ear mod-ules (\T1/lmtt/m/n/10 q,k,
+v,o,gate,up,down\T1/lmr/m/n/10 )
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 1241--1241
+[]\T1/lmss/m/n/9 Item-level tran-si-tions across re-cur-sive gen-er-a-tions on
+
+Overfull \hbox (5.14732pt too wide) in paragraph at lines 1273--1287
+[]\T1/lmr/m/n/10 On Gemma 3, an anal-o-gous regime struc-ture emerges,
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+[11]
+Overfull \hbox (20.46559pt too wide) in alignment at lines 1325--1335
+[][][][][][] 
+
+Overfull \hbox (7.18839pt too wide) in paragraph at lines 1344--1352
+[]\T1/lmr/m/n/10 The same mono-tonic dose-response struc-ture emerges:
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+
+Underfull \hbox (badness 10000) in alignment at lines 1362--1370
+[][][][][] 
+[12]
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+
+Underfull \hbox (badness 10000) in alignment at lines 1451--1461
+[][][][] 
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+
+Overfull \hbox (5.27167pt too wide) in paragraph at lines 1466--1471
+[]\T1/lmr/m/n/10 To com-pare the two up-date mech-a-nisms (ex-ploratory;
+
+Underfull \hbox (badness 1838) in paragraph at lines 1466--1471
+\T1/lmr/m/n/10 are method-specific and not di-rectly com-pa-ra-ble).
+[13]
+
+Package natbib Warning: Citation `shuttleworth2024illusion' on page 14 undefine
+d on input line 1504.
+
+
+Package natbib Warning: Citation `biderman2024' on page 14 undefined on input l
+ine 1504.
+
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 1519--1519
+[]\T1/lmss/m/n/9 Rank $\OT1/lmr/m/n/9 ^^9d$ \T1/lmss/m/n/9 learn-ing rate joint
+-dependence ma-trix on
+
+Overfull \hbox (12.96228pt too wide) in alignment at lines 1520--1528
+[][][][] 
+[14]
+Underfull \hbox (badness 1314) in paragraph at lines 1624--1627
+[]\T1/lmr/bx/n/10 Homeostatic \T1/lmr/m/n/10 ($\OML/lmm/m/it/10 r \LS2/stixcal/
+m/n/10 f \OT1/lmr/m/n/10 64$ \T1/lmr/m/n/10 on Qwen, re-ten-tion
+
+Overfull \hbox (9.3869pt too wide) in paragraph at lines 1627--1630
+[]\T1/lmr/bx/n/10 Distributionally de-graded, fac-tu-ally bounded
+
+Package natbib Warning: Citation `keisha2025' on page 15 undefined on input lin
+e 1638.
+
+
+Overfull \hbox (4.27368pt too wide) in paragraph at lines 1673--1681
+[]\T1/lmr/m/n/10 Output drift is there-fore in-ter-preted as a co-symptom
+
+Underfull \hbox (badness 1147) in paragraph at lines 1673--1681
+\T1/lmr/m/n/10 than a demon-strated causal an-tecedent of fac-tual
+[15]
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+
+Overfull \hbox (39.1245pt too wide) in alignment at lines 1704--1713
+[][][][][][] 
+
+Underfull \hbox (badness 1231) in paragraph at lines 1744--1744
+[]\T1/lmr/bx/n/10 Qwen dose--response (B7). \T1/lmr/m/n/10 A pre-registered
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `') on input line 1757.
+
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+[16]
+
+LaTeX Warning: No positions in optional float specifier.
+               Default added (so using `') on input line 1801.
+
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+Missing character: There is no ├░ ("F0) in font lmex10!
+
+Underfull \hbox (badness 1314) in paragraph at lines 1801--1801
+\T1/lmss/m/n/9 on fac-tual re-ten-tion across two back-bones (Gen10, $\OML/lmm/
+m/it/9 K[]$\T1/lmss/m/n/9 -
+
+Package natbib Warning: Citation `yi2025' on page 17 undefined on input line 18
+07.
+
+
+Overfull \hbox (13.70593pt too wide) in paragraph at lines 1846--1847
+\OML/lmm/m/it/10 r \OT1/lmr/m/n/10 = 256$ \T1/lmr/m/n/10 pro-to-col with three 
+new shuf-fle seeds (42/101/202).
+[17]
+Underfull \hbox (badness 1297) in paragraph at lines 1968--1968
+[]|\T1/lmss/m/n/8 Rank sweep, 6 val-ues;
+
+Underfull \hbox (badness 1924) in paragraph at lines 1968--1968
+\OML/lmm/m/it/8 N[]\OT1/lmr/m/n/8 3$ \T1/lmss/m/n/8 at $\OML/lmm/m/it/8 r[]\OT1
+/lmr/m/n/8 256$ \T1/lmss/m/n/8 (G1);
+
+Underfull \hbox (badness 10000) in paragraph at lines 1968--1968
+\T1/lmss/m/n/8 (single-seed); $\OML/lmm/m/it/8 N[]\OT1/lmr/m/n/8 3$
+
+Underfull \hbox (badness 4205) in paragraph at lines 1968--1968
+\T1/lmss/m/n/8 bf16 con-trol (G3) at
+
+Underfull \hbox (badness 10000) in paragraph at lines 1968--1968
+[]|\T1/lmss/m/n/8 Dose--response 0--
+
+Underfull \hbox (badness 10000) in paragraph at lines 1968--1968
+\T1/lmss/m/n/8 50%, $\OML/lmm/m/it/8 N[]\OT1/lmr/m/n/8 5$ \T1/lmss/m/n/8 seeds
+
+Underfull \hbox (badness 10000) in paragraph at lines 1968--1968
+[]|\T1/lmss/m/n/8 Dose--response plateau
+
+Underfull \hbox (badness 2809) in paragraph at lines 1968--1968
+\T1/lmss/m/n/8 at Gen 5; graded at
+
+Package natbib Warning: Citation `shumailov2024' on page 18 undefined on input 
+line 1987.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 18 undefined on input l
+ine 1988.
+
+
+Package natbib Warning: Citation `biderman2024' on page 18 undefined on input l
+ine 1997.
+
+
+Package natbib Warning: Citation `luo2023empirical' on page 18 undefined on inp
+ut line 1999.
+
+
+Package natbib Warning: Citation `biderman2024' on page 18 undefined on input l
+ine 2008.
+
+
+Package natbib Warning: Citation `shumailov2024' on page 18 undefined on input 
+line 2012.
+
+
+Package natbib Warning: Citation `dohmatob2025' on page 18 undefined on input l
+ine 2012.
+
+
+Package natbib Warning: Citation `keisha2025' on page 18 undefined on input lin
+e 2017.
+
+
+Package natbib Warning: Citation `keisha2025' on page 18 undefined on input lin
+e 2020.
+
+[18]
+
+Package natbib Warning: Citation `gerstgrasser2024' on page 19 undefined on inp
+ut line 2025.
+
+
+Package natbib Warning: Citation `wang2024diversity' on page 19 undefined on in
+put line 2027.
+
+
+Package natbib Warning: Citation `schaeffer2025position' on page 19 undefined o
+n input line 2043.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2063--2063
+[]|\T1/lmss/m/n/8 Steep, configuration-
+
+Underfull \hbox (badness 10000) in paragraph at lines 2069--2069
+[]|\T1/lmss/m/n/8 Capacity $\OT1/lmr/m/n/8 ^^9d$ \T1/lmss/m/n/8 mag-ni-tude
+
+Underfull \hbox (badness 10000) in paragraph at lines 2069--2069
+\T1/lmss/m/n/8 show joint de-pen-dence
+
+Underfull \hbox (badness 2318) in paragraph at lines 2069--2070
+\T1/lmss/m/n/8 B7/Qwen $\OML/lmm/m/it/8 r \OT1/lmr/m/n/8 = 256$ \T1/lmss/m/n/8 
+and
+
+Underfull \hbox (badness 10000) in paragraph at lines 2071--2071
+[]|\T1/lmss/m/n/8 Magnitude axis cross-
+
+Overfull \hbox (0.8024pt too wide) in paragraph at lines 2129--2143
+[]\T1/lmr/m/n/10 Regarding con-fig-u-ra-tion se-lec-tion, the dose-response
+
+Underfull \hbox (badness 1454) in paragraph at lines 2129--2143
+\T1/lmr/m/n/10 un-der-ly-ing prin-ci-ple ap-pears con-sis-tent across the
+
+Underfull \hbox (badness 1067) in paragraph at lines 2129--2143
+\T1/lmr/m/n/10 mod-i-fi-ca-tion to the train-ing ob-jec-tive; it op-er-ates
+[19]
+Underfull \hbox (badness 2529) in paragraph at lines 2176--2178
+[]\T1/lmr/m/n/10 Monitoring dis-tri-bu-tional di-ag-nos-tics (out-put
+
+Overfull \hbox (0.30237pt too wide) in paragraph at lines 2184--2198
+[]\T1/lmr/m/n/10 An ex-ploratory repli-ca-tion of the synthetic-exposure
+
+Underfull \hbox (badness 1242) in paragraph at lines 2199--2204
+\T1/lmr/m/n/10 or longer re-cur-sive hori-zons re-mains to be es-tab-
+
+Package natbib Warning: Citation `shumailov2024' on page 20 undefined on input 
+line 2217.
+
+
+Package natbib Warning: Citation `keisha2025' on page 20 undefined on input lin
+e 2217.
+
+[20]
+Overfull \hbox (8.84256pt too wide) in paragraph at lines 2239--2242
+\T1/lmr/m/n/10 which aligned the thresh-olds be-tween Qwen and Gemma 3
+
+Overfull \hbox (5.27463pt too wide) in paragraph at lines 2269--2272
+\T1/lmr/m/n/10 The raw effective-rank thresh-old is there-fore not portable
+Missing character: There is no ├▒ ("F1) in font lmex10!
+Missing character: There is no ├▒ ("F1) in font lmex10!
+[21]
+Overfull \hbox (7.57912pt too wide) in paragraph at lines 2347--2363
+[]\T1/lmr/m/n/10 Through sys-tem-atic dose-response ex-per-i-ments across
+
+Underfull \hbox (badness 1275) in paragraph at lines 2347--2363
+\T1/lmr/m/n/10 nomenon: in-creas-ing up-date ca-pac-ity, per-tur-ba-tion
+
+Overfull \hbox (2.17952pt too wide) in paragraph at lines 2393--2396
+[]\T1/lmr/bx/n/10 Zenodo \T1/lmr/m/n/10 (per-ma-nent, citable): [][]$\T1/lmtt/m
+/n/10 https : / / doi . org /
+
+Overfull \hbox (60.84055pt too wide) in paragraph at lines 2393--2396
+\T1/lmtt/m/n/10 10 . 5281 / zenodo . 23146342$[][] \T1/lmr/m/n/10 (DOI: \T1/lmt
+t/m/n/10 10.5281/zenodo.23146342\T1/lmr/m/n/10 ) 
+
+Overfull \hbox (40.24483pt too wide) in paragraph at lines 2396--2399
+\T1/lmtt/m/n/10 com / Jazancort / llm-[]knowledge-[]collapse-[]replication$[][]
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2401--2407
+\T1/lmtt/m/n/10 scripts/figures/fig9_dose_response.py \T1/lmr/m/n/10 re-gen-er-
+
+(./manuscript-anonymous-clean.bbl)
+
+Package natbib Warning: There were undefined citations.
+
+[22] [23] [24] [25] [26] (./manuscript-anonymous-clean.aux) )
+(see the transcript file for additional information)
+Output written on manuscript-anonymous-clean.pdf (27 pages).
+Transcript written on manuscript-anonymous-clean.log.

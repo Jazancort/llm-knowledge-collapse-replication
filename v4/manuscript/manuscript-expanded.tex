@@ -18,25 +18,25 @@
 \input{../docs/revision/resultados/make_all_outputs/numbers}
 % ── Corrections to canonical numbers (F3.3 / F3.4 / F3.5) ─────────────────
 % F3.3: rounding / trailing-zero removal for G1 and G1+G4 CI/SD values
-\renewcommand{1.73}{1.7}        % was 1.73 — round to 1 dp
-\renewcommand{77.90}{77.9}     % was 77.90 — drop trailing zero
-\renewcommand{81.50}{81.5}     % was 81.50 — drop trailing zero
-\renewcommand{1.50}{1.5}            % was 1.50 — drop trailing zero
-\renewcommand{75.30}{75.4}         % was 75.30 — corrected (exact 75.38→75.4)
-\renewcommand{82.80}{82.7}         % was 82.80 — corrected (exact 82.74→82.7)
-\renewcommand{78.20}{78.2}  % was 78.20 — drop trailing zero
+\renewcommand{\GoneFourSDten}{1.7}        % was 1.73 — round to 1 dp
+\renewcommand{\GoneFourCItenLo}{77.9}     % was 77.90 — drop trailing zero
+\renewcommand{\GoneFourCItenHi}{81.5}     % was 81.50 — drop trailing zero
+\renewcommand{\GoneSDten}{1.5}            % was 1.50 — drop trailing zero
+\renewcommand{\GoneCItenLo}{75.4}         % was 75.30 — corrected (exact 75.38→75.4)
+\renewcommand{\GoneCItenHi}{82.7}         % was 82.80 — corrected (exact 82.74→82.7)
+\renewcommand{\GoneSeedFifteenTen}{78.2}  % was 78.20 — drop trailing zero
 % F3.4: trailing-zero removal for G5 prospective cell
-\renewcommand{85.90}{85.9}  % was 85.90 — drop trailing zero
+\renewcommand{\GfiveRonetwoetightLRhigh}{85.9}  % was 85.90 — drop trailing zero
 % F3.5: round Gemma3 anchor means to 1 dp (matches table display)
-\renewcommand{94.35}{94.3}     % was 94.35 — round to 1 dp (217/230=94.348→94.3)
-\renewcommand{56.52}{56.5}  % was 56.52 — round to 1 dp
+\renewcommand{\GthreeMtenRfour}{94.3}     % was 94.35 — round to 1 dp (217/230=94.348→94.3)
+\renewcommand{\GthreeMtenRsixteen}{56.5}  % was 56.52 — round to 1 dp
 % ───────────────────────────────────────────────────────────────────────────
 % Usage: \rev{new text} — wraps any revised passage in blue when enabled.
 \usepackage[numbers]{natbib}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{amsmath}
-\newcommand{\lvert K_0\rvert}{\lvert K_0\rvert}
+\newcommand{\Kcard}{\lvert K_0\rvert}
 \newcommand{\KcardG}[1]{\lvert K_{0,\mathrm{#1}}\rvert}
 
 \usepackage{caption}
@@ -67,7 +67,7 @@
 \pdfglyphtounicode{bracketrightbig}{005D}
 \usepackage{adjustbox}
 \usepackage{placeins}  % provides \FloatBarrier for manual use
-\renewcommand{1.4}{1.8}
+\renewcommand{\arraystretch}{1.8}
 
 \begin{document}
 \let\WriteBookmarks\relax
@@ -134,8 +134,7 @@ we map adapter rank, learning rate, and synthetic exposure onto a regime
 structure with three zones: homeostatic, bounded, and degradative. Increasing
 rank produces a threshold-like transition within the tested grid; the boundary
 falls between effective ranks~50 and~88 for Qwen and between 3 and~6 for
-Gemma~3, a tenfold difference between architectures (these are not the same
-transition type). Learning-rate sweeps under full fine-tuning reproduce the
+Gemma~3, a tenfold difference between architectures. Learning-rate sweeps under full fine-tuning reproduce the
 same qualitative pattern, consistent with perturbation magnitude as the
 operative variable rather than low-rank adaptation specifically. At
 intermediate capacity ($r=128$, Qwen), factual retention remains near 90\%
@@ -145,7 +144,7 @@ dose-response experiments show that reducing synthetic exposure by 50\%
 shifts the Qwen system toward the bounded regime ($+9.2$\,pp at Gen~10,
 95\%~CI $[6.9, 11.6]$, $p < 0.001$) and improves endpoint retention on
 Gemma~3 ($+12.9$\,pp, $p = 0.003$) without reducing the rate of loss.
-Single-seed ablations are labeled descriptive throughout. The
+The
 effective-training-pressure index is an exploratory post-training summary
 and has not been validated as a prospective predictor across architectures
 or datasets. Experiments use 1--2 billion parameter models; generalization
@@ -1100,7 +1099,7 @@ constant within each experimental pipeline.
 
 
 \begin{table*}[!t]
-\renewcommand{1.4}{1.2}
+\renewcommand{\arraystretch}{1.2}
 \caption{\rev{Sources of variation in the recursive fine-tuning
 protocol and the corresponding experimental control. G3 and G4 refer to
 dedicated within-session ablations (Section~\ref{sec:results}). ``Held
@@ -1333,7 +1332,7 @@ progressive forgetting. In the degradative regime, \rev{losses exceeded recoveri
 Qwen~2.5~1.5B (seed~15, $\rev{\lvert K_0\rvert = 78}$). C$\to$W (Correct$\to$Wrong): facts lost;
 W$\to$C (Wrong$\to$Correct): facts recovered.\textsuperscript{\dag}}\label{tab:transitions}
 \footnotesize
-\renewcommand{1.4}{1.4}
+\renewcommand{\arraystretch}{1.4}
 \begin{tabular}{@{}lccccc@{}}
 \toprule
 Rank & Gens & C$\to$W & W$\to$C & Net loss & Final incorrect \\
@@ -1688,7 +1687,7 @@ output-distribution quality. While K0 retention remains bounded at 89.7\% throug
 Gen10, the output distribution degrades substantially: mean response length
 inflates from 2.47 to 7.0 words, content efficiency collapses from 0.41 to 0.13
 (a threefold dilution), stopwords double from 12\% to 25\%, MTLD collapses from
-2673 to 745, and baseline persistence falls to 5.2\%. We refer to this as a
+2673 to 745, and baseline persistence falls to \rev{$5.1$\% (4~of~78~items)}. We refer to this as a
 \textit{filler verbosity} phenotype: the model pads responses with repetitive
 function words while retaining enough factual content to maintain bounded
 retention.
@@ -1817,12 +1816,12 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \rev{\textbf{Qwen dose--response (B7).}
 A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
 protocol registered as \texttt{a916ebf} before any run) shows that the
-Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.200$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
-\rev{$+4.9$}\,pp at 25\% ($p = 0.001$, 95\%~CI $[2.5, 7.2]$), and
+Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
+\rev{$+4.9$}\,pp at 25\% ($p = 0.0044$, 95\%~CI $[2.5, 7.2]$), and
 \rev{$+9.2$}\,pp at 50\% ($p < 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
 paired $t$-test \rev{$p = 0.009$, $0.003$, $p < 0.001$}). A 50\% reduction
-\rev{reduces the rate of progressive loss to $-0.14$\,pp/generation} versus $-1.13$\,pp/generation at 0\% (mean across five seeds), shifting the system from the degradative to the bounded regime by the criterion of
+\rev{reduces the rate of progressive loss to $-0.15$\,pp/generation} versus $-1.13$\,pp/generation at 0\% (mean across five seeds), shifting the system from the degradative to the bounded regime by the criterion of
 Section~\ref{sec:res_capacity}.\footnote{\rev{See the footnote in Section~\ref{sec:res_capacity} for the three Gen5$\to$Gen10 slopes for Qwen $r=256$ and the estimation convention.}}
 
 The pre-registered prediction that 50\% removal would match halving the
@@ -1997,7 +1996,7 @@ motivation for treating them as manifestations of a common organizing principle.
 The framework is empirical rather than theoretical. We do not propose a
 closed-form expression that combines rank, learning rate, and exposure into a
 single scalar predictor. Instead, the experiments reveal that each variable independently
-controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $-0.14$\,pp/generation, whereas a 10\% reduction did not; its slope was $-1.49$\,pp/generation (on unrounded per-arm means), marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.
+controls the same qualitative transition. \rev{Within the tested grid, retention changes between adjacent configurations in a manner consistent with a threshold. The grid spacing bounds the resolution: adjacent tested ranks on Qwen differ by a factor of two ($r = 64$, 128, 256; effective ranks 29.5, 50.2, 87.6), so the boundary can be bracketed but not resolved. The dose--response data show the same limitation from the exposure axis: a 50\% reduction attenuated the Gen~5$\to$10 decline to $-0.15$\,pp/generation, whereas a 10\% reduction did not; its slope was $-1.49$\,pp/generation (on unrounded per-arm means), marginally steeper than the $-1.13$\,pp/generation of the 0\% arm, even though its Gen~10 retention was 1.8\,pp higher. The slope response across doses is therefore not monotonic, and we report the Gen~10 retention gain and the slope change as distinct outcomes rather than as a single effect.
 \rev{This pattern is consistent with the system operating near a regime boundary, though the present experiments do not establish a precise threshold value that will generalize to other settings.}}
 
 \rev{The contribution is the existence and reproducibility of this
@@ -2025,7 +2024,7 @@ supported by independent experimental evidence.
 \caption{Evidence matrix: mapping framework components to supporting
 experiments.}\label{tab:evidence}
 \footnotesize
-\renewcommand{1.4}{1.4}
+\renewcommand{\arraystretch}{1.4}
 \begin{tabularx}{\columnwidth}{@{}lX@{}}
 \toprule
 \textbf{Observation} & \textbf{Supporting evidence} \\
@@ -2139,7 +2138,7 @@ distinguishes what the evidence supports from what remains open.
 \caption{Scope of generalization: what the present evidence supports versus
 what remains unknown.}\label{tab:generalization}
 \footnotesize
-\renewcommand{1.4}{1.4}
+\renewcommand{\arraystretch}{1.4}
 \begin{tabular}{@{}p{3.6cm}p{3.6cm}@{}}
 \toprule
 \textbf{Supported by evidence} & \textbf{Remains unknown} \\
@@ -2172,7 +2171,7 @@ monitoring strategy. As noted in Section~\ref{sec:k0}, this figure may
 partially reflect format effects for the verbose responses generated at this
 rank; the distributional signals discussed here are therefore independent
 evidence that $r=128$ is not operating stably. Yet its output distribution degrades substantially: content
-efficiency collapses to 0.13, baseline persistence falls to 5.2\%, and MTLD
+efficiency collapses to 0.13, baseline persistence falls to \rev{$5.1$\% (4~of~78~items)}, and MTLD
 drops from 2673 to 745. This dissociation between factual retention and
 distributional quality provides the principal motivation for using
 output-distribution diagnostics as complementary monitoring signals.
@@ -2320,7 +2319,7 @@ values: Qwen ${\approx}$50--88, Gemma~3 ${\approx}$3--6, E2B ${\approx}$5--13. N
 the tested normalizations aligned thresholds across
 backbones.}\label{tab:normalization}
 \footnotesize
-\renewcommand{1.4}{1.4}
+\renewcommand{\arraystretch}{1.4}
 \begin{adjustbox}{max width=\columnwidth}
 \begin{tabular}{@{}lcccc@{}}
 \toprule
@@ -2512,12 +2511,14 @@ The revised manuscript, response-to-reviewers letter, and updated analysis scrip
 
 
 \begin{itemize}
-  \item \textbf{Zenodo} (permanent, citable):
-    \url{https://doi.org/10.5281/zenodo.23146342}
-    (DOI: \url{10.5281/zenodo.23146342})
+  \item \textbf{Zenodo} (permanent, citable):\\
+    Concept DOI (all versions, resolves to the latest):
+    \url{https://doi.org/10.5281/zenodo.23145361}\\
+    Version~v1.0.4 DOI (this paper):
+    \url{https://doi.org/10.5281/zenodo.23185146}
   \item \textbf{GitHub} (version-controlled):\\
     {\sloppy\url{https://github.com/Jazancort/llm-knowledge-collapse-replication}\par}
-    (release \texttt{v1.0.3}; \rev{note: v1.0.3 contains the initial replication scripts, data, and a draft manuscript; it does not contain the revisions, notation corrections, or layout fixes applied in the current submission; a new release will be deposited after the final version is frozen})
+    (release \texttt{v1.0.4}; includes consolidated results, analysis scripts, figure scripts, and audit checks)
 \end{itemize}
 
 \rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper.}

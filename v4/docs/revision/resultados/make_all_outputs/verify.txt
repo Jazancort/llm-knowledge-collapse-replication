@@ -1,5 +1,5 @@
 make_all.py — verify.txt
-Gerado: 2026-10-05 11:00
+Gerado: 2026-10-06 01:42
 
 VERIFICAÇÕES vs CANÔNICOS
 =======================================================
@@ -12,7 +12,7 @@ VERIFICAÇÕES vs CANÔNICOS
 [OK] G2 dose50 Gen10: 91.67 (expected≈91.7, tol=0.5)
 [OK] G2 dose50 Δ Gen10: 12.9 (expected≈12.9, tol=0.5)
 [OK] B7 dose50 Δ Gen10: 9.2 (expected≈9.2, tol=0.5)
-[OK] B7 LR delta: 0.43 (expected≈0.43, tol=0.05)
+[OK] B7 LR delta: 0.39 (expected≈0.43, tol=0.05)
 [OK] B7 slope dose0%: -1.13 (expected≈-1.13, tol=0.05)
 [OK] Gemma3 r4 mean Gen10: 94.35 (expected≈94.35, tol=0.5)
 [OK] Gemma3 r16 mean Gen10: 56.52 (expected≈56.52, tol=0.5)
