@@ -69,3 +69,7 @@ paper/scripts/check_quotes.py
 paper/scripts/analysis/check_state.py
 paper/scripts/analysis/analyze_revisao_final.py
 paper/scripts/analysis/make_per_seed_jsons.py
+
+
+# Pasta de submissão local — não vai ao GitHub
+para-enviar/
