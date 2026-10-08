@@ -1,0 +1,85 @@
+{
+  "group": "G5",
+  "backbone": "qwen",
+  "rank": 32,
+  "seed": 15,
+  "dose_pct": 0,
+  "bf16": false,
+  "ordem_aleatoria": false,
+  "k0": 78,
+  "dirname": "g1_rank32_seed15_G5_lr2e5_r32",
+  "generations": [
+    {
+      "gen": 0,
+      "retention": 78,
+      "retention_pct": 100.0,
+      "erank": null
+    },
+    {
+      "gen": 0,
+      "retention": 78,
+      "retention_pct": 100.0,
+      "erank": null
+    },
+    {
+      "gen": 1,
+      "retention": 73,
+      "retention_pct": 93.5897,
+      "erank": null
+    },
+    {
+      "gen": 1,
+      "retention": 73,
+      "retention_pct": 93.5897,
+      "erank": null
+    },
+    {
+      "gen": 2,
+      "retention": 71,
+      "retention_pct": 91.0256,
+      "erank": null
+    },
+    {
+      "gen": 2,
+      "retention": 71,
+      "retention_pct": 91.0256,
+      "erank": null
+    },
+    {
+      "gen": 3,
+      "retention": 72,
+      "retention_pct": 92.3077,
+      "erank": null
+    },
+    {
+      "gen": 3,
+      "retention": 72,
+      "retention_pct": 92.3077,
+      "erank": null
+    },
+    {
+      "gen": 4,
+      "retention": 72,
+      "retention_pct": 92.3077,
+      "erank": null
+    },
+    {
+      "gen": 4,
+      "retention": 72,
+      "retention_pct": 92.3077,
+      "erank": null
+    },
+    {
+      "gen": 5,
+      "retention": 70,
+      "retention_pct": 89.7436,
+      "erank": null
+    },
+    {
+      "gen": 5,
+      "retention": 70,
+      "retention_pct": 89.7436,
+      "erank": null
+    }
+  ]
+}

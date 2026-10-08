@@ -1,0 +1,145 @@
+{
+  "group": "G4",
+  "backbone": "qwen",
+  "rank": 256,
+  "seed": 42,
+  "dose_pct": 0,
+  "bf16": false,
+  "ordem_aleatoria": true,
+  "k0": 78,
+  "dirname": "g1_rank256_seed42_G4_ordem_s42",
+  "generations": [
+    {
+      "gen": 0,
+      "retention": 78,
+      "retention_pct": 100.0,
+      "erank": null
+    },
+    {
+      "gen": 0,
+      "retention": 78,
+      "retention_pct": 100.0,
+      "erank": null
+    },
+    {
+      "gen": 1,
+      "retention": 74,
+      "retention_pct": 94.8718,
+      "erank": null
+    },
+    {
+      "gen": 1,
+      "retention": 74,
+      "retention_pct": 94.8718,
+      "erank": null
+    },
+    {
+      "gen": 2,
+      "retention": 72,
+      "retention_pct": 92.3077,
+      "erank": null
+    },
+    {
+      "gen": 2,
+      "retention": 72,
+      "retention_pct": 92.3077,
+      "erank": null
+    },
+    {
+      "gen": 3,
+      "retention": 70,
+      "retention_pct": 89.7436,
+      "erank": null
+    },
+    {
+      "gen": 3,
+      "retention": 70,
+      "retention_pct": 89.7436,
+      "erank": null
+    },
+    {
+      "gen": 4,
+      "retention": 70,
+      "retention_pct": 89.7436,
+      "erank": null
+    },
+    {
+      "gen": 4,
+      "retention": 70,
+      "retention_pct": 89.7436,
+      "erank": null
+    },
+    {
+      "gen": 5,
+      "retention": 67,
+      "retention_pct": 85.8974,
+      "erank": null
+    },
+    {
+      "gen": 5,
+      "retention": 67,
+      "retention_pct": 85.8974,
+      "erank": null
+    },
+    {
+      "gen": 6,
+      "retention": 67,
+      "retention_pct": 85.8974,
+      "erank": null
+    },
+    {
+      "gen": 6,
+      "retention": 67,
+      "retention_pct": 85.8974,
+      "erank": null
+    },
+    {
+      "gen": 7,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    },
+    {
+      "gen": 7,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    },
+    {
+      "gen": 8,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    },
+    {
+      "gen": 8,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    },
+    {
+      "gen": 9,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    },
+    {
+      "gen": 9,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    },
+    {
+      "gen": 10,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    },
+    {
+      "gen": 10,
+      "retention": 64,
+      "retention_pct": 82.0513,
+      "erank": null
+    }
+  ]
+}

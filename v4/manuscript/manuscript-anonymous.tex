@@ -4,7 +4,6 @@
 
 \documentclass[a4paper,fleqn]{cas-dc}
 \usepackage{cmap}
-\usepackage{lmodern}
 \usepackage[T1]{fontenc}
 
 \usepackage[dvipsnames]{xcolor}
@@ -28,7 +27,7 @@
 \usepackage{caption}
 \usepackage{float}
 \captionsetup{font={small,sf}, labelfont={bf,small}}
-\usepackage{microtype}
+\usepackage[protrusion=true,expansion=false]{microtype}
 % ── Unicode CMap (pdflatex) ────────────────────────────────────
 \pdfgentounicode=1
 \input{glyphtounicode}
@@ -889,7 +888,7 @@ proxies (effective rank, mean absolute weight drift $d(t)$, response length, and
 SDI-3). Effective rank and drift track how much pressure was actually applied to
 the model, but they are not available prospectively; they therefore serve as
 post-hoc explanatory variables rather than pre-specified predictors. The
-operational index $\Pi = \mathrm{erank}(\Delta W) \times (\eta / 10^{-5})$ is reported as the mean across training generations, where $\mathrm{erank}(\Delta W)$ denotes the effective rank of the adapter weight update (see Table~\ref{tab:notation}). This is
+operational index $\Pi = \mathrm{erank}(\Delta W) \cdot (\eta / 10^{-5})$ is reported as the mean across training generations, where $\mathrm{erank}(\Delta W)$ denotes the effective rank of the adapter weight update (see Table~\ref{tab:notation}). This is
 an exploratory post-training summary; it is not available prospectively and has not been validated as a transferable quantitative predictor across architectures or datasets.}
 
 \subsubsection{Effective rank}\label{sec:erank}
@@ -1157,6 +1156,7 @@ presented alongside the capacity analysis.
 
 % ============================================================
 % 4. RESULTS
+\FloatBarrier
 % ============================================================
 \section{Results}\label{sec:results}
 
@@ -1239,7 +1239,7 @@ Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
 The longitudinal trajectories (Fig.~\ref{fig:trajectories}) reveal distinct
 temporal dynamics across regimes.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig1_trajectories.png}\\[4pt]
   \includegraphics[width=0.95\columnwidth]{figs/final/fig2_dose_response.png}
@@ -1345,6 +1345,7 @@ from homeostatic to degradative recursive fine-tuning on the Qwen backbone. The
 following sections examine whether this transition generalizes across
 architectures and update mechanisms.
 
+\FloatBarrier
 \subsection{Cross-backbone thresholds}\label{sec:res_backbone}
 
 To test whether the regime transition observed on Qwen is architecture-specific,
@@ -1491,7 +1492,7 @@ baseline diversity. None of these normalizations reduced the discrepancy to a
 common threshold. We report this as a negative result and discuss it further in
 Section~\ref{sec:limitations}.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig5_cross_backbone.png}
   \caption{$K_0$ retention versus mean effective rank across three backbones.
@@ -1511,6 +1512,7 @@ curve remains in the homeostatic region at effective ranks where Gemma~3 is
 already fully degradative. We next examine whether the same transition occurs
 when perturbation magnitude is varied independently of adapter capacity.
 
+\FloatBarrier
 \subsection{Perturbation magnitude: FFT comparison}\label{sec:res_fft}
 
 The previous sections established that increasing update capacity through adapter
@@ -1553,7 +1555,7 @@ As illustrated in Figure~\ref{fig:fft_qlora}, the separation between the
 trajectories is established after the first recursive generation and remains
 nearly constant thereafter.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig4_fft_vs_qlora.png}
   \caption{$K_0$ retention over 10 recursive generations for QLoRA $r=16$ and
@@ -1623,7 +1625,7 @@ offsets the effect of higher rank: $r=256$ with $\mathrm{LR}=5 \times 10^{-6}$
 retains 89.7\%, compared to 84.6\% at $\mathrm{LR}=10^{-5}$ and 82.1\% at
 $\mathrm{LR}=2 \times 10^{-5}$. This \rev{is consistent with the regime depending jointly on update capacity and perturbation magnitude rather than on either axis in isolation, although the single-seed design does not permit a formal interaction test.}
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig_rank_lr_heatmap.png}
   \caption{Rank $\times$ learning-rate joint pattern on Qwen~2.5~1.5B
@@ -1650,6 +1652,7 @@ multidimensional pressure landscape in which multiple control variables are
 associated with recursive stability. The next section examines how these regimes
 manifest in the distributional properties of the synthetic outputs.
 
+\FloatBarrier
 \subsection{Distributional signatures of degradation}\label{sec:res_distribution}
 
 The previous sections identified regime transitions through factual retention
@@ -1726,7 +1729,7 @@ while output-distribution quality degrades substantially.
 Figure~\ref{fig:distributional} illustrates the divergent trajectories across
 these three regimes.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig5_distributional.png}
   \caption{Distributional diagnostics over ten recursive generations for three
@@ -1767,6 +1770,7 @@ The next section tests whether the third component of effective training
 pressure, synthetic data exposure, can shift the system back toward homeostasis
 at the regime boundary.
 
+\FloatBarrier
 \subsection{Synthetic exposure interventions}\label{sec:res_intervention}
 
 The preceding sections established that update capacity and perturbation
@@ -1829,7 +1833,7 @@ archived in the replication repository (Section~\ref{app:repo}).}
 Figure~\ref{fig:interventions} visualizes the retention and effect-size
 comparison across conditions.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/scratch/fig_interventions.png}
   \caption{\rev{Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5, included for
@@ -1863,7 +1867,7 @@ levels; effective rank is not portable across architectures
 protocol without inferring which backbone operated at higher relative
 pressure.}
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig9_dose_response.png}
   \caption{\rev{Dose--response of synthetic exposure reduction on factual retention
@@ -1896,6 +1900,7 @@ interprets these findings in the context of prior work.
 % ============================================================
 % 4.6  EXPERIMENTAL CONTROLS (G3, G4, G5)
 % ============================================================
+\FloatBarrier
 \subsection{Experimental controls and prospective index}\label{sec:res_controls}
 
 \rev{\textbf{Quantization control (G3).}
@@ -1944,6 +1949,7 @@ $\Pi$, and the three cells were selected by nominal rank and learning rate, not
 by $\Pi$ value. \rev{Two of the three pre-specified regime classifications were confirmed; the third was not.} G5 is therefore exploratory evidence for the ordering, not a confirmatory
 test of the full classification scheme.
 All three cells used a single seed; the prospective result is therefore exploratory.}
+\FloatBarrier
 \section{Discussion}\label{sec:discussion}
 
 The preceding results identify consistent patterns in how recursive synthetic
@@ -2265,6 +2271,7 @@ prescriptive rules.
 
 % ============================================================
 % 6. LIMITATIONS
+\FloatBarrier
 % ============================================================
 \section{Limitations}\label{sec:limitations}
 
@@ -2431,6 +2438,7 @@ across backbones.}
 
 % ============================================================
 % 7. CONCLUSION
+\FloatBarrier
 % ============================================================
 \section{Conclusion}\label{sec:conclusion}
 
