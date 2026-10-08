@@ -1,4 +1,4 @@
-%% Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs
+﻿%% Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs
 %% Target: Knowledge-Based Systems (Elsevier, MS ID KNOSYS-D-26-21490)
 %% Template: CAS Double Column (cas-dc)
 
@@ -113,13 +113,13 @@
 knowledge in large language models under common parameter-efficient settings.
 The conditions governing whether degradation emerges, remains bounded, or
 can be reversed are not well understood. Through dose-response experiments
-across three architectures (Qwen~2.5~1.5B, Gemma~3~1B, and Gemma~4~E2B), up
-to ten recursive generations, and three to six seeds per headline condition,
+across three architectures (Qwen~2.5~1.5B, Gemma~3~1B, and Gemma~4~E2B\rev{~IT}), up
+to ten recursive generations, and \rev{three to six seeds per headline condition (Gemma~4 single-seed and therefore exploratory),}
 we map adapter rank, learning rate, and synthetic exposure onto a regime
 structure with three zones: homeostatic, bounded, and degradative. Increasing
 rank produces a threshold-like transition within the tested grid; the boundary
 falls between effective ranks~50 and~88 for Qwen and between 3 and~6 for
-Gemma~3, a tenfold difference between architectures, and not the same transition type. Learning-rate sweeps under full fine-tuning reproduce the
+Gemma~3, a tenfold difference between architectures, and not the same transition type. Learning-rate sweeps under full fine-tuning \rev{provide exploratory evidence broadly consistent with} the
 same qualitative pattern, consistent with perturbation magnitude as the
 operative variable rather than low-rank adaptation specifically. At
 intermediate capacity ($r=128$, Qwen), factual retention remains near 90\%
@@ -1013,13 +1013,13 @@ back toward homeostasis by reducing synthetic training exposure. The primary
 evidence comes from two pre-registered dose--response experiments, one on each
 backbone.
 
-\textbf{Qwen dose--response (B7, $r=256$, $n=5$ seeds).}
+\textbf{Qwen dose--response (B7, $r=256$, \rev{$N=5$} seeds).}
 Five paired seeds receive 0\%, 10\%, 25\%, or 50\% random downsampling of the
 synthetic training stream. The 0\% arm serves as a within-pipeline baseline
 (same evaluation code, same seeds), eliminating cross-pipeline confounds. The
 pre-registration hash is \texttt{a916ebf}.
 
-\textbf{Gemma~3 dose--response (G2, $r=10$, $n=3$ seeds).}
+\textbf{Gemma~3 dose--response (G2, $r=10$, \rev{$N=3$} seeds).}
 An independent pre-registered experiment applies the same four dose levels to
 Gemma~3~1B~IT at $r=10$. The evaluation set is $|K_{0,\mathrm{G2}}|=44$ items
 (established by the \texttt{g1\_rank10} pipeline; see Section~\ref{sec:k0}).
@@ -1029,8 +1029,7 @@ Gemma~3~1B~IT at $r=10$. The evaluation set is $|K_{0,\mathrm{G2}}|=44$ items
 experimental design: five discrete intervention strategies (baseline, prompt
 constraint, length filtering, canonical extraction, and random downsampling)
 evaluated on a single seed with a different evaluation pipeline. When C1 and C5
-from that pilot are re-run under an identical pipeline and paired seeds, the
-the effect of the archived C5 downsampling arm is $+1.9$\,pp ($n=3$), which is not
+from that pilot are re-run under an identical pipeline and paired seeds, \rev{the effect of the archived C5 downsampling arm is $+1.9$\,pp ($N=3$), which is not}
 statistically distinguishable from zero. The pilot results are archived in the
 replication repository; they are not used in the primary effect estimates below.}
 
@@ -1468,9 +1467,7 @@ architectures.
   \caption{$K_0$ retention trajectories over ten recursive generations across
   three backbones: (a)~Qwen~2.5~1.5B, (b)~Gemma~3~1B, and (c)~Gemma~4~E2B.
   Shaded bands show the seed range for Gemma~3 ($N=5$) and Qwen ($N=6$); Gemma~4 is a single trajectory ($N=1$, no band);
-  solid lines show means. All three backbones exhibit consistent
-  regime structure (homeostatic below threshold, degradative above), with the
-  transition occurring at backbone-dependent effective-rank
+  solid lines show means. \rev{All three backbones show a qualitatively similar regime ordering within the tested grid; the Gemma~4 trajectory is single-seed and therefore supportive rather than confirmatory.}
   values.}\label{fig:combined_traj}
 \end{figure*}
 
@@ -1503,7 +1500,7 @@ Section~\ref{sec:limitations}.
   architectures.}\label{fig:cross_backbone}
 \end{figure}
 
-The regime structure generalizes across architectures.
+\rev{The regime structure is qualitatively consistent across the tested architectures, with Gemma~4 providing single-seed exploratory support rather than confirmatory evidence.}
 Figure~\ref{fig:cross_backbone} shows three features: (i)~all
 three backbones exhibit a transition from blue (homeostatic) to red
 (degradative) markers as effective rank increases; (ii)~the transition occurs at
@@ -1779,14 +1776,14 @@ component of effective training pressure: whether reducing synthetic data
 exposure can shift the system back from a degradative to a near-homeostatic
 configuration. The primary evidence comes from the two pre-registered
 dose--response experiments described in Section~\ref{sec:intervention}:
-B7 on Qwen $r=256$ ($n=5$ paired seeds, $\Kcard=78$) and G2 on Gemma~3 $r=10$
-($n=3$ paired seeds, $|K_{0,\mathrm{G2}}|=44$).
+B7 on Qwen $r=256$ (\rev{$N=5$} paired seeds, $\Kcard=78$) and G2 on Gemma~3 $r=10$
+(\rev{$N=3$} paired seeds, $|K_{0,\mathrm{G2}}|=44$).
 
 \rev{Table~\ref{tab:interventions} reports $K_0$ retention and the gain over
 the 0\% within-pipeline baseline for each dose level on Qwen $r=256$.}
 
 \begin{table}[width=.95\linewidth,cols=6,pos=htbp]
-\caption{\rev{Dose--response on Qwen $r=256$ ($\Kcard=78$, $n=5$ paired seeds per
+\caption{\rev{Dose--response on Qwen $r=256$ ($\Kcard=78$, $N=5$ paired seeds per
 dose). Retention and gain ($\Delta$) relative to the 0\% within-pipeline
 baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \begin{tabular*}{\tblwidth}{@{} llrrrl@{} }
@@ -1807,7 +1804,7 @@ baseline at Gen5 and Gen10.}}\label{tab:interventions}
 \rev{\textbf{Qwen dose--response (B7).}
 A pre-registered dose--response experiment on Qwen $r=256$ (five paired seeds;
 protocol registered as \texttt{a916ebf} before any run) shows that the
-Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, $n=5$, 95\%~CI $[-1.1, 4.7]$),
+Gen~10 benefit is graded: \rev{$+1.8$}\,pp at 10\% removal ($p = 0.160$, \rev{$N=5$}, 95\%~CI $[-1.1, 4.7]$),
 \rev{$+4.9$}\,pp at 25\% ($p = 0.0044$, 95\%~CI $[2.5, 7.2]$), and
 \rev{$+9.2$}\,pp at 50\% ($p < 0.001$, 95\%~CI $[6.9, 11.6]$). At Gen~5, the
 gains are smaller and more uniform (\rev{$+3.6$, $+3.8$, $+4.4$}\,pp;
@@ -1825,7 +1822,7 @@ inconclusive at $n = 3$.
 
 The original C1--C5 pilot compared non-identical evaluation pipelines;
 when C1 and C5 are re-run under an identical pipeline and paired seeds,
-the effect of the archived C5 downsampling arm is $+1.9$\,pp ($n=3$, not
+the effect of the archived C5 downsampling arm is $+1.9$\,pp ($N=3$, not
 statistically distinguishable from zero). We therefore exclude the
 original pilot from the primary effect estimate; those results are
 archived in the replication repository (Section~\ref{app:repo}).}
@@ -1856,7 +1853,7 @@ Gen10, slope $\GtwoSlopeZero$~pp/gen). Reducing exposure by 10\%, 25\%, and
 50\% raises Gen10 retention by $\GtwoDeltatenTen$~pp
 ($p=\GtwoPtenTen$, 95\,\%~CI $[\GtwoCItenLoTen, \GtwoCItenHiTen]$), $\GtwoDeltatenTfive$~pp ($p=\GtwoPtenTfive$, 95\,\%~CI $[\GtwoCItenLoTfive, \GtwoCItenHiTfive]$), and
 $\GtwoDeltatenFifty$~pp (95\,\% CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$,
-$p=\GtwoPtenFifty$), respectively ($n=3$ paired seeds per dose).
+$p=\GtwoPtenFifty$), respectively (\rev{$N=3$} paired seeds per dose).
 At dose~$=50\%$, the slope is $\GtwoSlopeFifty$~pp/gen (identical across both arms at this precision), \rev{indicating that no reduction in the rate of progressive loss was observed for G2 at this dose; the exposure effect manifested as a retention gain, not a slope reduction.}}
 \rev{The absolute gain at dose~$=50\%$ Gen10 is larger for Gemma~3 G2
 ($\GtwoDeltatenFifty$~pp, $|K_{0,\mathrm{G2}}|{=}44$) than for Qwen B7
@@ -1874,8 +1871,8 @@ pressure.}
   across two backbones (Gen10, $K_0$-conditioned). Each curve shows the mean
   improvement ($\Delta$pp) over the respective unmodified baseline as the
   fraction of synthetic training examples removed increases from 0\% to 50\%.
-  Red circles: Gemma~3~1B at $r=10$ ($n=3$ paired seeds; $|K_{0,\mathrm{G2}}|=44$).
-  Orange squares: Qwen~2.5~1.5B at $r=256$ ($n=5$ paired seeds; $\Kcard=78$).
+  Red circles: Gemma~3~1B at $r=10$ ($N=3$ paired seeds; $|K_{0,\mathrm{G2}}|=44$).
+  Orange squares: Qwen~2.5~1.5B at $r=256$ ($N=5$ paired seeds; $\Kcard=78$).
   Shaded bands: 95\,\% confidence intervals from paired $t$-tests.
   The absolute gain is larger for Gemma~3 G2 ($|K_{0,\mathrm{G2}}|{=}44$)
   than for Qwen B7 ($|K_0|{=}78$); effective rank is not portable across
@@ -2238,7 +2235,7 @@ Regarding intervention design, the \rev{dose--response results indicate that the
 reduction strongly attenuated progressive loss on Qwen B7; on Gemma~3 G2,
 it improved Gen10 retention without reducing the observed rate of loss.
 Smaller doses (10--25\%) produced partial, dose-proportional retention benefits. The archived C5 downsampling arm did not replicate under paired evaluation ($+1.9$\,pp,
-$n=3$), indicating that marginal reductions at this level are not robustly
+$N=3$), indicating that marginal reductions at this level are not robustly
 effective in the evaluated configurations.} When
 monitoring signals indicate regime departure, reducing the volume of the
 synthetic training stream through downsampling
@@ -2397,7 +2394,7 @@ recursive retention was not established. Two candidate mechanisms are
 plausible: the per-generation update budget (fewer training steps per
 generation for lower-dose conditions) and data composition (\rev{a smaller number and different selection of synthetic training examples}
 relative to the per-generation update budget). The
-steps-matched control (G2b, $n=3$) was inconclusive, so the
+steps-matched control (G2b, \rev{$N=3$}) was inconclusive, so the
 relative contribution of each mechanism remains unresolved. The effect
 was tested on two configurations: B7 (Qwen $r=256$, Gen10
 horizon) and G2 (Gemma~3 $r=10$, Gen10). Whether the same sensitivity exists at other
@@ -2451,13 +2448,13 @@ not been validated as a transferable quantitative predictor across
 architectures or datasets.} The central finding is that recursive
 degradation is a pressure-gated phenomenon: increasing update capacity,
 perturbation magnitude, or synthetic exposure \rev{can each shift} the system from homeostatic to degradative behavior, with the transition being
-\rev{threshold-like within the tested grid}, backbone-dependent, and reproducible across the seeds evaluated. Cross-backbone replication \rev{further indicates} that degradation in the above-threshold regime is progressive and does not
+\rev{threshold-like within the tested grid}, backbone-dependent, and reproducible across the seeds evaluated. \rev{The cross-backbone comparison further suggests} that degradation in the above-threshold regime is progressive and does not
 stabilize within the observed horizon. \rev{Pre-registered dose--response
 experiments on two backbones show that a 50\% reduction in synthetic exposure
 \rev{substantially} attenuated progressive loss on \rev{Qwen~2.5~1.5B at $r=256$}; on \rev{Gemma~3~1B at $r=10$}, it improved
 retention at Gen~10 without reducing the observed rate of loss. The archived C5 pilot arm, evaluated in a
 different pipeline, did not replicate under paired conditions ($+1.9$\,pp,
-$n=3$).} This sensitivity is backbone-dependent. Distributional diagnostics further reveal
+$N=3$).} This sensitivity is backbone-dependent. Distributional diagnostics further reveal
 that output quality can degrade substantially before factual loss becomes
 apparent.
 

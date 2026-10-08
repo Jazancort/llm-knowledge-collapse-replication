@@ -702,7 +702,7 @@ The revised manuscript adds to Section~6: \newtext{The findings may not extend t
 \textbf{The original comparison was invalid.}
 C1 and C5 followed different evaluation pipelines, including differences in $K_0$ construction and data loading. The previously reported $9.0$- and $9.4$-percentage-point intervention gains cannot therefore serve as evidence of stabilization. Furthermore, the pilot used single-seed evaluations and compared conditions that differed in pipeline construction, not only in the dose level. We do not defend this comparison. The revised manuscript states: \newtext{The pilot results are archived in the replication repository; they are not used in the primary effect estimates below.}
 
-\medskip\noindent\textbf{The Qwen dose--response evidence (B7).}The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=\BsevenPtenTen$, 95\%~CI $[-1.1,4.7]$), $+4.9$\,pp at 25\% ($p=\BsevenPtenTfive$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $\BsevenSlopeFifty$\,pp/generation, compared with $\BsevenSlopeZero$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{A 50\% reduction reduces the rate of progressive loss to $\BsevenSlopeFifty$\,pp/generation versus $\BsevenSlopeZero$\,pp/generation at 0\% (mean across five seeds).} [verbatim]
+\medskip\noindent\textbf{The Qwen dose--response evidence (B7).} The revised Qwen evidence comes from Experiment~B7: 0\%, 10\%, 25\%, and 50\% example removal at $r=256$, with five paired seeds per dose. Relative to no removal, Generation~10 retention increased by $+1.8$\,pp at 10\% removal ($p=\BsevenPtenTen$, 95\%~CI $[-1.1,4.7]$), $+4.9$\,pp at 25\% ($p=\BsevenPtenTfive$, 95\%~CI $[2.5,7.2]$), and $+9.2$\,pp at 50\% ($p{<}0.001$, 95\%~CI $[6.9,11.6]$). At 50\% removal, the Generation~5--10 retention slope was $\BsevenSlopeFifty$\,pp/generation, compared with $\BsevenSlopeZero$\,pp/generation without removal. The attenuation of the later decline is therefore supported for this Qwen configuration and protocol. The revised manuscript states: \newtext{A 50\% reduction reduces the rate of progressive loss to $\BsevenSlopeFifty$\,pp/generation versus $\BsevenSlopeZero$\,pp/generation at 0\% (mean across five seeds).} [verbatim]
 Tab.~10 in the revised manuscript reports the full dose--response results for B7.
 
 \begin{inlineref}{Table~10 from the revised manuscript --- Dose-response interventions (B7)}
@@ -720,12 +720,12 @@ Tab.~10 in the revised manuscript reports the full dose--response results for B7
 {\scriptsize Qwen 2.5 1.5B, $r{=}256$, $|K_0|{=}78$, $n{=}5$ paired seeds per dose (B7). $\Delta$ values are computed from unrounded per-arm means; displayed values are rounded independently. The 50\% dose $\Delta$ Gen5 ($+4.4$\,pp) differs by $0.1$\,pp from simple column subtraction due to this rounding. The 50\% dose $\Delta$ Gen10 ($+9.2$\,pp predicted from unrounded means) differs by $0.1$\,pp from simple column subtraction ($89.0\%{-}79.7\%=+9.3$\,pp) due to the same rounding convention.}
 \end{inlineref}
 
-\medskip\noindent\textbf{The Gemma~3 dose--response evidence (G2).}The Gemma~3 response was different in kind. In Experiment~G2, 50\% removal at $r=10$ raised Generation~10 retention by $\GtwoDeltatenFifty$\,pp across three paired seeds (95\%~CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$), with the 10\% and 25\% doses giving $\GtwoDeltatenTen$\,pp ($p=\GtwoPtenTen$, 95\,\%~CI $[\GtwoCItenLoTen, \GtwoCItenHiTen]$) and $\GtwoDeltatenTfive$\,pp ($p=\GtwoPtenTfive$, 95\,\%~CI $[\GtwoCItenLoTfive, \GtwoCItenHiTfive]$), respectively. The Generation~5--10 slope was $\GtwoSlopeFifty$\,pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, identical to the precision reported ($\GtwoSlopeFifty$\,pp/generation in both arms). The intervention improved endpoint retention without demonstrably slowing later loss. The revised manuscript adds: \newtext{the exposure effect manifested as a retention gain, not a slope reduction.}
+\medskip\noindent\textbf{The Gemma~3 dose--response evidence (G2).} The Gemma~3 response was different in kind. In Experiment~G2, 50\% removal at $r=10$ raised Generation~10 retention by $\GtwoDeltatenFifty$\,pp across three paired seeds (95\%~CI $[\GtwoCItenLoFifty, \GtwoCItenHiFifty]$, $p=\GtwoPtenFifty$), with the 10\% and 25\% doses giving $\GtwoDeltatenTen$\,pp ($p=\GtwoPtenTen$, 95\,\%~CI $[\GtwoCItenLoTen, \GtwoCItenHiTen]$) and $\GtwoDeltatenTfive$\,pp ($p=\GtwoPtenTfive$, 95\,\%~CI $[\GtwoCItenLoTfive, \GtwoCItenHiTfive]$), respectively. The Generation~5--10 slope was $\GtwoSlopeFifty$\,pp/generation in the 50\% arm versus $\GtwoSlopeZero$ at 0\%, identical to the precision reported ($\GtwoSlopeFifty$\,pp/generation in both arms). The intervention improved endpoint retention without demonstrably slowing later loss. The revised manuscript adds: \newtext{the exposure effect manifested as a retention gain, not a slope reduction.}
 
 \textbf{Why the responses differ between backbones.}
 The reviewer asks whether the dose--response generalizes across ranks and seeds.
-For Qwen, it does: the B7 experiment uses five paired seeds at $r=256$ and
-shows a graded, statistically significant response. For Gemma~3, the G2
+For Qwen, it generalizes across doses and seeds: the B7 experiment uses five paired seeds at $r=256$ and
+shows a graded, statistically significant response. Generalization across ranks has not been tested; only $r=256$ was evaluated in B7, so that question remains open. For Gemma~3, the G2
 experiment uses three paired seeds at $r=10$ (degradative regime) and shows
 endpoint improvement without rate reduction. Whether the same pattern holds
 at other ranks or with more seeds is an open empirical question.
@@ -777,7 +777,9 @@ Release~v1.0.4 of the Zenodo archive (Concept DOI:
 \url{https://doi.org/10.5281/zenodo.23145361};
 Version DOI: \url{https://doi.org/10.5281/zenodo.23185146})
 contains: (i)~consolidated per-seed results files (one JSON per seed per
-arm) from which all reported statistics were derived;
+arm) from which all reported statistics were derived
+(these files were individually deposited as \texttt{paper/data/per-seed-results/}
+starting with release~v1.0.5, Concept DOI \url{https://doi.org/10.5281/zenodo.23145361});
 (ii)~the training configuration files for every reported condition;
 (iii)~the evaluation protocol, question partition identifiers, and the
 $K_0$ baseline sets for all three backbones; and
@@ -817,7 +819,7 @@ not contain, with the reason for each omission.
       results files} was added to Appendix~A.
 \item \textbf{Version discipline documented (Appendix~A).}
       Each script in the archive is now identified by the release
-      version in which it first appears; all five items are present in
+      version in which it first appears; all four items are present in
       the current archive (v1.0.4).
 \end{enumerate}
 
