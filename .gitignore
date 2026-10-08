@@ -26,3 +26,9 @@ desktop.ini
 *.tmp
 *.bak
 ~$*
+
+
+# Conteúdo histórico e interno — não necessário para reprodução do artigo
+archive/
+paper/docs/previous-submission/
+paper/docs/revision/
