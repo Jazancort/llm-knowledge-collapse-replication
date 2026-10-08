@@ -1,4 +1,4 @@
-<p align="center">
+﻿<p align="center">
   <h1 align="center">Effective Training Pressure Gates<br>Recursive Knowledge Degradation in LLMs</h1>
   <p align="center"><em>A Multi-Axis Dose-Response Study</em></p>
   <p align="center">
@@ -25,7 +25,7 @@
 We study *recursive fine-tuning* — the feedback loop where a model generates synthetic training data, retrains on it, and repeats — under controlled experimental conditions across three model families, ten recursive generations, and over 50 experimental runs.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/v4/manuscript/figs/scratch/fig1_overview.png" width="700" alt="Study overview: three degradation regimes">
+  <img src="https://raw.githubusercontent.com/Jazancort/llm-knowledge-collapse-replication/master/paper/manuscript/figs/scratch/fig1_overview.png" width="700" alt="Study overview: three degradation regimes">
   <br><sub>Fig. 1 — Three degradation regimes emerge as a function of effective training pressure. Homeostatic (>80%): factual retention stable across generations. Bounded (60–80%): moderate, stable loss. Degradative (<60%): progressive collapse.</sub>
 </p>
 
@@ -133,7 +133,7 @@ pip install torch==2.4.1 transformers==4.46.0 peft==0.13.2 \
 ### 2. Run all mechanical checks (14/14 PASS)
 
 ```bash
-cd v4
+cd paper
 python scripts/check_knosys.py
 ```
 
@@ -142,7 +142,7 @@ Checks CI/p-value internal consistency, integer attainability of all reported me
 ### 3. Regenerate all statistics
 
 ```bash
-cd v4
+cd paper
 python scripts/analysis/make_all.py
 ```
 
@@ -151,7 +151,7 @@ Reads per-seed results files and recomputes all statistics reported in the manus
 ### 4. Regenerate Fig. 9
 
 ```bash
-cd v4
+cd paper
 python figs/src/fig9_dose_response.py
 ```
 
@@ -160,7 +160,7 @@ Outputs `figs/final/fig9_dose_response.png` at 300 dpi (2360 × 1460 px).
 ### 5. Compile the manuscript
 
 ```bash
-cd v4/manuscript
+cd paper/manuscript
 pdflatex -interaction=nonstopmode manuscript-anonymous.tex
 bibtex manuscript-anonymous
 pdflatex -interaction=nonstopmode manuscript-anonymous.tex
@@ -174,30 +174,41 @@ pdflatex -interaction=nonstopmode manuscript-anonymous.tex
 ```
 .
 ├── README.md
-├── CHANGELOG.md          ← version history (v1.0.3 → v1.0.4)
+├── CHANGELOG.md          ← version history
 ├── .zenodo.json          ← Zenodo metadata (auto-read on release)
 │
-└── v4/
-    ├── manuscript/
-    │   ├── manuscript-anonymous.tex    ← LaTeX source
-    │   ├── manuscript-anonymous.pdf    ← compiled PDF
-    │   └── figs/                       ← all manuscript figures
-    │
-    ├── docs/
-    │   └── overleaf/
-    │       ├── response-to-reviewers.tex    ← reviewer response
-    │       └── numbers.tex                  ← 100+ canonical value macros
-    │
-    ├── scripts/
-    │   ├── analysis/
-    │   │   └── make_all.py               ← reproduces all statistics
-    │   └── audits/
-    │       ├── check_knosys.py           ← 14 mechanical checks
-    │       └── glyph_audit.py            ← equation extraction audit
-    │
-    └── figs/
-        └── src/
-            └── fig9_dose_response.py     ← Fig. 9 generator (300 dpi)
+├── paper/                ← replication package (current submission)
+│   ├── data/
+│   │   ├── per-seed-results/         ← 50 per-seed JSON files (G1–G5, B7, G2)
+│   │   │   ├── B7/  G1/  G2/  G3/  G4/  G5/
+│   │   └── resultados_consolidados.csv
+│   │
+│   ├── manuscript/
+│   │   ├── manuscript-anonymous.tex  ← LaTeX source
+│   │   ├── manuscript-anonymous.pdf  ← compiled PDF
+│   │   └── figs/                     ← all manuscript figures
+│   │
+│   ├── docs/
+│   │   └── overleaf/
+│   │       ├── response-to-reviewers.tex  ← reviewer response
+│   │       └── numbers.tex               ← 100+ canonical value macros
+│   │
+│   ├── scripts/
+│   │   ├── analysis/
+│   │   │   ├── make_all.py               ← reproduces all statistics
+│   │   │   └── make_per_seed_jsons.py    ← generates per-seed JSONs
+│   │   └── audits/
+│   │       ├── check_knosys.py           ← 14 mechanical checks
+│   │       └── glyph_audit.py            ← equation extraction audit
+│   │
+│   └── figs/
+│       └── src/
+│           └── fig9_dose_response.py     ← Fig. 9 generator (300 dpi)
+│
+└── archive/              ← previous revision artifacts (not needed for reproduction)
+    ├── v1/  v2/  v3/     ← earlier manuscript revisions
+    ├── old-root/         ← consolidated files from previous package versions
+    └── zenodo-staging/   ← internal staging artifacts
 ```
 
 ---
