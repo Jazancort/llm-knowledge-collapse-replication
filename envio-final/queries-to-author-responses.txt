@@ -1,0 +1,127 @@
+KNOSYS-D-26-21490 — Responses to Queries to Author (Production Stage)
+Manuscript: Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs
+Generated: Oct 15, 2026
+================================================================================
+
+
+QUERY 1
+"Your article is registered as a regular item and is being processed for
+inclusion in a regular issue of the journal. If this is NOT correct and your
+article belongs to a Special Issue/Collection please contact
+d.vinayagam@elsevier.com immediately."
+
+RESPONSE:
+Confirmed. This is a regular article, not part of a Special Issue or
+Collection. No action required.
+
+--------------------------------------------------------------------------------
+
+QUERY 2
+"Please confirm that given names and surnames have been identified correctly
+and are presented in the desired order and please carefully verify the spelling
+of all authors' names."
+
+RESPONSE:
+The author names and order are correct. The correct given name / surname split
+for each author is as follows:
+
+  1. Given: Julio Leite        | Surname: Azancort Neto
+  2. Given: Carlos Andre       | Surname: de Mattos Teixeira
+  3. Given: Andre Carlos       | Surname: Ponce de Leon Ferreira de Carvalho
+  4. Given: Carlos Renato      | Surname: Lisboa Frances
+
+(Note: accented characters -- Andre, Frances -- should appear with their
+diacritics: André, Francês.)
+
+--------------------------------------------------------------------------------
+
+QUERY 3
+"TeX and PDF is different for Corresponding author, hence we followed TeX.
+Please check, and correct if necessary."
+
+RESPONSE:
+Confirmed. The TeX version is correct. The corresponding author details are:
+
+  Name:        Julio Leite Azancort Neto
+  Email:       julio.azancort.neto@itec.ufpa.br
+  Affiliation: Instituto de Tecnologia, Universidade Federal do Para (UFPA),
+               Belem, PA, Brazil
+  ORCID:       0000-0003-2866-5445
+
+Please use these details as given in the TeX source.
+
+--------------------------------------------------------------------------------
+
+QUERY 4
+"Two versions of author contributions are available, i.e. one provided during
+article submission and the one provided in the source TeX/PDF. We have followed
+the contribution provided during submission. Please check and confirm whether
+the author contributions details added are correct, and make any changes if
+needed."
+
+RESPONSE:
+Confirmed. The author contribution statement provided during submission is
+correct. Please retain it as submitted.
+
+--------------------------------------------------------------------------------
+
+QUERY 5
+"End dot after the word 'confirmatory' has been removed from Figure 4's
+caption. Please check, and correct if necessary."
+
+RESPONSE:
+Confirmed. The removal is acceptable. No correction needed.
+
+--------------------------------------------------------------------------------
+
+QUERY 6
+"Supplementary material is provided for this article without a caption. If you
+wish to add a caption for your supplementary material, which will be available
+only in the online version of the article not in the PDF, please provide a
+caption which do not exceed 120 characters."
+
+RESPONSE:
+Please use the following caption for the supplementary material (93 characters):
+
+  "Supplementary tables and figures with experimental details, configuration
+  parameters, and additional results."
+
+--------------------------------------------------------------------------------
+
+QUERY 7
+"Correctly acknowledging the primary funders and grant IDs of your research is
+important to ensure compliance with funder policies. We could not find any
+acknowledgement of funding sources in your text. Is this correct?"
+
+RESPONSE:
+This research was supported by two funding sources:
+
+  1. Coordination for the Improvement of Higher Education Personnel (CAPES),
+     grant number 001, awarded to Julio Leite Azancort Neto.
+
+  2. National Council for Scientific and Technological Development (CNPq),
+     grant number 409001/2024-4, awarded to Carlos Renato Lisboa Frances
+     (INCT IAmazonia).
+
+--------------------------------------------------------------------------------
+
+QUERY 8
+"We have followed BiBTeX database for reference list. Please check, and correct
+if necessary."
+
+RESPONSE:
+Confirmed. The reference list is correct as generated from the BiBTeX database.
+
+One reference to note for verification:
+
+  Ouyang, L., Wu, J., Jiang, X., et al. (2022). Training language models to
+  follow instructions with human feedback. Advances in Neural Information
+  Processing Systems, 35, 27730-27744.
+  arXiv: https://arxiv.org/abs/2203.02155
+
+This entry (key: ouyang2022training) is correctly recorded in the database
+as published in NeurIPS 2022, volume 35, pages 27730-27744. No correction
+needed.
+
+================================================================================
+END OF RESPONSES

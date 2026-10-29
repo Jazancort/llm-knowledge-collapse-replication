@@ -1,0 +1,25 @@
+\begin{thebibliography}{2}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Biderman et~al.(2024)Biderman, Portes, Gonzalez~Ortiz, Paul,
+  Greengard, Jennings, King, Havens, Chiley, Frankle, Blakeney, and
+  Cunningham]{biderman2024}
+Dan Biderman, Jacob Portes, Jose~Javier Gonzalez~Ortiz, Mansheej Paul, Philip
+  Greengard, Connor Jennings, Daniel King, Sam Havens, Vitaliy Chiley, Jonathan
+  Frankle, Cody Blakeney, and John~P. Cunningham.
+\newblock {LoRA} learns less and forgets less.
+\newblock \emph{Transactions on Machine Learning Research (TMLR)}, 2024.
+\newblock Featured Certification. arXiv:2405.09673.
+
+\bibitem[Wen et~al.(2024)Wen, Liu, and Yu]{wen2024}
+YiMin Wen, Xiang Liu, and Hang Yu.
+\newblock Adaptive tree-like neural network: {Overcoming} catastrophic
+  forgetting to classify streaming data with concept drifts.
+\newblock \emph{Knowledge-Based Systems}, 293:\penalty0 111636, 2024.
+\newblock \doi{10.1016/j.knosys.2024.111636}.
+
+\end{thebibliography}

@@ -1,4 +1,4 @@
-﻿%% Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs
+%% Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs
 %% Target: Knowledge-Based Systems (Elsevier, MS ID KNOSYS-D-26-21490)
 %% Template: CAS Double Column (cas-dc)
 
@@ -8,16 +8,18 @@
 
 \usepackage[dvipsnames]{xcolor}
 % ── Revision highlighting ──────────────────────────────────────────────
-% Set \showchangestrue  to show yellow highlight in the tracked version.
-% Set \showchangestrue to produce a clean submission copy.
+% \rev{}    = R1 changes (hidden: showchangesfalse for production R2)
+% \revtwo{} = R2 changes (always blue — only Q3 addition)
 \newif\ifshowchanges
-\showchangestrue  % ← toggle here: \showchangestrue | \showchangesfalse
+\showchangesfalse  % R1 changes hidden in R2 submission
 \newcommand{\rev}[1]{\ifshowchanges{\color{blue}#1}\else{#1}\fi}
+\newcommand{\revtwo}[1]{{\color{blue}#1}}
 % ── Números canônicos — SINGLE SOURCE in shared/numbers.tex ──────────────
 \input{../shared/numbers}
 % ───────────────────────────────────────────────────────────────────────────
 % Usage: \rev{new text} — wraps any revised passage in blue when enabled.
 \usepackage[numbers]{natbib}
+\setlength{\bibsep}{0.5pt}
 \usepackage{booktabs}
 \usepackage{tabularx}
 \usepackage{amsmath}
@@ -54,24 +56,29 @@
 \usepackage{placeins}  % provides \FloatBarrier for manual use
 \renewcommand{\arraystretch}{1.8}
 
+%% Float placement tuning — single + double column
+\renewcommand{\topfraction}{0.90}
+\renewcommand{\bottomfraction}{0.80}
+\renewcommand{\textfraction}{0.08}
+\renewcommand{\floatpagefraction}{0.60}
+\setcounter{topnumber}{6}
+\setcounter{bottomnumber}{4}
+\setcounter{totalnumber}{10}
+\renewcommand{\dbltopfraction}{0.90}
+\renewcommand{\dblfloatpagefraction}{0.60}
+\setcounter{dbltopnumber}{4}
+
 \begin{document}
 \let\WriteBookmarks\relax
-\def\floatpagefraction{.85}
-\def\textfraction{.1}
-\def\topfraction{.9}
-\def\bottomfraction{.9}
-\setcounter{topnumber}{4}
-\setcounter{bottomnumber}{4}
-\setcounter{totalnumber}{8}
 
-% Reduce spacing around floats
-\setlength{\textfloatsep}{4pt plus 1pt minus 1pt}
-\setlength{\floatsep}{4pt plus 1pt minus 1pt}
-\setlength{\intextsep}{4pt plus 1pt minus 1pt}
-\setlength{\dbltextfloatsep}{4pt plus 1pt minus 1pt}
-\setlength{\dblfloatsep}{4pt plus 1pt minus 1pt}
-\setlength{\abovecaptionskip}{2pt}
-\setlength{\belowcaptionskip}{0pt}
+% Spacing around floats
+\setlength{\textfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\setlength{\intextsep}{6pt plus 2pt minus 2pt}
+\setlength{\dbltextfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\dblfloatsep}{6pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{1pt}
 
 \shorttitle{Pressure-Gated Recursive Degradation in LLMs}
 \shortauthors{Azancort Neto et al.}
@@ -378,7 +385,15 @@ Beyond computational efficiency, recent work has begun investigating how
 parameter-efficient adaptation influences knowledge stability. While classical
 continual learning literature has long studied catastrophic forgetting under
 sequential task updates \citep{kirkpatrick2017,delange2022,shi2024continualllm}, recent work
-explores stability under recursive data regimes. \citet{biderman2024} observed
+explores stability under recursive data regimes.
+\revtwo{Methods designed to overcome catastrophic forgetting under sequential task
+adaptation, such as the adaptive tree-like neural network of \citet{wen2024}
+which grows architecture branches for newly arriving concepts, address a
+different failure mode from the one studied here: rather than cross-task
+interference at discrete concept boundaries, the degradation we observe arises
+from a recursively replaced data stream in which each generation's synthetic
+outputs alter the distribution seen by the next.}
+\citet{biderman2024} observed
 that LoRA implicitly regularizes adaptation, concluding that it ``learns less
 and forgets less'' than full fine-tuning. Recent preprints further suggest that
 higher LoRA ranks increase forgetting while improving plasticity
@@ -774,7 +789,7 @@ one hour on either device. These timings are reported to document that the full
 protocol is reproducible on workstation-class hardware (see
 Appendix~\ref{app:repo} for code and data access).
 
-\begin{figure*}[!t]
+\begin{figure*}[pos=t,width=\textwidth]
   \centering
   \includegraphics[width=\textwidth]{figs/scratch/fig1_overview.pdf}%
   \vspace{4pt}
@@ -801,7 +816,7 @@ magnitude, module topology, and synthetic exposure, affect recursive stability.
 Table~\ref{tab:axes} summarizes the experimental axes, the manipulated variable,
 and the tested range.
 
-\begin{table}[!htbp]
+\begin{table}[pos=htbp]
 \caption{Experimental axes and their corresponding pressure
 components.}\label{tab:axes}
 \footnotesize
@@ -1082,7 +1097,7 @@ quantitatively in Section~\ref{sec:results}; the remaining factors are held
 constant within each experimental pipeline.
 
 
-\begin{table*}[!t]
+\begin{table*}[pos=t,width=\textwidth]
 \renewcommand{\arraystretch}{1.2}
 \caption{\rev{Sources of variation in the recursive fine-tuning
 protocol and the corresponding experimental control. G3 and G4 refer to
@@ -1155,7 +1170,6 @@ presented alongside the capacity analysis.
 
 % ============================================================
 % 4. RESULTS
-\FloatBarrier
 % ============================================================
 \section{Results}\label{sec:results}
 
@@ -1178,7 +1192,7 @@ loss; on
 supported by multi-seed experiments, whereas single-seed results are presented
 as supporting evidence.
 
-\begin{figure*}[!t]
+\begin{figure*}[pos=t,width=\textwidth]
 \centering
 \includegraphics[width=0.95\textwidth]{figs/final/fig_regime_examples.pdf}
 \caption{Representative response evolution under the three recursive regimes
@@ -1238,10 +1252,10 @@ Rank ($r$) & Params & Gen & Retention & Eff.\ Rank & \rev{$N$} & Regime \\
 The longitudinal trajectories (Fig.~\ref{fig:trajectories}) reveal distinct
 temporal dynamics across regimes.
 
-\begin{figure}[htbp]
+\begin{figure*}[pos=t,width=\textwidth]
   \centering
-  \includegraphics[width=0.95\columnwidth]{figs/final/fig1_trajectories.png}\\[4pt]
-  \includegraphics[width=0.95\columnwidth]{figs/final/fig2_dose_response.png}
+  \includegraphics[width=0.48\textwidth]{figs/final/fig1_trajectories.png}\hfill
+  \includegraphics[width=0.48\textwidth]{figs/final/fig2_dose_response.png}
   \caption{\rev{(a) Trajectories for the multi-seed runs ($r=16$: $N=3$, G3 bf16; $r=256$: $N=3$, G1); the single-seed NF4 sweep values tabulated in Table~\ref{tab:rank_sweep} appear in panel (b).} (a) K0 retention trajectories over 10 recursive
   generations for three representative ranks on Qwen~2.5~1.5B. Semi-transparent
   lines show individual seeds; solid thick lines show the per-rank mean.
@@ -1252,7 +1266,7 @@ temporal dynamics across regimes.
   nominal rank, indicating that increases in nominal capacity translate into
   progressively smaller increases in effective update
   dimensionality.}\label{fig:trajectories}
-\end{figure}
+\end{figure*}
 
 At $r=16$, retention stabilizes after
 an initial one-generation adaptation cost and remains flat through Gen10
@@ -1313,7 +1327,7 @@ sweep. In the homeostatic regime, facts lost at one generation are recovered at
 similar rates (net loss $\approx 0$), indicating bounded oscillation rather than
 progressive forgetting. In the degradative regime, \rev{losses exceeded recoveries in the single seed analyzed (Table~\ref{tab:transitions}), producing monotonic net displacement.}
 
-\begin{table}[!htbp]
+\begin{table}[pos=htbp]
 \caption{Item-level transitions across recursive generations on
 Qwen~2.5~1.5B (seed~15, $\rev{\Kcard = 78}$). C$\to$W (Correct$\to$Wrong): facts lost;
 W$\to$C (Wrong$\to$Correct): facts recovered.\textsuperscript{\dag}}\label{tab:transitions}
@@ -1344,7 +1358,6 @@ from homeostatic to degradative recursive fine-tuning on the Qwen backbone. The
 following sections examine whether this transition generalizes across
 architectures and update mechanisms.
 
-\FloatBarrier
 \subsection{Cross-backbone thresholds}\label{sec:res_backbone}
 
 To test whether the regime transition observed on Qwen is architecture-specific,
@@ -1461,7 +1474,7 @@ Figure~\ref{fig:combined_traj} presents the retention trajectories for all three
 backbones, enabling direct visual comparison of the regime structure across
 architectures.
 
-\begin{figure*}[!t]
+\begin{figure*}[pos=t,width=\textwidth]
   \centering
   \includegraphics[width=0.95\textwidth]{figs/scratch/fig_combined_trajectories.png}
   \caption{$K_0$ retention trajectories over ten recursive generations across
@@ -1489,7 +1502,7 @@ baseline diversity. None of these normalizations reduced the discrepancy to a
 common threshold. We report this as a negative result and discuss it further in
 Section~\ref{sec:limitations}.
 
-\begin{figure}[htbp]
+\begin{figure}[pos=htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig5_cross_backbone.png}
   \caption{$K_0$ retention versus mean effective rank across three backbones.
@@ -1509,7 +1522,6 @@ curve remains in the homeostatic region at effective ranks where Gemma~3 is
 already fully degradative. We next examine whether the same transition occurs
 when perturbation magnitude is varied independently of adapter capacity.
 
-\FloatBarrier
 \subsection{Perturbation magnitude: FFT comparison}\label{sec:res_fft}
 
 The previous sections established that increasing update capacity through adapter
@@ -1552,7 +1564,7 @@ As illustrated in Figure~\ref{fig:fft_qlora}, the separation between the
 trajectories is established after the first recursive generation and remains
 nearly constant thereafter.
 
-\begin{figure}[htbp]
+\begin{figure}[pos=htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig4_fft_vs_qlora.png}
   \caption{$K_0$ retention over 10 recursive generations for QLoRA $r=16$ and
@@ -1622,7 +1634,7 @@ offsets the effect of higher rank: $r=256$ with $\mathrm{LR}=5 \times 10^{-6}$
 retains 89.7\%, compared to 84.6\% at $\mathrm{LR}=10^{-5}$ and 82.1\% at
 $\mathrm{LR}=2 \times 10^{-5}$. This \rev{is consistent with the regime depending jointly on update capacity and perturbation magnitude rather than on either axis in isolation, although the single-seed design does not permit a formal interaction test.}
 
-\begin{figure}[htbp]
+\begin{figure}[pos=htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig_rank_lr_heatmap.png}
   \caption{Rank $\times$ learning-rate joint pattern on Qwen~2.5~1.5B
@@ -1649,7 +1661,6 @@ multidimensional pressure landscape in which multiple control variables are
 associated with recursive stability. The next section examines how these regimes
 manifest in the distributional properties of the synthetic outputs.
 
-\FloatBarrier
 \subsection{Distributional signatures of degradation}\label{sec:res_distribution}
 
 The previous sections identified regime transitions through factual retention
@@ -1726,7 +1737,7 @@ while output-distribution quality degrades substantially.
 Figure~\ref{fig:distributional} illustrates the divergent trajectories across
 these three regimes.
 
-\begin{figure}[htbp]
+\begin{figure}[pos=htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig5_distributional.png}
   \caption{Distributional diagnostics over ten recursive generations for three
@@ -1767,7 +1778,6 @@ The next section tests whether the third component of effective training
 pressure, synthetic data exposure, can shift the system back toward homeostasis
 at the regime boundary.
 
-\FloatBarrier
 \subsection{Synthetic exposure interventions}\label{sec:res_intervention}
 
 The preceding sections established that update capacity and perturbation
@@ -1830,7 +1840,7 @@ archived in the replication repository (Section~\ref{app:repo}).}
 Figure~\ref{fig:interventions} visualizes the retention and effect-size
 comparison across conditions.
 
-\begin{figure}[htbp]
+\begin{figure}[pos=htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/scratch/fig_interventions.png}
   \caption{\rev{Exploratory pilot (C1--C5) on Qwen $r=256$ at Gen5, included for
@@ -1864,7 +1874,7 @@ levels; effective rank is not portable across architectures
 protocol without inferring which backbone operated at higher relative
 pressure.}
 
-\begin{figure}[htbp]
+\begin{figure}[pos=htbp]
   \centering
   \includegraphics[width=0.95\columnwidth]{figs/final/fig9_dose_response.png}
   \caption{\rev{Dose--response of synthetic exposure reduction on factual retention
@@ -1897,7 +1907,6 @@ interprets these findings in the context of prior work.
 % ============================================================
 % 4.6  EXPERIMENTAL CONTROLS (G3, G4, G5)
 % ============================================================
-\FloatBarrier
 \subsection{Experimental controls and prospective index}\label{sec:res_controls}
 
 \rev{\textbf{Quantization control (G3).}
@@ -1946,7 +1955,7 @@ $\Pi$, and the three cells were selected by nominal rank and learning rate, not
 by $\Pi$ value. \rev{Two of the three pre-specified regime classifications were confirmed; the third was not.} G5 is therefore exploratory evidence for the ordering, not a confirmatory
 test of the full classification scheme.
 All three cells used a single seed; the prospective result is therefore exploratory.}
-\FloatBarrier
+
 \section{Discussion}\label{sec:discussion}
 
 The preceding results identify consistent patterns in how recursive synthetic
@@ -1964,7 +1973,7 @@ training pipelines (Section~\ref{sec:disc_practical}).
 
 \subsection{Effective training pressure as framework}\label{sec:disc_pressure}
 
-\begin{figure*}[!t]
+\begin{figure*}[pos=t,width=\textwidth]
   \centering
   \includegraphics[width=0.75\textwidth]{figs/scratch/fig_etp_framework.png}
   \caption{Pressure-response relationship guiding recursive fine-tuning
@@ -2010,7 +2019,7 @@ into a single predictive scalar remains an important direction for future work.}
 Table~\ref{tab:evidence} summarizes how each component of the framework is
 supported by independent experimental evidence.
 
-\begin{table}[!htbp]
+\begin{table}[pos=htbp]
 \caption{Evidence matrix: mapping framework components to supporting
 experiments.}\label{tab:evidence}
 \footnotesize
@@ -2125,7 +2134,7 @@ more productive than treating collapse as a monolithic threat.
 To clarify the scope of the present findings, Table~\ref{tab:generalization}
 distinguishes what the evidence supports from what remains open.
 
-\begin{table}[!htbp]
+\begin{table}[pos=htbp]
 \caption{Scope of generalization: what the present evidence supports versus
 what remains unknown.}\label{tab:generalization}
 \footnotesize
@@ -2268,7 +2277,6 @@ prescriptive rules.
 
 % ============================================================
 % 6. LIMITATIONS
-\FloatBarrier
 % ============================================================
 \section{Limitations}\label{sec:limitations}
 
@@ -2305,7 +2313,7 @@ Cross-architecture threshold normalization was attempted using several
 architectural ratios, none of which aligned the thresholds between Qwen and
 Gemma~3 (Table~\ref{tab:normalization}).
 
-\begin{table}[!htbp]
+\begin{table}[pos=htbp]
 \caption{Cross-architecture threshold normalization attempts. Threshold erank
 values: Qwen ${\approx}$50--88, Gemma~3 ${\approx}$3--6, E2B ${\approx}$5--13. None of
 the tested normalizations aligned thresholds across
@@ -2435,7 +2443,6 @@ across backbones.}
 
 % ============================================================
 % 7. CONCLUSION
-\FloatBarrier
 % ============================================================
 \section{Conclusion}\label{sec:conclusion}
 
@@ -2486,36 +2493,35 @@ their effects are additive or interactive.
 % APPENDIX
 % ============================================================
 \appendix
-\section*{Appendices}
-
 \section{Project repository and data access}\label{app:repo}
+\footnotesize
+\sloppy
 
 \rev{The replication package is archived at the links below. Release~v1.0.4 contains all five items listed below. The repository contains:
 \begin{enumerate}[(i)]
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
   \item the consolidated per-seed results files (one JSON per seed per arm, covering G1--G5, 27 multi-seed training runs (G1:~3, G2:~12, G3:~6, G4:~3, G5:~3), plus 20~B7 dose--response runs and 5~C1--C5 pilot runs; single-seed ablation runs are not counted in the 27; one run is one configuration--seed trajectory evaluated to its protocol-specific generation horizon);
   \item the training configuration files for each experimental arm;
   \item the evaluation protocol, question partition identifiers, and the $K_0$ baseline sets for each backbone;
-  \item the analysis and table-generation scripts, including \texttt{scripts/analysis/make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (\rev{all reported values verified against the per-seed results on the HEAD commit}); and
-  \item the notation and rendering audit script \texttt{scripts/audits/glyph\_audit.py}.
+  \item the analysis and table-generation scripts, including \texttt{scripts/analysis/}\allowbreak\texttt{make\_all.py}, which regenerates all reported statistics, tables, and figures from the consolidated results files and verifies each value against the paper (\rev{all reported values verified against the per-seed results on the HEAD commit}); and
+  \item the notation and rendering audit script \path{scripts/audits/glyph_audit.py}.
 \end{enumerate}
 }
 
 \rev{The archive permits reproduction of all reported statistics and figures from the consolidated per-seed results files. It does not include raw token-level predictions, trained adapter checkpoints, or base-model weights. Raw token-level predictions and adapters are not included because they exceed practical size limits for data repositories; base-model weights are not redistributed and must be obtained from the original distributors. Repository identifiers and revision hashes for the base models are listed in supplementary Table~S1.}
 
-
 \begin{itemize}
-  \item \textbf{Zenodo} (permanent, citable):\\
-    Concept DOI (all versions, resolves to the latest):
-    \url{https://doi.org/10.5281/zenodo.23145361}\\
-    Version~v1.0.4 DOI (this paper):
-    \url{https://doi.org/10.5281/zenodo.23185146}
-  \item \textbf{GitHub} (version-controlled):\\
-    {\sloppy\url{https://github.com/Jazancort/llm-knowledge-collapse-replication}\par}
-    (release \texttt{v1.0.4}; includes consolidated results, analysis scripts, figure scripts, and audit checks)
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+  \item \textbf{Zenodo} (permanent, citable):
+    Concept DOI: \url{https://doi.org/10.5281/zenodo.23145361};
+    Version~v1.0.4 DOI (this paper): \url{https://doi.org/10.5281/zenodo.23185146}.
+  \item \textbf{GitHub} (version-controlled):
+    \url{https://github.com/Jazancort/llm-knowledge-collapse-replication}
+    (release \texttt{v1.0.4}; includes consolidated results, analysis scripts, figure scripts, and audit checks).
 \end{itemize}
 
-\rev{Running \texttt{python scripts/analysis/make\_all.py} from the package root in the current checkout regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper.}
-Running \texttt{python figs/src/fig9\_dose\_response.py} regenerates
+\rev{Running \texttt{python scripts/analysis/}\allowbreak\texttt{make\_all.py} from the package root in the current checkout regenerates the aggregated results, tables, and figures from the archived per-seed data, and checks each regenerated value against the value reported in the paper.}
+Running \texttt{python figs/src/}\allowbreak\texttt{fig9\_dose\_response.py} regenerates
 Figure~\ref{fig:dose_response_crossbackbone} at 300~dpi.
 Base-model weights are obtained from their original distributors and are not
 redistributed; repository identifiers and revision hashes are listed in supplementary

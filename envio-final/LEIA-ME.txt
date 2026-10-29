@@ -1,0 +1,130 @@
+KNOSYS-D-26-21490R1 — Envio Final de Producao
+"Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs"
+Knowledge-Based Systems (Elsevier)
+Gerado em: 15/10/2026
+================================================================================
+
+CONTEXTO
+--------
+O editor aceitou o artigo. Este envio e de PRODUCAO (nao revisao).
+A Elsevier precisa dos arquivos-fonte para diagramacao.
+Nao enviar PDF do manuscrito — enviar apenas os fontes LaTeX.
+
+Incluir tambem Response to Reviewers endereçando os 3 pontos do Revisor #1.
+
+================================================================================
+01-manuscrito-fonte/
+================================================================================
+
+latex-source.zip
+  Tipo no sistema : LaTeX source files
+  Descricao       : ZIP com todos os fontes LaTeX:
+                    - manuscript-anonymous.tex  (arquivo principal)
+                    - cas-refs.bib              (referencias bibliograficas)
+                    - model1-num-names.bst      (estilo bibliografico Elsevier)
+                    - numbers.tex               (numeros canonicos, \input no main)
+                    - tab01_body.tex            (tabela incluida no main)
+                    - tab04_body.tex            (tabela incluida no main)
+                    - tab11_body.tex            (tabela incluida no main)
+                    - supplementary.tex         (material suplementar)
+
+supplementary.pdf
+  Tipo no sistema : Supplementary material
+  Descricao       : PDF compilado do suplementar.
+  ACAO            : Copiar de para-enviar/01-manuscrito/supplementary.pdf
+                    (nao esta aqui ainda — ver passo 5 abaixo)
+
+================================================================================
+02-figuras/
+================================================================================
+
+12 figuras referenciadas no manuscrito. Enviar todas como tipo "Figure".
+
+VETORIAIS (PDF):
+  fig1_overview.pdf         — Fig. 1  Visao geral do pipeline experimental
+  fig_regime_examples.pdf   — Fig. 2  Exemplos dos tres regimes
+
+RASTER (PNG):
+  fig1_trajectories.png     — Fig. 3a Trajetorias Qwen multi-seed
+  fig2_dose_response.png    — Fig. 3b Curva dose-resposta Qwen
+  fig_combined_trajectories.png  — Fig. 4  Tres backbones (Qwen, Gemma3, E2B)
+  fig5_cross_backbone.png   — Fig. 5  Retencao x erank cross-backbone
+  fig4_fft_vs_qlora.png     — Fig. 6  QLoRA vs FFT trajectories
+  fig_rank_lr_heatmap.png   — Fig. 7  Heatmap rank x learning rate
+  fig5_distributional.png   — Fig. 8  Analise distribucional por item
+  fig_interventions.png     — Fig. 9  Estrategias de intervencao
+  fig9_dose_response.png    — Fig. 10 Dose-response detalhado multi-seed
+  fig_etp_framework.png     — Fig. 11 Framework ETP
+
+================================================================================
+03-response-revisores/
+================================================================================
+
+response-to-reviewers-final.pdf (A CRIAR)
+  Tipo no sistema : Response to Reviewers
+  Descricao       : Resposta ponto a ponto ao Revisor #1 (R2 aprovou sem ressalvas).
+                    Tres pontos a enderecar:
+
+  Q1 — Verificacao manual do scorer (respostas curtas vs verbosas contra
+       substring scorer, itens K0 fixos). Reportar resultado na carta.
+
+  Q2 — Mapeamento imutavel de condicoes: cada condicao reportada -> run real,
+       seed, precisao, identificadores K0, contagens por geracao.
+       Pode incluir tabela na carta ou referenciar repositorio Zenodo.
+
+  Q3 — Adicionar referencia no Related Work:
+       "Adaptive tree-like neural network: Overcoming catastrophic forgetting
+       to classify streaming data with concept drifts" (KBS, 2024).
+       Distinguir forgetting sob adaptacao sequencial de tarefas vs
+       degradacao por substituicao recursiva de stream de dados.
+       ACAO NO PAPEL: 1-2 frases no Related Work + citacao.
+
+================================================================================
+04-documentos/
+================================================================================
+
+highlights-final.docx
+  Tipo no sistema : Highlights
+  Descricao       : 5 bullets corrigidos para refletir o paper final.
+                    CORRIGE o problema apontado pelo Revisor #1.
+
+credit-author-statement.docx
+  Tipo no sistema : Credit Author Statement
+  Descricao       : Carry over da submissao anterior. Verificar se ainda valido.
+
+declaration-of-competing-interests.docx
+  Tipo no sistema : Carry over automatico (ja no sistema)
+  Descricao       : Nao ha conflitos a declarar.
+
+title-page.docx
+  Tipo no sistema : Title page (se solicitado)
+
+================================================================================
+CHECKLIST DE ACOES ANTES DO ENVIO
+================================================================================
+
+  [x] 01 - latex-source.zip criado com 8 arquivos fonte
+  [x] 02 - 12 figuras copiadas (2 PDF + 10 PNG)
+  [x] 03 - highlights-final.docx criado com bullets corretos
+  [x] 04 - credit-author-statement.docx copiado
+  [x] 04 - declaration-of-competing-interests.docx copiado
+  [x] 04 - title-page.docx copiado
+
+  [ ] 01 - Copiar supplementary.pdf de para-enviar/01-manuscrito/
+  [x] 03 - response-to-reviewers-final.pdf compilado (Q1, Q2, Q3 endereçados)
+  [x] 03 - Referencia Q3 adicionada no Related Work (wen2024, linha 389 do .tex)
+           cas-refs.bib e latex-source.zip atualizados
+  [ ] -- - Upload no Editorial Manager (http://ees.elsevier.com/)
+           Localizar em "Submissions Needing Revision"
+           Clicar "Submit Revision"
+
+================================================================================
+RESUMO DO QUE MUDAR NO PAPEL (antes de fechar o zip final)
+================================================================================
+
+Unica mudanca no texto: adicionar 1-2 frases no Related Work comparando
+com o artigo KBS 2024 sobre adaptive tree-like neural network.
+Nao sao necessarias outras mudancas de conteudo cientifico.
+
+O editor disse: "scientific content requires no further revision."
+

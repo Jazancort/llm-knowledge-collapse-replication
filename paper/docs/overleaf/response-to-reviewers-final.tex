@@ -1,0 +1,193 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2.3cm]{geometry}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage[table]{xcolor}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage[numbers]{natbib}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\hypersetup{colorlinks=true, linkcolor=blue, urlcolor=blue, citecolor=blue}
+
+\definecolor{chgcolor}{RGB}{0,80,180}
+\definecolor{rccolor}{RGB}{0,110,40}
+
+\newcommand{\rconcern}[3]{%
+  \bigskip\noindent\rule{\linewidth}{0.4pt}\par\medskip
+  \noindent\textbf{\textcolor{rccolor}{#1 --- #2:}}\par
+  \smallskip
+  \begin{quote}\itshape\textcolor{rccolor}{#3}\end{quote}%
+}
+
+\newcommand{\newtext}[1]{\textcolor{chgcolor}{``#1''}}
+
+\newcommand{\msloc}[1]{%
+  \smallskip\noindent\textit{Revised manuscript: #1}\par%
+}
+
+\titleformat{\section}{\large\bfseries}{}{0em}{}
+\titlespacing*{\section}{0pt}{2.2em}{0.8em}
+
+\begin{document}
+
+% ------------------------------------------------------------------ Cover page
+\noindent
+Ms.\ Ref.\ No.: \textbf{KNOSYS-D-26-21490R1}\\[2pt]
+Title: \textit{Effective Training Pressure Gates Recursive Knowledge
+Degradation in LLMs: A Multi-Axis Dose-Response Study}\\[2pt]
+Journal: \textit{Knowledge-Based Systems} (Elsevier)\\[2pt]
+To: Dr.\ Hang Yu, Senior Editor\\[2pt]
+Re: Response to Reviewers --- Production Submission\\[2pt]
+Date: \today
+
+\bigskip
+\medskip\noindent\rule{\linewidth}{0.4pt}\medskip
+
+\noindent
+Dear Dr.\ Yu and Reviewers,
+
+We thank you for the positive decision and for the careful reading of the
+revised manuscript.
+This letter accompanies the production files (LaTeX source and figures) and
+responds point by point to the three questions raised by Reviewer~1 in the
+acceptance decision.
+Reviewer~2 expressed no further concerns; we are grateful for their
+evaluation.
+
+One textual change has been made to the manuscript: two sentences have been
+added to Section~2.4 (Parameter-efficient fine-tuning and forgetting) to
+address Reviewer~1's request for a comparison with sequential-task-adaptation
+methods.
+No other changes were made to the scientific content.
+
+\medskip\noindent
+Respectfully submitted on behalf of all authors,\\[6pt]
+Julio Leite Azancort Neto\\
+Corresponding Author
+
+\medskip\noindent\rule{\linewidth}{0.4pt}\medskip
+
+% ------------------------------------------------------------------ R2
+\section*{Reviewer 2}
+
+Reviewer~2 approved the manuscript without further concerns.
+We are grateful for the thorough and constructive engagement throughout
+both rounds of review.
+
+% ------------------------------------------------------------------ R1
+\section*{Reviewer 1}
+
+\rconcern{Reviewer 1}{Question 1}{%
+Can the authors report a targeted, blinded manual check of short and
+verbose answers against the substring scorer, using the original fixed $K_0$
+items, and explain whether any disagreements affect the key interpretations?}
+
+The evaluation uses a bidirectional substring scorer: a generation is marked
+correct if either (a)~the reference answer is a substring of the generated
+response, or (b)~the generated response is a substring of the reference
+answer.
+Direction~(a) handles verbose generated responses that contain the correct
+answer within a longer reply; direction~(b) handles concise generated
+responses that partially match a longer reference alias.
+The $K_0$ item set is fixed at generation~0 using this same scorer, so
+the denominator is internally consistent with the numerator throughout all
+generations.
+
+During the revision process, the scoring pipeline was subjected to a full
+audit that identified and corrected two implementation inconsistencies
+(described in Section~3.3 of the revised manuscript).
+After those corrections, we conducted a targeted manual review of a
+stratified sample of $K_0$ items, covering both short reference answers
+(fewer than five tokens) and verbose reference answers (more than fifteen
+tokens).
+For the short-answer stratum, the bidirectional check correctly handled all
+sampled cases: short correct answers were captured by direction~(b) when
+the generated response was also short, and by direction~(a) when the
+generated response was verbose.
+For the verbose-answer stratum, the check correctly retained items where
+the full reference phrase appeared as a substring of the generation.
+No disagreements were found in the sampled items that would change the sign
+or statistical significance of any reported result.
+We therefore conclude that the key interpretations are not affected by
+answer-length variation.
+
+\msloc{Section~3.3 (Evaluation protocol), revised manuscript.}
+
+% -----------------------------------------------------------------
+\rconcern{Reviewer 1}{Question 2}{%
+Can the authors provide an immutable, internally consistent mapping from
+each reported condition to its actual run, seed, precision, $K_0$ item
+identifiers and generation-level counts, and regenerate the inferential
+statistics from those records?}
+
+The complete experimental record is publicly archived at:
+
+\begin{center}
+\url{https://doi.org/10.5281/zenodo.23145361}
+\end{center}
+
+The archive contains, for every reported condition, run directory, seed,
+floating-point precision (NF4 or bf16), the $K_0$ item set constructed at
+generation~0, and generation-level retention counts.
+The mapping from manuscript condition labels to archive paths is provided
+in the \texttt{README.md} at the repository root.
+
+All inferential statistics reported in the manuscript (interaction estimates,
+confidence intervals, sign tests, and TOST equivalence tests) were
+regenerated directly from the per-seed \texttt{results\_all.json} files
+archived at that DOI before this submission.
+The regeneration scripts are included in the archive under
+\texttt{scripts/audits\_diagnostics/}.
+
+\msloc{Data Availability Statement and supplementary material,
+revised manuscript.}
+
+% -----------------------------------------------------------------
+\rconcern{Reviewer 1}{Question 3}{%
+The related-work discussion could further distinguish forgetting under
+sequential task adaptation from degradation of a recursively replaced data
+stream. A brief comparison with ``Adaptive tree-like neural network:
+Overcoming catastrophic forgetting to classify streaming data with concept
+drifts'' (Knowledge-Based Systems, 2024), focused on that distinction rather
+than a direct LLM baseline, would help clarify the scope of the contribution.}
+
+We have added two sentences to Section~2.4 (Parameter-efficient fine-tuning
+and forgetting), immediately before the discussion of \citet{biderman2024}.
+The added passage reads:
+
+\begin{quote}
+\newtext{Methods designed to overcome catastrophic forgetting under sequential
+task adaptation, such as the adaptive tree-like neural network of
+\citet{wen2024} which grows architecture branches for newly arriving concepts,
+address a different failure mode from the one studied here: rather than
+cross-task interference at discrete concept boundaries, the degradation we
+observe arises from a recursively replaced data stream in which each
+generation's synthetic outputs alter the distribution seen by the next.}
+\end{quote}
+
+\msloc{Section~2.4, paragraph beginning ``While classical continual
+learning\ldots'', revised manuscript.}
+
+\medskip
+\noindent\textbf{Production files.} This submission includes (i)~LaTeX
+source files (manuscript, bibliography, shared number definitions, and table
+bodies), (ii)~figure files in PDF and PNG format at 300\,DPI, and
+(iii)~updated Highlights.
+The Highlights have been corrected to align with the manuscript: the bullet
+previously reading ``arrests progressive loss'' has been replaced by ``A~50\%
+synthetic exposure cut improved retention on both backbones tested,'' which
+accurately reflects the distinct patterns observed on Qwen and Gemma~3.
+
+\medskip\noindent\rule{\linewidth}{0.4pt}
+
+\bibliographystyle{unsrtnat}
+\bibliography{../../manuscript/cas-refs}
+
+\end{document}
