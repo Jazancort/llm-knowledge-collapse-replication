@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 Testes seed-level N=6 para r=16 vs r=256 e outros contrastes.
 Usa resultados_consolidados.csv + dados históricos de multi-seed.
@@ -12,7 +12,7 @@ try:
 except ImportError:
     HAS_SCIPY = False
 
-csv_path = r'G:\Lab\Labcity\LLM\Artigo\Paradoxo - springer\Paradoxo\llm-knowledge-collapse (paper)\v4\docs\revision\resultados\resultados_consolidados.csv'
+csv_path = r'G:\Lab\Labcity\LLM\Artigo\Paradoxo - springer\papers\survey-taxonomy\llm-knowledge-collapse (paper)\v4\docs\revision\resultados\resultados_consolidados.csv'
 
 rows = []
 with open(csv_path, encoding='utf-8') as f:

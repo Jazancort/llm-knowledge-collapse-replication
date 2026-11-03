@@ -1,0 +1,61 @@
+KNOSYS-D-26-21490 — File Descriptions for Upload
+================================================================================
+
+cover-letter-revision.pdf
+  Revision cover letter including summary of major changes and author credentials.
+
+manuscript-anonymous.pdf
+  Revised anonymous manuscript with tracked changes marked in red.
+
+response-to-reviewers.pdf
+  Point-by-point response to all Reviewer 1 and Reviewer 2 comments.
+
+supplementary.pdf
+  Supplementary material with extended methodology and additional results.
+
+latex-source.zip
+  LaTeX source bundle: manuscript-anonymous.tex, cas-refs.bib, model1-num-names.bst, tab01_body.tex, supplementary.tex.
+
+credit-author-statement.docx
+  CRediT author contribution statement for all four authors.
+
+highlights-revised.docx
+  Five research highlights updated for the revised manuscript.
+
+--- FIGURES ---
+
+fig1_overview.pdf
+  Figure 1. Conceptual overview of the Effective Training Pressure (ETP) framework.
+
+fig_regime_examples.pdf
+  Figure 2. Examples of the three operating regimes: homeostatic, bounded, and degradative.
+
+fig1_trajectories.png
+  Figure 3. Factual retention trajectories across recursive generations (Gemma 2B).
+
+fig2_dose_response.png
+  Figure 4. Dose-response curve showing synthetic exposure controls regime transition.
+
+fig_combined_trajectories.png
+  Figure 5. Combined cross-backbone trajectories (Gemma and Qwen).
+
+fig5_cross_backbone.png
+  Figure 6. Long-horizon cross-backbone comparison (30 generations).
+
+fig4_fft_vs_qlora.png
+  Figure 7. Full fine-tuning vs. QLoRA factual retention comparison.
+
+fig_rank_lr_heatmap.png
+  Figure 8. Rank x learning rate joint-dependence heatmap (Qwen 2.5 1.5B).
+
+fig5_distributional.png
+  Figure 9. Distributional analysis of per-item knowledge degradation.
+
+fig_interventions.png
+  Figure 10. Effect of intervention strategies (dose reduction and rank adjustment).
+
+fig9_dose_response.png
+  Figure 11. Dose-response curve with confidence intervals, multi-seed (N=8).
+
+fig_etp_framework.png
+  Figure 12. ETP framework diagram showing how rank and learning rate determine pressure.

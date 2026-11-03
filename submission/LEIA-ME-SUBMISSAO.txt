@@ -1,0 +1,208 @@
+KNOSYS-D-26-21490 — Arquivos para Submissão da Revisão
+"Effective Training Pressure Gates Recursive Knowledge Degradation in LLMs"
+Knowledge-Based Systems (Elsevier)
+Gerado em: 08/10/2026
+================================================================================
+
+
+01-manuscrito/
+================================================================================
+
+manuscript-anonymous.pdf
+  Tipo no sistema : Revised manuscript (marked up)
+  Descricao       : Manuscrito anonimizado compilado com pdflatex (cas-dc template).
+                    Contem marcacoes de revisao via \rev{} em vermelho. Esta e a
+                    versao que os revisores vao ler. Inclui todas as alteracoes desta
+                    rodada: terceiro backbone (LLaMA), decomposicao de dois hazards,
+                    experimentos de longo horizonte, sweep de learning rate e
+                    revisao completa do Related Work.
+
+response-to-reviewers.pdf
+  Tipo no sistema : Response to reviewers
+  Descricao       : Carta de resposta ponto a ponto aos revisores R1 e R2.
+                    Cada comentario e reproduzido, seguido da acao tomada e
+                    das linhas alteradas no manuscrito. Gerado no Overleaf.
+
+supplementary.pdf
+  Tipo no sistema : Supplementary material
+  Descricao       : Material suplementar com detalhes metodologicos adicionais,
+                    hiperparametros completos e resultados auxiliares que nao
+                    cabem no corpo principal do artigo.
+
+
+02-carta-revisao/
+================================================================================
+
+cover-letter-revision.pdf
+  Tipo no sistema : Cover letter
+  Descricao       : Carta de apresentacao da revisao, dirigida ao Editorial Office
+                    do KNOSYS. Inclui: (1) resumo da contribuicao do artigo,
+                    (2) lista das 5 principais mudancas desta rodada, (3) credenciais
+                    academicas de cada autor com ORCID, afiliacao e contribuicao
+                    no manuscrito. Usar este PDF no upload (nao o cover-letter.pdf
+                    da submissao original).
+
+cover-letter-revision.docx
+  Tipo no sistema : (versao editavel da cover letter, nao enviar ao sistema)
+  Descricao       : Versao Word da cover letter de revisao para arquivo local.
+                    Nao e necessario enviar ao sistema da Elsevier.
+
+
+03-documentos/
+================================================================================
+
+credit-author-statement.docx
+  Tipo no sistema : Credit Author Statement
+  Descricao       : Declaracao de contribuicao de cada autor usando os papeis
+                    CRediT (Conceptualization, Methodology, Software, Investigation,
+                    Writing original draft, Writing review & editing, Supervision,
+                    Funding acquisition, etc.). Formato Word exigido pelo sistema.
+
+highlights-revised.docx
+  Tipo no sistema : Highlights
+  Descricao       : 5 destaques do artigo (cada um com no maximo 85 caracteres),
+                    atualizados para refletir os resultados desta revisao.
+                    Substitui o highlights.docx da submissao original.
+
+declaration-of-competing-interests.docx
+  Tipo no sistema : (ja carregado automaticamente — "carry over")
+  Descricao       : Declaracao de conflito de interesses assinada por todos os
+                    autores. Nao ha conflitos a declarar. Foi carregado na etapa
+                    anterior (carry over da submissao original).
+
+title-page.docx
+  Tipo no sistema : Title page (se solicitado separadamente)
+  Descricao       : Pagina de titulo com nomes, afiliacao, ORCID e email de todos
+                    os autores. Usar apenas se o sistema pedir titulo identificado
+                    separado do manuscrito anonimizado.
+
+bios-autores.docx
+  Tipo no sistema : (nao enviar ao sistema — uso interno)
+  Descricao       : Biografias completas dos 4 autores em ingles para referencia.
+                    Usadas na cover letter. Nao e um tipo de arquivo aceito pelo
+                    sistema da Elsevier.
+
+highlights.txt
+  Tipo no sistema : (nao enviar — versao texto simples para referencia)
+  Descricao       : Versao .txt dos highlights para consulta rapida. Usar o
+                    highlights-revised.docx para upload.
+
+
+04-latex-source/
+================================================================================
+
+latex-source.zip
+  Tipo no sistema : LaTeX source files
+  Descricao       : Arquivo ZIP com todos os fontes LaTeX do manuscrito:
+                    - manuscript-anonymous.tex  (arquivo principal)
+                    - cas-refs.bib              (referencias bibliograficas)
+                    - model1-num-names.bst      (estilo bibliografico Elsevier)
+                    - tab01_body.tex            (tabela incluida no manuscrito)
+                    - supplementary.tex         (fonte do suplementar)
+                    Nao inclui figuras (enviadas separadamente como tipo Figure).
+                    A Elsevier usa estes fontes para diagramacao apos aceitacao.
+
+
+figures-300dpi/
+================================================================================
+
+FIGURAS USADAS NO MANUSCRITO (enviar todas como tipo "Figure"):
+
+fig1_overview.pdf
+  Referencia no tex : figs/scratch/fig1_overview.pdf
+  Descricao         : Figura 1 — Visao geral do framework ETP (Effective Training
+                      Pressure). Diagrama conceitual do mecanismo de degradacao
+                      recursiva e regime de transicao. Enviar o PDF (nao o PNG).
+
+fig_regime_examples.pdf
+  Referencia no tex : figs/final/fig_regime_examples.pdf
+  Descricao         : Figura 2 — Exemplos dos tres regimes de operacao:
+                      homeostático (>80%), delimitado (60-80%) e degradativo (<60%).
+                      Enviar o PDF (nao o PNG).
+
+fig1_trajectories.png
+  Referencia no tex : figs/final/fig1_trajectories.png
+  Descricao         : Trajetorias de retencao factual para o backbone Gemma 2B
+                      ao longo de geracoes recursivas sob diferentes configuracoes.
+
+fig2_dose_response.png
+  Referencia no tex : figs/final/fig2_dose_response.png
+  Descricao         : Curva dose-resposta mostrando como a exposicao a dados
+                      sinteticos controla a transicao de regime.
+
+fig_combined_trajectories.png
+  Referencia no tex : figs/scratch/fig_combined_trajectories.png
+  Descricao         : Trajetorias combinadas cross-backbone (Gemma e Qwen)
+                      para comparacao direta dos padroes de degradacao.
+
+fig5_cross_backbone.png
+  Referencia no tex : figs/final/fig5_cross_backbone.png
+  Descricao         : Comparacao cross-backbone de longo horizonte (30 geracoes)
+                      mostrando estabilidade do regime homeostático.
+
+fig4_fft_vs_qlora.png
+  Referencia no tex : figs/final/fig4_fft_vs_qlora.png
+  Descricao         : Comparacao entre full fine-tuning (FFT) e QLoRA em termos
+                      de retencao factual e pressao de treinamento efetiva.
+
+fig_rank_lr_heatmap.png
+  Referencia no tex : figs/final/fig_rank_lr_heatmap.png
+  Descricao         : Heatmap da matriz de dependencia conjunta rank x learning
+                      rate no Qwen 2.5 1.5B (experimento piloto single-seed).
+
+fig5_distributional.png
+  Referencia no tex : figs/final/fig5_distributional.png
+  Descricao         : Analise distribucional da degradacao por item, mostrando
+                      que certos tipos de conhecimento sao mais vulneraveis.
+
+fig_interventions.png
+  Referencia no tex : figs/scratch/fig_interventions.png
+  Descricao         : Resultados das estrategias de intervencao (reducao de dose,
+                      ajuste de rank) e seus efeitos sobre o regime de operacao.
+
+fig9_dose_response.png
+  Referencia no tex : figs/final/fig9_dose_response.png
+  Descricao         : Curva dose-resposta detalhada com intervalos de confianca
+                      para Gemma e Qwen (multi-seed, N=8).
+
+fig_etp_framework.png
+  Referencia no tex : figs/scratch/fig_etp_framework.png
+  Descricao         : Diagrama do framework ETP mostrando como rank e learning
+                      rate se combinam para determinar a pressao de treinamento.
+
+
+FIGURAS EXTRAS (nao referenciadas no manuscrito — podem ser removidas do sistema):
+
+fig1_overview.png       - duplicata em PNG do fig1_overview.pdf (remover)
+fig_regime_examples.png - duplicata em PNG do fig_regime_examples.pdf (remover)
+fig3_cross_backbone.png - nao referenciada no manuscrito atual (remover)
+fig6_interventions.png  - nao referenciada no manuscrito atual (remover)
+fig7_methodology.png    - nao referenciada no manuscrito atual (remover)
+fig_gemma3_trajectories.png - nao referenciada no manuscrito atual (remover)
+
+
+================================================================================
+RESUMO DE ACOES NO SISTEMA KNOSYS
+================================================================================
+
+FAZER UPLOAD (novos arquivos):
+  [ ] Cover letter          -> 02-carta-revisao/cover-letter-revision.pdf
+  [ ] Revised manuscript    -> 01-manuscrito/manuscript-anonymous.pdf
+  [ ] LaTeX source files    -> 04-latex-source/latex-source.zip
+  [ ] Response to reviewers -> 01-manuscrito/response-to-reviewers.pdf
+  [ ] Supplementary         -> 01-manuscrito/supplementary.pdf
+  [ ] Credit Author Stmt    -> 03-documentos/credit-author-statement.docx
+  [ ] Highlights            -> 03-documentos/highlights-revised.docx
+  [ ] Figure (x12)          -> figures-300dpi/ (ver lista acima)
+
+JA CARREGADO AUTOMATICAMENTE (carry over):
+  [x] Declaration of competing interests
+  [x] Research data
+
+REMOVER DO SISTEMA (figuras extras enviadas por engano):
+  [ ] fig3_cross_backbone.png
+  [ ] fig6_interventions.png
+  [ ] fig7_methodology.png
+  [ ] fig_gemma3_trajectories.png
+  [ ] fig1_overview.png       (substituir pelo .pdf)
+  [ ] fig_regime_examples.png (substituir pelo .pdf)

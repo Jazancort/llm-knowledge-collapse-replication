@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 fig9_dose_response.py — Dose-response cross-backbone (Fig. 9)
 Dados: G2 Gemma3 r=10 N=3 + Bloco7 Qwen r=256 N=5
@@ -118,7 +118,7 @@ ax.text(0.98, 0.03,
 plt.tight_layout()
 
 # ── Salvar ───────────────────────────────────────────────────────────────────
-out_dir = r'G:\Lab\Labcity\LLM\Artigo\Paradoxo - springer\Paradoxo\llm-knowledge-collapse (paper)\v4\figs\final'
+out_dir = r'G:\Lab\Labcity\LLM\Artigo\Paradoxo - springer\papers\survey-taxonomy\llm-knowledge-collapse (paper)\v4\figs\final'
 
 png_path = out_dir + r'\fig9_dose_response.png'
 pdf_path = out_dir + r'\fig9_dose_response.pdf'
